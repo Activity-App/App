@@ -20,13 +20,16 @@ struct ContentView: View {
                         VStack {
                             Text("Competitions")
                                 .navigationBarTitle("Competitions")
-                            Button("Try HealthKit Auth") {
-                                hk.authorizeHealthKit()
+                            if !hk.success {
+                                Button("Try HealthKit Auth") {
+                                    hk.authorizeHealthKit()
+                                }
                             }
                             Text(hk.success ? "Successfully Authorized" : hk.processBegan ? "Something went wrong" : "")
-                            
-                            Button("Read data") {
-                                hk.readHealthData()
+                            if hk.success {
+                                Button("Read data") {
+                                    hk.readHealthData()
+                                }
                             }
                         }
                         if hk.processBegan && !hk.success {
