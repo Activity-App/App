@@ -24,6 +24,10 @@ struct ContentView: View {
                                 hk.authorizeHealthKit()
                             }
                             Text(hk.success ? "Successfully Authorized" : hk.processBegan ? "Something went wrong" : "")
+                            
+                            Button("Read data") {
+                                hk.readHealthData()
+                            }
                         }
                         if hk.processBegan && !hk.success {
                             ProgressView()

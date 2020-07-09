@@ -21,9 +21,9 @@ class HealthKitController: ObservableObject {
         }
         
         let healthKitTypes: Set = [
-            HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned)!,
-            HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.appleExerciseTime)!,
-            HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.appleStandTime)!
+            HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
+            HKObjectType.quantityType(forIdentifier: .appleExerciseTime)!,
+            HKObjectType.quantityType(forIdentifier: .appleStandTime)!
         ]
         
         healthStore.requestAuthorization(toShare: nil, read: healthKitTypes, completion: { success , _ in
@@ -34,5 +34,14 @@ class HealthKitController: ObservableObject {
                 }
             }
         })
+    }
+    
+    func readHealthData() {
+        let result: (HKActivitySummaryQuery, [HKActivitySummary]?, Error?) -> Void = { query, result, error in
+            print(result![0])
+        }
+        let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()])
+        let query = HKActivitySummaryQuery(predicate: devicePredicate, resultsHandler: result)
+        healthStore.execute(query)
     }
 }
