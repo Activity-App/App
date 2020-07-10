@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct ActivityRings: View {
-    
-    @ObservedObject var hk: HealthKitController
-    
+
+    @ObservedObject var healthKit: HealthKitController
+
     var body: some View {
         ZStack {
-            ActivityRing(ringType: .move, current: $hk.moveCurrent, goal: $hk.moveGoal)
+            ActivityRing(ringType: .move, current: $healthKit.moveCurrent, goal: $healthKit.moveGoal)
                 .frame(width: 100, height: 100)
-            ActivityRing(ringType: .exercise, current: $hk.exerciseCurrent, goal: $hk.exerciseGoal)
+            ActivityRing(ringType: .exercise, current: $healthKit.exerciseCurrent, goal: $healthKit.exerciseGoal)
                 .frame(width: 75, height: 75)
-            ActivityRing(ringType: .stand, current: $hk.standCurrent, goal: $hk.standGoal)
+            ActivityRing(ringType: .stand, current: $healthKit.standCurrent, goal: $healthKit.standGoal)
                 .frame(width: 50, height: 50)
         }
     }
@@ -25,6 +25,6 @@ struct ActivityRings: View {
 
 struct ActivityRings_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityRings(hk: HealthKitController())
+        ActivityRings(healthKit: HealthKitController())
     }
 }

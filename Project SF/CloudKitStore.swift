@@ -9,12 +9,11 @@ import Foundation
 import CloudKit
 
 class CloudKitStore {
-    
-    //MARK: Singleton
-    
+
+    // MARK: - Singleton
     static let shared = CloudKitStore()
     private init() {}
-    
-    //MARK: 
-    
+
+    // MARK: -
+
 }

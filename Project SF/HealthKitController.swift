@@ -11,7 +11,7 @@ import HealthKit
 class HealthKitController: ObservableObject {
 
     let healthStore = HKHealthStore()
-    
+
     @Published var processBegan = false
     @Published var success = false
 
@@ -36,18 +36,18 @@ class HealthKitController: ObservableObject {
             }
         })
     }
-    
+
     @Published var moveCurrent: Double = 0
     @Published var moveGoal: Double = 1
-    
+
     @Published var exerciseCurrent: Double = 0
     @Published var exerciseGoal: Double = 30
-    
+
     @Published var standCurrent: Double = 0
     @Published var standGoal: Double = 12
-    
+
     func updateAllActivityData() {
-        
+
         let resultHandler: (HKActivitySummaryQuery, [HKActivitySummary]?, Error?) -> Void = { query, result, error in
 
             if let results = result {
@@ -56,7 +56,7 @@ class HealthKitController: ObservableObject {
                         let moveUnits = HKUnit.largeCalorie()
                         self.moveCurrent = results.last!.activeEnergyBurned.doubleValue(for: moveUnits)
                         self.moveGoal = results.last!.activeEnergyBurnedGoal.doubleValue(for: moveUnits)
-                        
+
                         let exerciseUnits = HKUnit.minute()
                         self.exerciseCurrent = results.last!.appleExerciseTime.doubleValue(for: exerciseUnits)
                         self.exerciseGoal = results.last!.appleExerciseTimeGoal.doubleValue(for: exerciseUnits)
@@ -72,14 +72,13 @@ class HealthKitController: ObservableObject {
                     print("No results!")
                 }
             }
-            
+
             if error != nil {
                 print("Error: \(error!)")
             }
         }
 
         let query = HKActivitySummaryQuery(predicate: nil, resultsHandler: resultHandler)
-        
         healthStore.execute(query)
     }
 }

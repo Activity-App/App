@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @StateObject var hk = HealthKitController()
+    @StateObject var healthKit = HealthKitController()
     @State var page = 1
-    
+
     var body: some View {
         ZStack {
             TabView(selection: $page) {
@@ -20,44 +20,45 @@ struct ContentView: View {
                         VStack {
                             Text("Competitions")
                                 .navigationBarTitle("Competitions")
-                            if !hk.success {
+                            if !healthKit.success {
                                 Button("Try HealthKit Auth") {
-                                    hk.authorizeHealthKit()
+                                    healthKit.authorizeHealthKit()
                                 }
                             }
-                            Text(hk.success ? "Successfully Authorized" : hk.processBegan ? "Something went wrong" : "")
-                            if hk.success {
+                            Text(healthKit.success ? "Successfully Authorized" :
+                                 healthKit.processBegan ? "Something went wrong" : "")
+                            if healthKit.success {
                                 Button("Read data") {
-                                    hk.updateAllActivityData()
+                                    healthKit.updateAllActivityData()
                                 }
                             }
-                            if hk.processBegan && hk.success {
+                            if healthKit.processBegan && healthKit.success {
                                 HStack {
-                                    ActivityRings(hk: hk)
+                                    ActivityRings(healthKit: healthKit)
                                     VStack(alignment: .leading) {
                                         HStack {
                                             Text("Move: ")
                                                 .bold()
                                                 .foregroundColor(Color("move"))
-                                            Text("\(Int(hk.moveCurrent))/\(Int(hk.moveGoal))")
+                                            Text("\(Int(healthKit.moveCurrent))/\(Int(healthKit.moveGoal))")
                                         }
                                         HStack {
                                             Text("Exercise: ")
                                                 .bold()
                                                 .foregroundColor(Color("exercise"))
-                                            Text("\(Int(hk.exerciseCurrent))/\(Int(hk.exerciseGoal))")
+                                            Text("\(Int(healthKit.exerciseCurrent))/\(Int(healthKit.exerciseGoal))")
                                         }
                                         HStack {
                                             Text("Stand: ")
                                                 .bold()
                                                 .foregroundColor(Color("stand"))
-                                            Text("\(Int(hk.standCurrent))/\(Int(hk.standGoal))")
+                                            Text("\(Int(healthKit.standCurrent))/\(Int(healthKit.standGoal))")
                                         }
                                     }
                                 }
                             }
                         }
-                        if hk.processBegan && !hk.success {
+                        if healthKit.processBegan && !healthKit.success {
                             ProgressView()
                         }
                     }

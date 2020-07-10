@@ -14,7 +14,7 @@ enum RingType {
 }
 
 struct ActivityRing: View {
-    
+
     var ringType: RingType
     @Binding var current: Double
     @Binding var goal: Double
@@ -24,7 +24,10 @@ struct ActivityRing: View {
             Circle()
                 .stroke(lineWidth: 10)
                 .opacity(0.3)
-                .foregroundColor(ringType == .move ? Color("move") : ringType == .exercise ? Color("exercise") : Color("stand"))
+                .foregroundColor(
+                    ringType == .move ? Color("move") :
+                    ringType == .exercise ? Color("exercise") : Color("stand")
+                )
             Circle()
                 .trim(from: 0, to: CGFloat(
                         current.convert(
@@ -35,13 +38,15 @@ struct ActivityRing: View {
                 )
                 .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round))
                 .opacity(1)
-                .foregroundColor(ringType == .move ? Color("move") : ringType == .exercise ? Color("exercise") : Color("stand"))
+                .foregroundColor(
+                    ringType == .move ? Color("move") :
+                    ringType == .exercise ? Color("exercise") : Color("stand")
+                )
                 .rotationEffect(.degrees(-90))
                 .animation(.easeInOut(duration: 0.8))
         }
     }
 }
-
 
 struct ActivityRing_Previews: PreviewProvider {
     static var previews: some View {
