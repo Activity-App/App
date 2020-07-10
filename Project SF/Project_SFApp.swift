@@ -10,6 +10,9 @@ import SwiftUI
 @main
 // swiftlint:disable:next type_name
 struct Project_SFApp: App {
+    
+    let ck = CloudKitStore.shared
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

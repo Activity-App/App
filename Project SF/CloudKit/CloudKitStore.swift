@@ -42,7 +42,7 @@ class CloudKitStore {
                 records.append(record)
             }
         }
-        
+
         queryOperation.queryCompletionBlock = { cursor, error in
             Self.queue.sync {
                 // TODO: Need to properly handle paging
