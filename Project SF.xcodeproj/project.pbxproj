@@ -18,6 +18,7 @@
 		30BFC8E724B8041C00DAC6D9 /* ActivityRings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8E624B8041C00DAC6D9 /* ActivityRings.swift */; };
 		30BFC8E924B804CC00DAC6D9 /* ActivityRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8E824B804CC00DAC6D9 /* ActivityRing.swift */; };
 		9C9B984924B8150B00A0A42A /* CloudKitStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B984824B8150B00A0A42A /* CloudKitStore.swift */; };
+		9CF22AB624B823E700B35EA5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF22AB524B823E700B35EA5 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		30BFC8E624B8041C00DAC6D9 /* ActivityRings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRings.swift; sourceTree = "<group>"; };
 		30BFC8E824B804CC00DAC6D9 /* ActivityRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRing.swift; sourceTree = "<group>"; };
 		9C9B984824B8150B00A0A42A /* CloudKitStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitStore.swift; sourceTree = "<group>"; };
+		9CF22AB524B823E700B35EA5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,8 +107,17 @@
 			isa = PBXGroup;
 			children = (
 				9C9B984824B8150B00A0A42A /* CloudKitStore.swift */,
+				9CF22AB424B823E100B35EA5 /* Records */,
 			);
 			path = CloudKit;
+			sourceTree = "<group>";
+		};
+		9CF22AB424B823E100B35EA5 /* Records */ = {
+			isa = PBXGroup;
+			children = (
+				9CF22AB524B823E700B35EA5 /* User.swift */,
+			);
+			path = Records;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,6 +219,7 @@
 				30BFC8DF24B7637F00DAC6D9 /* Extensions.swift in Sources */,
 				9C9B984924B8150B00A0A42A /* CloudKitStore.swift in Sources */,
 				30BFC8E724B8041C00DAC6D9 /* ActivityRings.swift in Sources */,
+				9CF22AB624B823E700B35EA5 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

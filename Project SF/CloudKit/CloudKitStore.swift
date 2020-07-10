@@ -29,7 +29,7 @@ class CloudKitStore {
     // MARK: Methods
 
     func fetchRecords(with recordType: CKRecord.RecordType,
-                      predicate: NSPredicate,
+                      predicate: NSPredicate = NSPredicate(value: true),
                       scope: CKDatabase.Scope,
                       then handler: @escaping (Result<[CKRecord], Error>) -> Void) {
         let query = CKQuery(recordType: recordType, predicate: predicate)
@@ -75,6 +75,34 @@ class CloudKitStore {
             }
 
             handler(.success(record))
+        }
+    }
+
+    func saveRecord(_ record: CKRecord,
+                    scope: CKDatabase.Scope,
+                    then handler: @escaping (Result<Void, Error>) -> Void) {
+        let database = container.database(with: scope)
+
+        database.save(record) { _, error in
+            if let error = error {
+                handler(.failure(error))
+                return
+            }
+            handler(.success(()))
+        }
+    }
+
+    func deleteRecord(with recordID: CKRecord.ID,
+                      scope: CKDatabase.Scope,
+                      then handler: @escaping (Result<Void, Error>) -> Void) {
+        let database = container.database(with: scope)
+
+        database.delete(withRecordID: recordID) { _, error in
+            if let error = error {
+                handler(.failure(error))
+                return
+            }
+            handler(.success(()))
         }
     }
 
