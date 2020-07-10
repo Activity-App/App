@@ -20,6 +20,7 @@ class HealthKitController: ObservableObject {
             self.processBegan = true
         }
 
+        
         let healthKitTypes: Set = [
             HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
             HKObjectType.quantityType(forIdentifier: .appleExerciseTime)!,
