@@ -1,4 +1,5 @@
 # Project SF App
+![](https://github.com/Activity-App/App/workflows/CI/badge.svg) ![](https://github.com/Activity-App/App/workflows/SwiftLint/badge.svg)
 
 Project SF is an app which allows individuals to compete in challenges using their Apple HealthKit data.
 
