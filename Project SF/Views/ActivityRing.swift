@@ -7,10 +7,20 @@
 
 import SwiftUI
 
-enum RingType: String {
+enum RingType {
+    
     case move
     case exercise
     case stand
+    
+    var color: Color {
+        switch self {
+        case .move: return Color("move")
+        case .exercise: return Color("exercise")
+        case .stand: return Color("stand")
+        }
+    }
+    
 }
 
 struct ActivityRing: View {
@@ -24,7 +34,7 @@ struct ActivityRing: View {
             Circle()
                 .stroke(lineWidth: 10)
                 .opacity(0.3)
-                .foregroundColor(Color(ringType.rawValue))
+                .foregroundColor(ringType.color)
             Circle()
                 .trim(from: 0, to: CGFloat(
                         current.convert(
@@ -35,7 +45,7 @@ struct ActivityRing: View {
                 )
                 .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round))
                 .opacity(1)
-                .foregroundColor(Color(ringType.rawValue))
+                .foregroundColor(ringType.color)
                 .rotationEffect(.degrees(-90))
                 .animation(.easeInOut(duration: 0.8))
         }
