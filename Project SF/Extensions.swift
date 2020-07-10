@@ -13,6 +13,17 @@ extension View {
     }
 }
 
+extension Double {
+    public func convert(fromRange: (Double, Double), toRange: (Double, Double)) -> Double {
+        var value = self
+        value -= fromRange.0
+        value /= Double(fromRange.1 - fromRange.0)
+        value *= toRange.1 - toRange.0
+        value += toRange.0
+        return value
+    }
+}
+
 struct VisualEffectView: UIViewRepresentable {
     var effect: UIVisualEffect?
     let effectView = UIVisualEffectView(effect: nil)

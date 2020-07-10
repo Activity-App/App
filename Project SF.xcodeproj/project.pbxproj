@@ -15,6 +15,8 @@
 		30BFC8DF24B7637F00DAC6D9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8DE24B7637F00DAC6D9 /* Extensions.swift */; };
 		30BFC8E324B76BB900DAC6D9 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30BFC8E224B76BB900DAC6D9 /* HealthKit.framework */; };
 		30BFC8E524B7702500DAC6D9 /* HealthKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8E424B7702500DAC6D9 /* HealthKitController.swift */; };
+		30BFC8E724B8041C00DAC6D9 /* ActivityRings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8E624B8041C00DAC6D9 /* ActivityRings.swift */; };
+		30BFC8E924B804CC00DAC6D9 /* ActivityRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8E824B804CC00DAC6D9 /* ActivityRing.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,8 @@
 		30BFC8E024B76BB800DAC6D9 /* Project SF.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Project SF.entitlements"; sourceTree = "<group>"; };
 		30BFC8E224B76BB900DAC6D9 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		30BFC8E424B7702500DAC6D9 /* HealthKitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitController.swift; sourceTree = "<group>"; };
+		30BFC8E624B8041C00DAC6D9 /* ActivityRings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRings.swift; sourceTree = "<group>"; };
+		30BFC8E824B804CC00DAC6D9 /* ActivityRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRing.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,8 @@
 				30BFC8E024B76BB800DAC6D9 /* Project SF.entitlements */,
 				30BFC8CD24B75E6C00DAC6D9 /* Project_SFApp.swift */,
 				30BFC8CF24B75E6C00DAC6D9 /* ContentView.swift */,
+				30BFC8E624B8041C00DAC6D9 /* ActivityRings.swift */,
+				30BFC8E824B804CC00DAC6D9 /* ActivityRing.swift */,
 				30BFC8DC24B762D900DAC6D9 /* CustomTabBar.swift */,
 				30BFC8E424B7702500DAC6D9 /* HealthKitController.swift */,
 				30BFC8DE24B7637F00DAC6D9 /* Extensions.swift */,
@@ -187,7 +193,9 @@
 				30BFC8E524B7702500DAC6D9 /* HealthKitController.swift in Sources */,
 				30BFC8DD24B762D900DAC6D9 /* CustomTabBar.swift in Sources */,
 				30BFC8CE24B75E6C00DAC6D9 /* Project_SFApp.swift in Sources */,
+				30BFC8E924B804CC00DAC6D9 /* ActivityRing.swift in Sources */,
 				30BFC8DF24B7637F00DAC6D9 /* Extensions.swift in Sources */,
+				30BFC8E724B8041C00DAC6D9 /* ActivityRings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,7 +326,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Project SF/Project SF.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = Y4Q5FA8FMC;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -326,7 +334,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Kathleen-Gordinier.Project-SF";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wwdc.Project-SF";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -341,7 +349,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Project SF/Project SF.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = Y4Q5FA8FMC;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -349,7 +357,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Kathleen-Gordinier.Project-SF";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wwdc.Project-SF";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
