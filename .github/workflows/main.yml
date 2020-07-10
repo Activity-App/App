@@ -12,15 +12,6 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  SwiftLint:
-    runs-on: ubuntu-latest
-    
-    steps:
-     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-     - uses: actions/checkout@v2
-       
-     - name: GitHub Action for SwiftLint
-       uses: norio-nomura/action-swiftlint@3.1.0
   Build:
     # The type of runner that the job will run on
     runs-on: macos-latest
