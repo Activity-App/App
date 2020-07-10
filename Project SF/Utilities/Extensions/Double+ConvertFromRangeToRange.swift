@@ -9,12 +9,12 @@ import Foundation
 
 extension Double {
     
-    public func convert(fromRange: (Double, Double), toRange: (Double, Double)) -> Double {
+    public func convert(fromRange: ClosedRange<Double>, toRange: ClosedRange<Double>) -> Double {
         var value = self
-        value -= fromRange.0
-        value /= Double(fromRange.1 - fromRange.0)
-        value *= toRange.1 - toRange.0
-        value += toRange.0
+        value -= fromRange.lowerBound
+        value /= Double(fromRange.upperBound - fromRange.lowerBound)
+        value *= toRange.upperBound - toRange.lowerBound
+        value += toRange.lowerBound
         return value
     }
     

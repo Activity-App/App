@@ -28,8 +28,8 @@ struct ActivityRing: View {
             Circle()
                 .trim(from: 0, to: CGFloat(
                         current.convert(
-                            fromRange: (0, goal),
-                            toRange: (0.001, 1)
+                            fromRange: 0...goal,
+                            toRange: 0.001...1
                         )
                     )
                 )
