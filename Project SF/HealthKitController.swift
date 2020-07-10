@@ -38,10 +38,13 @@ class HealthKitController: ObservableObject {
     
     func readHealthData() {
         let result: (HKActivitySummaryQuery, [HKActivitySummary]?, Error?) -> Void = { query, result, error in
-            print(result![0])
+            if let results = result {
+                print(results[0])
+            }
         }
         let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()])
         let query = HKActivitySummaryQuery(predicate: devicePredicate, resultsHandler: result)
         healthStore.execute(query)
+        print(query)
     }
 }
