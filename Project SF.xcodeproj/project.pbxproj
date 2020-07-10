@@ -51,6 +51,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3029AF4F24B88693003F0324 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				30BFC8E424B7702500DAC6D9 /* HealthKitController.swift */,
+				9C9B984A24B81AA300A0A42A /* CloudKit */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3029AF5024B8869E003F0324 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				30BFC8CF24B75E6C00DAC6D9 /* ContentView.swift */,
+				30BFC8E624B8041C00DAC6D9 /* ActivityRings.swift */,
+				30BFC8E824B804CC00DAC6D9 /* ActivityRing.swift */,
+				30BFC8DC24B762D900DAC6D9 /* CustomTabBar.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3029AF5124B886A7003F0324 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				30BFC8DE24B7637F00DAC6D9 /* Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3029AF5224B886CB003F0324 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				30BFC8CD24B75E6C00DAC6D9 /* Project_SFApp.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
 		30BFC8C124B75E6C00DAC6D9 = {
 			isa = PBXGroup;
 			children = (
@@ -72,14 +108,10 @@
 			isa = PBXGroup;
 			children = (
 				30BFC8E024B76BB800DAC6D9 /* Project SF.entitlements */,
-				30BFC8CD24B75E6C00DAC6D9 /* Project_SFApp.swift */,
-				30BFC8CF24B75E6C00DAC6D9 /* ContentView.swift */,
-				30BFC8E624B8041C00DAC6D9 /* ActivityRings.swift */,
-				30BFC8E824B804CC00DAC6D9 /* ActivityRing.swift */,
-				30BFC8DC24B762D900DAC6D9 /* CustomTabBar.swift */,
-				30BFC8E424B7702500DAC6D9 /* HealthKitController.swift */,
-				9C9B984A24B81AA300A0A42A /* CloudKit */,
-				30BFC8DE24B7637F00DAC6D9 /* Extensions.swift */,
+				3029AF5224B886CB003F0324 /* Support */,
+				3029AF5024B8869E003F0324 /* Views */,
+				3029AF4F24B88693003F0324 /* Models */,
+				3029AF5124B886A7003F0324 /* Extensions */,
 				30BFC8D124B75E6F00DAC6D9 /* Assets.xcassets */,
 				30BFC8D624B75E6F00DAC6D9 /* Info.plist */,
 				30BFC8D324B75E6F00DAC6D9 /* Preview Content */,
