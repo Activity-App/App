@@ -76,7 +76,7 @@
 				30BFC8E824B804CC00DAC6D9 /* ActivityRing.swift */,
 				30BFC8DC24B762D900DAC6D9 /* CustomTabBar.swift */,
 				30BFC8E424B7702500DAC6D9 /* HealthKitController.swift */,
-				9C9B984824B8150B00A0A42A /* CloudKitStore.swift */,
+				9C9B984A24B81AA300A0A42A /* CloudKit */,
 				30BFC8DE24B7637F00DAC6D9 /* Extensions.swift */,
 				30BFC8D124B75E6F00DAC6D9 /* Assets.xcassets */,
 				30BFC8D624B75E6F00DAC6D9 /* Info.plist */,
@@ -99,6 +99,14 @@
 				30BFC8E224B76BB900DAC6D9 /* HealthKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9C9B984A24B81AA300A0A42A /* CloudKit */ = {
+			isa = PBXGroup;
+			children = (
+				9C9B984824B8150B00A0A42A /* CloudKitStore.swift */,
+			);
+			path = CloudKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
