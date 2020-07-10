@@ -1,8 +1,10 @@
 # Project SF App
 
+Project SF is an app which allows individuals to compete in challenges using their Apple HealthKit data.
+
 ### Note: Uses iOS 14. I'm already using iOS 14 app and @StateObject
 
-Just added basic custom tabview, navviewtitles and hk auth
+Just added basic custom tabview, navviewtitles and HealthKit auth
 
 # Contributing
 1. Fork this repo on your machine
