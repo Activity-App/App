@@ -8,6 +8,7 @@
 import SwiftUI
 
 @main
+// swiftlint:disable:next type_name
 struct Project_SFApp: App {
     var body: some Scene {
         WindowGroup {

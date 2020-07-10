@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    
-    @StateObject var hk = HealthKitController()
+
+    @StateObject var healthKit = HealthKitController()
     @State var page = 2
-    
+
     var body: some View {
         ZStack {
             TabView(selection: $page) {
@@ -20,23 +20,23 @@ struct ContentView: View {
                         VStack {
                             Text("Competitions")
                                 .navigationBarTitle("Competitions")
-                            if !hk.success {
+                            if !healthKit.success {
                                 Button("Try HealthKit Auth") {
-                                    hk.authorizeHealthKit()
+                                    healthKit.authorizeHealthKit()
                                 }
                             }
-                            Text(hk.success ? "Successfully Authorized" : hk.processBegan ? "Something went wrong" : "")
-                            if hk.success {
+                            Text(healthKit.success ? "Successfully Authorized" : healthKit.processBegan ? "Something went wrong" : "")
+                            if healthKit.success {
                                 Button("Read data") {
-                                    hk.readHealthData()
+                                    healthKit.readHealthData()
                                 }
                             }
                         }
-                        if hk.processBegan && !hk.success {
+                        if healthKit.processBegan && !healthKit.success {
                             ProgressView()
                         }
                     }
-                    
+
                 }
                 .tag(1)
 
@@ -45,7 +45,7 @@ struct ContentView: View {
                         .navigationBarTitle("Teams")
                 }
                 .tag(2)
-                
+
                 NavigationView {
                     Text("Settings")
                         .navigationBarTitle("Settings")
@@ -53,7 +53,7 @@ struct ContentView: View {
                 .tag(3)
             }
             .accentColor(.init(red: 1, green: 0.4, blue: 0.4))
-            
+
             TabBar(page: $page)
         }
     }
