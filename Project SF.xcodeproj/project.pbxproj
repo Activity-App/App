@@ -15,6 +15,7 @@
 		30BFC8DF24B7637F00DAC6D9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8DE24B7637F00DAC6D9 /* Extensions.swift */; };
 		30BFC8E324B76BB900DAC6D9 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30BFC8E224B76BB900DAC6D9 /* HealthKit.framework */; };
 		30BFC8E524B7702500DAC6D9 /* HealthKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8E424B7702500DAC6D9 /* HealthKitController.swift */; };
+		C4FC7C9024B7F1BB00E52F25 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FC7C8F24B7F1BB00E52F25 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		30BFC8E024B76BB800DAC6D9 /* Project SF.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Project SF.entitlements"; sourceTree = "<group>"; };
 		30BFC8E224B76BB900DAC6D9 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		30BFC8E424B7702500DAC6D9 /* HealthKitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitController.swift; sourceTree = "<group>"; };
+		C4FC7C8F24B7F1BB00E52F25 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +39,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30BFC8E324B76BB900DAC6D9 /* HealthKit.framework in Frameworks */,
+				C4FC7C9024B7F1BB00E52F25 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +90,7 @@
 		30BFC8E124B76BB900DAC6D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C4FC7C8F24B7F1BB00E52F25 /* CloudKit.framework */,
 				30BFC8E224B76BB900DAC6D9 /* HealthKit.framework */,
 			);
 			name = Frameworks;
