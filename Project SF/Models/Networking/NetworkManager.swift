@@ -7,17 +7,11 @@
 
 import Foundation
 
-enum NetworkError: Error {
-    case invalidURL
-    case networkError
-    case noDataInResponse
-    case decodingError
-}
-
 class NetworkManager {
     typealias DataResult = Result<Data, NetworkError>
     typealias DecodedResult<T> = Result<T, NetworkError>
 
+    // MARK: - Data request
     static func request(_ url: URL?, _ completion: @escaping (DataResult) -> Void) {
         guard let url = url else {
             completion(.failure(.invalidURL))
@@ -39,6 +33,7 @@ class NetworkManager {
         }.resume()
     }
 
+    // MARK: - Decoded request
     static func request<T: Codable>(_ url: URL?,
                                     decode type: T.Type,
                                     _ completion: @escaping (DecodedResult<T>) -> Void) {
@@ -55,5 +50,13 @@ class NetworkManager {
                 completion(.failure(error))
             }
         }
+    }
+
+    // MARK: - Network Error
+    enum NetworkError: Error {
+        case invalidURL
+        case networkError
+        case noDataInResponse
+        case decodingError
     }
 }
