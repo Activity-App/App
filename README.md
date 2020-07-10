@@ -8,7 +8,8 @@ Project SF is an app which allows individuals to compete in challenges using the
 - iOS 14.0
 
 # Contributing
-1. Fork this repo on your machine
-2. Add some cool stuff
-3. Make a pull request
-4. Wait for Code review team to accept it!
+1. Fork this repo on your machine,
+2. Add some cool stuff,
+3. Don't forget to document your code so everyone understands it,
+4. Make a pull request,
+5. Wait for Code review team to accept it!
