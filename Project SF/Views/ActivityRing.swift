@@ -19,14 +19,6 @@ struct ActivityRing: View {
     @Binding var current: Double
     @Binding var goal: Double
 
-//    var ringColor: Color {
-//        switch ringType {
-//        case .move: return Color("move")
-//        case .exercise: return Color("exercise")
-//        case .stand: return Color("stand")
-//        }
-//    }
-
     var body: some View {
         ZStack {
             Circle()
