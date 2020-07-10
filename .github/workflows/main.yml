@@ -12,6 +12,12 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  SwiftLint:
+    runs-on: macos-latest
+    
+    steps:
+     - name: GitHub Action for SwiftLint
+       uses: norio-nomura/action-swiftlint@3.1.0
   Build:
     # The type of runner that the job will run on
     runs-on: macos-latest
@@ -20,6 +26,9 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+      
+    - name: Select latest Xcode
+      run: "sudo xcode-select -s /Applications/Xcode_12_beta.app"
 
     # Runs a single command using the runners shell
     - name: Xcode Build
@@ -27,6 +36,6 @@ jobs:
       with:
         project: Project SF.xcodeproj
         scheme: Project SF
-        destination: platform=iOS Simulator,OS=13.5,name=iPhone 11 Pro
+        destination: platform=iOS Simulator,OS=14.0,name=iPhone 11 Pro
         action: build
      
