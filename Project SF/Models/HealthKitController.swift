@@ -15,12 +15,20 @@ class HealthKitController: ObservableObject {
     @Published var processBegan = false
     @Published var success = false
 
+    @Published var moveCurrent = 0.0
+    @Published var moveGoal = 1.0
+
+    @Published var exerciseCurrent = 0.0
+    @Published var exerciseGoal = 30.0
+
+    @Published var standCurrent = 0.0
+    @Published var standGoal = 12.0
+
     func authorizeHealthKit() {
         DispatchQueue.main.async {
             self.processBegan = true
         }
 
-        
         let healthKitTypes: Set = [
             HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
             HKObjectType.quantityType(forIdentifier: .appleExerciseTime)!,
@@ -37,15 +45,6 @@ class HealthKitController: ObservableObject {
             }
         })
     }
-
-    @Published var moveCurrent: Double = 0
-    @Published var moveGoal: Double = 1
-
-    @Published var exerciseCurrent: Double = 0
-    @Published var exerciseGoal: Double = 30
-
-    @Published var standCurrent: Double = 0
-    @Published var standGoal: Double = 12
 
     func updateAllActivityData() {
 
