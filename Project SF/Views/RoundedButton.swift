@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// A custom button with Text inside a rounded rect
+/// which spans across the whole width of the screen.
 struct RoundedButton: View {
     let title: String
     let action: () -> Void
@@ -25,6 +27,10 @@ struct RoundedButton: View {
         }
     }
 
+    /// Basic Init method.
+    /// - Parameters:
+    ///   - title: The title of the button.
+    ///   - action: The action that'll be performed on tap.
     init(_ title: String, action: (() -> Void)? = nil) {
         self.title = title
         self.action = action ?? {}
