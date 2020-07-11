@@ -10,7 +10,8 @@ import Combine
 @testable import Project_SF
 
 class HealthKitControllerTests: XCTestCase {
-    
+
+    // MARK: - Test Auth Granted
     func testHealthKitControllerAuthorizationGranted() throws {
         let mock = HKHealthStoreMock()
         mock.authorizationResponse.error = nil
@@ -32,7 +33,8 @@ class HealthKitControllerTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
         cancellable.cancel()
     }
-    
+
+    // MARK: - Test Auth Not Granted
     func testHealthKitControllerAuthorizationNotGranted() throws {
         let mock = HKHealthStoreMock()
         mock.authorizationResponse.success = false
@@ -54,7 +56,8 @@ class HealthKitControllerTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
         cancellable.cancel()
     }
-    
+
+    // MARK: - Test Update Activity Data
     func testHealthKitControllerUpdateActivityData() throws {
         let mock = HKHealthStoreMock()
         let fakeResult = HKActivitySummaryMock()
