@@ -25,8 +25,11 @@
 		30BFC8E724B8041C00DAC6D9 /* ActivityRings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8E624B8041C00DAC6D9 /* ActivityRings.swift */; };
 		30BFC8E924B804CC00DAC6D9 /* ActivityRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8E824B804CC00DAC6D9 /* ActivityRing.swift */; };
 		30F1EA3B24B951CA00FF89FC /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F1EA3A24B951CA00FF89FC /* IntroView.swift */; };
+		9C12BBDD24B9C3A100C050DB /* HKActivitySummaryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C12BBDC24B9C3A100C050DB /* HKActivitySummaryMock.swift */; };
 		9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */; };
 		9C7B4D0824B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B4D0724B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift */; };
+		9C9748E024B9A9AA00FB5F21 /* HKHealthStoreMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9748DF24B9A9AA00FB5F21 /* HKHealthStoreMock.swift */; };
+		9C9748E524B9B05900FB5F21 /* HKActivitySummaryQuery+ResultsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9748E424B9B05900FB5F21 /* HKActivitySummaryQuery+ResultsHandler.m */; };
 		9CCFDD0724B95E9600162B0F /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD0624B95E9600162B0F /* URLSessionMock.swift */; };
 		9CCFDD1D24B971D600162B0F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD1824B971D600162B0F /* User.swift */; };
 		9CCFDD1E24B971D600162B0F /* CloudKitStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD1924B971D600162B0F /* CloudKitStore.swift */; };
@@ -71,8 +74,13 @@
 		30BFC8E624B8041C00DAC6D9 /* ActivityRings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRings.swift; sourceTree = "<group>"; };
 		30BFC8E824B804CC00DAC6D9 /* ActivityRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRing.swift; sourceTree = "<group>"; };
 		30F1EA3A24B951CA00FF89FC /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
+		9C12BBDC24B9C3A100C050DB /* HKActivitySummaryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKActivitySummaryMock.swift; sourceTree = "<group>"; };
 		9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ForegroundModifier.swift"; sourceTree = "<group>"; };
 		9C7B4D0724B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ConvertFromRangeToRange.swift"; sourceTree = "<group>"; };
+		9C9748DF24B9A9AA00FB5F21 /* HKHealthStoreMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKHealthStoreMock.swift; sourceTree = "<group>"; };
+		9C9748E224B9AF1E00FB5F21 /* Project SFTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Project SFTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		9C9748E324B9AF1E00FB5F21 /* HKActivitySummaryQuery+ResultsHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HKActivitySummaryQuery+ResultsHandler.h"; sourceTree = "<group>"; };
+		9C9748E424B9B05900FB5F21 /* HKActivitySummaryQuery+ResultsHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "HKActivitySummaryQuery+ResultsHandler.m"; sourceTree = "<group>"; };
 		9CCFDD0624B95E9600162B0F /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
 		9CCFDD1824B971D600162B0F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9CCFDD1924B971D600162B0F /* CloudKitStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitStore.swift; sourceTree = "<group>"; };
@@ -271,7 +279,12 @@
 			children = (
 				9CD7F11D24B89C5000DDAD8C /* Project_SFTests.swift */,
 				9CCFDD0624B95E9600162B0F /* URLSessionMock.swift */,
+				9C9748DF24B9A9AA00FB5F21 /* HKHealthStoreMock.swift */,
+				9C12BBDC24B9C3A100C050DB /* HKActivitySummaryMock.swift */,
+				9C9748E324B9AF1E00FB5F21 /* HKActivitySummaryQuery+ResultsHandler.h */,
+				9C9748E424B9B05900FB5F21 /* HKActivitySummaryQuery+ResultsHandler.m */,
 				9CD7F11F24B89C5000DDAD8C /* Info.plist */,
+				9C9748E224B9AF1E00FB5F21 /* Project SFTests-Bridging-Header.h */,
 			);
 			path = "Project SFTests";
 			sourceTree = "<group>";
@@ -329,6 +342,7 @@
 					};
 					9CD7F11A24B89C5000DDAD8C = {
 						CreatedOnToolsVersion = 12.0;
+						LastSwiftMigration = 1200;
 						TestTargetID = 30BFC8C924B75E6C00DAC6D9;
 					};
 				};
@@ -429,6 +443,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CCFDD0724B95E9600162B0F /* URLSessionMock.swift in Sources */,
+				9C12BBDD24B9C3A100C050DB /* HKActivitySummaryMock.swift in Sources */,
+				9C9748E524B9B05900FB5F21 /* HKActivitySummaryQuery+ResultsHandler.m in Sources */,
+				9C9748E024B9A9AA00FB5F21 /* HKHealthStoreMock.swift in Sources */,
 				9CD7F11E24B89C5000DDAD8C /* Project_SFTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -610,6 +627,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W9K99K5JN4;
 				INFOPLIST_FILE = "Project SFTests/Info.plist";
@@ -620,6 +638,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "au.com.wttech.Project-SFTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Project SFTests/Project SFTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Project SF.app/Project SF";
@@ -630,6 +650,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W9K99K5JN4;
 				INFOPLIST_FILE = "Project SFTests/Info.plist";
@@ -640,6 +661,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "au.com.wttech.Project-SFTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Project SFTests/Project SFTests-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Project SF.app/Project SF";
