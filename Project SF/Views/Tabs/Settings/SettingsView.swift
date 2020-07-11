@@ -11,7 +11,8 @@ struct AboutFooter: View {
     var body: some View {
         VStack {
             Text("Made with <3 by WWDC Scholars")
-                .padding(.vertical, 8)
+                .padding(.top, 8)
+                .padding(.bottom, 4)
             Link("GitHub", destination: URL(string: "https://github.com/Activity-App/App")!)
                 .foregroundColor(.blue)
         }
