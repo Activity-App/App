@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ActivityRing: View {
+struct ActivityRingView: View {
 
     var ringType: RingType
     var ringWidth: CGFloat
@@ -88,7 +88,7 @@ struct ActivityRing: View {
 
 struct ActivityRing_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityRing(ringType: .stand, ringWidth: 30, current: .constant(19), goal: .constant(100))
+        ActivityRingView(ringType: .stand, ringWidth: 30, current: .constant(19), goal: .constant(100))
             .frame(width: 300, height: 300)
     }
 }

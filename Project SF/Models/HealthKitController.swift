@@ -18,6 +18,15 @@ class HealthKitController: ObservableObject {
 
     @Published var authorizationState = AuthorizationState.notBegun
     
+    @Published var moveCurrent = 0.0
+    @Published var moveGoal = 1.0
+
+    @Published var exerciseCurrent = 0.0
+    @Published var exerciseGoal = 30.0
+
+    @Published var standCurrent = 0.0
+    @Published var standGoal = 12.0
+    
     // MARK: Init
     
     init(healthStore: HKHealthStore = .init()) {
@@ -145,6 +154,27 @@ class HealthKitController: ObservableObject {
         }
     }
     
+    /// Update this classes activity values with the latest activity values from HealthKit
+    func updateTodaysActivityData() {
+        getActivityData(for: Date()) { move, exercise, stand, error in
+            if error != nil {
+                print(error!)
+                return
+            } else {
+                DispatchQueue.main.async {
+                    self.moveCurrent = move!.current
+                    self.moveGoal = move!.goal
+                    
+                    self.exerciseCurrent = exercise!.current
+                    self.exerciseGoal = exercise!.current
+                    
+                    self.standCurrent = stand!.current
+                    self.standGoal = stand!.current
+                }
+            }
+        }
+    }
+    
     // MARK: Authorization State
     
     enum AuthorizationState {
@@ -152,13 +182,5 @@ class HealthKitController: ObservableObject {
         case processStarted
         case granted
         case notGranted
-    }
-    
-    // MARK: Activity result
-    
-    public struct ActivityResult {
-        var type: RingType
-        var current: Double
-        var goal: Double
     }
 }

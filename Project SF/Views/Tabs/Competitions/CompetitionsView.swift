@@ -39,13 +39,33 @@ struct CompetitionsView: View {
     var body: some View {
         NavigationView {
             List {
+                
+                Section(header: Text("Current Activity")) {
+                    HStack {
+                        Spacer()
+                        ActivityRingsView(healthKit: healthKit)
+                            .padding(8)
+                        VStack(alignment: .leading) {
+                            Text("Move: \(Int(healthKit.moveCurrent))/\(Int(healthKit.moveGoal))")
+                                .foregroundColor(RingType.move.color)
+                                .fontWeight(.medium)
+                            Text("Exercise: \(Int(healthKit.exerciseCurrent))/\(Int(healthKit.exerciseGoal))")
+                                .foregroundColor(RingType.exercise.color)
+                                .fontWeight(.medium)
+                            Text("Stand: \(Int(healthKit.standCurrent))/\(Int(healthKit.standGoal))")
+                                .foregroundColor(RingType.stand.darkColor)
+                                .fontWeight(.medium)
+                        }
+                        Spacer()
+                    }
+                }
+                
                 ForEach(competitions.indices) { index in
                     Section(header: CurrentlyCompetingHeader(index: index)) {
                         CompetitionCell(
                             competitionName: competitions[index].name,
                             startDate: competitions[index].startDate,
-                            endDate: competitions[index].endDate,
-                            healthKit: healthKit
+                            endDate: competitions[index].endDate
                         )
                     }
                 }
@@ -56,6 +76,7 @@ struct CompetitionsView: View {
         .tabItem {
             Label("Competitions", systemImage: "star.fill")
         }
+
     }
 }
 
