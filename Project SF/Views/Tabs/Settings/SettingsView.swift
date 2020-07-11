@@ -7,30 +7,47 @@
 
 import SwiftUI
 
+struct AboutFooter: View {
+    var body: some View {
+        VStack(spacing: 8) {
+            // I have no idea how to make this centered without this hack.
+            HStack {
+                Spacer()
+                Text("Made with <3 by WWDC Scholars")
+                    .padding(.top, 8)
+                Spacer()
+            }
+
+            HStack {
+                Spacer()
+                Link("GitHub", destination: URL(string: "https://github.com/Activity-App/App")!)
+                    .foregroundColor(.blue)
+                Spacer()
+            }
+        }
+    }
+}
+
 struct SettingsView: View {
     var body: some View {
         NavigationView {
             List {
                 Section(header: Text("General"), content: {
-                    // TODO: Work on ProfileSettings view.
                     NavigationLabel(title: "Profile",
                                   systemName: "person.crop.circle",
-                                  destination: Text("destination"))
-                    // TODO: Create Notification settings.
+                                  destination: ProfileSettings())
                     NavigationLabel(title: "Notifications",
                                   systemName: "app.badge",
-                                  destination: Text("destination"))
+                                  destination: NotificationSettings())
                 })
 
-                Section(header: Text("Privacy"), content: {
-                    // TODO: Create Alter settings .
+                Section(header: Text("Privacy"), footer: AboutFooter(), content: {
                     NavigationLabel(title: "Alter permissions",
                                   systemName: "heart.text.square",
-                                  destination: Text("destination"))
-                    // TODO: Create Learn about privacy screen settings.
+                                  destination: PermissionSettings())
                     NavigationLabel(title: "Learn about privacy",
                                   systemName: "key",
-                                  destination: Text("destination"))
+                                  destination: PrivacyAbout())
                 })
             }
             .listStyle(InsetGroupedListStyle())
