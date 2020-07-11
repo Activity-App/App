@@ -25,26 +25,24 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             List {
-                Section {
+
+                Section(header: Text("General"), content: {
                     SettingsLabel(title: "Profile",
                                   systemName: "person.crop.circle",
                                   destination: Text("destination"))
                     SettingsLabel(title: "Notifications",
                                   systemName: "app.badge",
                                   destination: Text("destination"))
-                }
+                })
 
-                Section {
-                    Text("123")
-                    Text("123")
-                    Text("123")
-                }
-
-                Section {
+                Section(header: Text("Privacy"), content: {
+                    SettingsLabel(title: "Alter permissions",
+                                  systemName: "heart.text.square",
+                                  destination: Text("destination"))
                     SettingsLabel(title: "Learn about privacy",
                                   systemName: "key",
                                   destination: Text("destination"))
-                }
+                })
             }
             .listStyle(InsetGroupedListStyle())
             .navigationBarTitle("Settings")
