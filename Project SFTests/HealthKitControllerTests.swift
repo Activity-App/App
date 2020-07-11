@@ -98,7 +98,7 @@ class HealthKitControllerTests: XCTestCase {
         handle(expectedResult: 50, publisher: controller.$standCurrent)
         handle(expectedResult: 60, publisher: controller.$standGoal)
         
-        controller.updateAllActivityData()
+        controller.updateTodaysActivityData()
         
         wait(for: expectations, timeout: 5)
         cancellables
