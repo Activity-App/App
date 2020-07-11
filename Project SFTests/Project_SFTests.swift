@@ -31,92 +31,88 @@ class ProjectSFTests: XCTestCase {
     // MARK: Network Manager
     
     func testNetworkManagerSuccessfulRequest() throws {
+        let expect = XCTestExpectation()
+
         let mock = URLSessionMock()
         mock.data = Data([1, 0, 1, 1, 0])
         
         let networkManager = NetworkManager(urlSession: mock)
-        
-        var result: NetworkManager.DataResult?
-        var handlerCallTimes = 0
-        networkManager.request(URL(string: "fake")) {
-            result = $0
-            handlerCallTimes += 1
+
+        networkManager.request(URL(string: "fake")) { result in
+            switch result {
+            case .success(let data):
+                XCTAssertEqual(data, mock.data)
+                expect.fulfill()
+            default: return
+            }
         }
-        XCTAssertEqual(handlerCallTimes, 1)
-        
-        guard case .success(let data) = result else {
-            XCTFail("Result not success")
-            return
-        }
-        XCTAssertEqual(data, mock.data)
+
+        wait(for: [expect], timeout: 1)
     }
     
     func testNetworkManagerErrorRequest() throws {
+        let expect = XCTestExpectation()
+
         let mock = URLSessionMock()
         mock.error = FakeError()
         
         let networkManager = NetworkManager(urlSession: mock)
-        
-        var result: NetworkManager.DataResult?
-        var handlerCallTimes = 0
-        networkManager.request(URL(string: "fake")) {
-            result = $0
-            handlerCallTimes += 1
+
+        networkManager.request(URL(string: "fake")) { result in
+            switch result {
+            case .failure(let error):
+                XCTAssertEqual(error, NetworkManager.NetworkError.networkError)
+                expect.fulfill()
+            default: expect.fulfill()
+            }
         }
-        XCTAssertEqual(handlerCallTimes, 1)
-        
-        guard case .failure(let error) = result else {
-            XCTFail("Result not failure")
-            return
-        }
-        XCTAssertEqual(error, NetworkManager.NetworkError.networkError)
+
+        wait(for: [expect], timeout: 1)
     }
     
     func testNetworkManagerNoDataRequest() throws {
+        let expect = XCTestExpectation()
+
         let mock = URLSessionMock()
         
         let networkManager = NetworkManager(urlSession: mock)
-        
-        var result: NetworkManager.DataResult?
-        var handlerCallTimes = 0
-        networkManager.request(URL(string: "fake")) {
-            result = $0
-            handlerCallTimes += 1
+
+        networkManager.request(URL(string: "fake")) { result in
+            switch result {
+            case .failure(let error):
+                XCTAssertEqual(error, NetworkManager.NetworkError.noDataInResponse)
+            default: return
+            }
+
         }
-        XCTAssertEqual(handlerCallTimes, 1)
-        
-        guard case .failure(let error) = result else {
-            XCTFail("Result not failure")
-            return
-        }
-        XCTAssertEqual(error, NetworkManager.NetworkError.noDataInResponse)
+
+        wait(for: [expect], timeout: 1)
     }
     
     func testNetworkManagerRequestDecode() throws {
+        let expect = XCTestExpectation()
+
         let mock = URLSessionMock()
-        mock.data = #"""
+        mock.data = """
         {
             "name": "test",
             "count": 10123
         }
-        """#.data(using: .utf8)
+        """.data(using: .utf8)
         
         let networkManager = NetworkManager(urlSession: mock)
-        
-        var result: NetworkManager.DecodedResult<SampleDataStruct>?
-        var handlerCallTimes = 0
-        networkManager.request(URL(string: "fake"), decode: SampleDataStruct.self) {
-            result = $0
-            handlerCallTimes += 1
+
+        networkManager.request(URL(string: "fake"), decode: SampleDataStruct.self) { result in
+            switch result {
+            case .success(let decodedObject):
+                XCTAssertEqual(decodedObject.name, "test")
+                XCTAssertEqual(decodedObject.count, 10123)
+                expect.fulfill()
+            default: return
+            }
         }
-        XCTAssertEqual(handlerCallTimes, 1)
-        
-        guard case .success(let decodedObject) = result else {
-            XCTFail("Result not success")
-            return
-        }
-        XCTAssertEqual(decodedObject.name, "test")
-        XCTAssertEqual(decodedObject.count, 10123)
+
+        wait(for: [expect], timeout: 1)
     }
     
     // MARK: Performance
