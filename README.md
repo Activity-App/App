@@ -8,7 +8,7 @@ Project SF is an app which allows individuals to compete in challenges using the
 - iOS 14.0
 
 # Connect with developers
-Connect with other developers of this project on [Discord](https://discord.gg/HcGXy3w)
+Connect with other developers of this project on the official [Discord Server](https://discord.gg/HcGXy3w)
 # Contributing
 1. Clone this repo to your machine
 2. Make a separate branch or use one of the existing ones
