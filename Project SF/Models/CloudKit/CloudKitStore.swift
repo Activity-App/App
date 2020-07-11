@@ -38,7 +38,7 @@ class CloudKitStore {
     func fetchRecords(with recordType: CKRecord.RecordType,
                       predicate: NSPredicate = NSPredicate(value: true),
                       scope: CKDatabase.Scope,
-                      then handler: @escaping (Result<[CKRecord], Error>) -> Void) {
+                      then handler: @escaping (Result<[CKRecord], CloudKitStoreError>) -> Void) {
         let query = CKQuery(recordType: recordType, predicate: predicate)
         let queryOperation = CKQueryOperation(query: query)
 
@@ -54,7 +54,7 @@ class CloudKitStore {
             Self.queue.sync {
                 // TODO: Need to properly handle paging
                 if let error = error {
-                    handler(.failure(error))
+                    handler(.failure(.other(error.localizedDescription)))
                     return
                 }
 
@@ -75,7 +75,7 @@ class CloudKitStore {
     func fetchRecords<RecordType: Record>(with record: RecordType.Type,
                                           predicate: NSPredicate = NSPredicate(value: true),
                                           scope: CKDatabase.Scope,
-                                          then handler: @escaping (Result<[RecordType], Error>) -> Void) {
+                                          then handler: @escaping (Result<[RecordType], CloudKitStoreError>) -> Void) {
         fetchRecords(with: record.type, predicate: predicate, scope: scope) { result in
             switch result {
             case .success(let records):
@@ -95,12 +95,12 @@ class CloudKitStore {
     ///   - handler: Called with the result of the operation. Not guaranteed to be on the main thread.
     func fetchRecord(with recordID: CKRecord.ID,
                      scope: CKDatabase.Scope,
-                     then handler: @escaping (Result<CKRecord, Error>) -> Void) {
+                     then handler: @escaping (Result<CKRecord, CloudKitStoreError>) -> Void) {
         let database = container.database(with: scope)
 
         database.fetch(withRecordID: recordID) { record, error in
             if let error = error {
-                handler(.failure(error))
+                handler(.failure(.other(error.localizedDescription)))
                 return
             }
             guard let record = record else {
@@ -114,10 +114,10 @@ class CloudKitStore {
     
     /// Asynchronously fetches the user record from the CloudKit database
     /// - Parameter handler: Called with the result of the operation. Not guaranteed to be on the main thread.
-    func fetchUserRecord(then handler: @escaping (Result<UserRecord, Error>) -> Void) {
+    func fetchUserRecord(then handler: @escaping (Result<UserRecord, CloudKitStoreError>) -> Void) {
         container.fetchUserRecordID { recordID, error in
             if let error = error {
-                handler(.failure(error))
+                handler(.failure(.other(error.localizedDescription)))
                 return
             }
             
@@ -146,12 +146,12 @@ class CloudKitStore {
     ///   - handler: Called with the result of the operation. Not guaranteed to be on the main thread.
     func saveRecord(_ record: CKRecord,
                     scope: CKDatabase.Scope,
-                    then handler: @escaping (Result<Void, Error>) -> Void) {
+                    then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void) {
         let database = container.database(with: scope)
 
         database.save(record) { _, error in
             if let error = error {
-                handler(.failure(error))
+                handler(.failure(.other(error.localizedDescription)))
                 return
             }
             handler(.success(()))
@@ -165,12 +165,12 @@ class CloudKitStore {
     ///   - handler: Called with the result of the operation. Not guaranteed to be on the main thread.
     func deleteRecord(with recordID: CKRecord.ID,
                       scope: CKDatabase.Scope,
-                      then handler: @escaping (Result<Void, Error>) -> Void) {
+                      then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void) {
         let database = container.database(with: scope)
 
         database.delete(withRecordID: recordID) { _, error in
             if let error = error {
-                handler(.failure(error))
+                handler(.failure(.other(error.localizedDescription)))
                 return
             }
             handler(.success(()))
@@ -180,6 +180,7 @@ class CloudKitStore {
     // MARK: - CloudKitStoreError
 
     enum CloudKitStoreError: Error {
+        case other(String)
         case missingRecord
         case missingID
     }
