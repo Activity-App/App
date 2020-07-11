@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @AppStorage("TabViewPage") var page = 1
+    @AppStorage("TabViewPage") var page = 3
 
     var body: some View {
         TabView(selection: $page) {
