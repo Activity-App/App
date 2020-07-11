@@ -22,10 +22,10 @@
 		9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */; };
 		9C7B4D0824B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B4D0724B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift */; };
 		9CCFDD0724B95E9600162B0F /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD0624B95E9600162B0F /* URLSessionMock.swift */; };
-		9CCFDD1024B95EFB00162B0F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD0B24B95EFB00162B0F /* User.swift */; };
-		9CCFDD1124B95EFB00162B0F /* CloudKitStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD0C24B95EFB00162B0F /* CloudKitStore.swift */; };
-		9CCFDD1224B95EFB00162B0F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD0E24B95EFB00162B0F /* NetworkManager.swift */; };
-		9CCFDD1324B95EFB00162B0F /* HealthKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD0F24B95EFB00162B0F /* HealthKitController.swift */; };
+		9CCFDD1D24B971D600162B0F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD1824B971D600162B0F /* User.swift */; };
+		9CCFDD1E24B971D600162B0F /* CloudKitStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD1924B971D600162B0F /* CloudKitStore.swift */; };
+		9CCFDD1F24B971D600162B0F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD1B24B971D600162B0F /* NetworkManager.swift */; };
+		9CCFDD2024B971D600162B0F /* HealthKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD1C24B971D600162B0F /* HealthKitController.swift */; };
 		9CD7F11E24B89C5000DDAD8C /* Project_SFTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7F11D24B89C5000DDAD8C /* Project_SFTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,8 +60,10 @@
 		9CCFDD0624B95E9600162B0F /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
 		9CCFDD0B24B95EFB00162B0F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9CCFDD0C24B95EFB00162B0F /* CloudKitStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitStore.swift; sourceTree = "<group>"; };
-		9CCFDD0E24B95EFB00162B0F /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		9CCFDD0F24B95EFB00162B0F /* HealthKitController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitController.swift; sourceTree = "<group>"; };
+		9CCFDD1824B971D600162B0F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		9CCFDD1924B971D600162B0F /* CloudKitStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitStore.swift; sourceTree = "<group>"; };
+		9CCFDD1B24B971D600162B0F /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		9CCFDD1C24B971D600162B0F /* HealthKitController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitController.swift; sourceTree = "<group>"; };
 		9CD7F11B24B89C5000DDAD8C /* Project SFTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Project SFTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CD7F11D24B89C5000DDAD8C /* Project_SFTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project_SFTests.swift; sourceTree = "<group>"; };
 		9CD7F11F24B89C5000DDAD8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -86,16 +88,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3029AF4F24B88693003F0324 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				30BFC8E424B7702500DAC6D9 /* HealthKitController.swift */,
-				9CCFDD0324B95A6800162B0F /* Networking */,
-				9C9B984A24B81AA300A0A42A /* CloudKit */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		3029AF5024B8869E003F0324 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +126,7 @@
 				9CD7F11C24B89C5000DDAD8C /* Project SFTests */,
 				30BFC8CB24B75E6C00DAC6D9 /* Products */,
 				30BFC8E124B76BB900DAC6D9 /* Frameworks */,
+				9CCFDD1424B971B200162B0F /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -152,7 +145,7 @@
 				30BFC8E024B76BB800DAC6D9 /* Project SF.entitlements */,
 				3029AF5224B886CB003F0324 /* Support */,
 				3029AF5024B8869E003F0324 /* Views */,
-				9CCFDD0824B95EFB00162B0F /* Models */,
+				9CCFDD1524B971D600162B0F /* Models */,
 				9C7B4D0A24B89B0F00FC4456 /* Utilities */,
 				30BFC8D124B75E6F00DAC6D9 /* Assets.xcassets */,
 				30BFC8D624B75E6F00DAC6D9 /* Info.plist */,
@@ -186,45 +179,46 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		9CCFDD0824B95EFB00162B0F /* Models */ = {
+		9CCFDD1424B971B200162B0F /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				9CCFDD0924B95EFB00162B0F /* CloudKit */,
-				9CCFDD0D24B95EFB00162B0F /* Networking */,
-				9CCFDD0F24B95EFB00162B0F /* HealthKitController.swift */,
+				9CCFDD0C24B95EFB00162B0F /* CloudKitStore.swift */,
+				9CCFDD0B24B95EFB00162B0F /* User.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		9CCFDD1524B971D600162B0F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9CCFDD1624B971D600162B0F /* CloudKit */,
+				9CCFDD1A24B971D600162B0F /* Networking */,
+				9CCFDD1C24B971D600162B0F /* HealthKitController.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		9CCFDD0324B95A6800162B0F /* Networking */ = {
+		9CCFDD1624B971D600162B0F /* CloudKit */ = {
 			isa = PBXGroup;
 			children = (
-				9CCFDD0424B95A6800162B0F /* NetworkManager.swift */,
-			);
-			path = Networking;
-			sourceTree = "<group>";
-		};
-		9CD7F11C24B89C5000DDAD8C /* Project SFTests */ = {
-			isa = PBXGroup;
-			children = (
-				9CCFDD0A24B95EFB00162B0F /* Records */,
-				9CCFDD0C24B95EFB00162B0F /* CloudKitStore.swift */,
+				9CCFDD1724B971D600162B0F /* Records */,
+				9CCFDD1924B971D600162B0F /* CloudKitStore.swift */,
 			);
 			path = CloudKit;
 			sourceTree = "<group>";
 		};
-		9CCFDD0A24B95EFB00162B0F /* Records */ = {
+		9CCFDD1724B971D600162B0F /* Records */ = {
 			isa = PBXGroup;
 			children = (
-				9CCFDD0B24B95EFB00162B0F /* User.swift */,
+				9CCFDD1824B971D600162B0F /* User.swift */,
 			);
 			path = Records;
 			sourceTree = "<group>";
 		};
-		9CCFDD0D24B95EFB00162B0F /* Networking */ = {
+		9CCFDD1A24B971D600162B0F /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				9CCFDD0E24B95EFB00162B0F /* NetworkManager.swift */,
+				9CCFDD1B24B971D600162B0F /* NetworkManager.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -362,21 +356,19 @@
 			files = (
 				9C7B4D0824B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift in Sources */,
 				30BFC8D024B75E6C00DAC6D9 /* ContentView.swift in Sources */,
-				9CCFDD1324B95EFB00162B0F /* HealthKitController.swift in Sources */,
 				30BFC8DD24B762D900DAC6D9 /* CustomTabBar.swift in Sources */,
-				9CCFDD1224B95EFB00162B0F /* NetworkManager.swift in Sources */,
 				30BFC8CE24B75E6C00DAC6D9 /* Project_SFApp.swift in Sources */,
+				9CCFDD1F24B971D600162B0F /* NetworkManager.swift in Sources */,
 				30BFC8E924B804CC00DAC6D9 /* ActivityRing.swift in Sources */,
 				30BFC8DF24B7637F00DAC6D9 /* VisualEffectView.swift in Sources */,
+				9CCFDD1D24B971D600162B0F /* User.swift in Sources */,
+				9CCFDD1E24B971D600162B0F /* CloudKitStore.swift in Sources */,
 				30F1EA3B24B951CA00FF89FC /* IntroView.swift in Sources */,
 				30A0EEF724B9381A004A99B7 /* SignIn.swift in Sources */,
+				9CCFDD2024B971D600162B0F /* HealthKitController.swift in Sources */,
 				9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */,
-				9C9B984924B8150B00A0A42A /* CloudKitStore.swift in Sources */,
-				9CCFDD0524B95A6800162B0F /* NetworkManager.swift in Sources */,
 				30BFC8E724B8041C00DAC6D9 /* ActivityRings.swift in Sources */,
 				3090918224B9480F000E3B11 /* RoundedButton.swift in Sources */,
-				9CCFDD1124B95EFB00162B0F /* CloudKitStore.swift in Sources */,
-				9CCFDD1024B95EFB00162B0F /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
