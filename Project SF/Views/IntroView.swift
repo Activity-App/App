@@ -41,8 +41,12 @@ struct IntroView: View {
                 Text("This is an app about fitness challanges")
                     .font(.headline)
 
-                InfoCell(title: "Test title", subTitle: "Some text that we use the data phom the phone", image: Image(systemName: "iphone"))
-                InfoCell(title: "This is a splash screen", subTitle: "something about using the apple watch trainings", image: Image(systemName: "applewatch.watchface"))
+                InfoCell(title: "Test title",
+                         subTitle: "Some text that we use the data phom the phone",
+                         image: Image(systemName: "iphone"))
+                InfoCell(title: "This is a splash screen",
+                         subTitle: "something about using the apple watch trainings",
+                         image: Image(systemName: "applewatch.watchface"))
                 InfoCell(title: "Test", subTitle: "idk maybe something else", image: Image(systemName: "pencil"))
                 Spacer()
 
