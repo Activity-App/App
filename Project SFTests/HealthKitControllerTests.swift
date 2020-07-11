@@ -58,6 +58,7 @@ class HealthKitControllerTests: XCTestCase {
     }
 
     // MARK: - Test Update Activity Data
+    // swiftlint:disable function_body_length
     func testHealthKitControllerUpdateActivityData() throws {
         let mock = HKHealthStoreMock()
         let fakeResult = HKActivitySummaryMock()
