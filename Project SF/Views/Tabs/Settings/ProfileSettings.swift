@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ProfileSettings: View {
 
-    @State var username = "My Name"
-    @State var phoneNumber = "+7 (914) 690 52-28"
-    @State var description = ""
+    @AppStorage("username") var username = "My Name"
+    @AppStorage("phone-number") var phoneNumber = "+7 (914) 690 52-28"
+    @AppStorage("user-description") var description = ""
 
     @State var isShowingAlert = false
 
@@ -69,10 +69,6 @@ struct ProfileSettings: View {
         }
         .padding(.horizontal)
         .navigationTitle("Profile")
-    }
-
-    init() {
-        username = UserDefaults.standard.string(forKey: "username") ?? ""
     }
 }
 
