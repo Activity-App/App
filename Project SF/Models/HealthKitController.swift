@@ -34,6 +34,8 @@ class HealthKitController: ObservableObject {
     }
     
     // MARK: Methods
+
+    // MARK: - Auth health kit
     
     /// Authorize HealthKit with specified types. Will present a screen to give access if not previously enabled.
     func authorizeHealthKit() {
@@ -61,7 +63,9 @@ class HealthKitController: ObservableObject {
             }
         })
     }
-    
+
+    // MARK: - Update all activity data
+
     /// Gets activity data for current day, and stores the new values in the published vars.
     func updateAllActivityData() {
 
@@ -98,6 +102,8 @@ class HealthKitController: ObservableObject {
         let query = HKActivitySummaryQuery(predicate: nil, resultsHandler: resultHandler)
         healthStore.execute(query)
     }
+
+    // MARK: - Update data for day
     
     func update(data: HKQuantityTypeIdentifier, for day: Date) {
         let dataType = HKQuantityType.quantityType(forIdentifier: data)
