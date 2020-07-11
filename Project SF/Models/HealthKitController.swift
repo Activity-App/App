@@ -16,8 +16,7 @@ class HealthKitController: ObservableObject {
     
     // MARK: Published Properties
 
-    @Published var processBegan = false
-    @Published var success = false
+    @Published var authorizationState = AuthorizationState.notBegun
 
     @Published var moveCurrent = 0.0
     @Published var moveGoal = 1.0
@@ -39,7 +38,7 @@ class HealthKitController: ObservableObject {
     /// Authorize HealthKit with specified types. Will present a screen to give access if not previously enabled.
     func authorizeHealthKit() {
         DispatchQueue.main.async {
-            self.processBegan = true
+            self.authorizationState = .processStarted
         }
 
         let healthKitTypes: Set = [
@@ -52,10 +51,12 @@ class HealthKitController: ObservableObject {
         ]
 
         healthStore.requestAuthorization(toShare: nil, read: healthKitTypes, completion: { success, _ in
-            if success {
-                print("Success! HK is working")
-                DispatchQueue.main.async {
-                    self.success = true
+            DispatchQueue.main.async {
+                if success {
+                    print("Success! HK is working")
+                    self.authorizationState = .granted
+                } else {
+                    self.authorizationState = .notGranted
                 }
             }
         })
@@ -131,4 +132,14 @@ class HealthKitController: ObservableObject {
             }
         }
     }
+    
+    // MARK: Authorization State
+    
+    enum AuthorizationState {
+        case notBegun
+        case processStarted
+        case granted
+        case notGranted
+    }
+    
 }
