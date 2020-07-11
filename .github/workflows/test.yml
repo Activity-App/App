@@ -1,6 +1,6 @@
 # Tests the project
 
-name: XcodeBuild
+name: Test
 
 on: [push]
 
