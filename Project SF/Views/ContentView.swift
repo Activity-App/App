@@ -13,14 +13,11 @@ struct ContentView: View {
 
     var body: some View {
         TabView(selection: $page) {
+            TodayView()
+            
             CompetitionsView()
-                .tag(1)
-
-            TeamsView()
-                .tag(2)
 
             SettingsView()
-                .tag(3)
         }
         .accentColor(.init(red: 1, green: 0.4, blue: 0.4))
     }
