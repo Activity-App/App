@@ -25,14 +25,14 @@ struct RoundedButton: View {
         }
     }
 
-    init(_ title: String, action: @escaping () -> Void) {
+    init(_ title: String, action: (() -> Void)? = nil) {
         self.title = title
-        self.action = action
+        self.action = action ?? {}
     }
 }
 
 struct RoundedButton_Previews: PreviewProvider {
     static var previews: some View {
-        RoundedButton()
+        RoundedButton("Button title")
     }
 }
