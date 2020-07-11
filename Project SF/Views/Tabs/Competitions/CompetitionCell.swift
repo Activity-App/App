@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CompetitionCell: View {
+    let competitionName: String
+    let endDate: Date
     let healthKit: HealthKitController
 
     var body: some View {
@@ -18,7 +20,7 @@ struct CompetitionCell: View {
                     ActivityRings(healthKit: healthKit)
                         .padding(.trailing)
                     VStack(alignment: .leading) {
-                        Text("Ends On 21 August 2020")
+                        Text(endDate, style: .relative)
                             .foregroundColor(.secondary)
                             .font(.subheadline)
 
@@ -42,9 +44,12 @@ struct CompetitionCell: View {
                     }
                 }
             })
+            .padding(.vertical, 8)
     }
 
-    init(_ healthKit: HealthKitController) {
+    init(_ competitionName: String, endsOn endDate: Date, _ healthKit: HealthKitController) {
+        self.competitionName = competitionName
+        self.endDate = endDate
         self.healthKit = healthKit
     }
 }
