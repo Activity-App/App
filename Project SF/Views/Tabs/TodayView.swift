@@ -20,7 +20,6 @@ struct TodayView: View {
                 Text("Today")
             }
         }
-        .tag(2)
     }
 }
 
