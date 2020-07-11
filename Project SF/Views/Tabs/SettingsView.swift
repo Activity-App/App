@@ -30,7 +30,7 @@ struct SettingsView: View {
                                   systemName: "person.crop.circle",
                                   destination: Text("destination"))
                     SettingsLabel(title: "Notifications",
-                                  systemName: "person.crop.circle",
+                                  systemName: "app.badge",
                                   destination: Text("destination"))
                 }
 
@@ -42,7 +42,7 @@ struct SettingsView: View {
 
                 Section {
                     SettingsLabel(title: "Learn about privacy",
-                                  systemName: "person.crop.circle",
+                                  systemName: "key",
                                   destination: Text("destination"))
                 }
             }
