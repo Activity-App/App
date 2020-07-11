@@ -9,8 +9,12 @@ import Foundation
 import HealthKit
 
 class HealthKitController: ObservableObject {
+    
+    // MARK: Properties
 
-    let healthStore = HKHealthStore()
+    let healthStore: HKHealthStore
+    
+    // MARK: Published Properties
 
     @Published var processBegan = false
     @Published var success = false
@@ -23,7 +27,16 @@ class HealthKitController: ObservableObject {
 
     @Published var standCurrent = 0.0
     @Published var standGoal = 12.0
-
+    
+    // MARK: Init
+    
+    init(healthStore: HKHealthStore = .init()) {
+        self.healthStore = healthStore
+    }
+    
+    // MARK: Methods
+    
+    /// Authorize HealthKit with specified types. Will present a screen to give access if not previously enabled.
     func authorizeHealthKit() {
         DispatchQueue.main.async {
             self.processBegan = true
