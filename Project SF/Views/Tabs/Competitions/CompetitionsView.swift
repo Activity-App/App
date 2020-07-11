@@ -15,15 +15,15 @@ struct CompetitionsView: View {
         NavigationView {
             List {
                 Section {
-                    CompetitionCell(healthKit)
+                    CompetitionCell("CompetitionName", endsOn: Date() + 1000, healthKit)
                 }
 
                 Section {
-                    CompetitionCell(healthKit)
+                    CompetitionCell("CompetitionName", endsOn: Date() + 10000, healthKit)
                 }
 
                 Section {
-                    CompetitionCell(healthKit)
+                    CompetitionCell("CompetitionName", endsOn: Date() + 100000, healthKit)
                 }
             }
             .listStyle(InsetGroupedListStyle())
