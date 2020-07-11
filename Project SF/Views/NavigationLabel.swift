@@ -17,12 +17,7 @@ struct NavigationLabel<Destination: View>: View {
             destination: destination,
             label: {
                 Label(title, systemImage: systemName)
-            })
+            }
+        )
     }
 }
-
-//struct NavigationLabel_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NavigationLabel()
-//    }
-//}
