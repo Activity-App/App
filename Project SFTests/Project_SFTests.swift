@@ -81,6 +81,7 @@ class ProjectSFTests: XCTestCase {
             switch result {
             case .failure(let error):
                 XCTAssertEqual(error, NetworkManager.NetworkError.noDataInResponse)
+                expect.fulfill()
             default: return
             }
 
