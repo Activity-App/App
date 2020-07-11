@@ -18,9 +18,9 @@ struct CurrentlyCompetingHeader: View {
     var index: Int
     var body: some View {
         if index == 0 {
-            Text("Currently Competing")
+            return AnyView(Text("Currently Competing"))
         } else {
-            EmptyView()
+            return AnyView(EmptyView())
         }
     }
 }
