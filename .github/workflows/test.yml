@@ -1,6 +1,6 @@
 # Tests the project
 
-name: Test
+name: UnitTesting
 
 on: [push]
 
