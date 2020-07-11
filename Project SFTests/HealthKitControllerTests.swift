@@ -108,7 +108,7 @@ class HealthKitControllerTests: XCTestCase {
                description: "Stand value is not set correctly")
         handle(expectedResult: 60,
                publisher: controller.$standGoal,
-               sdescription: "Stand goal is not set correctly")
+               description: "Stand goal is not set correctly")
         
         controller.updateTodaysActivityData()
         
