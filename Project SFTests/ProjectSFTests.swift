@@ -31,7 +31,7 @@ class NetworkManagerTests: XCTestCase {
             }
         }
 
-        wait(for: [expect], timeout: 1)
+        wait(for: [expect], timeout: 5)
     }
 
     // MARK: - Network Error Request
@@ -52,7 +52,7 @@ class NetworkManagerTests: XCTestCase {
             }
         }
 
-        wait(for: [expect], timeout: 1)
+        wait(for: [expect], timeout: 5)
     }
 
     // MARK: - Network No Data In Response
@@ -73,7 +73,7 @@ class NetworkManagerTests: XCTestCase {
 
         }
 
-        wait(for: [expect], timeout: 1)
+        wait(for: [expect], timeout: 5)
     }
 
     // MARK: - Network Request Decode
@@ -100,7 +100,7 @@ class NetworkManagerTests: XCTestCase {
             }
         }
 
-        wait(for: [expect], timeout: 1)
+        wait(for: [expect], timeout: 5)
     }
 
 }
