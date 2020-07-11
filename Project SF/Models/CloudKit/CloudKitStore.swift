@@ -27,7 +27,14 @@ class CloudKitStore {
     }
 
     // MARK: Methods
-
+    
+    /// Asynchronously fetches records from the CloudKit database.
+    /// Current Limitation: Doesn't handle paging correctly
+    /// - Parameters:
+    ///   - recordType: The type of record to fetch.
+    ///   - predicate: Condition for records to be fetched.
+    ///   - scope: The database scope.
+    ///   - handler: Called with the result of the operation. Not guaranteed to be on the main thread.
     func fetchRecords(with recordType: CKRecord.RecordType,
                       predicate: NSPredicate = NSPredicate(value: true),
                       scope: CKDatabase.Scope,
@@ -58,7 +65,12 @@ class CloudKitStore {
         let database = container.database(with: scope)
         database.add(queryOperation)
     }
-
+    
+    /// Asynchronously fetches a single record from the CloudKit database.
+    /// - Parameters:
+    ///   - recordID: The ID of the record you want to fetch.
+    ///   - scope: The database scope
+    ///   - handler: Called with the result of the operation. Not guaranteed to be on the main thread.
     func fetchRecord(with recordID: CKRecord.ID,
                      scope: CKDatabase.Scope,
                      then handler: @escaping (Result<CKRecord, Error>) -> Void) {
@@ -77,7 +89,12 @@ class CloudKitStore {
             handler(.success(record))
         }
     }
-
+    
+    /// Asynchronously saves a single record to the CloudKit database, with a low priority.
+    /// - Parameters:
+    ///   - record: The record to save.
+    ///   - scope: The database scope.
+    ///   - handler: Called with the result of the operation. Not guaranteed to be on the main thread.
     func saveRecord(_ record: CKRecord,
                     scope: CKDatabase.Scope,
                     then handler: @escaping (Result<Void, Error>) -> Void) {
@@ -91,7 +108,12 @@ class CloudKitStore {
             handler(.success(()))
         }
     }
-
+    
+    /// Asynchronously deletes a single record to the CloudKit database, with a low priority.
+    /// - Parameters:
+    ///   - recordID: The ID of the record you want to delete.
+    ///   - scope: The database scope.
+    ///   - handler: Called with the result of the operation. Not guaranteed to be on the main thread.
     func deleteRecord(with recordID: CKRecord.ID,
                       scope: CKDatabase.Scope,
                       then handler: @escaping (Result<Void, Error>) -> Void) {

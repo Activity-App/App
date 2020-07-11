@@ -22,6 +22,7 @@
 		9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */; };
 		9C7B4D0824B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B4D0724B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift */; };
 		9C9B984924B8150B00A0A42A /* CloudKitStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B984824B8150B00A0A42A /* CloudKitStore.swift */; };
+		9CCFDD0524B95A6800162B0F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD0424B95A6800162B0F /* NetworkManager.swift */; };
 		9CD7F11E24B89C5000DDAD8C /* Project_SFTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7F11D24B89C5000DDAD8C /* Project_SFTests.swift */; };
 		9CF22AB624B823E700B35EA5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF22AB524B823E700B35EA5 /* User.swift */; };
 /* End PBXBuildFile section */
@@ -55,6 +56,7 @@
 		9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ForegroundModifier.swift"; sourceTree = "<group>"; };
 		9C7B4D0724B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ConvertFromRangeToRange.swift"; sourceTree = "<group>"; };
 		9C9B984824B8150B00A0A42A /* CloudKitStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitStore.swift; sourceTree = "<group>"; };
+		9CCFDD0424B95A6800162B0F /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		9CD7F11B24B89C5000DDAD8C /* Project SFTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Project SFTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CD7F11D24B89C5000DDAD8C /* Project_SFTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project_SFTests.swift; sourceTree = "<group>"; };
 		9CD7F11F24B89C5000DDAD8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				30BFC8E424B7702500DAC6D9 /* HealthKitController.swift */,
+				9CCFDD0324B95A6800162B0F /* Networking */,
 				9C9B984A24B81AA300A0A42A /* CloudKit */,
 			);
 			path = Models;
@@ -185,6 +188,14 @@
 				9CF22AB424B823E100B35EA5 /* Records */,
 			);
 			path = CloudKit;
+			sourceTree = "<group>";
+		};
+		9CCFDD0324B95A6800162B0F /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				9CCFDD0424B95A6800162B0F /* NetworkManager.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		9CD7F11C24B89C5000DDAD8C /* Project SFTests */ = {
@@ -335,6 +346,7 @@
 				30A0EEF724B9381A004A99B7 /* SignIn.swift in Sources */,
 				9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */,
 				9C9B984924B8150B00A0A42A /* CloudKitStore.swift in Sources */,
+				9CCFDD0524B95A6800162B0F /* NetworkManager.swift in Sources */,
 				30BFC8E724B8041C00DAC6D9 /* ActivityRings.swift in Sources */,
 				9CF22AB624B823E700B35EA5 /* User.swift in Sources */,
 				3090918224B9480F000E3B11 /* RoundedButton.swift in Sources */,
