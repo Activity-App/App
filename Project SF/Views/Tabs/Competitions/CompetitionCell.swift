@@ -33,7 +33,7 @@ struct CompetitionCell: View {
                                 .foregroundColor(RingColor.move.color)
                                 .fontWeight(.medium)
                             Text("Exercise: \(Int(healthKit.exerciseCurrent))/\(Int(healthKit.exerciseGoal))")
-                                .foregroundColor(RingColor.exercise.color)
+                                .foregroundColor(RingColor.exercise.darkColor)
                                 .fontWeight(.medium)
                             Text("Stand: \(Int(healthKit.standCurrent))/\(Int(healthKit.standGoal))")
                                 .foregroundColor(RingColor.stand.color)
