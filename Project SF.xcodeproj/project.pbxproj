@@ -62,8 +62,6 @@
 		9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ForegroundModifier.swift"; sourceTree = "<group>"; };
 		9C7B4D0724B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ConvertFromRangeToRange.swift"; sourceTree = "<group>"; };
 		9CCFDD0624B95E9600162B0F /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
-		9CCFDD0B24B95EFB00162B0F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		9CCFDD0C24B95EFB00162B0F /* CloudKitStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitStore.swift; sourceTree = "<group>"; };
 		9CCFDD1824B971D600162B0F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9CCFDD1924B971D600162B0F /* CloudKitStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitStore.swift; sourceTree = "<group>"; };
 		9CCFDD1B24B971D600162B0F /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -138,7 +136,6 @@
 				9CD7F11C24B89C5000DDAD8C /* Project SFTests */,
 				30BFC8CB24B75E6C00DAC6D9 /* Products */,
 				30BFC8E124B76BB900DAC6D9 /* Frameworks */,
-				9CCFDD1424B971B200162B0F /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -190,15 +187,6 @@
 				3029AF5124B886A7003F0324 /* Extensions */,
 			);
 			path = Utilities;
-			sourceTree = "<group>";
-		};
-		9CCFDD1424B971B200162B0F /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				9CCFDD0C24B95EFB00162B0F /* CloudKitStore.swift */,
-				9CCFDD0B24B95EFB00162B0F /* User.swift */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		9CCFDD1524B971D600162B0F /* Models */ = {
