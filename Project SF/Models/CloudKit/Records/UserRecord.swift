@@ -11,6 +11,8 @@ import CloudKit
 class UserRecord {
     
     // MARK: Properties
+    
+    static let type = "Users"
 
     private let record: CKRecord
 

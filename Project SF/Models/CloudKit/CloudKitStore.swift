@@ -66,6 +66,28 @@ class CloudKitStore {
         database.add(queryOperation)
     }
     
+    /// Asynchronously fetches records from the CloudKit database
+    /// - Parameters:
+    ///   - record: The type of the record to fetch.
+    ///   - predicate: Condition for records to be fetched.
+    ///   - scope: The database scope.
+    ///   - handler: Called with the result of the operation. Not guaranteed to be on the main thread.
+    func fetchRecords<RecordType: Record>(with record: RecordType.Type,
+                                          predicate: NSPredicate = NSPredicate(value: true),
+                                          scope: CKDatabase.Scope,
+                                          then handler: @escaping (Result<[RecordType], Error>) -> Void) {
+        fetchRecords(with: record.type, predicate: predicate, scope: scope) { result in
+            switch result {
+            case .success(let records):
+                let records = records.map { RecordType.init(record: $0) }
+                
+                handler(.success(records))
+            case .failure(let error):
+                handler(.failure(error))
+            }
+        }
+    }
+    
     /// Asynchronously fetches a single record from the CloudKit database.
     /// - Parameters:
     ///   - recordID: The ID of the record you want to fetch.
@@ -87,6 +109,33 @@ class CloudKitStore {
             }
 
             handler(.success(record))
+        }
+    }
+    
+    /// Asynchronously fetches the user record from the CloudKit database
+    /// - Parameter handler: Called with the result of the operation. Not guaranteed to be on the main thread.
+    func fetchUserRecord(then handler: @escaping (Result<UserRecord, Error>) -> Void) {
+        container.fetchUserRecordID { recordID, error in
+            if let error = error {
+                handler(.failure(error))
+                return
+            }
+            
+            guard let recordID = recordID else {
+                handler(.failure(CloudKitStoreError.missingID))
+                return
+            }
+            
+            // TODO: Determine whether or not this could be a memory leak
+            
+            self.fetchRecord(with: recordID, scope: .private) { result in
+                switch result {
+                case .success(let record):
+                    handler(.success(UserRecord(record: record)))
+                case .failure(let error):
+                    handler(.failure(error))
+                }
+            }
         }
     }
     
@@ -132,6 +181,7 @@ class CloudKitStore {
 
     enum CloudKitStoreError: Error {
         case missingRecord
+        case missingID
     }
 
 }

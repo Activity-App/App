@@ -36,10 +36,11 @@
 		9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */; };
 		9C7B4D0824B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B4D0724B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift */; };
 		9C8FAD4624B9E39E00571947 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAD4524B9E39E00571947 /* Record.swift */; };
+		9C8FAD4824B9E7CC00571947 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAD4724B9E7CC00571947 /* UserController.swift */; };
 		9C9748E024B9A9AA00FB5F21 /* HKHealthStoreMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9748DF24B9A9AA00FB5F21 /* HKHealthStoreMock.swift */; };
 		9C9748E524B9B05900FB5F21 /* HKActivitySummaryQuery+ResultsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9748E424B9B05900FB5F21 /* HKActivitySummaryQuery+ResultsHandler.m */; };
 		9CCFDD0724B95E9600162B0F /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD0624B95E9600162B0F /* URLSessionMock.swift */; };
-		9CCFDD1D24B971D600162B0F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD1824B971D600162B0F /* User.swift */; };
+		9CCFDD1D24B971D600162B0F /* UserRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD1824B971D600162B0F /* UserRecord.swift */; };
 		9CCFDD1E24B971D600162B0F /* CloudKitStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD1924B971D600162B0F /* CloudKitStore.swift */; };
 		9CCFDD1F24B971D600162B0F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD1B24B971D600162B0F /* NetworkManager.swift */; };
 		9CCFDD2024B971D600162B0F /* HealthKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD1C24B971D600162B0F /* HealthKitController.swift */; };
@@ -93,12 +94,13 @@
 		9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ForegroundModifier.swift"; sourceTree = "<group>"; };
 		9C7B4D0724B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ConvertFromRangeToRange.swift"; sourceTree = "<group>"; };
 		9C8FAD4524B9E39E00571947 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		9C8FAD4724B9E7CC00571947 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		9C9748DF24B9A9AA00FB5F21 /* HKHealthStoreMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKHealthStoreMock.swift; sourceTree = "<group>"; };
 		9C9748E224B9AF1E00FB5F21 /* Project SFTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Project SFTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		9C9748E324B9AF1E00FB5F21 /* HKActivitySummaryQuery+ResultsHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HKActivitySummaryQuery+ResultsHandler.h"; sourceTree = "<group>"; };
 		9C9748E424B9B05900FB5F21 /* HKActivitySummaryQuery+ResultsHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "HKActivitySummaryQuery+ResultsHandler.m"; sourceTree = "<group>"; };
 		9CCFDD0624B95E9600162B0F /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
-		9CCFDD1824B971D600162B0F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		9CCFDD1824B971D600162B0F /* UserRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRecord.swift; sourceTree = "<group>"; };
 		9CCFDD1924B971D600162B0F /* CloudKitStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitStore.swift; sourceTree = "<group>"; };
 		9CCFDD1B24B971D600162B0F /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		9CCFDD1C24B971D600162B0F /* HealthKitController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitController.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 				9CCFDD1624B971D600162B0F /* CloudKit */,
 				9CCFDD1A24B971D600162B0F /* Networking */,
 				9CCFDD1C24B971D600162B0F /* HealthKitController.swift */,
+				9C8FAD4724B9E7CC00571947 /* UserController.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -302,7 +305,7 @@
 		9CCFDD1724B971D600162B0F /* Records */ = {
 			isa = PBXGroup;
 			children = (
-				9CCFDD1824B971D600162B0F /* User.swift */,
+				9CCFDD1824B971D600162B0F /* UserRecord.swift */,
 			);
 			path = Records;
 			sourceTree = "<group>";
@@ -458,10 +461,11 @@
 				308FAD9424B989DE00126F3F /* CompetitionsView.swift in Sources */,
 				30BFC8CE24B75E6C00DAC6D9 /* ProjectSFApp.swift in Sources */,
 				9CCFDD1F24B971D600162B0F /* NetworkManager.swift in Sources */,
+				9C8FAD4824B9E7CC00571947 /* UserController.swift in Sources */,
 				9CCFDD2624B9753F00162B0F /* Main.swift in Sources */,
 				30BFC8E924B804CC00DAC6D9 /* ActivityRing.swift in Sources */,
 				30BFC8DF24B7637F00DAC6D9 /* VisualEffectView.swift in Sources */,
-				9CCFDD1D24B971D600162B0F /* User.swift in Sources */,
+				9CCFDD1D24B971D600162B0F /* UserRecord.swift in Sources */,
 				308FAD8D24B97E8A00126F3F /* PrivacyView.swift in Sources */,
 				308FAD8B24B97E7E00126F3F /* InfoCell.swift in Sources */,
 				308FADA424B9A9F000126F3F /* PrivacyAbout.swift in Sources */,
