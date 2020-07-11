@@ -31,9 +31,9 @@ struct RoundedButton: View {
     /// - Parameters:
     ///   - title: The title of the button.
     ///   - action: The action that'll be performed on tap.
-    init(_ title: String, action: (() -> Void)? = nil) {
+    init(_ title: String, action: @escaping () -> Void = {}) {
         self.title = title
-        self.action = action ?? {}
+        self.action = action
     }
 }
 
