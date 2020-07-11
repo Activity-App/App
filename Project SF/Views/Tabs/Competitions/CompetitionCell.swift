@@ -9,8 +9,9 @@ import SwiftUI
 
 struct CompetitionCell: View {
     let competitionName: String
+    let startDate: Date
     let endDate: Date
-    let healthKit: HealthKitController
+    @ObservedObject var healthKit: HealthKitController
 
     var body: some View {
         NavigationLink(
@@ -26,31 +27,25 @@ struct CompetitionCell: View {
 
                         Spacer()
 
-                        Text("Competition name")
+                        Text(competitionName)
                             .font(.headline)
                         Spacer()
 
                         VStack(alignment: .leading) {
                             Text("Move: \(Int(healthKit.moveCurrent))/\(Int(healthKit.moveGoal))")
-                                .foregroundColor(RingColor.move.color)
+                                .foregroundColor(RingColor.move.darkColor)
                                 .fontWeight(.medium)
                             Text("Exercise: \(Int(healthKit.exerciseCurrent))/\(Int(healthKit.exerciseGoal))")
                                 .foregroundColor(RingColor.exercise.darkColor)
                                 .fontWeight(.medium)
                             Text("Stand: \(Int(healthKit.standCurrent))/\(Int(healthKit.standGoal))")
-                                .foregroundColor(RingColor.stand.color)
+                                .foregroundColor(RingColor.stand.darkColor)
                                 .fontWeight(.medium)
                         }
                     }
                 }
             })
             .padding(.vertical, 8)
-    }
-
-    init(_ competitionName: String, endsOn endDate: Date, _ healthKit: HealthKitController) {
-        self.competitionName = competitionName
-        self.endDate = endDate
-        self.healthKit = healthKit
     }
 }
 
