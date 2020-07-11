@@ -2,7 +2,10 @@
 
 name: SwiftLint
   
-on: [push]
+on:
+  push:
+    branches: [ master, development ]
+  pull_request:
 
 jobs:
   Lint:
