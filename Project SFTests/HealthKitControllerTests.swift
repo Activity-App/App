@@ -30,7 +30,7 @@ class HealthKitControllerTests: XCTestCase {
         
         controller.authorizeHealthKit()
         
-        wait(for: [expectation], timeout: 1)
+        wait(for: [expectation], timeout: 5)
         cancellable.cancel()
     }
 
@@ -53,7 +53,7 @@ class HealthKitControllerTests: XCTestCase {
         
         controller.authorizeHealthKit()
         
-        wait(for: [expectation], timeout: 1)
+        wait(for: [expectation], timeout: 5)
         cancellable.cancel()
     }
 
@@ -100,7 +100,7 @@ class HealthKitControllerTests: XCTestCase {
         
         controller.updateAllActivityData()
         
-        wait(for: expectations, timeout: 2)
+        wait(for: expectations, timeout: 5)
         cancellables
             .forEach { $0.cancel() }
     }

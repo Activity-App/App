@@ -36,6 +36,7 @@
 		9C12BBE624B9D41600C050DB /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C12BBE524B9D41600C050DB /* SampleData.swift */; };
 		9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */; };
 		9C7B4D0824B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B4D0724B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift */; };
+		9C8FAD4624B9E39E00571947 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAD4524B9E39E00571947 /* Record.swift */; };
 		9C9748E024B9A9AA00FB5F21 /* HKHealthStoreMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9748DF24B9A9AA00FB5F21 /* HKHealthStoreMock.swift */; };
 		9C9748E524B9B05900FB5F21 /* HKActivitySummaryQuery+ResultsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9748E424B9B05900FB5F21 /* HKActivitySummaryQuery+ResultsHandler.m */; };
 		9CCFDD0724B95E9600162B0F /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD0624B95E9600162B0F /* URLSessionMock.swift */; };
@@ -93,6 +94,7 @@
 		9C12BBE524B9D41600C050DB /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ForegroundModifier.swift"; sourceTree = "<group>"; };
 		9C7B4D0724B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ConvertFromRangeToRange.swift"; sourceTree = "<group>"; };
+		9C8FAD4524B9E39E00571947 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		9C9748DF24B9A9AA00FB5F21 /* HKHealthStoreMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKHealthStoreMock.swift; sourceTree = "<group>"; };
 		9C9748E224B9AF1E00FB5F21 /* Project SFTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Project SFTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		9C9748E324B9AF1E00FB5F21 /* HKActivitySummaryQuery+ResultsHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HKActivitySummaryQuery+ResultsHandler.h"; sourceTree = "<group>"; };
@@ -301,8 +303,9 @@
 		9CCFDD1624B971D600162B0F /* CloudKit */ = {
 			isa = PBXGroup;
 			children = (
-				9CCFDD1724B971D600162B0F /* Records */,
 				9CCFDD1924B971D600162B0F /* CloudKitStore.swift */,
+				9C8FAD4524B9E39E00571947 /* Record.swift */,
+				9CCFDD1724B971D600162B0F /* Records */,
 			);
 			path = CloudKit;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				9CCFDD1E24B971D600162B0F /* CloudKitStore.swift in Sources */,
 				30F1EA3B24B951CA00FF89FC /* IntroView.swift in Sources */,
 				9CCFDD2024B971D600162B0F /* HealthKitController.swift in Sources */,
+				9C8FAD4624B9E39E00571947 /* Record.swift in Sources */,
 				308FAD9624B989EF00126F3F /* TeamsView.swift in Sources */,
 				9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */,
 				30BFC8E724B8041C00DAC6D9 /* ActivityRings.swift in Sources */,
@@ -641,7 +645,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Project SF/Project SF.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = W9K99K5JN4;
+				DEVELOPMENT_TEAM = 5RTMJNH82H;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -649,7 +653,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wfltaylor.ProjectSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -664,7 +668,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Project SF/Project SF.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = W9K99K5JN4;
+				DEVELOPMENT_TEAM = 5RTMJNH82H;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -672,7 +676,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wfltaylor.ProjectSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
