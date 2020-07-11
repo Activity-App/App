@@ -152,9 +152,17 @@
 			children = (
 				308FAD9324B989DE00126F3F /* CompetitionsView.swift */,
 				308FAD9524B989EF00126F3F /* TeamsView.swift */,
-				308FAD9724B989FF00126F3F /* SettingsView.swift */,
+				308FAD9A24B999DC00126F3F /* Settings */,
 			);
 			path = Tabs;
+			sourceTree = "<group>";
+		};
+		308FAD9A24B999DC00126F3F /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				308FAD9724B989FF00126F3F /* SettingsView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		30BFC8C124B75E6C00DAC6D9 = {
