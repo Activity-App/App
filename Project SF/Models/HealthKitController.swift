@@ -113,13 +113,16 @@ class HealthKitController: ObservableObject {
 
     // MARK: - Get health data
     
-    /// Gets health data for specified date with completion containing result. Remember to include requested data types in auth first!
+    /// Gets health data for specified date with completion containing result.
+    /// Remember to include requested data types in auth first!
     /// - Parameters:
     ///   - data: HealthKit quantity type for data
     ///   - unit: HealthKit unit type for data
     ///   - date: Date to fetch health data
     ///   - completion: Completion that returns result as double as well as error if that occured.
-    func getHealthData(data: HKQuantityTypeIdentifier, unit: HKUnit, for date: Date, completion: @escaping (Double?, Error?) -> Void) {
+    func getHealthData(data: HKQuantityTypeIdentifier,
+                       unit: HKUnit, for date: Date,
+                       completion: @escaping (Double?, Error?) -> Void) {
         let dataType = HKQuantityType.quantityType(forIdentifier: data)
 
         let calendar = Calendar(identifier: .gregorian)
