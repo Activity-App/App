@@ -15,4 +15,4 @@ Connect with other developers of this project on [Discord](https://discord.gg/Hc
 3. Add some cool stuff (take a look at issues for things that need doing)
 4. Don't forget to document your code so everyone understands it
 5. Make a pull request to the development branch
-6. Wait for the code review team to accept it
+6. Wait for the code review team to review and merge it. 
