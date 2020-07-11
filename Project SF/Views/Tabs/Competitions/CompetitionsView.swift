@@ -15,17 +15,6 @@ struct CompetitionsView: View {
         NavigationView {
             List {
                 Section {
-<<<<<<< HEAD
-                    CompetitionCell(healthKit)
-                }
-
-                Section {
-                    CompetitionCell(healthKit)
-                }
-
-                Section {
-                    CompetitionCell(healthKit)
-=======
                     CompetitionCell("CompetitionName", endsOn: Date() + 1000, healthKit)
                 }
 
@@ -35,22 +24,17 @@ struct CompetitionsView: View {
 
                 Section {
                     CompetitionCell("CompetitionName", endsOn: Date() + 100000, healthKit)
->>>>>>> development
                 }
             }
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("Competitions")
         }
         .tabItem {
-<<<<<<< HEAD
-            Label("Competitions", systemImage: "star.fill")
-=======
             VStack {
                 Image(systemName: "star.fill")
                     .font(.system(size: 18))
                 Text("Competitions")
             }
->>>>>>> development
         }
     }
 }
