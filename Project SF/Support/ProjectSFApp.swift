@@ -1,5 +1,5 @@
 //
-//  Project_SFApp.swift
+//  ProjectSFApp.swift
 //  Project SF
 //
 //  Created by Christian Privitelli on 10/7/20.
@@ -7,9 +7,7 @@
 
 import SwiftUI
 
-@main
-// swiftlint:disable:next type_name
-struct Project_SFApp: App {
+struct ProjectSFApp: App {
     
     let cloudKitStore = CloudKitStore.shared
     

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		3090918224B9480F000E3B11 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3090918124B9480F000E3B11 /* RoundedButton.swift */; };
 		30A0EEF724B9381A004A99B7 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A0EEF624B93819004A99B7 /* SignIn.swift */; };
-		30BFC8CE24B75E6C00DAC6D9 /* Project_SFApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8CD24B75E6C00DAC6D9 /* Project_SFApp.swift */; };
+		30BFC8CE24B75E6C00DAC6D9 /* ProjectSFApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8CD24B75E6C00DAC6D9 /* ProjectSFApp.swift */; };
 		30BFC8D024B75E6C00DAC6D9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8CF24B75E6C00DAC6D9 /* ContentView.swift */; };
 		30BFC8D224B75E6F00DAC6D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30BFC8D124B75E6F00DAC6D9 /* Assets.xcassets */; };
 		30BFC8D524B75E6F00DAC6D9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30BFC8D424B75E6F00DAC6D9 /* Preview Assets.xcassets */; };
@@ -26,6 +26,10 @@
 		9CCFDD1E24B971D600162B0F /* CloudKitStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD1924B971D600162B0F /* CloudKitStore.swift */; };
 		9CCFDD1F24B971D600162B0F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD1B24B971D600162B0F /* NetworkManager.swift */; };
 		9CCFDD2024B971D600162B0F /* HealthKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD1C24B971D600162B0F /* HealthKitController.swift */; };
+		9CCFDD2224B973EB00162B0F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CCFDD2124B973EB00162B0F /* CloudKit.framework */; };
+		9CCFDD2424B9745E00162B0F /* UIApplication+IsTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD2324B9745E00162B0F /* UIApplication+IsTesting.swift */; };
+		9CCFDD2624B9753F00162B0F /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD2524B9753F00162B0F /* Main.swift */; };
+		9CCFDD2824B9758A00162B0F /* TestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD2724B9758A00162B0F /* TestApp.swift */; };
 		9CD7F11E24B89C5000DDAD8C /* Project_SFTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7F11D24B89C5000DDAD8C /* Project_SFTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,7 +47,7 @@
 		3090918124B9480F000E3B11 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		30A0EEF624B93819004A99B7 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		30BFC8CA24B75E6C00DAC6D9 /* Project SF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project SF.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		30BFC8CD24B75E6C00DAC6D9 /* Project_SFApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project_SFApp.swift; sourceTree = "<group>"; };
+		30BFC8CD24B75E6C00DAC6D9 /* ProjectSFApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSFApp.swift; sourceTree = "<group>"; };
 		30BFC8CF24B75E6C00DAC6D9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		30BFC8D124B75E6F00DAC6D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30BFC8D424B75E6F00DAC6D9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -64,6 +68,10 @@
 		9CCFDD1924B971D600162B0F /* CloudKitStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitStore.swift; sourceTree = "<group>"; };
 		9CCFDD1B24B971D600162B0F /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		9CCFDD1C24B971D600162B0F /* HealthKitController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitController.swift; sourceTree = "<group>"; };
+		9CCFDD2124B973EB00162B0F /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		9CCFDD2324B9745E00162B0F /* UIApplication+IsTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+IsTesting.swift"; sourceTree = "<group>"; };
+		9CCFDD2524B9753F00162B0F /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		9CCFDD2724B9758A00162B0F /* TestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestApp.swift; sourceTree = "<group>"; };
 		9CD7F11B24B89C5000DDAD8C /* Project SFTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Project SFTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CD7F11D24B89C5000DDAD8C /* Project_SFTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project_SFTests.swift; sourceTree = "<group>"; };
 		9CD7F11F24B89C5000DDAD8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -75,6 +83,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30BFC8E324B76BB900DAC6D9 /* HealthKit.framework in Frameworks */,
+				9CCFDD2224B973EB00162B0F /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +116,7 @@
 			children = (
 				9C7B4D0724B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift */,
 				9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */,
+				9CCFDD2324B9745E00162B0F /* UIApplication+IsTesting.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -114,7 +124,9 @@
 		3029AF5224B886CB003F0324 /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				30BFC8CD24B75E6C00DAC6D9 /* Project_SFApp.swift */,
+				9CCFDD2524B9753F00162B0F /* Main.swift */,
+				30BFC8CD24B75E6C00DAC6D9 /* ProjectSFApp.swift */,
+				9CCFDD2724B9758A00162B0F /* TestApp.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -165,6 +177,7 @@
 		30BFC8E124B76BB900DAC6D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9CCFDD2124B973EB00162B0F /* CloudKit.framework */,
 				30BFC8E224B76BB900DAC6D9 /* HealthKit.framework */,
 			);
 			name = Frameworks;
@@ -357,8 +370,9 @@
 				9C7B4D0824B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift in Sources */,
 				30BFC8D024B75E6C00DAC6D9 /* ContentView.swift in Sources */,
 				30BFC8DD24B762D900DAC6D9 /* CustomTabBar.swift in Sources */,
-				30BFC8CE24B75E6C00DAC6D9 /* Project_SFApp.swift in Sources */,
+				30BFC8CE24B75E6C00DAC6D9 /* ProjectSFApp.swift in Sources */,
 				9CCFDD1F24B971D600162B0F /* NetworkManager.swift in Sources */,
+				9CCFDD2624B9753F00162B0F /* Main.swift in Sources */,
 				30BFC8E924B804CC00DAC6D9 /* ActivityRing.swift in Sources */,
 				30BFC8DF24B7637F00DAC6D9 /* VisualEffectView.swift in Sources */,
 				9CCFDD1D24B971D600162B0F /* User.swift in Sources */,
@@ -369,6 +383,8 @@
 				9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */,
 				30BFC8E724B8041C00DAC6D9 /* ActivityRings.swift in Sources */,
 				3090918224B9480F000E3B11 /* RoundedButton.swift in Sources */,
+				9CCFDD2424B9745E00162B0F /* UIApplication+IsTesting.swift in Sources */,
+				9CCFDD2824B9758A00162B0F /* TestApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,7 +532,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Project SF/Project SF.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = W9K99K5JN4;
+				DEVELOPMENT_TEAM = 5RTMJNH82H;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -524,7 +540,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wfltaylor.ProjectSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -539,7 +555,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Project SF/Project SF.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = W9K99K5JN4;
+				DEVELOPMENT_TEAM = 5RTMJNH82H;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -547,7 +563,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wfltaylor.ProjectSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
