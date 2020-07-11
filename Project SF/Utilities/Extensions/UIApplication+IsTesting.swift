@@ -13,8 +13,9 @@ extension ProcessInfo {
     var isTesting: Bool {
         #if DEBUG
         return environment["XCTestConfigurationFilePath"] != nil
-        #endif
+        #else
         return false
+        #endif
     }
     
 }

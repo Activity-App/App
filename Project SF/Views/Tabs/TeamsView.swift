@@ -20,7 +20,6 @@ struct TeamsView: View {
                 Text("Teams")
             }
         }
-        .tag(2)
     }
 }
 
