@@ -13,6 +13,7 @@ struct TestApp: App {
     var body: some Scene {
         WindowGroup {
             Text("Testing")
+            sfaj;sdkjf;aklsdjfkl;asdjfkl;ajsdklf;aj
         }
     }
     
