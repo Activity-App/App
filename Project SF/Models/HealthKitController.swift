@@ -46,8 +46,6 @@ class HealthKitController: ObservableObject {
             HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
             HKObjectType.quantityType(forIdentifier: .appleExerciseTime)!,
             HKObjectType.quantityType(forIdentifier: .appleStandTime)!,
-            HKObjectType.quantityType(forIdentifier: .stepCount)!,
-            HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
             HKObjectType.activitySummaryType()
         ]
 
@@ -60,8 +58,7 @@ class HealthKitController: ObservableObject {
             }
         })
     }
-    
-    /// Gets activity data for current day, and stores the new values in the published vars.
+
     func updateAllActivityData() {
 
         let resultHandler: (HKActivitySummaryQuery, [HKActivitySummary]?, Error?) -> Void = { query, result, error in
@@ -96,39 +93,5 @@ class HealthKitController: ObservableObject {
 
         let query = HKActivitySummaryQuery(predicate: nil, resultsHandler: resultHandler)
         healthStore.execute(query)
-    }
-    
-    func update(data: HKQuantityTypeIdentifier, for day: Date) {
-        let dataType = HKQuantityType.quantityType(forIdentifier: data)
-
-        let calendar = Calendar(identifier: .gregorian)
-        let startOfDay = calendar.startOfDay(for: day)
-
-        let predicate = HKQuery.predicateForSamples(withStart: startOfDay, end: day, options: .strictStartDate)
-        var interval = DateComponents()
-        interval.day = 1
-        
-        let query = HKStatisticsCollectionQuery(
-            quantityType: dataType!,
-            quantitySamplePredicate: predicate,
-            options: [.cumulativeSum],
-            anchorDate: startOfDay as Date,
-            intervalComponents: interval
-        )
-        
-        query.initialResultsHandler = { query, result, error in
-            if let results = result {
-                results.enumerateStatistics(from: startOfDay, to: day) { statistics, _ in
-                    if let quantity = statistics.sumQuantity() {
-                        let dataResult = quantity.doubleValue(for: HKUnit.meter())
-
-                        print("Result = \(dataResult)")
-                    }
-                }
-            }
-            if error != nil {
-                print("Error: \(error!)")
-            }
-        }
     }
 }

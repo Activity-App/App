@@ -1,5 +1,5 @@
 //
-//  SettingsView.swift
+//  TeamsView.swift
 //  Project SF
 //
 //  Created by Roman Esin on 11.07.2020.
@@ -7,24 +7,24 @@
 
 import SwiftUI
 
-struct SettingsView: View {
+struct TeamsView: View {
     var body: some View {
         NavigationView {
-            Text("Settings")
-                .navigationBarTitle("Settings")
+            Text("Teams")
+                .navigationBarTitle("Teams")
         }
         .tabItem {
             VStack {
-                Image(systemName: "gearshape.fill")
+                Image(systemName: "person.3.fill")
                     .font(.system(size: 18))
-                Text("Settings")
+                Text("Teams")
             }
         }
     }
 }
 
-struct SettingsView_Previews: PreviewProvider {
+struct TeamsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        TeamsView()
     }
 }
