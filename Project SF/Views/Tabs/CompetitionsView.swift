@@ -25,14 +25,8 @@ struct CompetitionsView: View {
                     Text(healthKit.success ? "Successfully Authorized" :
                          healthKit.processBegan ? "Something went wrong" : "")
                     if healthKit.success {
-                        Button("Read activity") {
+                        Button("Read data") {
                             healthKit.updateAllActivityData()
-                        }
-                        Button("Read steps") {
-                            healthKit.update(data: .stepCount, for: Date())
-                        }
-                        Button("Read distance") {
-                            healthKit.update(data: .distanceWalkingRunning, for: Date())
                         }
                     }
                     if healthKit.processBegan && healthKit.success {

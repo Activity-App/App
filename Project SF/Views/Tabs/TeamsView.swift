@@ -7,24 +7,24 @@
 
 import SwiftUI
 
-struct TodayView: View {
+struct TeamsView: View {
     var body: some View {
         NavigationView {
-            Text("Today")
-                .navigationBarTitle("Today")
+            Text("Teams")
+                .navigationBarTitle("Teams")
         }
         .tabItem {
             VStack {
-                Image(systemName: "calendar.circle.fill")
+                Image(systemName: "person.3.fill")
                     .font(.system(size: 18))
-                Text("Today")
+                Text("Teams")
             }
         }
     }
 }
 
-struct TodayView_Previews: PreviewProvider {
+struct TeamsView_Previews: PreviewProvider {
     static var previews: some View {
-        TodayView()
+        TeamsView()
     }
 }
