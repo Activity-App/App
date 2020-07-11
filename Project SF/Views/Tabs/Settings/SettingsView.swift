@@ -7,38 +7,24 @@
 
 import SwiftUI
 
-struct SettingsLabel<Destination: View>: View {
-    let title: String
-    let systemName: String
-    let destination: Destination
-
-    var body: some View {
-        NavigationLink(
-            destination: destination,
-            label: {
-                Label(title, systemImage: systemName)
-            })
-    }
-}
-
 struct SettingsView: View {
     var body: some View {
         NavigationView {
             List {
                 Section(header: Text("General"), content: {
-                    SettingsLabel(title: "Profile",
+                    NavigationLabel(title: "Profile",
                                   systemName: "person.crop.circle",
                                   destination: Text("destination"))
-                    SettingsLabel(title: "Notifications",
+                    NavigationLabel(title: "Notifications",
                                   systemName: "app.badge",
                                   destination: Text("destination"))
                 })
 
                 Section(header: Text("Privacy"), content: {
-                    SettingsLabel(title: "Alter permissions",
+                    NavigationLabel(title: "Alter permissions",
                                   systemName: "heart.text.square",
                                   destination: Text("destination"))
-                    SettingsLabel(title: "Learn about privacy",
+                    NavigationLabel(title: "Learn about privacy",
                                   systemName: "key",
                                   destination: Text("destination"))
                 })
