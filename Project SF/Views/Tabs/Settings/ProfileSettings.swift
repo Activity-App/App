@@ -10,25 +10,36 @@ import SwiftUI
 struct ProfileSettings: View {
 
     @State var username = ""
+    @State var description = ""
 
     @State var isShowingAlert = false
 
     var body: some View {
-        VStack {
-            Form {
+        ScrollView {
+            Image(systemName: "person.crop.circle")
+                .resizable()
+                .frame(width: 100, height: 100)
+                .padding(.bottom, 32)
+
+            GroupBox {
                 TextField("Enter your name", text: $username) { (didChange) in
                     print(didChange)
                 } onCommit: {
-                    guard !username.isEmpty else {
-                        isShowingAlert = true
-                        return
-                    }
+                    print("Commited")
                 }
             }
+
+            GroupBox {
+                Text("Enter your bio or description")
+                    .foregroundColor(Color(.tertiaryLabel))
+                TextEditor(text: $description)
+                    .cornerRadius(8)
+            }
+            .frame(height: 400)
+
         }
-        .alert(isPresented: $isShowingAlert) {
-            Alert(title: Text("Please, fill in your name"), message: nil, dismissButton: .default(Text("Ok")))
-        }
+        .padding(.horizontal)
+        .navigationTitle("Profile")
     }
 
     init() {
@@ -38,6 +49,8 @@ struct ProfileSettings: View {
 
 struct ProfileSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileSettings()
+        NavigationView {
+            ProfileSettings()
+        }
     }
 }
