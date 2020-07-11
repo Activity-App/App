@@ -8,17 +8,35 @@
 import Foundation
 
 class NetworkManager {
+    
+    // MARK: Type Aliases
+    
     typealias DataResult = Result<Data, NetworkError>
     typealias DecodedResult<T> = Result<T, NetworkError>
+    
+    // MARK: Static Properties
 
-    // MARK: - Data request
-    static func request(_ url: URL?, _ completion: @escaping (DataResult) -> Void) {
+    static let shared = NetworkManager(urlSession: URLSession.shared)
+    
+    // MARK: Properties
+    
+    let urlSession: URLSession
+    
+    // MARK: Init
+    
+    init(urlSession: URLSession) {
+        self.urlSession = urlSession
+    }
+
+    // MARK: Data Request
+    
+    func request(_ url: URL?, _ completion: @escaping (DataResult) -> Void) {
         guard let url = url else {
             completion(.failure(.invalidURL))
             return
         }
 
-        URLSession.shared.dataTask(with: url) { (data, _, error) in
+        urlSession.dataTask(with: url) { (data, _, error) in
             if error != nil {
                 completion(.failure(.networkError))
                 return
@@ -33,10 +51,11 @@ class NetworkManager {
         }.resume()
     }
 
-    // MARK: - Decoded request
-    static func request<T: Codable>(_ url: URL?,
-                                    decode type: T.Type,
-                                    _ completion: @escaping (DecodedResult<T>) -> Void) {
+    // MARK: Decoded Request
+    
+    func request<T: Codable>(_ url: URL?,
+                             decode type: T.Type,
+                             completion: @escaping (DecodedResult<T>) -> Void) {
         request(url) { (result) in
             switch result {
             case .success(let data):
@@ -53,10 +72,12 @@ class NetworkManager {
     }
 
     // MARK: - Network Error
+    
     enum NetworkError: Error {
         case invalidURL
         case networkError
         case noDataInResponse
         case decodingError
     }
+    
 }
