@@ -17,7 +17,7 @@ struct ProfileSettingsView: View {
         VStack {
             Form {
                 TextField("Enter your name", text: $username) { (didChange) in
-
+                    print(didChange)
                 } onCommit: {
                     guard !username.isEmpty else {
                         isShowingAlert = true

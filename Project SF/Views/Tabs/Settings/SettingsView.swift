@@ -12,18 +12,22 @@ struct SettingsView: View {
         NavigationView {
             List {
                 Section(header: Text("General"), content: {
+                    // TODO: Work on ProfileSettings view.
                     NavigationLabel(title: "Profile",
                                   systemName: "person.crop.circle",
                                   destination: Text("destination"))
+                    // TODO: Create Notification settings.
                     NavigationLabel(title: "Notifications",
                                   systemName: "app.badge",
                                   destination: Text("destination"))
                 })
 
                 Section(header: Text("Privacy"), content: {
+                    // TODO: Create Alter settings .
                     NavigationLabel(title: "Alter permissions",
                                   systemName: "heart.text.square",
                                   destination: Text("destination"))
+                    // TODO: Create Learn about privacy screen settings.
                     NavigationLabel(title: "Learn about privacy",
                                   systemName: "key",
                                   destination: Text("destination"))
