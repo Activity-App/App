@@ -53,7 +53,6 @@ struct SettingsView: View {
                 Text("Settings")
             }
         }
-        .tag(3)
     }
 }
 
