@@ -13,11 +13,11 @@ struct ActivityRings: View {
 
     var body: some View {
         ZStack {
-            ActivityRing(ringType: .move, current: $healthKit.moveCurrent, goal: $healthKit.moveGoal)
+            ActivityRing(ringColor: .move, current: $healthKit.moveCurrent, goal: $healthKit.moveGoal)
                 .frame(width: 100, height: 100)
-            ActivityRing(ringType: .exercise, current: $healthKit.exerciseCurrent, goal: $healthKit.exerciseGoal)
+            ActivityRing(ringColor: .exercise, current: $healthKit.exerciseCurrent, goal: $healthKit.exerciseGoal)
                 .frame(width: 75, height: 75)
-            ActivityRing(ringType: .stand, current: $healthKit.standCurrent, goal: $healthKit.standGoal)
+            ActivityRing(ringColor: .stand, current: $healthKit.standCurrent, goal: $healthKit.standGoal)
                 .frame(width: 50, height: 50)
         }
     }
