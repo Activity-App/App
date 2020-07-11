@@ -6,18 +6,27 @@
 //
 
 import SwiftUI
-import AuthenticationServices
 
 struct SignIn: View {
+
+    @State var username = ""
+
     var body: some View {
-        SignInWithAppleButton(.signIn,
-                              onRequest: { request in
-
-                              },
-                              onCompletion: { result in
-
-                              }
-        )
+        VStack {
+            Spacer()
+            GroupBox {
+                TextField("Enter your name", text: $username) { (didChange) in
+                    print(didChange)
+                } onCommit: {
+                    print("Commited")
+                }
+            }
+            .padding()
+            Spacer()
+            RoundedButton("Continue") {
+                print(123)
+            }
+        }
     }
 }
 
