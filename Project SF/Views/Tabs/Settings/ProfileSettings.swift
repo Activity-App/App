@@ -25,7 +25,7 @@ struct ProfileSettings: View {
                     .aspectRatio(contentMode: .fit)
             })
             .frame(height: 100)
-            .padding(.bottom)
+            .padding(.vertical)
 
             GroupBox {
                 HStack {
@@ -64,7 +64,7 @@ struct ProfileSettings: View {
                 TextEditor(text: $description)
                     .cornerRadius(8)
             }
-            .frame(height: 400)
+            .frame(height: 250)
 
         }
         .padding(.horizontal)
