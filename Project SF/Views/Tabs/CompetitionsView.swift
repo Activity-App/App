@@ -17,19 +17,23 @@ struct CompetitionsView: View {
                 VStack {
                     Text("Competitions")
                         .navigationBarTitle("Competitions")
-                    if !healthKit.success {
+                    if healthKit.authorizationState != .granted {
                         Button("Try HealthKit Auth") {
                             healthKit.authorizeHealthKit()
                         }
                     }
-                    Text(healthKit.success ? "Successfully Authorized" :
-                         healthKit.processBegan ? "Something went wrong" : "")
-                    if healthKit.success {
+                    switch healthKit.authorizationState {
+                    case .granted:
+                        Text("Successfully Authorized")
+                    case .notGranted:
+                        Text("Something went wrong")
+                    default:
+                        Text("")
+                    }
+                    if healthKit.authorizationState == .granted {
                         Button("Read data") {
                             healthKit.updateAllActivityData()
                         }
-                    }
-                    if healthKit.processBegan && healthKit.success {
                         HStack {
                             ActivityRings(healthKit: healthKit)
                             VStack(alignment: .leading) {
@@ -55,7 +59,7 @@ struct CompetitionsView: View {
                         }
                     }
                 }
-                if healthKit.processBegan && !healthKit.success {
+                if healthKit.authorizationState == .processStarted {
                     ProgressView()
                 }
             }
