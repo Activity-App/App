@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3050353B24B9E73600FCCA0D /* CompetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3050353A24B9E73600FCCA0D /* CompetitionCell.swift */; };
 		308FAD8B24B97E7E00126F3F /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8A24B97E7E00126F3F /* InfoCell.swift */; };
 		308FAD8D24B97E8A00126F3F /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8C24B97E8A00126F3F /* PrivacyView.swift */; };
 		308FAD9124B987F000126F3F /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD9024B987F000126F3F /* SignIn.swift */; };
@@ -60,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3050353A24B9E73600FCCA0D /* CompetitionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionCell.swift; sourceTree = "<group>"; };
 		308FAD8A24B97E7E00126F3F /* InfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
 		308FAD8C24B97E8A00126F3F /* PrivacyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
 		308FAD9024B987F000126F3F /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
@@ -163,6 +165,15 @@
 			path = Support;
 			sourceTree = "<group>";
 		};
+		3050353924B9E6C700FCCA0D /* Competitions */ = {
+			isa = PBXGroup;
+			children = (
+				308FAD9324B989DE00126F3F /* CompetitionsView.swift */,
+				3050353A24B9E73600FCCA0D /* CompetitionCell.swift */,
+			);
+			path = Competitions;
+			sourceTree = "<group>";
+		};
 		308FAD8924B97E5500126F3F /* Splash Screen */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,7 +188,7 @@
 		308FAD9224B989BD00126F3F /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
-				308FAD9324B989DE00126F3F /* CompetitionsView.swift */,
+				3050353924B9E6C700FCCA0D /* Competitions */,
 				308FAD9524B989EF00126F3F /* TeamsView.swift */,
 				308FAD9A24B999DC00126F3F /* Settings */,
 			);
@@ -474,6 +485,7 @@
 				9CCFDD2424B9745E00162B0F /* UIApplication+IsTesting.swift in Sources */,
 				9CCFDD2824B9758A00162B0F /* TestApp.swift in Sources */,
 				308FAD9824B989FF00126F3F /* SettingsView.swift in Sources */,
+				3050353B24B9E73600FCCA0D /* CompetitionCell.swift in Sources */,
 				308FADA024B9A96700126F3F /* NotificationSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
