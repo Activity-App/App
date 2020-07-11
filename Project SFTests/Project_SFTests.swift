@@ -142,7 +142,7 @@ class ProjectSFTests: XCTestCase {
     }
     
     func testHealthKitControllerAuthorizationNotGranted() throws {
-        let mock = HKHealthStoreMock()
+        let mock = HKHealthStoreMock() 
         mock.authorizationResponse.success = false
         mock.authorizationResponse.error = FakeError()
         
