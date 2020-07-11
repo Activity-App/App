@@ -24,8 +24,30 @@ struct SettingsLabel<Destination: View>: View {
 struct SettingsView: View {
     var body: some View {
         NavigationView {
-            Text("Settings")
-                .navigationBarTitle("Settings")
+            List {
+                Section {
+                    SettingsLabel(title: "Profile",
+                                  systemName: "person.crop.circle",
+                                  destination: Text("destination"))
+                    SettingsLabel(title: "Notifications",
+                                  systemName: "person.crop.circle",
+                                  destination: Text("destination"))
+                }
+
+                Section {
+                    Text("123")
+                    Text("123")
+                    Text("123")
+                }
+
+                Section {
+                    SettingsLabel(title: "Learn about privacy",
+                                  systemName: "person.crop.circle",
+                                  destination: Text("destination"))
+                }
+            }
+            .listStyle(InsetGroupedListStyle())
+            .navigationBarTitle("Settings")
         }
         .tabItem {
             VStack {
