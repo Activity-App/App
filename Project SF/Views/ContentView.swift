@@ -13,9 +13,9 @@ struct ContentView: View {
 
     var body: some View {
         TabView(selection: $page) {
+            TodayView()
+            
             CompetitionsView()
-
-            TeamsView()
 
             SettingsView()
         }
