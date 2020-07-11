@@ -68,7 +68,6 @@ struct CompetitionsView: View {
                 Text("Competitions")
             }
         }
-        .tag(1)
     }
 }
 
