@@ -9,29 +9,58 @@ import SwiftUI
 
 struct ProfileSettings: View {
 
-    @State var username = ""
+    @State var username = "My Name"
+    @State var phoneNumber = "+7 (914) 690 52-28"
     @State var description = ""
 
     @State var isShowingAlert = false
 
     var body: some View {
         ScrollView {
-            Image(systemName: "person.crop.circle")
-                .resizable()
-                .frame(width: 100, height: 100)
-                .padding(.bottom, 32)
+            Button(action: {
+                
+            }, label: {
+                Image(systemName: "person.crop.circle.badge.plus")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            })
+            .frame(height: 100)
+            .padding(.bottom)
 
             GroupBox {
-                TextField("Enter your name", text: $username) { (didChange) in
-                    print(didChange)
-                } onCommit: {
-                    print("Commited")
+                HStack {
+                    TextField("Enter your name", text: $username) { (didChange) in
+                        print(didChange)
+                    } onCommit: {
+                        print("Commited")
+                    }
+                    .multilineTextAlignment(.leading)
+
+                    Image(systemName: "pencil")
                 }
+                .font(.headline)
             }
 
             GroupBox {
-                Text("Enter your bio or description")
-                    .foregroundColor(Color(.tertiaryLabel))
+                HStack {
+                    TextField("Enter your phone number", text: $phoneNumber) { (didChange) in
+                        print(didChange)
+                    } onCommit: {
+                        print("Commited")
+                    }
+                    .multilineTextAlignment(.leading)
+
+                    Image(systemName: "pencil")
+                }
+                .font(.headline)
+            }
+
+            GroupBox {
+                HStack {
+                    Text("Enter your bio or description")
+                        .foregroundColor(Color(.tertiaryLabel))
+                    Spacer()
+                }
                 TextEditor(text: $description)
                     .cornerRadius(8)
             }
