@@ -11,6 +11,7 @@ struct AboutFooter: View {
     var body: some View {
         VStack(spacing: 8) {
             // I have no idea how to make this centered without this hack.
+            // Branch rule test //
             HStack {
                 Spacer()
                 Text("Made with <3 by WWDC Scholars")
