@@ -15,5 +15,5 @@ jobs:
       run: "sudo xcode-select -s /Applications/Xcode_12_beta.app"
 
     - name: Xcode Build
-      run: "xcodebuild -workspace Calculator.xcworkspace -scheme Project\ SF -destination platform=iOS\ Simulator,OS=14.0,name=iPhone\ 11\ Pro clean test | xcpretty"
+      run: "xcodebuild -project 'Project SF.xcodeproj' -scheme 'Project SF' -destination platform='iOS Simulator',OS=14.0,name='iPhone 11 Pro' clean test"
      
