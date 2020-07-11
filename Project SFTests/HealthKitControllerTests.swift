@@ -77,8 +77,8 @@ class HealthKitControllerTests: XCTestCase {
         var cancellables = [AnyCancellable]()
         var expectations = [XCTestExpectation]()
         
-        func handle(expectedResult: Double, publisher: Published<Double>.Publisher) {
-            let expectation = XCTestExpectation()
+        func handle(expectedResult: Double, publisher: Published<Double>.Publisher, description: String = "") {
+            let expectation = XCTestExpectation(description: description)
             let cancellable = publisher
                 .filter {
                     return $0 == expectedResult
@@ -91,12 +91,24 @@ class HealthKitControllerTests: XCTestCase {
             expectations.append(expectation)
         }
             
-        handle(expectedResult: 100.0, publisher: controller.$moveCurrent)
-        handle(expectedResult: 200.0, publisher: controller.$moveGoal)
-        handle(expectedResult: 50, publisher: controller.$exerciseCurrent)
-        handle(expectedResult: 60, publisher: controller.$exerciseGoal)
-        handle(expectedResult: 50, publisher: controller.$standCurrent)
-        handle(expectedResult: 60, publisher: controller.$standGoal)
+        handle(expectedResult: 100.0,
+               publisher: controller.$moveCurrent,
+               description: "Move value is not set correctly")
+        handle(expectedResult: 200.0,
+               publisher: controller.$moveGoal,
+               description: "Move goal is not set correctly")
+        handle(expectedResult: 50,
+               publisher: controller.$exerciseCurrent,
+               description: "Exercise value is not set correctly")
+        handle(expectedResult: 60,
+               publisher: controller.$exerciseGoal,
+               description: "Exercise goal is not set correctly")
+        handle(expectedResult: 50,
+               publisher: controller.$standCurrent,
+               description: "Stand value is not set correctly")
+        handle(expectedResult: 60,
+               publisher: controller.$standGoal,
+               sdescription: "Stand goal is not set correctly")
         
         controller.updateTodaysActivityData()
         
