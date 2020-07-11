@@ -10,7 +10,6 @@ import Foundation
 extension Double {
     
     public func convert(fromRange: ClosedRange<Double>, toRange: ClosedRange<Double>) -> Double {
-        // test
         var value = self
         value -= fromRange.lowerBound
         value /= Double(fromRange.upperBound - fromRange.lowerBound)

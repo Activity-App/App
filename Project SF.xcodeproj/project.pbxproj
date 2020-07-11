@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3090918224B9480F000E3B11 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3090918124B9480F000E3B11 /* RoundedButton.swift */; };
+		30A0EEF724B9381A004A99B7 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A0EEF624B93819004A99B7 /* SignIn.swift */; };
 		30BFC8CE24B75E6C00DAC6D9 /* Project_SFApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8CD24B75E6C00DAC6D9 /* Project_SFApp.swift */; };
 		30BFC8D024B75E6C00DAC6D9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8CF24B75E6C00DAC6D9 /* ContentView.swift */; };
 		30BFC8D224B75E6F00DAC6D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30BFC8D124B75E6F00DAC6D9 /* Assets.xcassets */; };
@@ -35,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3090918124B9480F000E3B11 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		30A0EEF624B93819004A99B7 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		30BFC8CA24B75E6C00DAC6D9 /* Project SF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project SF.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30BFC8CD24B75E6C00DAC6D9 /* Project_SFApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project_SFApp.swift; sourceTree = "<group>"; };
 		30BFC8CF24B75E6C00DAC6D9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -92,6 +96,8 @@
 				30BFC8E624B8041C00DAC6D9 /* ActivityRings.swift */,
 				30BFC8E824B804CC00DAC6D9 /* ActivityRing.swift */,
 				30BFC8DC24B762D900DAC6D9 /* CustomTabBar.swift */,
+				30A0EEF624B93819004A99B7 /* SignIn.swift */,
+				3090918124B9480F000E3B11 /* RoundedButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -326,10 +332,12 @@
 				30BFC8CE24B75E6C00DAC6D9 /* Project_SFApp.swift in Sources */,
 				30BFC8E924B804CC00DAC6D9 /* ActivityRing.swift in Sources */,
 				30BFC8DF24B7637F00DAC6D9 /* VisualEffectView.swift in Sources */,
+				30A0EEF724B9381A004A99B7 /* SignIn.swift in Sources */,
 				9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */,
 				9C9B984924B8150B00A0A42A /* CloudKitStore.swift in Sources */,
 				30BFC8E724B8041C00DAC6D9 /* ActivityRings.swift in Sources */,
 				9CF22AB624B823E700B35EA5 /* User.swift in Sources */,
+				3090918224B9480F000E3B11 /* RoundedButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,7 +484,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Project SF/Project SF.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = 939BQQZ3GG;
+				DEVELOPMENT_TEAM = W9K99K5JN4;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -484,7 +492,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.priva28.Project-SF";
+				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -499,7 +507,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Project SF/Project SF.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = 939BQQZ3GG;
+				DEVELOPMENT_TEAM = W9K99K5JN4;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -507,7 +515,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.priva28.Project-SF";
+				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -519,7 +527,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = W9K99K5JN4;
 				INFOPLIST_FILE = "Project SFTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -539,7 +547,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = W9K99K5JN4;
 				INFOPLIST_FILE = "Project SFTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
