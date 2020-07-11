@@ -13,6 +13,8 @@
 		308FAD9424B989DE00126F3F /* CompetitionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD9324B989DE00126F3F /* CompetitionsView.swift */; };
 		308FAD9624B989EF00126F3F /* TeamsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD9524B989EF00126F3F /* TeamsView.swift */; };
 		308FAD9824B989FF00126F3F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD9724B989FF00126F3F /* SettingsView.swift */; };
+		308FAD9C24B99AA700126F3F /* ProfileSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD9B24B99AA700126F3F /* ProfileSettingsView.swift */; };
+		308FAD9E24B9A0DC00126F3F /* NavigationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD9D24B9A0DC00126F3F /* NavigationLabel.swift */; };
 		3090918224B9480F000E3B11 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3090918124B9480F000E3B11 /* RoundedButton.swift */; };
 		30BFC8CE24B75E6C00DAC6D9 /* ProjectSFApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8CD24B75E6C00DAC6D9 /* ProjectSFApp.swift */; };
 		30BFC8D024B75E6C00DAC6D9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8CF24B75E6C00DAC6D9 /* ContentView.swift */; };
@@ -54,6 +56,8 @@
 		308FAD9324B989DE00126F3F /* CompetitionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsView.swift; sourceTree = "<group>"; };
 		308FAD9524B989EF00126F3F /* TeamsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsView.swift; sourceTree = "<group>"; };
 		308FAD9724B989FF00126F3F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		308FAD9B24B99AA700126F3F /* ProfileSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsView.swift; sourceTree = "<group>"; };
+		308FAD9D24B9A0DC00126F3F /* NavigationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLabel.swift; sourceTree = "<group>"; };
 		3090918124B9480F000E3B11 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		30BFC8CA24B75E6C00DAC6D9 /* Project SF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project SF.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30BFC8CD24B75E6C00DAC6D9 /* ProjectSFApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSFApp.swift; sourceTree = "<group>"; };
@@ -112,6 +116,7 @@
 				30BFC8E624B8041C00DAC6D9 /* ActivityRings.swift */,
 				30BFC8E824B804CC00DAC6D9 /* ActivityRing.swift */,
 				3090918124B9480F000E3B11 /* RoundedButton.swift */,
+				308FAD9D24B9A0DC00126F3F /* NavigationLabel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -152,9 +157,18 @@
 			children = (
 				308FAD9324B989DE00126F3F /* CompetitionsView.swift */,
 				308FAD9524B989EF00126F3F /* TeamsView.swift */,
-				308FAD9724B989FF00126F3F /* SettingsView.swift */,
+				308FAD9A24B999DC00126F3F /* Settings */,
 			);
 			path = Tabs;
+			sourceTree = "<group>";
+		};
+		308FAD9A24B999DC00126F3F /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				308FAD9724B989FF00126F3F /* SettingsView.swift */,
+				308FAD9B24B99AA700126F3F /* ProfileSettingsView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		30BFC8C124B75E6C00DAC6D9 = {
@@ -383,6 +397,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				308FAD9E24B9A0DC00126F3F /* NavigationLabel.swift in Sources */,
 				9C7B4D0824B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift in Sources */,
 				30BFC8D024B75E6C00DAC6D9 /* ContentView.swift in Sources */,
 				308FAD9424B989DE00126F3F /* CompetitionsView.swift in Sources */,
@@ -401,6 +416,7 @@
 				308FAD9624B989EF00126F3F /* TeamsView.swift in Sources */,
 				9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */,
 				30BFC8E724B8041C00DAC6D9 /* ActivityRings.swift in Sources */,
+				308FAD9C24B99AA700126F3F /* ProfileSettingsView.swift in Sources */,
 				3090918224B9480F000E3B11 /* RoundedButton.swift in Sources */,
 				9CCFDD2424B9745E00162B0F /* UIApplication+IsTesting.swift in Sources */,
 				9CCFDD2824B9758A00162B0F /* TestApp.swift in Sources */,
@@ -552,7 +568,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Project SF/Project SF.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = 939BQQZ3GG;
+				DEVELOPMENT_TEAM = W9K99K5JN4;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -560,7 +576,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.priva28.ProjectSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -575,7 +591,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Project SF/Project SF.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = 939BQQZ3GG;
+				DEVELOPMENT_TEAM = W9K99K5JN4;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -583,7 +599,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.priva28.ProjectSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
