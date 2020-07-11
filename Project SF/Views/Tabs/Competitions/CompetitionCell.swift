@@ -33,13 +33,13 @@ struct CompetitionCell: View {
 
                         VStack(alignment: .leading) {
                             Text("Move: \(Int(healthKit.moveCurrent))/\(Int(healthKit.moveGoal))")
-                                .foregroundColor(RingColor.move.darkColor)
+                                .foregroundColor(RingType.move.darkColor)
                                 .fontWeight(.medium)
                             Text("Exercise: \(Int(healthKit.exerciseCurrent))/\(Int(healthKit.exerciseGoal))")
-                                .foregroundColor(RingColor.exercise.darkColor)
+                                .foregroundColor(RingType.exercise.darkColor)
                                 .fontWeight(.medium)
                             Text("Stand: \(Int(healthKit.standCurrent))/\(Int(healthKit.standGoal))")
-                                .foregroundColor(RingColor.stand.darkColor)
+                                .foregroundColor(RingType.stand.darkColor)
                                 .fontWeight(.medium)
                         }
                     }

@@ -17,15 +17,6 @@ class HealthKitController: ObservableObject {
     // MARK: Published Properties
 
     @Published var authorizationState = AuthorizationState.notBegun
-
-    @Published var moveCurrent = 0.0
-    @Published var moveGoal = 1.0
-
-    @Published var exerciseCurrent = 0.0
-    @Published var exerciseGoal = 30.0
-
-    @Published var standCurrent = 0.0
-    @Published var standGoal = 12.0
     
     // MARK: Init
     
@@ -64,54 +55,68 @@ class HealthKitController: ObservableObject {
         })
     }
 
-    // MARK: - Update all activity data
+    // MARK: - Get activity data
+    
+    /// Gets activity data for specified date with completion containing result.
+    /// - Parameters:
+    ///   - date: Date to fetch activity data
+    ///   - completion: Completion that returns move, exercise, stand, error in that order.
+    func getActivityData(for date: Date,
+                         completion: @escaping (ActivityResult?, ActivityResult?, ActivityResult?, Error?) -> Void) {
+        
+        let calendar = Calendar(identifier: .gregorian)
+        let startOfDay = calendar.startOfDay(for: date)
 
-    /// Gets activity data for current day, and stores the new values in the published vars.
-    func updateAllActivityData() {
-
-        let resultHandler: (HKActivitySummaryQuery, [HKActivitySummary]?, Error?) -> Void = { query, result, error in
-
-            if let results = result {
-                if !results.isEmpty {
-                    DispatchQueue.main.async {
-                        let moveUnits = HKUnit.largeCalorie()
-                        self.moveCurrent = results.last!.activeEnergyBurned.doubleValue(for: moveUnits)
-                        self.moveGoal = results.last!.activeEnergyBurnedGoal.doubleValue(for: moveUnits)
-
-                        let exerciseUnits = HKUnit.minute()
-                        self.exerciseCurrent = results.last!.appleExerciseTime.doubleValue(for: exerciseUnits)
-                        self.exerciseGoal = results.last!.appleExerciseTimeGoal.doubleValue(for: exerciseUnits)
-
-                        let standUnits = HKUnit.count()
-                        self.standCurrent = results.last!.appleStandHours.doubleValue(for: standUnits)
-                        self.standGoal = results.last!.appleStandHoursGoal.doubleValue(for: standUnits)
-                    }
-                    print("Move: \(self.moveCurrent)/\(self.moveGoal)")
-                    print("Exercise: \(self.exerciseCurrent)/\(self.exerciseGoal)")
-                    print("Stand: \(self.standCurrent)/\(self.standGoal)")
-                } else {
-                    print("No results!")
+        let predicate = HKQuery.predicateForSamples(withStart: startOfDay, end: date, options: .strictStartDate)
+        let query = HKActivitySummaryQuery(predicate: predicate) { _, result, error in
+            guard let result = result?.last else {
+                if let error = error {
+                    print(error)
+                    completion(nil, nil, nil, error)
                 }
+                return
             }
-
-            if error != nil {
-                print("Error: \(error!)")
-            }
+            
+            let moveUnits = HKUnit.largeCalorie()
+            let exerciseUnits = HKUnit.minute()
+            let standUnits = HKUnit.count()
+            
+            let moveResult = ActivityResult(
+                type: .move,
+                current: result.activeEnergyBurned.doubleValue(for: moveUnits),
+                goal: result.activeEnergyBurnedGoal.doubleValue(for: moveUnits)
+            )
+            let exerciseResult = ActivityResult(
+                type: .exercise,
+                current: result.appleExerciseTime.doubleValue(for: exerciseUnits),
+                goal: result.appleExerciseTimeGoal.doubleValue(for: exerciseUnits)
+            )
+            let standResult = ActivityResult(
+                type: .exercise,
+                current: result.appleStandHours.doubleValue(for: standUnits),
+                goal: result.appleStandHoursGoal.doubleValue(for: standUnits)
+            )
+            
+            completion(moveResult, exerciseResult, standResult, nil)
         }
-
-        let query = HKActivitySummaryQuery(predicate: nil, resultsHandler: resultHandler)
         healthStore.execute(query)
     }
 
-    // MARK: - Update data for day
+    // MARK: - Get health data
     
-    func update(data: HKQuantityTypeIdentifier, for day: Date) {
+    /// Gets health data for specified date with completion containing result. Remember to include requested data types in auth first!
+    /// - Parameters:
+    ///   - data: HealthKit quantity type for data
+    ///   - unit: HealthKit unit type for data
+    ///   - date: Date to fetch health data
+    ///   - completion: Completion that returns result as double as well as error if that occured.
+    func getHealthData(data: HKQuantityTypeIdentifier, unit: HKUnit, for date: Date, completion: @escaping (Double?, Error?) -> Void) {
         let dataType = HKQuantityType.quantityType(forIdentifier: data)
 
         let calendar = Calendar(identifier: .gregorian)
-        let startOfDay = calendar.startOfDay(for: day)
+        let startOfDay = calendar.startOfDay(for: date)
 
-        let predicate = HKQuery.predicateForSamples(withStart: startOfDay, end: day, options: .strictStartDate)
+        let predicate = HKQuery.predicateForSamples(withStart: startOfDay, end: date, options: .strictStartDate)
         var interval = DateComponents()
         interval.day = 1
         
@@ -124,17 +129,18 @@ class HealthKitController: ObservableObject {
         )
         
         query.initialResultsHandler = { query, result, error in
-            if let results = result {
-                results.enumerateStatistics(from: startOfDay, to: day) { statistics, _ in
-                    if let quantity = statistics.sumQuantity() {
-                        let dataResult = quantity.doubleValue(for: HKUnit.meter())
-
-                        print("Result = \(dataResult)")
-                    }
+            guard let result = result else {
+                if let error = error {
+                    print(error)
+                    completion(nil, error)
                 }
+                return
             }
-            if error != nil {
-                print("Error: \(error!)")
+            
+            result.enumerateStatistics(from: startOfDay, to: date) { statistics, _ in
+                if let quantity = statistics.sumQuantity()?.doubleValue(for: unit) {
+                    completion(quantity, nil)
+                }
             }
         }
     }
@@ -148,4 +154,11 @@ class HealthKitController: ObservableObject {
         case notGranted
     }
     
+    // MARK: Activity result
+    
+    public struct ActivityResult {
+        var type: RingType
+        var current: Double
+        var goal: Double
+    }
 }
