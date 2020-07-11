@@ -18,7 +18,7 @@ struct ProfileSettings: View {
     var body: some View {
         ScrollView {
             Button(action: {
-                
+                // TODO: Present image search through the gallery.
             }, label: {
                 Image(systemName: "person.crop.circle.badge.plus")
                     .resizable()

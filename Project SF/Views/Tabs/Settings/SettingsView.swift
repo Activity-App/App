@@ -7,6 +7,27 @@
 
 import SwiftUI
 
+struct AboutFooter: View {
+    var body: some View {
+        VStack(spacing: 8) {
+            // I have no idea how to make this centered without this hack.
+            HStack {
+                Spacer()
+                Text("Made with <3 by WWDC Scholars")
+                    .padding(.top, 8)
+                Spacer()
+            }
+
+            HStack {
+                Spacer()
+                Link("GitHub", destination: URL(string: "https://github.com/Activity-App/App")!)
+                    .foregroundColor(.blue)
+                Spacer()
+            }
+        }
+    }
+}
+
 struct SettingsView: View {
     var body: some View {
         NavigationView {
@@ -20,7 +41,7 @@ struct SettingsView: View {
                                   destination: NotificationSettings())
                 })
 
-                Section(header: Text("Privacy"), content: {
+                Section(header: Text("Privacy"), footer: AboutFooter(), content: {
                     NavigationLabel(title: "Alter permissions",
                                   systemName: "heart.text.square",
                                   destination: PermissionSettings())

@@ -9,12 +9,23 @@ import SwiftUI
 
 struct NotificationSettings: View {
     var body: some View {
-        Text("Hello, World!")
+        List {
+            Section {
+                Toggle("High scores", isOn: .constant(true))
+                Toggle("Challanges", isOn: .constant(true))
+                Toggle("Competitions", isOn: .constant(true))
+                Toggle("Messages", isOn: .constant(true))
+            }
+        }
+        .listStyle(InsetGroupedListStyle())
+        .navigationTitle("Notifications")
     }
 }
 
 struct NotificationSettings_Previews: PreviewProvider {
     static var previews: some View {
-        NotificationSettings()
+        NavigationView {
+            NotificationSettings()
+        }
     }
 }
