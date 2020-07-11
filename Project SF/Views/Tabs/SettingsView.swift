@@ -25,7 +25,6 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             List {
-
                 Section(header: Text("General"), content: {
                     SettingsLabel(title: "Profile",
                                   systemName: "person.crop.circle",
