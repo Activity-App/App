@@ -33,13 +33,13 @@ struct ActivityRing: View {
             VStack {
                 ZStack {
                     
-                    /// Ring outline
+                    // Ring outline
                     Circle()
                         .stroke(lineWidth: ringWidth)
                         .opacity(0.3)
                         .foregroundColor(ringColor.darkColor)
                     
-                    /// The activity ring
+                    // The activity ring
                     Circle()
                         .trim(from: 0, to: CGFloat(fill))
                         .stroke(
@@ -54,7 +54,7 @@ struct ActivityRing: View {
                         .rotationEffect(.degrees(-90))
                         .animation(.easeInOut(duration: 2.5))
                     
-                    /// Fixes gradient when at 0 position
+                    // Fixes gradient when at 0 position
                     Circle()
                         .frame(width: ringWidth, height: ringWidth)
                         .offset(y: -geometry.size.height/2)
@@ -62,7 +62,7 @@ struct ActivityRing: View {
                             fill > 0.1 ? .clear : ringColor.darkColor
                         )
 
-                    /// Ring shadow
+                    // Ring shadow
                     Circle()
                         .frame(width: ringWidth, height: ringWidth)
                         .offset(y: -geometry.size.height/2)
