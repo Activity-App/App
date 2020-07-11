@@ -14,19 +14,19 @@ struct SettingsView: View {
                 Section(header: Text("General"), content: {
                     NavigationLabel(title: "Profile",
                                   systemName: "person.crop.circle",
-                                  destination: Text("destination"))
+                                  destination: ProfileSettings())
                     NavigationLabel(title: "Notifications",
                                   systemName: "app.badge",
-                                  destination: Text("destination"))
+                                  destination: NotificationSettings())
                 })
 
                 Section(header: Text("Privacy"), content: {
                     NavigationLabel(title: "Alter permissions",
                                   systemName: "heart.text.square",
-                                  destination: Text("destination"))
+                                  destination: PermissionSettings())
                     NavigationLabel(title: "Learn about privacy",
                                   systemName: "key",
-                                  destination: Text("destination"))
+                                  destination: PrivacyAbout())
                 })
             }
             .listStyle(InsetGroupedListStyle())

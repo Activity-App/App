@@ -1,5 +1,5 @@
 //
-//  ProfileSettingsView.swift
+//  ProfileSettings.swift
 //  Project SF
 //
 //  Created by Roman Esin on 11.07.2020.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProfileSettingsView: View {
+struct ProfileSettings: View {
 
     @State var username = ""
 
@@ -38,6 +38,6 @@ struct ProfileSettingsView: View {
 
 struct ProfileSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileSettingsView()
+        ProfileSettings()
     }
 }
