@@ -7,50 +7,77 @@
 
 import SwiftUI
 
+/// Creates activity ring with the specified parameters.
+struct Ring {
+    static var medium: Ring {
+        Ring(minFrame: 46, width: 14, padding: 9)
+    }
+
+    static var small: Ring {
+        Ring(minFrame: 36, width: 12, padding: 6)
+    }
+
+    var minFrame: CGFloat
+    var width: CGFloat
+    var padding: CGFloat
+
+    /// Creates activity ring with the specified parameters.
+    /// - Parameters:
+    ///   - minFrame: The frame of the smallest ring.
+    ///   - width: Width of each ring.
+    ///   - padding: Padding between rings.
+    init(minFrame: CGFloat, width: CGFloat, padding: CGFloat) {
+        self.minFrame = minFrame
+        self.width = width
+        self.padding = padding
+    }
+}
+
 struct ActivityRingsView: View {
 
     @ObservedObject var healthKit: HealthKitController
-    var minimalFrame: CGFloat = 42
-    var ringWidth: CGFloat = 12
-    var ringPadding: CGFloat = 5
+    let ring: Ring
 
     private var midRingFrame: CGFloat {
-        minimalFrame + ringWidth * 2 + ringPadding
+        ring.minFrame + ring.width * 2 + ring.padding
     }
 
     private var largeRingFrame: CGFloat {
-        midRingFrame + ringWidth * 2 + ringPadding
+        midRingFrame + ring.width * 2 + ring.padding
     }
 
     var body: some View {
         ZStack {
             ActivityRingView(
                 ringType: .move,
-                ringWidth: ringWidth,
+                ringWidth: ring.width,
                 current: $healthKit.moveCurrent,
                 goal: $healthKit.moveGoal
             )
             .frame(width: largeRingFrame, height: largeRingFrame)
             ActivityRingView(
                 ringType: .exercise,
-                ringWidth: ringWidth,
+                ringWidth: ring.width,
                 current: $healthKit.exerciseCurrent,
                 goal: $healthKit.exerciseGoal
             )
             .frame(width: midRingFrame, height: midRingFrame)
             ActivityRingView(
                 ringType: .stand,
-                ringWidth: ringWidth,
+                ringWidth: ring.width,
                 current: $healthKit.standCurrent,
                 goal: $healthKit.standGoal
             )
-            .frame(width: minimalFrame, height: minimalFrame)
+            .frame(width: ring.minFrame, height: ring.minFrame)
         }
     }
 }
 
 struct ActivityRingsView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityRingsView(healthKit: HealthKitController())
+        VStack(spacing: 20) {
+            ActivityRingsView(healthKit: HealthKitController(), ring: .medium)
+            ActivityRingsView(healthKit: HealthKitController(), ring: .small)
+        }
     }
 }
