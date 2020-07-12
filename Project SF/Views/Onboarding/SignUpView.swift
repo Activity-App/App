@@ -11,6 +11,7 @@ struct SignUpView: View {
 
     @Binding var showOnboarding: Bool
     @AppStorage("username") var username = ""
+    @AppStorage("phone-number") var phoneNumber = ""
 
     var body: some View {
         VStack {
@@ -42,10 +43,13 @@ struct SignUpView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.top, 32)
                 GroupBox {
-                    TextField("Phone Number", text: $username) { didChange in
-                        print(didChange)
+                    TextField("Phone Number", text: $phoneNumber) { _ in
+                        phoneNumber = format(with: "+X (XXX) XXX-XXXX", phone: phoneNumber)
                     } onCommit: {
                         print("Commited")
+                    }
+                    .onChange(of: phoneNumber) { _ in
+                        phoneNumber = format(with: "+X (XXX) XXX-XXXX", phone: phoneNumber)
                     }
                 }
                 Text("This will be used so other people with your contact can discover you.")
@@ -60,6 +64,27 @@ struct SignUpView: View {
         }
         .padding(.horizontal)
         .navigationTitle("Sign Up")
+    }
+
+    func format(with mask: String, phone: String) -> String {
+        let numbers = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+        var result = ""
+        var index = numbers.startIndex // numbers iterator
+
+        // iterate over the mask characters until the iterator of numbers ends
+        for ch in mask where index < numbers.endIndex {
+            if ch == "X" {
+                // mask requires a number in this place, so take the next one
+                result.append(numbers[index])
+
+                // move numbers iterator to the next index
+                index = numbers.index(after: index)
+
+            } else {
+                result.append(ch) // just append a mask character
+            }
+        }
+        return result
     }
 }
 
