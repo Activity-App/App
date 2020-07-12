@@ -39,23 +39,10 @@ class UserRecord: Record {
     
     // MARK: Key
     
-    enum Key: String {
+    enum Key: String, RecordKey {
         case nickname
         case phoneNumberHash
         case bio
     }
 
-}
-
-private extension CKRecord {
-    
-    subscript(_ key: UserRecord.Key) -> Any? {
-        get {
-            return self[key.rawValue]
-        }
-        set {
-            self[key.rawValue] = newValue as? __CKRecordObjCValue
-        }
-    }
-    
 }
