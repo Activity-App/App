@@ -18,46 +18,73 @@ struct CreateCompetition: View {
     var body: some View {
 //        ScrollView {
             VStack {
-                GroupBox {
-                    TextField("Enter Competition Name", text: $competitionName) { _ in
+                RoundedTextField("Competition Name", text: $competitionName) { _ in
 
-                    } onCommit: {
+                } onCommit: {
 
-                    }
                 }
+                .padding(.vertical, 8)
 
-                GroupBox(label: Text("Pick competition end date").foregroundColor(Color(UIColor.tertiaryLabel)),
-                         content: {
-                    Picker("Pick competition end date", selection: $pickedDate) {
-                        Text("1 Day").tag(0)
-                        Text("7 Days").tag(1)
-                        Text("1 Month").tag(2)
-                        Text("Custom").tag(3)
-                    }.pickerStyle(SegmentedPickerStyle())
-
-                    // TODO: Add animation to this thing
-                    if pickedDate == 3 {
-                        DatePicker("", selection: $competitionEndDate)
-                            .frame(maxHeight: 50)
-                    }
-                })
-
-                GroupBox {
-                    Button("Invite friends") {
-                        // TODO: Hanlde invite friends
-                        invitedFriends.append("nmsdnjosadn\(Int.random(in: 0...100))")
-                    }
-                    .frame(maxWidth: .infinity)
-
-                    if !invitedFriends.isEmpty {
-                        List(invitedFriends.indices) { index in
-                            Section {
-                                Text(invitedFriends[index])
-                            }
+                Group {
+                    VStack {
+                        Text("End Date")
+                            .foregroundColor(Color(.tertiaryLabel))
+                            .bold()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        Picker("Pick competition end date", selection: $pickedDate) {
+                            Text("1 Day").tag(0)
+                            Text("7 Days").tag(1)
+                            Text("1 Month").tag(2)
+                            Text("Custom").tag(3)
+                        }.pickerStyle(SegmentedPickerStyle())
+                        if pickedDate == 3 {
+                            DatePicker("", selection: $competitionEndDate)
+                                .frame(maxHeight: 50)
+                                .transition(
+                                    AnyTransition
+                                        .opacity.animation(.easeInOut)
+                                        .combined(with: AnyTransition
+                                                    .move(edge: .top)
+                                                    .animation(.easeInOut)))
+                                .padding(.trailing, 8)
                         }
-                        .listStyle(InsetGroupedListStyle())
                     }
+                    .padding(16)
                 }
+                .background(
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .frame(minHeight: 50)
+                        .foregroundColor(Color(.secondarySystemBackground))
+                )
+                .animation(.easeInOut)
+                .padding(.bottom, 8)
+                
+                Group {
+                    VStack {
+                        Button("Invite friends") {
+                            // TODO: Hanlde invite friends
+                            invitedFriends.append("nmsdnjosadn\(Int.random(in: 0...100))")
+                        }
+                        .frame(maxWidth: .infinity)
+
+                        if !invitedFriends.isEmpty {
+                            List(invitedFriends.indices) { index in
+                                Section {
+                                    Text(invitedFriends[index])
+                                }
+                            }
+                            .listStyle(InsetGroupedListStyle())
+                        }
+                    }
+                    .padding(16)
+                }
+                .background(
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .frame(minHeight: 50)
+                        .foregroundColor(Color(.secondarySystemBackground))
+                )
+                .animation(.easeInOut)
+                .padding(.bottom, 8)
 
                 Spacer()
 
