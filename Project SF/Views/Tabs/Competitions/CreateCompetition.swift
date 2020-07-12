@@ -20,7 +20,6 @@ struct CreateCompetition: View {
                 GroupBox {
                     TextField("Competition name", text: $competitionName) { _ in
 
-                } onCommit: {
                     } onCommit: {
 
                     }
