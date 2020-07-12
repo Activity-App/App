@@ -54,7 +54,7 @@ class CloudKitStore {
             Self.queue.sync {
                 // TODO: Need to properly handle paging
                 if let error = error {
-                    handler(.failure(.other(error.localizedDescription)))
+                    handler(.failure(.other(error)))
                     return
                 }
 
@@ -100,7 +100,7 @@ class CloudKitStore {
 
         database.fetch(withRecordID: recordID) { record, error in
             if let error = error {
-                handler(.failure(.other(error.localizedDescription)))
+                handler(.failure(.other(error)))
                 return
             }
             guard let record = record else {
@@ -117,7 +117,7 @@ class CloudKitStore {
     func fetchUserRecord(then handler: @escaping (Result<UserRecord, CloudKitStoreError>) -> Void) {
         container.fetchUserRecordID { recordID, error in
             if let error = error {
-                handler(.failure(.other(error.localizedDescription)))
+                handler(.failure(.other(error)))
                 return
             }
             
@@ -151,7 +151,7 @@ class CloudKitStore {
 
         database.save(record) { _, error in
             if let error = error {
-                handler(.failure(.other(error.localizedDescription)))
+                handler(.failure(.other(error)))
                 return
             }
             handler(.success(()))
@@ -170,7 +170,7 @@ class CloudKitStore {
 
         database.delete(withRecordID: recordID) { _, error in
             if let error = error {
-                handler(.failure(.other(error.localizedDescription)))
+                handler(.failure(.other(error)))
                 return
             }
             handler(.success(()))
@@ -180,7 +180,7 @@ class CloudKitStore {
     // MARK: - CloudKitStoreError
 
     enum CloudKitStoreError: Error {
-        case other(String)
+        case other(Error)
         case missingRecord
         case missingID
     }
