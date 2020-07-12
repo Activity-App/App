@@ -10,6 +10,7 @@
 		302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88924BA199E00FF79D7 /* RingType.swift */; };
 		302CF88C24BA1A4000FF79D7 /* ActivityResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */; };
 		3050353B24B9E73600FCCA0D /* CompetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3050353A24B9E73600FCCA0D /* CompetitionCell.swift */; };
+		306B267924BB1CC600D6E649 /* ImageSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306B267824BB1CC600D6E649 /* ImageSelectionView.swift */; };
 		308FAD8B24B97E7E00126F3F /* OnboardingInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8A24B97E7E00126F3F /* OnboardingInfoCell.swift */; };
 		308FAD8D24B97E8A00126F3F /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8C24B97E8A00126F3F /* PrivacyView.swift */; };
 		308FAD9124B987F000126F3F /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD9024B987F000126F3F /* SignUpView.swift */; };
@@ -35,6 +36,8 @@
 		30D3217824BB430E009CD9D0 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D3217724BB430E009CD9D0 /* RoundedTextField.swift */; };
 		30F1EA3B24B951CA00FF89FC /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F1EA3A24B951CA00FF89FC /* OnboardingView.swift */; };
 		30FABF2924BB46E7004B8B62 /* CompetitionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FABF2824BB46E7004B8B62 /* CompetitionDetailView.swift */; };
+		30FCC84C24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FCC84B24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift */; };
+		30FCC84E24BB318000862C01 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FCC84D24BB318000862C01 /* KeyboardManager.swift */; };
 		9C12BBDD24B9C3A100C050DB /* HKActivitySummaryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C12BBDC24B9C3A100C050DB /* HKActivitySummaryMock.swift */; };
 		9C12BBDF24B9D39600C050DB /* UtilitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C12BBDE24B9D39600C050DB /* UtilitiesTests.swift */; };
 		9C12BBE124B9D3D800C050DB /* HealthKitControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C12BBE024B9D3D800C050DB /* HealthKitControllerTests.swift */; };
@@ -72,6 +75,7 @@
 		302CF88924BA199E00FF79D7 /* RingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingType.swift; sourceTree = "<group>"; };
 		302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityResult.swift; sourceTree = "<group>"; };
 		3050353A24B9E73600FCCA0D /* CompetitionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionCell.swift; sourceTree = "<group>"; };
+		306B267824BB1CC600D6E649 /* ImageSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectionView.swift; sourceTree = "<group>"; };
 		308FAD8A24B97E7E00126F3F /* OnboardingInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingInfoCell.swift; sourceTree = "<group>"; };
 		308FAD8C24B97E8A00126F3F /* PrivacyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
 		308FAD9024B987F000126F3F /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -100,6 +104,8 @@
 		30D3217724BB430E009CD9D0 /* RoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
 		30F1EA3A24B951CA00FF89FC /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		30FABF2824BB46E7004B8B62 /* CompetitionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionDetailView.swift; sourceTree = "<group>"; };
+		30FCC84B24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignKeyboardOnDragGesture.swift; sourceTree = "<group>"; };
+		30FCC84D24BB318000862C01 /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
 		9C12BBDC24B9C3A100C050DB /* HKActivitySummaryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKActivitySummaryMock.swift; sourceTree = "<group>"; };
 		9C12BBDE24B9D39600C050DB /* UtilitiesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilitiesTests.swift; sourceTree = "<group>"; };
 		9C12BBE024B9D3D800C050DB /* HealthKitControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitControllerTests.swift; sourceTree = "<group>"; };
@@ -224,6 +230,7 @@
 				308FAD9F24B9A96700126F3F /* NotificationSettings.swift */,
 				308FADA124B9A9D100126F3F /* PermissionSettings.swift */,
 				308FADA324B9A9F000126F3F /* PrivacyAbout.swift */,
+				306B267824BB1CC600D6E649 /* ImageSelectionView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -305,6 +312,8 @@
 			children = (
 				30BFC8DE24B7637F00DAC6D9 /* VisualEffectView.swift */,
 				3029AF5124B886A7003F0324 /* Extensions */,
+				30FCC84B24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift */,
+				30FCC84D24BB318000862C01 /* KeyboardManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -488,11 +497,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				308FAD9E24B9A0DC00126F3F /* NavigationLabel.swift in Sources */,
+				306B267924BB1CC600D6E649 /* ImageSelectionView.swift in Sources */,
 				308FADA224B9A9D100126F3F /* PermissionSettings.swift in Sources */,
 				9C7B4D0824B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift in Sources */,
 				30BFC8D024B75E6C00DAC6D9 /* ContentView.swift in Sources */,
+				30FCC84C24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift in Sources */,
 				308FAD9424B989DE00126F3F /* CompetitionsView.swift in Sources */,
 				30963C8D24BA90EB005D9EA7 /* GrantDataAccessView.swift in Sources */,
+				30FCC84E24BB318000862C01 /* KeyboardManager.swift in Sources */,
 				30BFC8CE24B75E6C00DAC6D9 /* ProjectSFApp.swift in Sources */,
 				9CCFDD1F24B971D600162B0F /* NetworkManager.swift in Sources */,
 				9CCFDD2624B9753F00162B0F /* Main.swift in Sources */,

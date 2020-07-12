@@ -59,7 +59,6 @@ struct CompetitionsView: View {
                         Spacer()
                     }
                 }
-                
                 ForEach(competitions.indices) { index in
                     Section(header: CurrentlyCompetingHeader(index: index)) {
                         CompetitionCell(competition: competitions[index])
