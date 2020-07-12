@@ -27,7 +27,7 @@ struct CurrentlyCompetingHeader: View {
 
 struct CompetitionsView: View {
 
-    @StateObject var healthKit = HealthKitController()
+    @EnvironmentObject var healthKit: HealthKitController
     
     // Temporary. Get these from CK when thats working.
     var competitions: [Competition] = [
@@ -43,7 +43,7 @@ struct CompetitionsView: View {
                 Section(header: Text("Current Activity")) {
                     HStack {
                         Spacer()
-                        ActivityRingsView(healthKit: healthKit, ringSize: .medium)
+                        ActivityRingsView(ringSize: .medium)
                             .padding(8)
                         VStack(alignment: .leading) {
                             Text("Move: \(Int(healthKit.moveCurrent))/\(Int(healthKit.moveGoal))")
