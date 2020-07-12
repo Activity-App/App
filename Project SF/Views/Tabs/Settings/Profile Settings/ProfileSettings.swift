@@ -13,22 +13,21 @@ struct ProfileSettings: View {
     // MARK: Properties
 
     @AppStorage("phone-number") var phoneNumber = "+7 (914) 690 52-28"
-    @AppStorage("user-description") var description = ""
     
     @State var nickname = ""
 
     @State var isShowingAlert = false
-    @StateObject var userController = UserController()
+    @StateObject var controller = ProfileSettingsController()
     
     // MARK: View
 
     var body: some View {
         ScrollView {
-            switch userController.state {
+            switch controller.userController.state {
             case .loading:
                 ProgressView()
-            case .user(let userModel):
-                if userController.isSyncing {
+            case .user(_):
+                if controller.userController.isSyncing {
                     ProgressView {
                         Text("Syncing")
                     }
@@ -45,10 +44,10 @@ struct ProfileSettings: View {
 
                 GroupBox {
                     HStack {
-                        TextField("Enter your name", text: $nickname) { (didChange) in
+                        TextField("Enter your name", text: $controller.nicknameText) { (didChange) in
                             print(didChange)
                         } onCommit: {
-                            userController.setNickname(nickname)
+                            controller.setNickname()
                         }
                         .multilineTextAlignment(.leading)
 
@@ -77,15 +76,13 @@ struct ProfileSettings: View {
                             .foregroundColor(Color(.tertiaryLabel))
                         Spacer()
                     }
-                    TextEditor(text: $description)
+                    TextEditor(text: $controller.bioText)
                         .cornerRadius(8)
                 }
                 .frame(height: 250)
             case .failure(let error):
                 Text("Error: \(error.localizedDescription)")
             }
-            
-
         }
         .padding(.horizontal)
         .navigationTitle("Profile")
@@ -95,7 +92,7 @@ struct ProfileSettings: View {
     // MARK: Methods
     
     private func viewAppeared() {
-        userController.updateData()
+        controller.setup()
     }
     
 }

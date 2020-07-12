@@ -41,6 +41,7 @@
 		9C8FAD4624B9E39E00571947 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAD4524B9E39E00571947 /* Record.swift */; };
 		9C8FAD4824B9E7CC00571947 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAD4724B9E7CC00571947 /* UserController.swift */; };
 		9C8FAD4A24BAADA600571947 /* CKContainer+AppDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAD4924BAADA600571947 /* CKContainer+AppDefault.swift */; };
+		9C8FAD4D24BAB75C00571947 /* ProfileSetttingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAD4C24BAB75C00571947 /* ProfileSetttingsController.swift */; };
 		9C9748E024B9A9AA00FB5F21 /* HKHealthStoreMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9748DF24B9A9AA00FB5F21 /* HKHealthStoreMock.swift */; };
 		9C9748E524B9B05900FB5F21 /* HKActivitySummaryQuery+ResultsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9748E424B9B05900FB5F21 /* HKActivitySummaryQuery+ResultsHandler.m */; };
 		9CCFDD0724B95E9600162B0F /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD0624B95E9600162B0F /* URLSessionMock.swift */; };
@@ -103,6 +104,7 @@
 		9C8FAD4524B9E39E00571947 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		9C8FAD4724B9E7CC00571947 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		9C8FAD4924BAADA600571947 /* CKContainer+AppDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CKContainer+AppDefault.swift"; sourceTree = "<group>"; };
+		9C8FAD4C24BAB75C00571947 /* ProfileSetttingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetttingsController.swift; sourceTree = "<group>"; };
 		9C9748DF24B9A9AA00FB5F21 /* HKHealthStoreMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKHealthStoreMock.swift; sourceTree = "<group>"; };
 		9C9748E224B9AF1E00FB5F21 /* Project SFTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Project SFTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		9C9748E324B9AF1E00FB5F21 /* HKActivitySummaryQuery+ResultsHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HKActivitySummaryQuery+ResultsHandler.h"; sourceTree = "<group>"; };
@@ -210,7 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				308FAD9724B989FF00126F3F /* SettingsView.swift */,
-				308FAD9B24B99AA700126F3F /* ProfileSettings.swift */,
+				9C8FAD4B24BAB75000571947 /* Profile Settings */,
 				308FAD9F24B9A96700126F3F /* NotificationSettings.swift */,
 				308FADA124B9A9D100126F3F /* PermissionSettings.swift */,
 				308FADA324B9A9F000126F3F /* PrivacyAbout.swift */,
@@ -297,6 +299,15 @@
 				3029AF5124B886A7003F0324 /* Extensions */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		9C8FAD4B24BAB75000571947 /* Profile Settings */ = {
+			isa = PBXGroup;
+			children = (
+				308FAD9B24B99AA700126F3F /* ProfileSettings.swift */,
+				9C8FAD4C24BAB75C00571947 /* ProfileSetttingsController.swift */,
+			);
+			path = "Profile Settings";
 			sourceTree = "<group>";
 		};
 		9CCFDD1524B971D600162B0F /* Models */ = {
@@ -478,6 +489,7 @@
 				308FADA224B9A9D100126F3F /* PermissionSettings.swift in Sources */,
 				9C7B4D0824B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift in Sources */,
 				30BFC8D024B75E6C00DAC6D9 /* ContentView.swift in Sources */,
+				9C8FAD4D24BAB75C00571947 /* ProfileSetttingsController.swift in Sources */,
 				308FAD9424B989DE00126F3F /* CompetitionsView.swift in Sources */,
 				30BFC8CE24B75E6C00DAC6D9 /* ProjectSFApp.swift in Sources */,
 				9CCFDD1F24B971D600162B0F /* NetworkManager.swift in Sources */,
