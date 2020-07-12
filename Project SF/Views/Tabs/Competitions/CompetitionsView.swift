@@ -42,18 +42,18 @@ struct CompetitionsView: View {
                 Section(header: Text("Current Activity")) {
                     HStack {
                         VStack(alignment: .leading) {
-                            Text("Move: \(Int(healthKit.moveCurrent))/\(Int(healthKit.moveGoal))")
+                            Text("Move: \(Int(healthKit.latestActivityData.moveCurrent))/\(Int(healthKit.latestActivityData.moveGoal))")
                                 .foregroundColor(RingType.move.color)
                                 .fontWeight(.medium)
-                            Text("Exercise: \(Int(healthKit.exerciseCurrent))/\(Int(healthKit.exerciseGoal))")
+                            Text("Exercise: \(Int(healthKit.latestActivityData.exerciseCurrent))/\(Int(healthKit.latestActivityData.exerciseGoal))")
                                 .foregroundColor(RingType.exercise.color)
                                 .fontWeight(.medium)
-                            Text("Stand: \(Int(healthKit.standCurrent))/\(Int(healthKit.standGoal))")
+                            Text("Stand: \(Int(healthKit.latestActivityData.standCurrent))/\(Int(healthKit.latestActivityData.standGoal))")
                                 .foregroundColor(RingType.stand.darkColor)
                                 .fontWeight(.medium)
                         }
                         Spacer()
-                        ActivityRingsView(ringSize: RingSize.medium)
+                        ActivityRingsView(values: $healthKit.latestActivityData, ringSize: .medium)
                             .padding(.vertical, 12)
                     }
                 }

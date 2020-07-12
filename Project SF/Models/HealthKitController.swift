@@ -18,14 +18,14 @@ class HealthKitController: ObservableObject {
 
     @Published var authorizationState = AuthorizationState.notBegun
     
-    @Published var moveCurrent = 0.0
-    @Published var moveGoal = 1.0
-
-    @Published var exerciseCurrent = 0.0
-    @Published var exerciseGoal = 30.0
-
-    @Published var standCurrent = 0.0
-    @Published var standGoal = 12.0
+    @Published var latestActivityData = ActivityRings(
+        moveCurrent: 0,
+        moveGoal: 1,
+        exerciseCurrent: 0,
+        exerciseGoal: 30,
+        standCurrent: 0,
+        standGoal: 12
+    )
     
     // MARK: Init
     
@@ -173,14 +173,15 @@ class HealthKitController: ObservableObject {
                 return
             } else {
                 DispatchQueue.main.async {
-                    self.moveCurrent = move!.current
-                    self.moveGoal = move!.goal
                     
-                    self.exerciseCurrent = exercise!.current
-                    self.exerciseGoal = exercise!.goal
+                    self.latestActivityData.moveCurrent = move!.current
+                    self.latestActivityData.moveGoal = move!.goal
                     
-                    self.standCurrent = stand!.current
-                    self.standGoal = stand!.goal
+                    self.latestActivityData.exerciseCurrent = exercise!.current
+                    self.latestActivityData.exerciseGoal = exercise!.goal
+                    
+                    self.latestActivityData.standCurrent = stand!.current
+                    self.latestActivityData.standGoal = stand!.goal
 
                     completion()
                 }

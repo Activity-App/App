@@ -19,7 +19,7 @@ struct RingSize {
     }
 
     static var small: RingSize {
-        RingSize(size: 70, width: 9.5, padding: 1.5)
+        RingSize(size: 70, width: 10, padding: 1)
     }
 
     var size: CGFloat
@@ -48,8 +48,7 @@ struct RingSize {
 
 struct ActivityRingsView: View {
 
-    @EnvironmentObject var healthKit: HealthKitController
-
+    @Binding var values: ActivityRings
     let ringSize: RingSize
 
     var body: some View {
@@ -57,22 +56,22 @@ struct ActivityRingsView: View {
             ActivityRingView(
                 ringType: .move,
                 ringWidth: ringSize.width,
-                current: $healthKit.moveCurrent,
-                goal: $healthKit.moveGoal
+                current: $values.moveCurrent,
+                goal: $values.moveGoal
             )
             .frame(width: ringSize.move, height: ringSize.move)
             ActivityRingView(
                 ringType: .exercise,
                 ringWidth: ringSize.width,
-                current: $healthKit.exerciseCurrent,
-                goal: $healthKit.exerciseGoal
+                current: $values.exerciseCurrent,
+                goal: $values.exerciseGoal
             )
             .frame(width: ringSize.exercise, height: ringSize.exercise)
             ActivityRingView(
                 ringType: .stand,
                 ringWidth: ringSize.width,
-                current: $healthKit.standCurrent,
-                goal: $healthKit.standGoal
+                current: $values.standCurrent,
+                goal: $values.standGoal
             )
             .frame(width: ringSize.stand, height: ringSize.stand)
         }
@@ -81,10 +80,18 @@ struct ActivityRingsView: View {
 
 struct ActivityRingsView_Previews: PreviewProvider {
     static var previews: some View {
-        VStack(spacing: 20) {
-            ActivityRingsView(ringSize: .large)
-            ActivityRingsView(ringSize: .medium)
-            ActivityRingsView(ringSize: .small)
+        let activity = ActivityRings(
+            moveCurrent: 350,
+            moveGoal: 300,
+            exerciseCurrent: 4,
+            exerciseGoal: 30,
+            standCurrent: 1,
+            standGoal: 12
+        )
+        return VStack(spacing: 20) {
+            ActivityRingsView(values: .constant(activity), ringSize: .large)
+            ActivityRingsView(values: .constant(activity), ringSize: .medium)
+            ActivityRingsView(values: .constant(activity), ringSize: .small)
         }
     }
 }
