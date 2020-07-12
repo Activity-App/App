@@ -62,11 +62,7 @@ struct CompetitionsView: View {
                 
                 ForEach(competitions.indices) { index in
                     Section(header: CurrentlyCompetingHeader(index: index)) {
-                        CompetitionCell(
-                            competitionName: competitions[index].name,
-                            startDate: competitions[index].startDate,
-                            endDate: competitions[index].endDate
-                        )
+                        CompetitionCell(competition: competitions[index])
                     }
                 }
             }
