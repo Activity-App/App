@@ -13,6 +13,7 @@ struct CreateCompetition: View {
     @State var competitionName = ""
     @State var competitionEndDate = Date() + 60 * 60 * 24
     @State var pickedDate = 0
+    @State var invitedFriends: [String] = []
 
     var body: some View {
 //        ScrollView {
@@ -37,15 +38,25 @@ struct CreateCompetition: View {
                     // TODO: Add animation to this thing
                     if pickedDate == 3 {
                         DatePicker("", selection: $competitionEndDate)
-                            .frame(maxHeight: 70)
+                            .frame(maxHeight: 50)
                     }
                 })
 
                 GroupBox {
                     Button("Invite friends") {
                         // TODO: Hanlde invite friends
+                        invitedFriends.append("nmsdnjosadn\(Int.random(in: 0...100))")
                     }
                     .frame(maxWidth: .infinity)
+
+                    if !invitedFriends.isEmpty {
+                        List(invitedFriends.indices) { index in
+                            Section {
+                                Text(invitedFriends[index])
+                            }
+                        }
+                        .listStyle(InsetGroupedListStyle())
+                    }
                 }
 
                 Spacer()
