@@ -9,63 +9,68 @@ import SwiftUI
 
 struct ProfileSettings: View {
 
-    @AppStorage("username") var username = "My Name"
+    @AppStorage("username") var username = ""
     @AppStorage("phone-number") var phoneNumber = "+7 (914) 690 52-28"
     @AppStorage("user-description") var description = ""
 
     @State var isShowingAlert = false
 
     var body: some View {
-        ScrollView {
-            Button(action: {
-                // TODO: Present image search through the gallery.
-            }, label: {
-                Image(systemName: "person.crop.circle.badge.plus")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            })
-            .frame(height: 100)
-            .padding(.vertical)
+        // This VStack and empty text is required to fix the navigation title glitching out on scroll
+        // so ScrollView isn't the topmost view.
+        VStack(spacing: 0) {
+            Text("")
+            ScrollView {
+                Button(action: {
+                    // TODO: Present image search through the gallery.
+                }, label: {
+                    Image(systemName: "person.crop.circle.badge.plus")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                })
+                .frame(height: 100)
+                .padding(.vertical)
 
-            GroupBox {
-                HStack {
-                    TextField("Enter your name", text: $username) { (didChange) in
-                        print(didChange)
-                    } onCommit: {
-                        print("Commited")
+                GroupBox {
+                    HStack {
+                        TextField("Enter your name", text: $username) { (didChange) in
+                            print(didChange)
+                        } onCommit: {
+                            print("Commited")
+                        }
+                        .multilineTextAlignment(.leading)
+
+                        Image(systemName: "pencil")
                     }
-                    .multilineTextAlignment(.leading)
-
-                    Image(systemName: "pencil")
+                    .font(.headline)
                 }
-                .font(.headline)
-            }
 
-            GroupBox {
-                HStack {
-                    TextField("Enter your phone number", text: $phoneNumber) { (didChange) in
-                        print(didChange)
-                    } onCommit: {
-                        print("Commited")
+                GroupBox {
+                    HStack {
+                        TextField("Enter your phone number", text: $phoneNumber) { (didChange) in
+                            print(didChange)
+                        } onCommit: {
+                            print("Commited")
+                        }
+                        .multilineTextAlignment(.leading)
+
+                        Image(systemName: "pencil")
                     }
-                    .multilineTextAlignment(.leading)
-
-                    Image(systemName: "pencil")
+                    .font(.headline)
                 }
-                .font(.headline)
-            }
 
-            GroupBox {
-                HStack {
-                    Text("Enter your bio or description")
-                        .foregroundColor(Color(.tertiaryLabel))
-                    Spacer()
+                GroupBox {
+                    HStack {
+                        Text("Enter your bio or description")
+                            .foregroundColor(Color(.tertiaryLabel))
+                        Spacer()
+                    }
+                    TextEditor(text: $description)
+                        .cornerRadius(8)
                 }
-                TextEditor(text: $description)
-                    .cornerRadius(8)
-            }
-            .frame(height: 250)
+                .frame(height: 250)
 
+            }
         }
         .padding(.horizontal)
         .navigationTitle("Profile")

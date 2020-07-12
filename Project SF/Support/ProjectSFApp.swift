@@ -7,8 +7,9 @@
 import SwiftUI
 
 struct ProjectSFApp: App {
-    
+ 
     let cloudKitStore = CloudKitStore.shared
+
     @AppStorage("showOnboarding") var showOnboarding = true
     @StateObject var healthKit = HealthKitController()
     

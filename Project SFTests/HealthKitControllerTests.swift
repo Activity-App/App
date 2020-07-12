@@ -58,6 +58,7 @@ class HealthKitControllerTests: XCTestCase {
     }
 
     // MARK: - Test Update Activity Data
+    
     func testHealthKitControllerUpdateActivityData() throws {
         let mock = HKHealthStoreMock()
         let fakeResult = HKActivitySummaryMock()
@@ -74,35 +75,30 @@ class HealthKitControllerTests: XCTestCase {
         
         let controller = HealthKitController(healthStore: mock)
         
-        var cancellables = [AnyCancellable]()
-        var expectations = [XCTestExpectation]()
-        
-        func handle(expectedResult: Double, publisher: Published<Double>.Publisher) {
-            let expectation = XCTestExpectation()
-            let cancellable = publisher
-                .filter {
-                    return $0 == expectedResult
-                }
-                .sink { _ in
-                    expectation.fulfill()
-                }
-            
-            cancellables.append(cancellable)
-            expectations.append(expectation)
+        let expectation = XCTestExpectation()
+
+        controller.updateTodaysActivityData {
+            XCTAssertEqual(controller.moveCurrent, 100, "Move value is not set correctly")
+            XCTAssertEqual(controller.moveGoal, 200, "Move goal is not set correctly")
+            XCTAssertEqual(controller.exerciseCurrent, 50, "Exercise value is not set correctly")
+            XCTAssertEqual(controller.exerciseGoal, 60, "Exercise goal is not set correctly")
+            XCTAssertEqual(controller.standCurrent, 50, "Stand value is not set correctly")
+            XCTAssertEqual(controller.standGoal, 60, "Stand goal is not set correctly")
+            expectation.fulfill()
         }
-            
-        handle(expectedResult: 100.0, publisher: controller.$moveCurrent)
-        handle(expectedResult: 200.0, publisher: controller.$moveGoal)
-        handle(expectedResult: 50, publisher: controller.$exerciseCurrent)
-        handle(expectedResult: 60, publisher: controller.$exerciseGoal)
-        handle(expectedResult: 50, publisher: controller.$standCurrent)
-        handle(expectedResult: 60, publisher: controller.$standGoal)
         
-        controller.updateAllActivityData()
+        /*let currentValuesExpectation = XCTestExpectation()
+        let currentValuesCancellable = controller.$moveCurrent.zip(controller.$exerciseCurrent, controller.$standCurrent)
+            .sink { _ in
+                guard controller.moveCurrent != 0, controller.exerciseCurrent != 0, controller.standCurrent != 0 else { return }
+                XCTAssertEqual(controller.moveCurrent, 100, "Move value is not set correctly")
+                XCTAssertEqual(controller.exerciseCurrent, 50, "Exercise value is not set correctly")
+                XCTAssertEqual(controller.standCurrent, 50, "Stand value is not set correctly")
+                
+                currentValuesExpectation.fulfill()
+            }*/
         
-        wait(for: expectations, timeout: 5)
-        cancellables
-            .forEach { $0.cancel() }
+        wait(for: [expectation], timeout: 5)
     }
 
 }

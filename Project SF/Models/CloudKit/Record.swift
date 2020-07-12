@@ -9,6 +9,4 @@ import Foundation
 
 protocol Record {
     
-    
-    
 }

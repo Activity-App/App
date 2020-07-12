@@ -10,7 +10,7 @@
 	<array/>
 	<key>com.apple.developer.icloud-container-identifiers</key>
 	<array>
-		<string>iCloud.ProjectSF</string>
+		<string>iCloud.com.wfltaylor.projectsf</string>
 	</array>
 	<key>com.apple.developer.icloud-services</key>
 	<array>
