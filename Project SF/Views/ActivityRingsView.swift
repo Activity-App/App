@@ -10,30 +10,41 @@ import SwiftUI
 struct ActivityRingsView: View {
 
     @ObservedObject var healthKit: HealthKitController
+    var minimalFrame: CGFloat = 42
+    var ringWidth: CGFloat = 12
+    var ringPadding: CGFloat = 5
+
+    private var midRingFrame: CGFloat {
+        minimalFrame + ringWidth * 2
+    }
+
+    private var largeRingFrame: CGFloat {
+        midRingFrame + ringWidth * 2
+    }
 
     var body: some View {
         ZStack {
             ActivityRingView(
                 ringType: .move,
-                ringWidth: 14,
+                ringWidth: ringWidth,
                 current: $healthKit.moveCurrent,
                 goal: $healthKit.moveGoal
             )
-            .frame(width: 110, height: 110)
+            .frame(width: largeRingFrame + ringPadding * 2, height: largeRingFrame + ringPadding * 2)
             ActivityRingView(
                 ringType: .exercise,
-                ringWidth: 14,
+                ringWidth: ringWidth,
                 current: $healthKit.exerciseCurrent,
                 goal: $healthKit.exerciseGoal
             )
-            .frame(width: 78, height: 78)
+            .frame(width: midRingFrame + ringPadding, height: midRingFrame + ringPadding)
             ActivityRingView(
                 ringType: .stand,
-                ringWidth: 14,
+                ringWidth: ringWidth,
                 current: $healthKit.standCurrent,
                 goal: $healthKit.standGoal
             )
-            .frame(width: 46, height: 46)
+            .frame(width: minimalFrame, height: minimalFrame)
         }
     }
 }
