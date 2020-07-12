@@ -15,11 +15,11 @@ struct ActivityRingsView: View {
     var ringPadding: CGFloat = 5
 
     private var midRingFrame: CGFloat {
-        minimalFrame + ringWidth * 2
+        minimalFrame + ringWidth * 2 + ringPadding
     }
 
     private var largeRingFrame: CGFloat {
-        midRingFrame + ringWidth * 2
+        midRingFrame + ringWidth * 2 + ringPadding * 2
     }
 
     var body: some View {
@@ -30,14 +30,14 @@ struct ActivityRingsView: View {
                 current: $healthKit.moveCurrent,
                 goal: $healthKit.moveGoal
             )
-            .frame(width: largeRingFrame + ringPadding * 2, height: largeRingFrame + ringPadding * 2)
+            .frame(width: largeRingFrame, height: largeRingFrame)
             ActivityRingView(
                 ringType: .exercise,
                 ringWidth: ringWidth,
                 current: $healthKit.exerciseCurrent,
                 goal: $healthKit.exerciseGoal
             )
-            .frame(width: midRingFrame + ringPadding, height: midRingFrame + ringPadding)
+            .frame(width: midRingFrame, height: midRingFrame)
             ActivityRingView(
                 ringType: .stand,
                 ringWidth: ringWidth,
