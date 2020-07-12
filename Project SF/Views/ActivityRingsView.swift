@@ -7,49 +7,50 @@
 
 import SwiftUI
 
-/// Creates activity ring with the specified parameters.
-/// Use `.large`, `.medium` or `.small` to get default ring sizes.
+///// Creates activity ring with the specified parameters.
+///// Use `.large`, `.medium` or `.small` to get default ring sizes.
 struct RingSize {
     static var large: RingSize {
-        RingSize(minFrame: 55, width: 17, padding: 10)
+        RingSize(size: 150, width: 20, padding: 4)
     }
 
     static var medium: RingSize {
-        RingSize(minFrame: 46, width: 14, padding: 8)
+        RingSize(size: 100, width: 13, padding: 2)
     }
 
     static var small: RingSize {
-        RingSize(minFrame: 36, width: 12, padding: 6)
+        RingSize(size: 70, width: 9.5, padding: 1.5)
     }
 
-    var minFrame: CGFloat
+    var size: CGFloat
     var width: CGFloat
     var padding: CGFloat
+    
+    var move: CGFloat
+    var exercise: CGFloat
+    var stand: CGFloat
 
     /// Creates activity ring with the specified parameters.
     /// - Parameters:
     ///   - minFrame: The frame of the smallest ring.
     ///   - width: Width of each ring.
     ///   - padding: Padding between rings.
-    init(minFrame: CGFloat, width: CGFloat, padding: CGFloat) {
-        self.minFrame = minFrame
+    init(size: CGFloat, width: CGFloat, padding: CGFloat) {
+        self.size = size
         self.width = width
         self.padding = padding
+        
+        move = size
+        exercise = size - width*2 - padding
+        stand = exercise - width*2 - padding
     }
 }
 
 struct ActivityRingsView: View {
 
     @EnvironmentObject var healthKit: HealthKitController
+
     let ringSize: RingSize
-
-    private var midRingFrame: CGFloat {
-        ringSize.minFrame + ringSize.width * 2 + ringSize.padding
-    }
-
-    private var largeRingFrame: CGFloat {
-        midRingFrame + ringSize.width * 2 + ringSize.padding
-    }
 
     var body: some View {
         ZStack {
@@ -59,21 +60,21 @@ struct ActivityRingsView: View {
                 current: $healthKit.moveCurrent,
                 goal: $healthKit.moveGoal
             )
-            .frame(width: largeRingFrame, height: largeRingFrame)
+            .frame(width: ringSize.move, height: ringSize.move)
             ActivityRingView(
                 ringType: .exercise,
                 ringWidth: ringSize.width,
                 current: $healthKit.exerciseCurrent,
                 goal: $healthKit.exerciseGoal
             )
-            .frame(width: midRingFrame, height: midRingFrame)
+            .frame(width: ringSize.exercise, height: ringSize.exercise)
             ActivityRingView(
                 ringType: .stand,
                 ringWidth: ringSize.width,
                 current: $healthKit.standCurrent,
                 goal: $healthKit.standGoal
             )
-            .frame(width: ringSize.minFrame, height: ringSize.minFrame)
+            .frame(width: ringSize.stand, height: ringSize.stand)
         }
     }
 }

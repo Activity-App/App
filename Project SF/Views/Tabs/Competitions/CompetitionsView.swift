@@ -53,7 +53,7 @@ struct CompetitionsView: View {
                                 .fontWeight(.medium)
                         }
                         Spacer()
-                        ActivityRingsView(ringSize: .small)
+                        ActivityRingsView(ringSize: RingSize.medium)
                             .padding(.vertical, 12)
                     }
                 }

@@ -16,7 +16,7 @@ struct ContentView: View {
             CompetitionsView()
                 .tag(1)
 
-            TeamsView()
+            FriendsView()
                 .tag(2)
 
             SettingsView()
