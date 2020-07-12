@@ -40,7 +40,7 @@ struct RingSize {
 
 struct ActivityRingsView: View {
 
-    @ObservedObject var healthKit: HealthKitController
+    @EnvironmentObject var healthKit: HealthKitController
     let ringSize: RingSize
 
     private var midRingFrame: CGFloat {
@@ -81,9 +81,9 @@ struct ActivityRingsView: View {
 struct ActivityRingsView_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 20) {
-            ActivityRingsView(healthKit: HealthKitController(), ringSize: .large)
-            ActivityRingsView(healthKit: HealthKitController(), ringSize: .medium)
-            ActivityRingsView(healthKit: HealthKitController(), ringSize: .small)
+            ActivityRingsView(ringSize: .large)
+            ActivityRingsView(ringSize: .medium)
+            ActivityRingsView(ringSize: .small)
         }
     }
 }
