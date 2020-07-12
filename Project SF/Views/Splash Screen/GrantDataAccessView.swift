@@ -70,7 +70,7 @@ struct GrantDataAccessView: View {
 //        }
         
         VStack {
-            Text("This application will need access to your health data to calculate the goals properly.")
+            Text("This application will need access to your health data to calculate the points in competitions.")
                 .padding(.horizontal, 16)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
