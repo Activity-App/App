@@ -12,11 +12,12 @@ struct CompetitionDetailView: View {
 
     var body: some View {
         Text(competition.name)
+            .navigationTitle(competition.name)
     }
 }
 
 struct CompetitionDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        CompetitionDetailView(competition: Competition(name: "asdfasd", startDate: Date(), endDate: Date() + 123))
+        CompetitionDetailView(competition: Competition(name: "Competition Name", startDate: Date(), endDate: Date() + 123))
     }
 }
