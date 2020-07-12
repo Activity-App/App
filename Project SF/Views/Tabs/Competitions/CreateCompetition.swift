@@ -18,11 +18,7 @@ struct CreateCompetition: View {
     var body: some View {
         VStack {
             GroupBox {
-                TextField("Enter Competition Name", text: $competitionName) { _ in
-
-                } onCommit: {
-
-                }
+                TextField("Enter Competition Name", text: $competitionName)
             }
 
             GroupBox(label: Text("Pick competition end date").foregroundColor(Color(UIColor.tertiaryLabel)),
