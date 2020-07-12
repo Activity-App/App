@@ -19,8 +19,10 @@ struct NavigationLabel<Destination: View>: View {
             label: {
                 if let title = title {
                     Label(title, systemImage: systemName)
+                        .font(.title2)
                 } else {
                     Image(systemName: systemName)
+                        .font(.title2)
                 }
             }
         )
@@ -30,5 +32,15 @@ struct NavigationLabel<Destination: View>: View {
         self.title = title
         self.systemName = systemName
         self.destination = destination
+    }
+}
+
+struct NavigationLabel_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            Text("Hello, World!")
+                .navigationTitle("Title")
+                .navigationBarItems(trailing: NavigationLabel(systemName: "plus", destination: Text("123")))
+        }
     }
 }
