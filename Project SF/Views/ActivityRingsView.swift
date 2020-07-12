@@ -8,9 +8,14 @@
 import SwiftUI
 
 /// Creates activity ring with the specified parameters.
+/// Use `.large`, `.medium` or `.small` to get default ring sizes.
 struct Ring {
+    static var large: Ring {
+        Ring(minFrame: 55, width: 17, padding: 10)
+    }
+
     static var medium: Ring {
-        Ring(minFrame: 46, width: 14, padding: 9)
+        Ring(minFrame: 46, width: 14, padding: 8)
     }
 
     static var small: Ring {
@@ -76,6 +81,7 @@ struct ActivityRingsView: View {
 struct ActivityRingsView_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 20) {
+            ActivityRingsView(healthKit: HealthKitController(), ring: .large)
             ActivityRingsView(healthKit: HealthKitController(), ring: .medium)
             ActivityRingsView(healthKit: HealthKitController(), ring: .small)
         }
