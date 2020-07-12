@@ -57,7 +57,6 @@ struct CompetitionsView: View {
                             .padding(.vertical, 12)
                     }
                 }
-                
                 ForEach(competitions.indices) { index in
                     Section(header: CurrentlyCompetingHeader(index: index)) {
                         CompetitionCell(
@@ -70,7 +69,7 @@ struct CompetitionsView: View {
             }
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("Competitions")
-            .navigationBarItems(trailing: Button("test") {})
+            .navigationBarItems(trailing: NavigationLabel(systemName: "plus", destination: CreateCompetition()))
         }
         .tabItem {
             Label("Competitions", systemImage: "star.fill")
@@ -81,10 +80,6 @@ struct CompetitionsView: View {
 
 struct CompetitionsView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            Text("asd")
-                .navigationTitle("test")
-                .navigationBarItems(trailing: NavigationLabel(systemName: "plus", destination: Text("asd")))
-        }
+        CompetitionsView()
     }
 }
