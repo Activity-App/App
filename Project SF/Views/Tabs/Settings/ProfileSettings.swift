@@ -9,72 +9,89 @@ import SwiftUI
 
 struct ProfileSettings: View {
 
+    @AppStorage("name") var name = ""
     @AppStorage("username") var username = ""
-    @AppStorage("phone-number") var phoneNumber = "+7 (914) 690 52-28"
-    @AppStorage("user-description") var description = ""
-
-    @State var isShowingAlert = false
+    @AppStorage("userDescription") var description = ""
+    
+    @StateObject var keyboard = KeyboardManager()
+    
+    @State var profilePicture: UIImage?
+    @State var showImageSelectionView = false
 
     var body: some View {
         // This VStack and empty text is required to fix the navigation title glitching out on scroll
         // so ScrollView isn't the topmost view.
         VStack(spacing: 0) {
             Text("")
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 Button(action: {
-                    // TODO: Present image search through the gallery.
+                    showImageSelectionView = true
                 }, label: {
-                    Image(systemName: "person.crop.circle.badge.plus")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
+                    if profilePicture == nil {
+                        Image(systemName: "person.crop.circle.badge.plus")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 100, height: 100)
+                    } else {
+                        Image(uiImage: profilePicture!)
+                            .renderingMode(.original)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 100, height: 100)
+                            .clipShape(Circle())
+                    }
                 })
-                .frame(height: 100)
-                .padding(.vertical)
+                .padding(.bottom)
 
-                GroupBox {
-                    HStack {
-                        TextField("Enter your name", text: $username) { (didChange) in
-                            print(didChange)
-                        } onCommit: {
-                            print("Commited")
-                        }
-                        .multilineTextAlignment(.leading)
-
-                        Image(systemName: "pencil")
-                    }
+                TextField("Name", text: $name)
                     .font(.headline)
-                }
-
-                GroupBox {
-                    HStack {
-                        TextField("Enter your phone number", text: $phoneNumber) { (didChange) in
-                            print(didChange)
-                        } onCommit: {
-                            print("Commited")
-                        }
-                        .multilineTextAlignment(.leading)
-
-                        Image(systemName: "pencil")
-                    }
+                    .padding(.horizontal)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .frame(minHeight: 50)
+                            .foregroundColor(Color(.secondarySystemBackground))
+                    )
+                    .frame(minHeight: 50)
+                    .padding(.bottom, 8)
+                
+                TextField("Username", text: $username)
                     .font(.headline)
-                }
+                    .padding(.horizontal)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .frame(minHeight: 50)
+                            .foregroundColor(Color(.secondarySystemBackground))
+                    )
+                    .frame(minHeight: 50)
+                    .padding(.bottom, 8)
 
-                GroupBox {
-                    HStack {
-                        Text("Enter your bio or description")
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .frame(minHeight: 50)
+                        .foregroundColor(Color(.secondarySystemBackground))
+                        .onTapGesture {
+                            UIApplication.shared.endEditing(true)
+                        }
+                    VStack {
+                        Text("Bio/Description")
                             .foregroundColor(Color(.tertiaryLabel))
-                        Spacer()
+                            .bold()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        TextEditor(text: $description)
+                            .cornerRadius(10)
                     }
-                    TextEditor(text: $description)
-                        .cornerRadius(8)
+                    .padding(16)
                 }
                 .frame(height: 250)
-
+                
+                Spacer(minLength: keyboard.currentHeight)
             }
         }
         .padding(.horizontal)
         .navigationTitle("Profile")
-        .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $showImageSelectionView) {
+            ImageSelectionView(image: $profilePicture)
+        }
     }
 }
 
