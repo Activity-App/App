@@ -16,56 +16,59 @@ struct ProfileSettings: View {
     @State var isShowingAlert = false
 
     var body: some View {
-        ScrollView {
-            Button(action: {
-                // TODO: Present image search through the gallery.
-            }, label: {
-                Image(systemName: "person.crop.circle.badge.plus")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            })
-            .frame(height: 100)
-            .padding(.vertical)
+        VStack(spacing: 0) {
+            Text("")
+            ScrollView {
+                Button(action: {
+                    // TODO: Present image search through the gallery.
+                }, label: {
+                    Image(systemName: "person.crop.circle.badge.plus")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                })
+                .frame(height: 100)
+                .padding(.vertical)
 
-            GroupBox {
-                HStack {
-                    TextField("Enter your name", text: $username) { (didChange) in
-                        print(didChange)
-                    } onCommit: {
-                        print("Commited")
+                GroupBox {
+                    HStack {
+                        TextField("Enter your name", text: $username) { (didChange) in
+                            print(didChange)
+                        } onCommit: {
+                            print("Commited")
+                        }
+                        .multilineTextAlignment(.leading)
+
+                        Image(systemName: "pencil")
                     }
-                    .multilineTextAlignment(.leading)
-
-                    Image(systemName: "pencil")
+                    .font(.headline)
                 }
-                .font(.headline)
-            }
 
-            GroupBox {
-                HStack {
-                    TextField("Enter your phone number", text: $phoneNumber) { (didChange) in
-                        print(didChange)
-                    } onCommit: {
-                        print("Commited")
+                GroupBox {
+                    HStack {
+                        TextField("Enter your phone number", text: $phoneNumber) { (didChange) in
+                            print(didChange)
+                        } onCommit: {
+                            print("Commited")
+                        }
+                        .multilineTextAlignment(.leading)
+
+                        Image(systemName: "pencil")
                     }
-                    .multilineTextAlignment(.leading)
-
-                    Image(systemName: "pencil")
+                    .font(.headline)
                 }
-                .font(.headline)
-            }
 
-            GroupBox {
-                HStack {
-                    Text("Enter your bio or description")
-                        .foregroundColor(Color(.tertiaryLabel))
-                    Spacer()
+                GroupBox {
+                    HStack {
+                        Text("Enter your bio or description")
+                            .foregroundColor(Color(.tertiaryLabel))
+                        Spacer()
+                    }
+                    TextEditor(text: $description)
+                        .cornerRadius(8)
                 }
-                TextEditor(text: $description)
-                    .cornerRadius(8)
-            }
-            .frame(height: 250)
+                .frame(height: 250)
 
+            }
         }
         .padding(.horizontal)
         .navigationTitle("Profile")
