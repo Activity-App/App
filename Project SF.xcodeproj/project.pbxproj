@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88924BA199E00FF79D7 /* RingType.swift */; };
 		302CF88C24BA1A4000FF79D7 /* ActivityResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */; };
 		3050353B24B9E73600FCCA0D /* CompetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3050353A24B9E73600FCCA0D /* CompetitionCell.swift */; };
+		307E8E8024BAF2690060875B /* BCrypt in Frameworks */ = {isa = PBXBuildFile; productRef = 307E8E7F24BAF2690060875B /* BCrypt */; };
 		308FAD8B24B97E7E00126F3F /* OnboardingInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8A24B97E7E00126F3F /* OnboardingInfoCell.swift */; };
 		308FAD8D24B97E8A00126F3F /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8C24B97E8A00126F3F /* PrivacyView.swift */; };
 		308FAD9124B987F000126F3F /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD9024B987F000126F3F /* SignUpView.swift */; };
@@ -126,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				307E8E8024BAF2690060875B /* BCrypt in Frameworks */,
 				30BFC8E324B76BB900DAC6D9 /* HealthKit.framework in Frameworks */,
 				9CCFDD2224B973EB00162B0F /* CloudKit.framework in Frameworks */,
 			);
@@ -369,6 +371,9 @@
 			dependencies = (
 			);
 			name = "Project SF";
+			packageProductDependencies = (
+				307E8E7F24BAF2690060875B /* BCrypt */,
+			);
 			productName = "Project SF";
 			productReference = 30BFC8CA24B75E6C00DAC6D9 /* Project SF.app */;
 			productType = "com.apple.product-type.application";
@@ -419,6 +424,9 @@
 				Base,
 			);
 			mainGroup = 30BFC8C124B75E6C00DAC6D9;
+			packageReferences = (
+				307E8E7E24BAF2690060875B /* XCRemoteSwiftPackageReference "bcrypt" */,
+			);
 			productRefGroup = 30BFC8CB24B75E6C00DAC6D9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -684,7 +692,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Project SF/Project SF.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = 5RTMJNH82H;
+				DEVELOPMENT_TEAM = W9K99K5JN4;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -775,6 +783,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		307E8E7E24BAF2690060875B /* XCRemoteSwiftPackageReference "bcrypt" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vapor-community/bcrypt.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		307E8E7F24BAF2690060875B /* BCrypt */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 307E8E7E24BAF2690060875B /* XCRemoteSwiftPackageReference "bcrypt" */;
+			productName = BCrypt;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 30BFC8C224B75E6C00DAC6D9 /* Project object */;
 }
