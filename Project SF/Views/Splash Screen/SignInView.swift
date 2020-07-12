@@ -1,5 +1,5 @@
 //
-//  SignIn.swift
+//  SignInView.swift
 //  Project SF
 //
 //  Created by Roman Esin on 11.07.2020.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct SignIn: View {
+struct SignInView: View {
 
-    @State var username = ""
+    @AppStorage("username") var username = ""
 
     var body: some View {
         VStack {
@@ -21,17 +21,19 @@ struct SignIn: View {
                     print("Commited")
                 }
             }
-            .padding()
+
             Spacer()
-            RoundedButton("Continue") {
-                print(123)
-            }
+            RoundedNavigationLink("Continue", destination: GrantDataAccessView())
         }
+        .padding(.horizontal)
+        .navigationTitle("Sign Up")
     }
 }
 
 struct SignIn_Previews: PreviewProvider {
     static var previews: some View {
-        SignIn()
+        NavigationView {
+            SignInView()
+        }
     }
 }
