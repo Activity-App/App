@@ -19,7 +19,7 @@ struct RingSize {
     }
 
     static var small: RingSize {
-        RingSize(size: 70, width: 10, padding: 1)
+        RingSize(size: 75, width: 10, padding: 2)
     }
 
     var size: CGFloat
