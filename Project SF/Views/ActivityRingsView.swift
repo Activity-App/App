@@ -7,28 +7,28 @@
 
 import SwiftUI
 
-struct ActivityRings: View {
+struct ActivityRingsView: View {
 
     @ObservedObject var healthKit: HealthKitController
 
     var body: some View {
         ZStack {
-            ActivityRing(
-                ringColor: .move,
+            ActivityRingView(
+                ringType: .move,
                 ringWidth: 14,
                 current: $healthKit.moveCurrent,
                 goal: $healthKit.moveGoal
             )
             .frame(width: 110, height: 110)
-            ActivityRing(
-                ringColor: .exercise,
+            ActivityRingView(
+                ringType: .exercise,
                 ringWidth: 14,
                 current: $healthKit.exerciseCurrent,
                 goal: $healthKit.exerciseGoal
             )
             .frame(width: 78, height: 78)
-            ActivityRing(
-                ringColor: .stand,
+            ActivityRingView(
+                ringType: .stand,
                 ringWidth: 14,
                 current: $healthKit.standCurrent,
                 goal: $healthKit.standGoal
@@ -38,8 +38,8 @@ struct ActivityRings: View {
     }
 }
 
-struct ActivityRings_Previews: PreviewProvider {
+struct ActivityRingsView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityRings(healthKit: HealthKitController())
+        ActivityRingsView(healthKit: HealthKitController())
     }
 }
