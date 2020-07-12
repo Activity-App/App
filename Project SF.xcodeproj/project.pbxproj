@@ -10,7 +10,7 @@
 		3050353B24B9E73600FCCA0D /* CompetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3050353A24B9E73600FCCA0D /* CompetitionCell.swift */; };
 		308FAD8B24B97E7E00126F3F /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8A24B97E7E00126F3F /* InfoCell.swift */; };
 		308FAD8D24B97E8A00126F3F /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8C24B97E8A00126F3F /* PrivacyView.swift */; };
-		308FAD9124B987F000126F3F /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD9024B987F000126F3F /* SignIn.swift */; };
+		308FAD9124B987F000126F3F /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD9024B987F000126F3F /* SignInView.swift */; };
 		308FAD9424B989DE00126F3F /* CompetitionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD9324B989DE00126F3F /* CompetitionsView.swift */; };
 		308FAD9624B989EF00126F3F /* TeamsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD9524B989EF00126F3F /* TeamsView.swift */; };
 		308FAD9824B989FF00126F3F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD9724B989FF00126F3F /* SettingsView.swift */; };
@@ -65,7 +65,7 @@
 		3050353A24B9E73600FCCA0D /* CompetitionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionCell.swift; sourceTree = "<group>"; };
 		308FAD8A24B97E7E00126F3F /* InfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
 		308FAD8C24B97E8A00126F3F /* PrivacyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
-		308FAD9024B987F000126F3F /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
+		308FAD9024B987F000126F3F /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		308FAD9324B989DE00126F3F /* CompetitionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsView.swift; sourceTree = "<group>"; };
 		308FAD9524B989EF00126F3F /* TeamsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsView.swift; sourceTree = "<group>"; };
 		308FAD9724B989FF00126F3F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -182,7 +182,7 @@
 				308FAD8A24B97E7E00126F3F /* InfoCell.swift */,
 				30F1EA3A24B951CA00FF89FC /* IntroView.swift */,
 				308FAD8C24B97E8A00126F3F /* PrivacyView.swift */,
-				308FAD9024B987F000126F3F /* SignIn.swift */,
+				308FAD9024B987F000126F3F /* SignInView.swift */,
 			);
 			path = "Splash Screen";
 			sourceTree = "<group>";
@@ -476,7 +476,7 @@
 				308FAD8D24B97E8A00126F3F /* PrivacyView.swift in Sources */,
 				308FAD8B24B97E7E00126F3F /* InfoCell.swift in Sources */,
 				308FADA424B9A9F000126F3F /* PrivacyAbout.swift in Sources */,
-				308FAD9124B987F000126F3F /* SignIn.swift in Sources */,
+				308FAD9124B987F000126F3F /* SignInView.swift in Sources */,
 				9CCFDD1E24B971D600162B0F /* CloudKitStore.swift in Sources */,
 				30F1EA3B24B951CA00FF89FC /* IntroView.swift in Sources */,
 				9CCFDD2024B971D600162B0F /* HealthKitController.swift in Sources */,

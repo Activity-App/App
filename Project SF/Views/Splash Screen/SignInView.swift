@@ -1,5 +1,5 @@
 //
-//  SignIn.swift
+//  SignInView.swift
 //  Project SF
 //
 //  Created by Roman Esin on 11.07.2020.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SignIn: View {
+struct SignInView: View {
 
     @State var username = ""
 
@@ -32,6 +32,6 @@ struct SignIn: View {
 
 struct SignIn_Previews: PreviewProvider {
     static var previews: some View {
-        SignIn()
+        SignInView()
     }
 }
