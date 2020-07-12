@@ -18,7 +18,7 @@ struct CreateCompetition: View {
 //        ScrollView {
             VStack {
                 GroupBox {
-                    TextField("Competition name", text: $competitionName) { _ in
+                    TextField("Enter Competition Name", text: $competitionName) { _ in
 
                     } onCommit: {
 
