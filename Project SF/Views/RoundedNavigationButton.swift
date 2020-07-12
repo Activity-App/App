@@ -47,8 +47,10 @@ struct RoundedNavigationLink<Destination: View>: View {
 
 struct RoundedNavigationButton_Previews: PreviewProvider {
     static var previews: some View {
-        RoundedNavigationLink("Continue", destination: Text(""))
-        RoundedNavigationLink("Continue", destination: Text(""), isLoading: .constant(true))
+        Group {
+            RoundedNavigationLink("Continue", destination: Text(""))
+            RoundedNavigationLink("Continue", destination: Text(""), isLoading: .constant(true))
+        }
     }
 }
 
