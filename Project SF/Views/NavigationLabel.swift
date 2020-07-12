@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct NavigationLabel<Destination: View>: View {
-    let title: String
+
+    let title: String?
     let systemName: String
     let destination: Destination
 
@@ -16,8 +17,18 @@ struct NavigationLabel<Destination: View>: View {
         NavigationLink(
             destination: destination,
             label: {
-                Label(title, systemImage: systemName)
+                if let title = title {
+                    Label(title, systemImage: systemName)
+                } else {
+                    Image(systemName: systemName)
+                }
             }
         )
+    }
+
+    init(title: String? = nil, systemName: String, destination: Destination) {
+        self.title = title
+        self.systemName = systemName
+        self.destination = destination
     }
 }
