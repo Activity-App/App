@@ -73,6 +73,10 @@ struct CompetitionsView: View {
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("Competitions")
         }
+        .navigationBarItems(trailing: NavigationItem(imageName: "plus", action: {
+            
+        })
+        )
         .tabItem {
             Label("Competitions", systemImage: "star.fill")
         }
