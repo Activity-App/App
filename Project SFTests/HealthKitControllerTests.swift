@@ -87,6 +87,17 @@ class HealthKitControllerTests: XCTestCase {
             expectation.fulfill()
         }
         
+        /*let currentValuesExpectation = XCTestExpectation()
+        let currentValuesCancellable = controller.$moveCurrent.zip(controller.$exerciseCurrent, controller.$standCurrent)
+            .sink { _ in
+                guard controller.moveCurrent != 0, controller.exerciseCurrent != 0, controller.standCurrent != 0 else { return }
+                XCTAssertEqual(controller.moveCurrent, 100, "Move value is not set correctly")
+                XCTAssertEqual(controller.exerciseCurrent, 50, "Exercise value is not set correctly")
+                XCTAssertEqual(controller.standCurrent, 50, "Stand value is not set correctly")
+                
+                currentValuesExpectation.fulfill()
+            }*/
+        
         wait(for: [expectation], timeout: 5)
     }
 
