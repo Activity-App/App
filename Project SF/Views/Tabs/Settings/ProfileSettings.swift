@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfileSettings: View {
 
-    @AppStorage("username") var username = "My Name"
+    @AppStorage("username") var username = ""
     @AppStorage("phone-number") var phoneNumber = "+7 (914) 690 52-28"
     @AppStorage("user-description") var description = ""
 

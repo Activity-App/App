@@ -1,5 +1,5 @@
 //
-//  InfoCell.swift
+//  OnboardingInfoCell.swift
 //  Project SF
 //
 //  Created by Roman Esin on 11.07.2020.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InfoCell: View {
+struct OnboardingInfoCell: View {
     var title: String
     var subTitle: String
     var imageName: String
@@ -37,6 +37,6 @@ struct InfoCell: View {
 
 struct InfoCell_Previews: PreviewProvider {
     static var previews: some View {
-        InfoCell(title: "dsafs", subTitle: "112rqwff", imageName: "pencil")
+        OnboardingInfoCell(title: "dsafs", subTitle: "112rqwff", imageName: "pencil")
     }
 }

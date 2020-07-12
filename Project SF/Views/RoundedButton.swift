@@ -16,10 +16,10 @@ struct RoundedButton: View {
     var body: some View {
         Button(action: action) {
             Text(title)
-                .font(.system(.title2))
-                .fontWeight(.medium)
+                .font(.headline)
+                .fontWeight(.semibold)
                 .padding(12)
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity, minHeight: 55)
                 .background(Color.blue)
                 .foregroundColor(.white)
                 .cornerRadius(16)
@@ -48,10 +48,10 @@ struct RoundedNavigationLink<Destination: View>: View {
             destination: destination,
             label: {
                 Text(title)
-                    .font(.system(.title2))
-                    .fontWeight(.medium)
+                    .font(.headline)
+                    .fontWeight(.semibold)
                     .padding(12)
-                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: .infinity, minHeight: 55)
                     .background(Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(16)
