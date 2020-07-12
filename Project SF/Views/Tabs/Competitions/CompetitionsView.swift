@@ -43,7 +43,7 @@ struct CompetitionsView: View {
                 Section(header: Text("Current Activity")) {
                     HStack {
                         Spacer()
-                        ActivityRingsView(healthKit: healthKit)
+                        ActivityRingsView(healthKit: healthKit, ringSize: .medium)
                             .padding(8)
                         VStack(alignment: .leading) {
                             Text("Move: \(Int(healthKit.moveCurrent))/\(Int(healthKit.moveGoal))")
