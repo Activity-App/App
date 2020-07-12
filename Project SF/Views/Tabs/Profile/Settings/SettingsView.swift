@@ -22,40 +22,35 @@ struct AboutFooter: View {
 
 struct SettingsView: View {
     var body: some View {
-//        NavigationView {
-            List {
-                Section(header: Text("General")) {
-                    NavigationLabel(
-                        title: "Profile",
-                        systemName: "person.crop.circle",
-                        destination: ProfileSettings()
-                    )
-                    NavigationLabel(
-                        title: "Notifications",
-                        systemName: "app.badge",
-                        destination: NotificationSettings()
-                    )
-                }
-
-                Section(header: Text("Privacy"), footer: AboutFooter()) {
-                    NavigationLabel(
-                        title: "Alter permissions",
-                        systemName: "heart.text.square",
-                        destination: PermissionSettings()
-                    )
-                    NavigationLabel(
-                        title: "Learn about privacy",
-                        systemName: "key",
-                        destination: PrivacyAbout()
-                    )
-                }
+        List {
+            Section(header: Text("General")) {
+                NavigationLabel(
+                    title: "Profile",
+                    systemName: "person.crop.circle",
+                    destination: ProfileSettings()
+                )
+                NavigationLabel(
+                    title: "Notifications",
+                    systemName: "app.badge",
+                    destination: NotificationSettings()
+                )
             }
-            .listStyle(InsetGroupedListStyle())
-            .navigationBarTitle("Settings")
-//        }
-//        .tabItem {
-//            Label("Settings", systemImage: "gearshape.fill")
-//        }
+            
+            Section(header: Text("Privacy"), footer: AboutFooter()) {
+                NavigationLabel(
+                    title: "Alter permissions",
+                    systemName: "heart.text.square",
+                    destination: PermissionSettings()
+                )
+                NavigationLabel(
+                    title: "Learn about privacy",
+                    systemName: "key",
+                    destination: PrivacyAbout()
+                )
+            }
+        }
+        .listStyle(InsetGroupedListStyle())
+        .navigationBarTitle("Settings")
     }
 }
 
