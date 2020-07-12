@@ -11,37 +11,32 @@ struct CompetitionCell: View {
     let competitionName: String
     let startDate: Date
     let endDate: Date
-    @ObservedObject var healthKit: HealthKitController
 
     var body: some View {
         NavigationLink(
             destination: Text("Destination"),
             label: {
                 HStack {
-                    ActivityRings(healthKit: healthKit)
-                        .padding(.trailing)
+                    
+                    VStack {
+                        Text("1st")
+                            .font(.largeTitle)
+                            .bold()
+                        Text("5 points")
+                            .foregroundColor(.secondary)
+                            .font(.subheadline)
+                    }
+                    .padding(.horizontal, 8)
+                    
                     VStack(alignment: .leading) {
+                        Spacer()
                         Text(endDate, style: .relative)
                             .foregroundColor(.secondary)
                             .font(.subheadline)
-
                         Spacer()
-
                         Text(competitionName)
                             .font(.headline)
                         Spacer()
-
-                        VStack(alignment: .leading) {
-                            Text("Move: \(Int(healthKit.moveCurrent))/\(Int(healthKit.moveGoal))")
-                                .foregroundColor(RingColor.move.darkColor)
-                                .fontWeight(.medium)
-                            Text("Exercise: \(Int(healthKit.exerciseCurrent))/\(Int(healthKit.exerciseGoal))")
-                                .foregroundColor(RingColor.exercise.darkColor)
-                                .fontWeight(.medium)
-                            Text("Stand: \(Int(healthKit.standCurrent))/\(Int(healthKit.standGoal))")
-                                .foregroundColor(RingColor.stand.darkColor)
-                                .fontWeight(.medium)
-                        }
                     }
                 }
             })
@@ -49,8 +44,9 @@ struct CompetitionCell: View {
     }
 }
 
-//struct CompetitionCell_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CompetitionCell()
-//    }
-//}
+struct CompetitionCell_Previews: PreviewProvider {
+    static var previews: some View {
+        CompetitionCell(competitionName: "test", startDate: Date(), endDate: Date())
+            .frame(width: 200, height: 40)
+    }
+}

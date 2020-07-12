@@ -24,11 +24,12 @@ struct IntroView: View {
                          imageName: "applewatch.watchface")
                 InfoCell(title: "Lightning fast",
                          subTitle: "I hope everything will work as fast as possible..",
-                         imageName: "paperplane")
+                         imageName: "bolt")
                 Spacer()
 
                 RoundedNavigationLink("Continue", destination: PrivacyView())
-            }.padding(.horizontal)
+            }
+            .padding(.horizontal)
             .navigationTitle("Welcome")
         }
     }
