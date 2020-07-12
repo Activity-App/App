@@ -35,6 +35,7 @@
 		30BFC8E924B804CC00DAC6D9 /* ActivityRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8E824B804CC00DAC6D9 /* ActivityRingView.swift */; };
 		30D3217824BB430E009CD9D0 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D3217724BB430E009CD9D0 /* RoundedTextField.swift */; };
 		30F1EA3B24B951CA00FF89FC /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F1EA3A24B951CA00FF89FC /* OnboardingView.swift */; };
+		30FABF2C24BB5423004B8B62 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FABF2B24BB5423004B8B62 /* ProfileView.swift */; };
 		30FCC84C24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FCC84B24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift */; };
 		30FCC84E24BB318000862C01 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FCC84D24BB318000862C01 /* KeyboardManager.swift */; };
 		9C12BBDD24B9C3A100C050DB /* HKActivitySummaryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C12BBDC24B9C3A100C050DB /* HKActivitySummaryMock.swift */; };
@@ -102,6 +103,7 @@
 		30BFC8E824B804CC00DAC6D9 /* ActivityRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRingView.swift; sourceTree = "<group>"; };
 		30D3217724BB430E009CD9D0 /* RoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
 		30F1EA3A24B951CA00FF89FC /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		30FABF2B24BB5423004B8B62 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		30FCC84B24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignKeyboardOnDragGesture.swift; sourceTree = "<group>"; };
 		30FCC84D24BB318000862C01 /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
 		9C12BBDC24B9C3A100C050DB /* HKActivitySummaryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKActivitySummaryMock.swift; sourceTree = "<group>"; };
@@ -214,7 +216,7 @@
 			children = (
 				3050353924B9E6C700FCCA0D /* Competitions */,
 				308FAD9524B989EF00126F3F /* TeamsView.swift */,
-				308FAD9A24B999DC00126F3F /* Settings */,
+				30FABF2A24BB540C004B8B62 /* Profile */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -281,6 +283,15 @@
 				30BFC8E224B76BB900DAC6D9 /* HealthKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		30FABF2A24BB540C004B8B62 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				30FABF2B24BB5423004B8B62 /* ProfileView.swift */,
+				308FAD9A24B999DC00126F3F /* Settings */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		9C12BBE224B9D3FC00C050DB /* Utilities */ = {
@@ -494,6 +505,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				308FAD9E24B9A0DC00126F3F /* NavigationLabel.swift in Sources */,
+				30FABF2C24BB5423004B8B62 /* ProfileView.swift in Sources */,
 				306B267924BB1CC600D6E649 /* ImageSelectionView.swift in Sources */,
 				308FADA224B9A9D100126F3F /* PermissionSettings.swift in Sources */,
 				9C7B4D0824B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift in Sources */,
@@ -685,7 +697,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Project SF/Project SF.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = 939BQQZ3GG;
+				DEVELOPMENT_TEAM = W9K99K5JN4;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -693,7 +705,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.priva28.ProjectSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -708,7 +720,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Project SF/Project SF.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = 939BQQZ3GG;
+				DEVELOPMENT_TEAM = W9K99K5JN4;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -716,7 +728,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.priva28.ProjectSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
