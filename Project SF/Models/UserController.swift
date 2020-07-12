@@ -29,23 +29,7 @@ class UserController: ObservableObject {
     
     /// Asynchronously updates the state with new data from the server.
     func updateData() {
-        DispatchQueue.main.async {
-            self.state = .loading
-            self.isSyncing = true
-        }
-        cloudKitStore.fetchUserRecord { [weak self] result in
-            DispatchQueue.main.async {
-                guard let self = self else { return }
-                self.isSyncing = false
-                switch result {
-                case .success(let record):
-                    self.userRecord = record
-                    self.updateStateToMatchUserRecord()
-                case .failure(let error):
-                    self.state = .failure(error)
-                }
-            }
-        }
+        updateData(setStateToLoading: true)
     }
     
     /// Asynchronously updates the users nickname.
@@ -53,6 +37,14 @@ class UserController: ObservableObject {
     func setNickname(_ nickname: String) {
         guard let userRecord = userRecord else { return }
         userRecord.nickname = nickname
+        
+        updateStateToMatchUserRecord()
+        syncRecord()
+    }
+    
+    func setBio(_ bio: String) {
+        guard let userRecord = userRecord else { return }
+        userRecord.bio = bio
         
         updateStateToMatchUserRecord()
         syncRecord()
@@ -68,7 +60,6 @@ class UserController: ObservableObject {
     private func syncRecord() {
         guard let userRecord = userRecord else { return }
         DispatchQueue.main.async {
-            self.state = .loading
             self.isSyncing = true
         }
         cloudKitStore.saveUserRecord(userRecord, savePolicy: .changedKeys) { [weak self] result in
@@ -76,9 +67,31 @@ class UserController: ObservableObject {
                 guard let self = self else { return }
                 switch result {
                 case .success:
-                    self.updateData()
+                    self.updateData(setStateToLoading: false)
                 case .failure(let error):
                     self.isSyncing = false
+                    self.state = .failure(error)
+                }
+            }
+        }
+    }
+    
+    func updateData(setStateToLoading: Bool) {
+        DispatchQueue.main.async {
+            if setStateToLoading {
+                self.state = .loading
+            }
+            self.isSyncing = true
+        }
+        cloudKitStore.fetchUserRecord { [weak self] result in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.isSyncing = false
+                switch result {
+                case .success(let record):
+                    self.userRecord = record
+                    self.updateStateToMatchUserRecord()
+                case .failure(let error):
                     self.state = .failure(error)
                 }
             }

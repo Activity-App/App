@@ -87,12 +87,18 @@ struct ProfileSettings: View {
         .padding(.horizontal)
         .navigationTitle("Profile")
         .onAppear(perform: viewAppeared)
+        .onDisappear(perform: viewDisappeared)
     }
     
     // MARK: Methods
     
     private func viewAppeared() {
         controller.setup()
+    }
+    
+    private func viewDisappeared() {
+        controller.setBio()
+        controller.setNickname()
     }
     
 }

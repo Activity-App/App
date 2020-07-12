@@ -15,3 +15,11 @@ protocol Record {
     init(record: CKRecord)
 
 }
+
+extension Record {
+    
+    init() {
+        self.init(record: CKRecord(recordType: Self.type))
+    }
+    
+}

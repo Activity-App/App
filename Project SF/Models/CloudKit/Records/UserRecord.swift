@@ -8,7 +8,7 @@
 import Foundation
 import CloudKit
 
-class UserRecord {
+class UserRecord: Record {
     
     // MARK: Properties
     
@@ -33,7 +33,7 @@ class UserRecord {
     
     // MARK: Init
     
-    init(record: CKRecord) {
+    required init(record: CKRecord) {
         self.record = record
     }
     

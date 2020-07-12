@@ -15,6 +15,7 @@ class ProfileSettingsController: ObservableObject {
     let userController: UserController
     
     var stateChangeCancellable: AnyCancellable?
+    var bioEntryCancellable: AnyCancellable?
     
     @Published var nicknameText = ""
     
@@ -37,11 +38,16 @@ class ProfileSettingsController: ObservableObject {
                     self.bioText = user.bio ?? ""
                 }
             }
+        
         userController.updateData()
     }
     
     func setNickname() {
         userController.setNickname(nicknameText)
+    }
+    
+    func setBio() {
+        userController.setBio(bioText)
     }
     
 }

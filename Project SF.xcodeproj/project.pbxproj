@@ -36,6 +36,7 @@
 		9C12BBE124B9D3D800C050DB /* HealthKitControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C12BBE024B9D3D800C050DB /* HealthKitControllerTests.swift */; };
 		9C12BBE424B9D40A00C050DB /* FakeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C12BBE324B9D40A00C050DB /* FakeError.swift */; };
 		9C12BBE624B9D41600C050DB /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C12BBE524B9D41600C050DB /* SampleData.swift */; };
+		9C338BD524BAC4F4003E5048 /* ChallengesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C338BD424BAC4F4003E5048 /* ChallengesController.swift */; };
 		9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */; };
 		9C7B4D0824B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B4D0724B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift */; };
 		9C8FAD4624B9E39E00571947 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAD4524B9E39E00571947 /* Record.swift */; };
@@ -99,6 +100,7 @@
 		9C12BBE024B9D3D800C050DB /* HealthKitControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitControllerTests.swift; sourceTree = "<group>"; };
 		9C12BBE324B9D40A00C050DB /* FakeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeError.swift; sourceTree = "<group>"; };
 		9C12BBE524B9D41600C050DB /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
+		9C338BD424BAC4F4003E5048 /* ChallengesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengesController.swift; sourceTree = "<group>"; };
 		9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ForegroundModifier.swift"; sourceTree = "<group>"; };
 		9C7B4D0724B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ConvertFromRangeToRange.swift"; sourceTree = "<group>"; };
 		9C8FAD4524B9E39E00571947 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				9CCFDD1A24B971D600162B0F /* Networking */,
 				9CCFDD1C24B971D600162B0F /* HealthKitController.swift */,
 				9C8FAD4724B9E7CC00571947 /* UserController.swift */,
+				9C338BD424BAC4F4003E5048 /* ChallengesController.swift */,
 				302CF88924BA199E00FF79D7 /* RingType.swift */,
 				302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */,
 			);
@@ -508,6 +511,7 @@
 				9C8FAD4624B9E39E00571947 /* Record.swift in Sources */,
 				9C8FAD4A24BAADA600571947 /* CKContainer+AppDefault.swift in Sources */,
 				302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */,
+				9C338BD524BAC4F4003E5048 /* ChallengesController.swift in Sources */,
 				308FAD9624B989EF00126F3F /* TeamsView.swift in Sources */,
 				9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */,
 				30BFC8E724B8041C00DAC6D9 /* ActivityRingsView.swift in Sources */,
