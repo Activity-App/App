@@ -41,7 +41,7 @@ struct PrivacyView: View {
             
             Spacer()
 
-            RoundedNavigationLink("Continue", destination: OnboardingSignUpView(showOnboarding: $showOnboarding))
+            RoundedNavigationLink("Continue", destination: SignUpView(showOnboarding: $showOnboarding))
         }
         .padding(.horizontal)
         .navigationTitle("Privacy")
@@ -50,6 +50,6 @@ struct PrivacyView: View {
 
 struct PrivacyView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingPrivacyView(showOnboarding: .constant(true))
+        PrivacyView(showOnboarding: .constant(true))
     }
 }
