@@ -37,34 +37,6 @@ struct RoundedButton: View {
     }
 }
 
-/// A custom NavigationLink with Text inside a rounded rect
-/// which spans across the whole width of the screen.
-struct RoundedNavigationLink<Destination: View>: View {
-    let title: String
-    let destination: Destination
-
-    var body: some View {
-        NavigationLink(
-            destination: destination,
-            label: {
-                Text(title)
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                    .padding(12)
-                    .frame(maxWidth: .infinity, minHeight: 55)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(16)
-                    .padding()
-            })
-    }
-
-    init(_ title: String, destination: Destination) {
-        self.title = title
-        self.destination = destination
-    }
-}
-
 struct RoundedButton_Previews: PreviewProvider {
     static var previews: some View {
         RoundedButton("Button title")
