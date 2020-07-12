@@ -10,15 +10,6 @@
 		302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88924BA199E00FF79D7 /* RingType.swift */; };
 		302CF88C24BA1A4000FF79D7 /* ActivityResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */; };
 		3050353B24B9E73600FCCA0D /* CompetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3050353A24B9E73600FCCA0D /* CompetitionCell.swift */; };
-		307E8E7324BAF0C40060875B /* Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307E8E6A24BAF0C30060875B /* Convenience.swift */; };
-		307E8E7424BAF0C40060875B /* BCryptError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307E8E6B24BAF0C30060875B /* BCryptError.swift */; };
-		307E8E7524BAF0C40060875B /* Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307E8E6C24BAF0C30060875B /* Base64.swift */; };
-		307E8E7624BAF0C40060875B /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307E8E6D24BAF0C30060875B /* Parser.swift */; };
-		307E8E7724BAF0C40060875B /* Salt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307E8E6E24BAF0C30060875B /* Salt.swift */; };
-		307E8E7824BAF0C40060875B /* Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307E8E6F24BAF0C30060875B /* Hash.swift */; };
-		307E8E7924BAF0C40060875B /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307E8E7024BAF0C30060875B /* Keys.swift */; };
-		307E8E7A24BAF0C40060875B /* Export.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307E8E7124BAF0C40060875B /* Export.swift */; };
-		307E8E7B24BAF0C40060875B /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307E8E7224BAF0C40060875B /* Serializer.swift */; };
 		308FAD8B24B97E7E00126F3F /* OnboardingInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8A24B97E7E00126F3F /* OnboardingInfoCell.swift */; };
 		308FAD8D24B97E8A00126F3F /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8C24B97E8A00126F3F /* PrivacyView.swift */; };
 		308FAD9124B987F000126F3F /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD9024B987F000126F3F /* SignUpView.swift */; };
@@ -77,15 +68,6 @@
 		302CF88924BA199E00FF79D7 /* RingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingType.swift; sourceTree = "<group>"; };
 		302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityResult.swift; sourceTree = "<group>"; };
 		3050353A24B9E73600FCCA0D /* CompetitionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionCell.swift; sourceTree = "<group>"; };
-		307E8E6A24BAF0C30060875B /* Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Convenience.swift; sourceTree = "<group>"; };
-		307E8E6B24BAF0C30060875B /* BCryptError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCryptError.swift; sourceTree = "<group>"; };
-		307E8E6C24BAF0C30060875B /* Base64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base64.swift; sourceTree = "<group>"; };
-		307E8E6D24BAF0C30060875B /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
-		307E8E6E24BAF0C30060875B /* Salt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Salt.swift; sourceTree = "<group>"; };
-		307E8E6F24BAF0C30060875B /* Hash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hash.swift; sourceTree = "<group>"; };
-		307E8E7024BAF0C30060875B /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
-		307E8E7124BAF0C40060875B /* Export.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Export.swift; sourceTree = "<group>"; };
-		307E8E7224BAF0C40060875B /* Serializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializer.swift; sourceTree = "<group>"; };
 		308FAD8A24B97E7E00126F3F /* OnboardingInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingInfoCell.swift; sourceTree = "<group>"; };
 		308FAD8C24B97E8A00126F3F /* PrivacyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
 		308FAD9024B987F000126F3F /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -200,22 +182,6 @@
 			path = Competitions;
 			sourceTree = "<group>";
 		};
-		307E8E6924BAF09F0060875B /* BCrypt */ = {
-			isa = PBXGroup;
-			children = (
-				307E8E6C24BAF0C30060875B /* Base64.swift */,
-				307E8E6B24BAF0C30060875B /* BCryptError.swift */,
-				307E8E6A24BAF0C30060875B /* Convenience.swift */,
-				307E8E7124BAF0C40060875B /* Export.swift */,
-				307E8E6F24BAF0C30060875B /* Hash.swift */,
-				307E8E7024BAF0C30060875B /* Keys.swift */,
-				307E8E6D24BAF0C30060875B /* Parser.swift */,
-				307E8E6E24BAF0C30060875B /* Salt.swift */,
-				307E8E7224BAF0C40060875B /* Serializer.swift */,
-			);
-			path = BCrypt;
-			sourceTree = "<group>";
-		};
 		308FAD8924B97E5500126F3F /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -325,7 +291,6 @@
 		9C7B4D0A24B89B0F00FC4456 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				307E8E6924BAF09F0060875B /* BCrypt */,
 				30BFC8DE24B7637F00DAC6D9 /* VisualEffectView.swift */,
 				3029AF5124B886A7003F0324 /* Extensions */,
 			);
@@ -510,13 +475,10 @@
 				308FADA224B9A9D100126F3F /* PermissionSettings.swift in Sources */,
 				9C7B4D0824B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift in Sources */,
 				30BFC8D024B75E6C00DAC6D9 /* ContentView.swift in Sources */,
-				307E8E7924BAF0C40060875B /* Keys.swift in Sources */,
 				308FAD9424B989DE00126F3F /* CompetitionsView.swift in Sources */,
 				30963C8D24BA90EB005D9EA7 /* GrantDataAccessView.swift in Sources */,
 				30BFC8CE24B75E6C00DAC6D9 /* ProjectSFApp.swift in Sources */,
-				307E8E7324BAF0C40060875B /* Convenience.swift in Sources */,
 				9CCFDD1F24B971D600162B0F /* NetworkManager.swift in Sources */,
-				307E8E7824BAF0C40060875B /* Hash.swift in Sources */,
 				9CCFDD2624B9753F00162B0F /* Main.swift in Sources */,
 				30BFC8E924B804CC00DAC6D9 /* ActivityRingView.swift in Sources */,
 				30BFC8DF24B7637F00DAC6D9 /* VisualEffectView.swift in Sources */,
@@ -524,17 +486,12 @@
 				308FAD8D24B97E8A00126F3F /* PrivacyView.swift in Sources */,
 				308FAD8B24B97E7E00126F3F /* OnboardingInfoCell.swift in Sources */,
 				308FADA424B9A9F000126F3F /* PrivacyAbout.swift in Sources */,
-				307E8E7B24BAF0C40060875B /* Serializer.swift in Sources */,
 				308FAD9124B987F000126F3F /* SignUpView.swift in Sources */,
 				9CCFDD1E24B971D600162B0F /* CloudKitStore.swift in Sources */,
 				30F1EA3B24B951CA00FF89FC /* OnboardingView.swift in Sources */,
 				9CCFDD2024B971D600162B0F /* HealthKitController.swift in Sources */,
-				307E8E7424BAF0C40060875B /* BCryptError.swift in Sources */,
 				9C8FAD4624B9E39E00571947 /* Record.swift in Sources */,
 				302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */,
-				307E8E7A24BAF0C40060875B /* Export.swift in Sources */,
-				307E8E7524BAF0C40060875B /* Base64.swift in Sources */,
-				307E8E7724BAF0C40060875B /* Salt.swift in Sources */,
 				308FAD9624B989EF00126F3F /* TeamsView.swift in Sources */,
 				9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */,
 				30BFC8E724B8041C00DAC6D9 /* ActivityRingsView.swift in Sources */,
@@ -543,7 +500,6 @@
 				9CCFDD2424B9745E00162B0F /* UIApplication+IsTesting.swift in Sources */,
 				9CCFDD2824B9758A00162B0F /* TestApp.swift in Sources */,
 				308FAD9824B989FF00126F3F /* SettingsView.swift in Sources */,
-				307E8E7624BAF0C40060875B /* Parser.swift in Sources */,
 				302CF88C24BA1A4000FF79D7 /* ActivityResult.swift in Sources */,
 				3050353B24B9E73600FCCA0D /* CompetitionCell.swift in Sources */,
 				308FADA024B9A96700126F3F /* NotificationSettings.swift in Sources */,
@@ -701,7 +657,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Project SF/Project SF.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = 939BQQZ3GG;
+				DEVELOPMENT_TEAM = W9K99K5JN4;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -709,7 +665,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.priva28.ProjectSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -724,7 +680,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Project SF/Project SF.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = 939BQQZ3GG;
+				DEVELOPMENT_TEAM = W9K99K5JN4;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -732,7 +688,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.priva28.ProjectSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
