@@ -1,5 +1,5 @@
 //
-//  OnboardingGrantDataAccessView.swift
+//  GrantDataAccessView.swift
 //  Project SF
 //
 //  Created by Roman Esin on 12.07.2020.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OnboardingGrantDataAccessView: View {
+struct GrantDataAccessView: View {
 
     @Binding var showOnboarding: Bool
     @EnvironmentObject var healthKit: HealthKitController

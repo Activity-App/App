@@ -1,5 +1,5 @@
 //
-//  OnboardingPrivacyView.swift
+//  PrivacyView.swift
 //  Project SF
 //
 //  Created by Roman Esin on 11.07.2020.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OnboardingPrivacyView: View {
+struct PrivacyView: View {
     
     @Binding var showOnboarding: Bool
     

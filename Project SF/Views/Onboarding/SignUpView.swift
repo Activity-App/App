@@ -1,5 +1,5 @@
 //
-//  OnboardingSignUpView.swift
+//  SignUpView.swift
 //  Project SF
 //
 //  Created by Roman Esin on 11.07.2020.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OnboardingSignUpView: View {
+struct SignUpView: View {
 
     @Binding var showOnboarding: Bool
     @AppStorage("username") var username = ""
