@@ -19,7 +19,7 @@ struct ActivityRingsView: View {
     }
 
     private var largeRingFrame: CGFloat {
-        midRingFrame + ringWidth * 2 + ringPadding * 2
+        midRingFrame + ringWidth * 2 + ringPadding
     }
 
     var body: some View {
