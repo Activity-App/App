@@ -19,7 +19,7 @@ struct ContentView: View {
             FriendsView()
                 .tag(2)
 
-            SettingsView()
+            ProfileView()
                 .tag(3)
         }
         .accentColor(Color("mainAccent"))

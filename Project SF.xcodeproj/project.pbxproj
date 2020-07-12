@@ -36,6 +36,7 @@
 		30D3217B24BB4D91009CD9D0 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D3217A24BB4D91009CD9D0 /* FriendsView.swift */; };
 		30D3217D24BB4EDE009CD9D0 /* ActivityRings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D3217C24BB4EDE009CD9D0 /* ActivityRings.swift */; };
 		30F1EA3B24B951CA00FF89FC /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F1EA3A24B951CA00FF89FC /* OnboardingView.swift */; };
+		30FABF2C24BB5423004B8B62 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FABF2B24BB5423004B8B62 /* ProfileView.swift */; };
 		30FCC84C24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FCC84B24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift */; };
 		30FCC84E24BB318000862C01 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FCC84D24BB318000862C01 /* KeyboardManager.swift */; };
 		9C12BBDD24B9C3A100C050DB /* HKActivitySummaryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C12BBDC24B9C3A100C050DB /* HKActivitySummaryMock.swift */; };
@@ -104,6 +105,7 @@
 		30D3217A24BB4D91009CD9D0 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 		30D3217C24BB4EDE009CD9D0 /* ActivityRings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRings.swift; sourceTree = "<group>"; };
 		30F1EA3A24B951CA00FF89FC /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		30FABF2B24BB5423004B8B62 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		30FCC84B24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignKeyboardOnDragGesture.swift; sourceTree = "<group>"; };
 		30FCC84D24BB318000862C01 /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
 		9C12BBDC24B9C3A100C050DB /* HKActivitySummaryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKActivitySummaryMock.swift; sourceTree = "<group>"; };
@@ -505,6 +507,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				308FAD9E24B9A0DC00126F3F /* NavigationLabel.swift in Sources */,
+				30FABF2C24BB5423004B8B62 /* ProfileView.swift in Sources */,
 				306B267924BB1CC600D6E649 /* ImageSelectionView.swift in Sources */,
 				308FADA224B9A9D100126F3F /* PermissionSettings.swift in Sources */,
 				9C7B4D0824B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift in Sources */,
@@ -697,7 +700,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Project SF/Project SF.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = 939BQQZ3GG;
+				DEVELOPMENT_TEAM = W9K99K5JN4;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -705,7 +708,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.priva28.ProjectSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -720,7 +723,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Project SF/Project SF.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = 939BQQZ3GG;
+				DEVELOPMENT_TEAM = W9K99K5JN4;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -728,7 +731,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.priva28.ProjectSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
