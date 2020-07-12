@@ -12,7 +12,7 @@ class CloudKitStore {
 
     // MARK: Static Properties
 
-    static let shared = CloudKitStore(container: CKContainer.default())
+    static let shared = CloudKitStore(container: .appDefault)
 
     private static let queue = DispatchQueue(label: "com.wwdc.Project-SF.cloudkitqueue")
 
@@ -26,7 +26,7 @@ class CloudKitStore {
         self.container = container
     }
 
-    // MARK: Methods
+    // MARK: Fetching
     
     /// Asynchronously fetches records from the CloudKit database.
     /// Current Limitation: Doesn't handle paging correctly
@@ -139,24 +139,47 @@ class CloudKitStore {
         }
     }
     
-    /// Asynchronously saves a single record to the CloudKit database, with a low priority.
+    // MARK: Saving
+    
+    /// Asynchronously saves a single record to the CloudKit database.
     /// - Parameters:
     ///   - record: The record to save.
     ///   - scope: The database scope.
+    ///   - savePolicy: The policy to apply when the server contains a newer version of a specific record.
     ///   - handler: Called with the result of the operation. Not guaranteed to be on the main thread.
     func saveRecord(_ record: CKRecord,
                     scope: CKDatabase.Scope,
+                    savePolicy: CKModifyRecordsOperation.RecordSavePolicy = .ifServerRecordUnchanged,
                     then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void) {
         let database = container.database(with: scope)
-
-        database.save(record) { _, error in
+        
+        let operation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
+        operation.savePolicy = savePolicy
+        operation.perRecordCompletionBlock = { _, error in
             if let error = error {
                 handler(.failure(.other(error)))
                 return
             }
             handler(.success(()))
         }
+        
+        database.add(operation)
+     }
+    
+    func saveUserRecord(_ record: UserRecord,
+                        savePolicy: CKModifyRecordsOperation.RecordSavePolicy = .ifServerRecordUnchanged,
+                        then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void) {
+        saveRecord(record.record, scope: .private, savePolicy: savePolicy) { result in
+            switch result {
+            case .success:
+                handler(.success(()))
+            case .failure(let error):
+                handler(.failure(error))
+            }
+        }
     }
+    
+    // MARK: Deleting
     
     /// Asynchronously deletes a single record to the CloudKit database, with a low priority.
     /// - Parameters:
@@ -176,6 +199,8 @@ class CloudKitStore {
             handler(.success(()))
         }
     }
+    
+    // MARK: Utilities
 
     // MARK: - CloudKitStoreError
 

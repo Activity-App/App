@@ -6,70 +6,98 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ProfileSettings: View {
+    
+    // MARK: Properties
 
-    @AppStorage("username") var username = "My Name"
     @AppStorage("phone-number") var phoneNumber = "+7 (914) 690 52-28"
     @AppStorage("user-description") var description = ""
+    
+    @State var nickname = ""
 
     @State var isShowingAlert = false
+    @StateObject var userController = UserController()
+    
+    // MARK: View
 
     var body: some View {
         ScrollView {
-            Button(action: {
-                // TODO: Present image search through the gallery.
-            }, label: {
-                Image(systemName: "person.crop.circle.badge.plus")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            })
-            .frame(height: 100)
-            .padding(.vertical)
-
-            GroupBox {
-                HStack {
-                    TextField("Enter your name", text: $username) { (didChange) in
-                        print(didChange)
-                    } onCommit: {
-                        print("Commited")
+            switch userController.state {
+            case .loading:
+                ProgressView()
+            case .user(let userModel):
+                if userController.isSyncing {
+                    ProgressView {
+                        Text("Syncing")
                     }
-                    .multilineTextAlignment(.leading)
-
-                    Image(systemName: "pencil")
                 }
-                .font(.headline)
-            }
+                Button(action: {
+                    // TODO: Present image search through the gallery.
+                }, label: {
+                    Image(systemName: "person.crop.circle.badge.plus")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                })
+                .frame(height: 100)
+                .padding(.vertical)
 
-            GroupBox {
-                HStack {
-                    TextField("Enter your phone number", text: $phoneNumber) { (didChange) in
-                        print(didChange)
-                    } onCommit: {
-                        print("Commited")
+                GroupBox {
+                    HStack {
+                        TextField("Enter your name", text: $nickname) { (didChange) in
+                            print(didChange)
+                        } onCommit: {
+                            userController.setNickname(nickname)
+                        }
+                        .multilineTextAlignment(.leading)
+
+                        Image(systemName: "pencil")
                     }
-                    .multilineTextAlignment(.leading)
-
-                    Image(systemName: "pencil")
+                    .font(.headline)
                 }
-                .font(.headline)
-            }
 
-            GroupBox {
-                HStack {
-                    Text("Enter your bio or description")
-                        .foregroundColor(Color(.tertiaryLabel))
-                    Spacer()
+                GroupBox {
+                    HStack {
+                        TextField("Enter your phone number", text: $phoneNumber) { (didChange) in
+                            print(didChange)
+                        } onCommit: {
+                            print("Commited")
+                        }
+                        .multilineTextAlignment(.leading)
+
+                        Image(systemName: "pencil")
+                    }
+                    .font(.headline)
                 }
-                TextEditor(text: $description)
-                    .cornerRadius(8)
+
+                GroupBox {
+                    HStack {
+                        Text("Enter your bio or description")
+                            .foregroundColor(Color(.tertiaryLabel))
+                        Spacer()
+                    }
+                    TextEditor(text: $description)
+                        .cornerRadius(8)
+                }
+                .frame(height: 250)
+            case .failure(let error):
+                Text("Error: \(error.localizedDescription)")
             }
-            .frame(height: 250)
+            
 
         }
         .padding(.horizontal)
         .navigationTitle("Profile")
+        .onAppear(perform: viewAppeared)
     }
+    
+    // MARK: Methods
+    
+    private func viewAppeared() {
+        userController.updateData()
+    }
+    
 }
 
 struct ProfileSettingsView_Previews: PreviewProvider {

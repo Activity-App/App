@@ -14,7 +14,7 @@ class UserRecord {
     
     static let type = "Users"
 
-    private let record: CKRecord
+    let record: CKRecord
 
     var nickname: String? {
         get { record[Key.nickname] as? String }
