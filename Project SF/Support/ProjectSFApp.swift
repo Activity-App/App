@@ -10,7 +10,7 @@ import SwiftUI
 struct ProjectSFApp: App {
     
     //let cloudKitStore = CloudKitStore.shared
-    @AppStorage("showOnboarding") var showOnboarding = true
+    @State var showOnboarding = true
     @StateObject var healthKit = HealthKitController()
     
     var body: some Scene {
@@ -28,7 +28,7 @@ struct ProjectSFApp: App {
                             }
                         }
                     }
-                    .transition(AnyTransition.scale.animation(.easeInOut))
+                    .transition(AnyTransition.opacity.animation(.linear(duration: 1)))
             }
         }
         
