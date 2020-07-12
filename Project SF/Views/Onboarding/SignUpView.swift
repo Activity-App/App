@@ -55,7 +55,7 @@ struct SignUpView: View {
             }
             Spacer()
             RoundedNavigationLink(
-                "Continue", destination: OnboardingGrantDataAccessView(showOnboarding: $showOnboarding)
+                "Continue", destination: GrantDataAccessView(showOnboarding: $showOnboarding)
             )
         }
         .padding(.horizontal)
@@ -66,7 +66,7 @@ struct SignUpView: View {
 struct SignIn_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            OnboardingSignUpView(showOnboarding: .constant(true))
+            SignUpView(showOnboarding: .constant(true))
         }
     }
 }

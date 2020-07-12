@@ -54,7 +54,7 @@ struct GrantDataAccessView: View {
 struct GrantDataAccessView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            OnboardingGrantDataAccessView(showOnboarding: .constant(true))
+            GrantDataAccessView(showOnboarding: .constant(true))
         }
     }
 }

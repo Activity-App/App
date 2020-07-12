@@ -46,7 +46,7 @@ struct OnboardingView: View {
                 
                 Spacer()
 
-                RoundedNavigationLink("Continue", destination: OnboardingPrivacyView(showOnboarding: $showOnboarding))
+                RoundedNavigationLink("Continue", destination: PrivacyView(showOnboarding: $showOnboarding))
             }
             .padding(.horizontal)
             .navigationTitle("Welcome")
