@@ -9,23 +9,14 @@ import SwiftUI
 
 struct AboutFooter: View {
     var body: some View {
-        VStack(spacing: 8) {
-            // I have no idea how to make this centered without this hack.
-            // Branch rule test //
-            HStack {
-                Spacer()
-                Text("Made with <3 by WWDC Scholars")
-                    .padding(.top, 8)
-                Spacer()
-            }
-
-            HStack {
-                Spacer()
-                Link("GitHub", destination: URL(string: "https://github.com/Activity-App/App")!)
-                    .foregroundColor(.blue)
-                Spacer()
-            }
+        VStack {
+            Text("Made with <3 by WWDC Scholars")
+                .padding(.top, 8)
+                .padding(.bottom, 4)
+            Link("GitHub", destination: URL(string: "https://github.com/Activity-App/App")!)
+                .foregroundColor(.blue)
         }
+        .frame(maxWidth: .infinity)
     }
 }
 
@@ -33,33 +24,37 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             List {
-                Section(header: Text("General"), content: {
-                    NavigationLabel(title: "Profile",
-                                  systemName: "person.crop.circle",
-                                  destination: ProfileSettings())
-                    NavigationLabel(title: "Notifications",
-                                  systemName: "app.badge",
-                                  destination: NotificationSettings())
-                })
+                Section(header: Text("General")) {
+                    NavigationLabel(
+                        title: "Profile",
+                        systemName: "person.crop.circle",
+                        destination: ProfileSettings()
+                    )
+                    NavigationLabel(
+                        title: "Notifications",
+                        systemName: "app.badge",
+                        destination: NotificationSettings()
+                    )
+                }
 
-                Section(header: Text("Privacy"), footer: AboutFooter(), content: {
-                    NavigationLabel(title: "Alter permissions",
-                                  systemName: "heart.text.square",
-                                  destination: PermissionSettings())
-                    NavigationLabel(title: "Learn about privacy",
-                                  systemName: "key",
-                                  destination: PrivacyAbout())
-                })
+                Section(header: Text("Privacy"), footer: AboutFooter()) {
+                    NavigationLabel(
+                        title: "Alter permissions",
+                        systemName: "heart.text.square",
+                        destination: PermissionSettings()
+                    )
+                    NavigationLabel(
+                        title: "Learn about privacy",
+                        systemName: "key",
+                        destination: PrivacyAbout()
+                    )
+                }
             }
             .listStyle(InsetGroupedListStyle())
             .navigationBarTitle("Settings")
         }
         .tabItem {
-            VStack {
-                Image(systemName: "gearshape.fill")
-                    .font(.system(size: 18))
-                Text("Settings")
-            }
+            Label("Settings", systemImage: "gearshape.fill")
         }
     }
 }

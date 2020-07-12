@@ -4,12 +4,12 @@
 //
 //  Created by Christian Privitelli on 10/7/20.
 //
-
 import SwiftUI
 
 struct ProjectSFApp: App {
-    
-    //let cloudKitStore = CloudKitStore.shared
+ 
+    let cloudKitStore = CloudKitStore.shared
+
     @AppStorage("showOnboarding") var showOnboarding = true
     @StateObject var healthKit = HealthKitController()
     
