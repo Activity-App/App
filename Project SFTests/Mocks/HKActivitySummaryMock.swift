@@ -49,7 +49,7 @@ class HKActivitySummaryMock: HKActivitySummary {
 
     override var appleStandHoursGoal: HKQuantity {
         get { _appleStandHoursGoal }
-        set {  _appleStandHoursGoal = newValue }
+        set { _appleStandHoursGoal = newValue }
     }
     
     private var _appleStandHoursGoal: HKQuantity = HKActivitySummaryMock.hkQuantityZero
