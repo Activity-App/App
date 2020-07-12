@@ -158,7 +158,7 @@ class HealthKitController: ObservableObject {
     }
     
     /// Update this classes activity values with the latest activity values from HealthKit
-    func updateTodaysActivityData() {
+    func updateTodaysActivityData(_ completion: @escaping () -> Void = {}) {
         getActivityData(for: Date()) { move, exercise, stand, error in
             if error != nil {
                 print(error!)
@@ -173,6 +173,8 @@ class HealthKitController: ObservableObject {
                     
                     self.standCurrent = stand!.current
                     self.standGoal = stand!.current
+
+                    completion()
                 }
             }
         }

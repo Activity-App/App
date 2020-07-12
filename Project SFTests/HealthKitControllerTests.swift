@@ -82,6 +82,7 @@ class HealthKitControllerTests: XCTestCase {
             let expectation = XCTestExpectation(description: description)
             let cancellable = publisher
                 .filter {
+                    print(description, $0, expectedResult)
                     return $0 == expectedResult
                 }
                 .sink { _ in
@@ -91,27 +92,27 @@ class HealthKitControllerTests: XCTestCase {
             cancellables.append(cancellable)
             expectations.append(expectation)
         }
-            
-        handle(expectedResult: 100.0,
-               publisher: controller.$moveCurrent,
-               description: "Move value is not set correctly")
-        handle(expectedResult: 200.0,
-               publisher: controller.$moveGoal,
-               description: "Move goal is not set correctly")
-        handle(expectedResult: 50,
-               publisher: controller.$exerciseCurrent,
-               description: "Exercise value is not set correctly")
-        handle(expectedResult: 60,
-               publisher: controller.$exerciseGoal,
-               description: "Exercise goal is not set correctly")
-        handle(expectedResult: 50,
-               publisher: controller.$standCurrent,
-               description: "Stand value is not set correctly")
-        handle(expectedResult: 60,
-               publisher: controller.$standGoal,
-               description: "Stand goal is not set correctly")
-        
-        controller.updateTodaysActivityData()
+
+        controller.updateTodaysActivityData {
+            handle(expectedResult: 100.0,
+                   publisher: controller.$moveCurrent,
+                   description: "Move value is not set correctly")
+            handle(expectedResult: 200.0,
+                   publisher: controller.$moveGoal,
+                   description: "Move goal is not set correctly")
+            handle(expectedResult: 50.0,
+                   publisher: controller.$exerciseCurrent,
+                   description: "Exercise value is not set correctly")
+            handle(expectedResult: 60.0,
+                   publisher: controller.$exerciseGoal,
+                   description: "Exercise goal is not set correctly")
+            handle(expectedResult: 50.0,
+                   publisher: controller.$standCurrent,
+                   description: "Stand value is not set correctly")
+            handle(expectedResult: 60.0,
+                   publisher: controller.$standGoal,
+                   description: "Stand goal is not set correctly")
+        }
         
         wait(for: expectations, timeout: 5)
         cancellables
