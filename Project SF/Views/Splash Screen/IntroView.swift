@@ -28,7 +28,8 @@ struct IntroView: View {
                 Spacer()
 
                 RoundedNavigationLink("Continue", destination: PrivacyView())
-            }.padding(.horizontal)
+            }
+            .padding(.horizontal)
             .navigationTitle("Welcome")
         }
     }

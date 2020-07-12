@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SignInView: View {
 
-    @State var username = ""
+    @AppStorage("username") var username = ""
 
     var body: some View {
         VStack {
@@ -21,17 +21,19 @@ struct SignInView: View {
                     print("Commited")
                 }
             }
-            .padding()
+
             Spacer()
-            RoundedButton("Continue") {
-                print(123)
-            }
+            RoundedNavigationLink("Continue", destination: GrantDataAccessView())
         }
+        .padding(.horizontal)
+        .navigationTitle("Sign Up")
     }
 }
 
 struct SignIn_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView()
+        NavigationView {
+            SignInView()
+        }
     }
 }

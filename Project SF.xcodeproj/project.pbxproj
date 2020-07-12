@@ -20,6 +20,7 @@
 		308FADA224B9A9D100126F3F /* PermissionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FADA124B9A9D100126F3F /* PermissionSettings.swift */; };
 		308FADA424B9A9F000126F3F /* PrivacyAbout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FADA324B9A9F000126F3F /* PrivacyAbout.swift */; };
 		3090918224B9480F000E3B11 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3090918124B9480F000E3B11 /* RoundedButton.swift */; };
+		30963C8D24BA90EB005D9EA7 /* GrantDataAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30963C8C24BA90EB005D9EA7 /* GrantDataAccessView.swift */; };
 		30BFC8CE24B75E6C00DAC6D9 /* ProjectSFApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8CD24B75E6C00DAC6D9 /* ProjectSFApp.swift */; };
 		30BFC8D024B75E6C00DAC6D9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8CF24B75E6C00DAC6D9 /* ContentView.swift */; };
 		30BFC8D224B75E6F00DAC6D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30BFC8D124B75E6F00DAC6D9 /* Assets.xcassets */; };
@@ -75,6 +76,7 @@
 		308FADA124B9A9D100126F3F /* PermissionSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSettings.swift; sourceTree = "<group>"; };
 		308FADA324B9A9F000126F3F /* PrivacyAbout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyAbout.swift; sourceTree = "<group>"; };
 		3090918124B9480F000E3B11 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		30963C8C24BA90EB005D9EA7 /* GrantDataAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrantDataAccessView.swift; sourceTree = "<group>"; };
 		30BFC8CA24B75E6C00DAC6D9 /* Project SF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project SF.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30BFC8CD24B75E6C00DAC6D9 /* ProjectSFApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSFApp.swift; sourceTree = "<group>"; };
 		30BFC8CF24B75E6C00DAC6D9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				30F1EA3A24B951CA00FF89FC /* IntroView.swift */,
 				308FAD8C24B97E8A00126F3F /* PrivacyView.swift */,
 				308FAD9024B987F000126F3F /* SignInView.swift */,
+				30963C8C24BA90EB005D9EA7 /* GrantDataAccessView.swift */,
 			);
 			path = "Splash Screen";
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				9C7B4D0824B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift in Sources */,
 				30BFC8D024B75E6C00DAC6D9 /* ContentView.swift in Sources */,
 				308FAD9424B989DE00126F3F /* CompetitionsView.swift in Sources */,
+				30963C8D24BA90EB005D9EA7 /* GrantDataAccessView.swift in Sources */,
 				30BFC8CE24B75E6C00DAC6D9 /* ProjectSFApp.swift in Sources */,
 				9CCFDD1F24B971D600162B0F /* NetworkManager.swift in Sources */,
 				9CCFDD2624B9753F00162B0F /* Main.swift in Sources */,

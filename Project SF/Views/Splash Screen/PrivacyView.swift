@@ -26,8 +26,9 @@ struct PrivacyView: View {
                      imageName: "pencil")
             Spacer()
 
-            RoundedNavigationLink("Continue", destination: SignIn())
-        }.padding(.horizontal)
+            RoundedNavigationLink("Continue", destination: SignInView())
+        }
+        .padding(.horizontal)
         .navigationTitle("Privacy")
     }
 }
