@@ -38,10 +38,15 @@ struct CreateCompetition: View {
                     if pickedDate == 3 {
                         DatePicker("", selection: $competitionEndDate)
                             .frame(maxHeight: 70)
-//                            .padding(.horizontal, 16)
-//                            .datePickerStyle(GraphicalDatePickerStyle())
                     }
                 })
+
+                GroupBox {
+                    Button("Invite friends") {
+                        // TODO: Hanlde invite friends
+                    }
+                    .frame(maxWidth: .infinity)
+                }
 
                 Spacer()
 
