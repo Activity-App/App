@@ -8,28 +8,15 @@
 import Foundation
 import CloudKit
 
-class UserRecord: Record {
+class UserRecord: DynamicRecord {
     
     // MARK: Properties
     
     static let type = "Users"
+    
+    static let model = Model()
 
     let record: CKRecord
-
-    var nickname: String? {
-        get { record[Key.nickname] as? String }
-        set { record[Key.nickname] = newValue }
-    }
-    
-    var phoneNumberHash: String? {
-        get { record[Key.phoneNumberHash] as? String }
-        set { record[Key.phoneNumberHash] = newValue }
-    }
-    
-    var bio: String? {
-        get { record[Key.bio] as? String }
-        set { record[Key.bio] = newValue }
-    }
     
     // MARK: Init
     
@@ -37,12 +24,16 @@ class UserRecord: Record {
         self.record = record
     }
     
-    // MARK: Key
+    // MARK: Model
     
-    enum Key: String, RecordKey {
-        case nickname
-        case phoneNumberHash
-        case bio
+    struct Model: ModelProtocol {
+        
+        let nickname = ModelItem<String>(key: "nickname")
+                
+        let phoneNumberHash = ModelItem<String>(key: "phoneNumberHash")
+        
+        let bio = ModelItem<String>(key: "bio")
+        
     }
 
 }

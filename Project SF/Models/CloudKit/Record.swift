@@ -12,6 +12,8 @@ protocol Record {
     
     static var type: CKRecord.RecordType { get }
     
+    var record: CKRecord { get }
+    
     init(record: CKRecord)
 
 }
@@ -23,5 +25,3 @@ extension Record {
     }
     
 }
-
-
