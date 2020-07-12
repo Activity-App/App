@@ -39,12 +39,8 @@ struct CompetitionsView: View {
     var body: some View {
         NavigationView {
             List {
-                
                 Section(header: Text("Current Activity")) {
                     HStack {
-                        Spacer()
-                        ActivityRingsView(ringSize: .medium)
-                            .padding(8)
                         VStack(alignment: .leading) {
                             Text("Move: \(Int(healthKit.moveCurrent))/\(Int(healthKit.moveGoal))")
                                 .foregroundColor(RingType.move.color)
@@ -57,6 +53,8 @@ struct CompetitionsView: View {
                                 .fontWeight(.medium)
                         }
                         Spacer()
+                        ActivityRingsView(ringSize: .small)
+                            .padding(.vertical, 12)
                     }
                 }
                 ForEach(competitions.indices) { index in
