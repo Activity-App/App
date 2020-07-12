@@ -37,6 +37,12 @@ class URLSessionMock: URLSession {
     
     var error: Error?
     
+    // MARK: Init
+    
+    override init() {
+        super.init()
+    }
+    
     // MARK: Overriden Methods
     
     override func dataTask(with url: URL,

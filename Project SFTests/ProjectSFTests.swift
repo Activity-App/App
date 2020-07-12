@@ -17,7 +17,7 @@ class NetworkManagerTests: XCTestCase {
     func testNetworkManagerSuccessfulRequest() throws {
         let expect = XCTestExpectation()
 
-        let mock = URLSessionMock(configuration: .default)
+        let mock = URLSessionMock()
         mock.data = Data([1, 0, 1, 1, 0])
         
         let networkManager = NetworkManager(urlSession: mock)
@@ -38,7 +38,7 @@ class NetworkManagerTests: XCTestCase {
     func testNetworkManagerErrorRequest() throws {
         let expect = XCTestExpectation()
         
-        let mock = URLSessionMock(configuration: .default)
+        let mock = URLSessionMock()
         mock.error = FakeError()
         
         let networkManager = NetworkManager(urlSession: mock)
@@ -59,7 +59,7 @@ class NetworkManagerTests: XCTestCase {
     func testNetworkManagerNoDataRequest() throws {
         let expect = XCTestExpectation()
 
-        let mock = URLSessionMock(configuration: .default)
+        let mock = URLSessionMock()
         
         let networkManager = NetworkManager(urlSession: mock)
 
@@ -80,7 +80,7 @@ class NetworkManagerTests: XCTestCase {
     func testNetworkManagerRequestDecode() throws {
         let expect = XCTestExpectation()
 
-        let mock = URLSessionMock(configuration: .default)
+        let mock = URLSessionMock()
         mock.data = """
         {
             "name": "test",
