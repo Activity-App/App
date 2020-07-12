@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GrantDataAccessView: View {
 
-    
+    @StateObject var healthKit = HealthKitController()
 
     var body: some View {
 //        NavigationView {
@@ -68,6 +68,7 @@ struct GrantDataAccessView: View {
 //                Text("Competitions")
 //            }
 //        }
+        
         VStack {
             Text("This application will need access to your health data to calculate the goals properly.")
                 .padding(.horizontal, 16)
