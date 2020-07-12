@@ -24,21 +24,11 @@ struct RoundedNavigationLink<Destination: View>: View {
                     Text(title)
                         .font(.headline)
                         .fontWeight(.semibold)
-                        .padding(12)
-                        .frame(maxWidth: .infinity, minHeight: 55)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(16)
-                        .padding()
+                        .modifier(RoundedRectBackground())
                 } else {
                     ProgressView()
                         .progressViewStyle(LightProgressViewStyle())
-                        .padding(12)
-                        .frame(maxWidth: .infinity, minHeight: 55)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(16)
-                        .padding()
+                        .modifier(RoundedRectBackground())
                 }
             })
             .disabled(isLoading)
@@ -58,6 +48,20 @@ struct RoundedNavigationButton_Previews: PreviewProvider {
             RoundedNavigationLink("Continue", destination: Text(""), isLoading: .constant(true))
         }
     }
+}
+
+private struct RoundedRectBackground: ViewModifier {
+
+    func body(content: Content) -> some View {
+        content
+            .padding(12)
+            .frame(maxWidth: .infinity, minHeight: 55)
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(16)
+            .padding()
+    }
+    
 }
 
 private struct LightProgressViewStyle: ProgressViewStyle {
