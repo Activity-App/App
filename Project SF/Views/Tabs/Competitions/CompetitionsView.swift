@@ -71,6 +71,7 @@ struct CompetitionsView: View {
             }
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("Competitions")
+            .navigationBarItems(trailing: NavigationLabel(systemName: "plus", destination: CreateCompetition()))
         }
         .tabItem {
             Label("Competitions", systemImage: "star.fill")
