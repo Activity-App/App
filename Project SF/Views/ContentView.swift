@@ -19,7 +19,7 @@ struct ContentView: View {
             TeamsView()
                 .tag(2)
 
-            SettingsView()
+            ProfileView()
                 .tag(3)
         }
         .accentColor(.init(red: 1, green: 0.4, blue: 0.4))

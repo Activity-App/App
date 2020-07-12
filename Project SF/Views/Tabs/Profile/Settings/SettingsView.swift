@@ -22,7 +22,7 @@ struct AboutFooter: View {
 
 struct SettingsView: View {
     var body: some View {
-        NavigationView {
+//        NavigationView {
             List {
                 Section(header: Text("General")) {
                     NavigationLabel(
@@ -52,10 +52,10 @@ struct SettingsView: View {
             }
             .listStyle(InsetGroupedListStyle())
             .navigationBarTitle("Settings")
-        }
-        .tabItem {
-            Label("Settings", systemImage: "gearshape.fill")
-        }
+//        }
+//        .tabItem {
+//            Label("Settings", systemImage: "gearshape.fill")
+//        }
     }
 }
 
