@@ -38,6 +38,7 @@
 		9C12BBE124B9D3D800C050DB /* HealthKitControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C12BBE024B9D3D800C050DB /* HealthKitControllerTests.swift */; };
 		9C12BBE424B9D40A00C050DB /* FakeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C12BBE324B9D40A00C050DB /* FakeError.swift */; };
 		9C12BBE624B9D41600C050DB /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C12BBE524B9D41600C050DB /* SampleData.swift */; };
+		9C6C74AC24BADD1800C657B0 /* RoundedNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6C74AB24BADD1800C657B0 /* RoundedNavigationButton.swift */; };
 		9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */; };
 		9C7B4D0824B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B4D0724B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift */; };
 		9C8FAD4624B9E39E00571947 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAD4524B9E39E00571947 /* Record.swift */; };
@@ -99,6 +100,7 @@
 		9C12BBE024B9D3D800C050DB /* HealthKitControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitControllerTests.swift; sourceTree = "<group>"; };
 		9C12BBE324B9D40A00C050DB /* FakeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeError.swift; sourceTree = "<group>"; };
 		9C12BBE524B9D41600C050DB /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
+		9C6C74AB24BADD1800C657B0 /* RoundedNavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedNavigationButton.swift; sourceTree = "<group>"; };
 		9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ForegroundModifier.swift"; sourceTree = "<group>"; };
 		9C7B4D0724B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ConvertFromRangeToRange.swift"; sourceTree = "<group>"; };
 		9C8FAD4524B9E39E00571947 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				30BFC8E624B8041C00DAC6D9 /* ActivityRingsView.swift */,
 				30BFC8E824B804CC00DAC6D9 /* ActivityRingView.swift */,
 				3090918124B9480F000E3B11 /* RoundedButton.swift */,
+				9C6C74AB24BADD1800C657B0 /* RoundedNavigationButton.swift */,
 				308FAD9D24B9A0DC00126F3F /* NavigationLabel.swift */,
 			);
 			path = Views;
@@ -509,6 +512,7 @@
 				9CCFDD2824B9758A00162B0F /* TestApp.swift in Sources */,
 				308FAD9824B989FF00126F3F /* SettingsView.swift in Sources */,
 				302CF88C24BA1A4000FF79D7 /* ActivityResult.swift in Sources */,
+				9C6C74AC24BADD1800C657B0 /* RoundedNavigationButton.swift in Sources */,
 				3050353B24B9E73600FCCA0D /* CompetitionCell.swift in Sources */,
 				308FADA024B9A96700126F3F /* NotificationSettings.swift in Sources */,
 			);
@@ -665,7 +669,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Project SF/Project SF.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = W9K99K5JN4;
+				DEVELOPMENT_TEAM = 5RTMJNH82H;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -673,7 +677,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wfltaylor.ProjectSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -696,7 +700,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wfltaylor.ProjectSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
