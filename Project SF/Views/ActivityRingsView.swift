@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ActivityRingsView: View {
 
-    @ObservedObject var healthKit: HealthKitController
+    @EnvironmentObject var healthKit: HealthKitController
 
     var body: some View {
         ZStack {
@@ -40,6 +40,6 @@ struct ActivityRingsView: View {
 
 struct ActivityRingsView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityRingsView(healthKit: HealthKitController())
+        ActivityRingsView()
     }
 }

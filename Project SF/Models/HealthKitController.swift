@@ -38,7 +38,7 @@ class HealthKitController: ObservableObject {
     // MARK: - Auth health kit
     
     /// Authorize HealthKit with specified types. Will present a screen to give access if not previously enabled.
-    func authorizeHealthKit() {
+    func authorizeHealthKit(completion: @escaping () -> Void = {}) {
         DispatchQueue.main.async {
             self.authorizationState = .processStarted
         }
@@ -52,13 +52,18 @@ class HealthKitController: ObservableObject {
             HKObjectType.activitySummaryType()
         ]
 
-        healthStore.requestAuthorization(toShare: nil, read: healthKitTypes, completion: { success, _ in
+        healthStore.requestAuthorization(toShare: nil, read: healthKitTypes, completion: { success, error in
             DispatchQueue.main.async {
                 if success {
                     print("Success! HK is working")
                     self.authorizationState = .granted
+                    completion()
                 } else {
                     self.authorizationState = .notGranted
+                    if let error = error {
+                        print(error)
+                        completion()
+                    }
                 }
             }
         })
