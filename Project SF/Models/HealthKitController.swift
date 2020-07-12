@@ -172,10 +172,10 @@ class HealthKitController: ObservableObject {
                     self.moveGoal = move!.goal
                     
                     self.exerciseCurrent = exercise!.current
-                    self.exerciseGoal = exercise!.current
+                    self.exerciseGoal = exercise!.goal
                     
                     self.standCurrent = stand!.current
-                    self.standGoal = stand!.current
+                    self.standGoal = stand!.goal
 
                     completion()
                 }
