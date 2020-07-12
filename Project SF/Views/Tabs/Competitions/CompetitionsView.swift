@@ -72,11 +72,8 @@ struct CompetitionsView: View {
             }
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("Competitions")
+            .navigationBarItems(trailing: Button("test") {})
         }
-        .navigationBarItems(trailing: NavigationItem(imageName: "plus", action: {
-            
-        })
-        )
         .tabItem {
             Label("Competitions", systemImage: "star.fill")
         }
@@ -86,6 +83,10 @@ struct CompetitionsView: View {
 
 struct CompetitionsView_Previews: PreviewProvider {
     static var previews: some View {
-        CompetitionsView()
+        NavigationView {
+            Text("asd")
+                .navigationTitle("test")
+                .navigationBarItems(trailing: NavigationLabel(systemName: "plus", destination: Text("asd")))
+        }
     }
 }
