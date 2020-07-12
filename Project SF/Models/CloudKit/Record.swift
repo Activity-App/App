@@ -13,5 +13,5 @@ protocol Record {
     static var type: CKRecord.RecordType { get }
     
     init(record: CKRecord)
-    
+
 }
