@@ -16,8 +16,8 @@ struct ProfileSettings: View {
     @State var isShowingAlert = false
 
     var body: some View {
-        // This VStack and empty text is required to fix nav title glitching out on scroll
-        // So ScrollView isnt the topmost view.
+        // This VStack and empty text is required to fix the navigation title glitching out on scroll
+        // so ScrollView isn't the topmost view.
         VStack(spacing: 0) {
             Text("")
             ScrollView {
