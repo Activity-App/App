@@ -78,12 +78,12 @@ class HealthKitControllerTests: XCTestCase {
         let expectation = XCTestExpectation()
 
         controller.updateTodaysActivityData {
-            XCTAssertEqual(controller.moveCurrent, 100, "Move value is not set correctly")
-            XCTAssertEqual(controller.moveGoal, 200, "Move goal is not set correctly")
-            XCTAssertEqual(controller.exerciseCurrent, 50, "Exercise value is not set correctly")
-            XCTAssertEqual(controller.exerciseGoal, 60, "Exercise goal is not set correctly")
-            XCTAssertEqual(controller.standCurrent, 50, "Stand value is not set correctly")
-            XCTAssertEqual(controller.standGoal, 60, "Stand goal is not set correctly")
+            XCTAssertEqual(controller.latestActivityData.moveCurrent, 100, "Move value is not set correctly")
+            XCTAssertEqual(controller.latestActivityData.moveGoal, 200, "Move goal is not set correctly")
+            XCTAssertEqual(controller.latestActivityData.exerciseCurrent, 50, "Exercise value is not set correctly")
+            XCTAssertEqual(controller.latestActivityData.exerciseGoal, 60, "Exercise goal is not set correctly")
+            XCTAssertEqual(controller.latestActivityData.standCurrent, 50, "Stand value is not set correctly")
+            XCTAssertEqual(controller.latestActivityData.standGoal, 60, "Stand goal is not set correctly")
             expectation.fulfill()
         }
         

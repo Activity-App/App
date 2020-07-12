@@ -18,7 +18,12 @@ struct CurrentlyCompetingHeader: View {
     var index: Int
     var body: some View {
         if index == 0 {
-            return AnyView(Text("Currently Competing"))
+            return AnyView(
+                Text("CURRENTLY COMPETING")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            )
         } else {
             return AnyView(EmptyView())
         }
@@ -39,35 +44,45 @@ struct CompetitionsView: View {
     var body: some View {
         NavigationView {
             List {
-                Section(header: Text("Current Activity")) {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("Move: \(Int(healthKit.moveCurrent))/\(Int(healthKit.moveGoal))")
-                                .foregroundColor(RingType.move.color)
-                                .fontWeight(.medium)
-                            Text("Exercise: \(Int(healthKit.exerciseCurrent))/\(Int(healthKit.exerciseGoal))")
-                                .foregroundColor(RingType.exercise.color)
-                                .fontWeight(.medium)
-                            Text("Stand: \(Int(healthKit.standCurrent))/\(Int(healthKit.standGoal))")
-                                .foregroundColor(RingType.stand.darkColor)
-                                .fontWeight(.medium)
+                Text("CURRENT ACTIVITY")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Section {
+                    GroupBox {
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("Move: \(Int(healthKit.latestActivityData.moveCurrent))/\(Int(healthKit.latestActivityData.moveGoal))")
+                                    .foregroundColor(RingType.move.color)
+                                    .fontWeight(.medium)
+                                Text("Exercise: \(Int(healthKit.latestActivityData.exerciseCurrent))/\(Int(healthKit.latestActivityData.exerciseGoal))")
+                                    .foregroundColor(RingType.exercise.color)
+                                    .fontWeight(.medium)
+                                Text("Stand: \(Int(healthKit.latestActivityData.standCurrent))/\(Int(healthKit.latestActivityData.standGoal))")
+                                    .foregroundColor(RingType.stand.darkColor)
+                                    .fontWeight(.medium)
+                            }
+                            Spacer()
+                            ActivityRingsView(values: $healthKit.latestActivityData, ringSize: .medium)
+                                .padding(.vertical, 12)
                         }
-                        Spacer()
-                        ActivityRingsView(ringSize: .small)
-                            .padding(.vertical, 12)
                     }
                 }
+                .padding(.bottom, 16)
                 ForEach(competitions.indices) { index in
-                    Section(header: CurrentlyCompetingHeader(index: index)) {
-                        CompetitionCell(
-                            competitionName: competitions[index].name,
-                            startDate: competitions[index].startDate,
-                            endDate: competitions[index].endDate
-                        )
+                    CurrentlyCompetingHeader(index: index)
+                    Section {
+                        GroupBox {
+                            CompetitionCell(
+                                competitionName: competitions[index].name,
+                                startDate: competitions[index].startDate,
+                                endDate: competitions[index].endDate
+                            )
+                        }
                     }
                 }
             }
-            .listStyle(InsetGroupedListStyle())
+            .listStyle(InsetListStyle())
             .navigationTitle("Competitions")
             .navigationBarItems(trailing: NavigationLabel(systemName: "plus", destination: CreateCompetition()))
         }
