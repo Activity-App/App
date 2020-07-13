@@ -170,6 +170,37 @@ class CompetitionsController {
         container.add(metadataFetchOperation)
     }
     
+    func fetchCompetitions(then handler: @escaping (Result<[CompetitionRecord], Error>) -> Void) {
+        // TODO: Should be optimized with caching
+        let dispatchGroup = DispatchGroup()
+        
+        var competitionRecords = [CompetitionRecord]()
+        var errors = [Error]()
+        
+        let recordFetchHandler = { (result: Result<[CompetitionRecord], Error>) in
+            dispatchGroup.leave()
+            switch result {
+            case .success(let records):
+                competitionRecords.append(contentsOf: records)
+            case .failure(let error):
+                errors.append(error)
+            }
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            if competitionRecords.isEmpty, !errors.isEmpty {
+                handler(.failure(CompetitionsControllerError.multiple(errors)))
+            } else {
+                handler(.success(competitionRecords))
+            }
+        }
+        
+        dispatchGroup.enter()
+        fetchCompetitionsFromDatabaseWithScope(.private, then: recordFetchHandler)
+        dispatchGroup.enter()
+        fetchCompetitionsFromDatabaseWithScope(.shared, then: recordFetchHandler)
+    }
+    
     // MARK: Friend Discovery
     
     /// Requests permission from the user to discover their contacts.
@@ -325,6 +356,53 @@ class CompetitionsController {
             handler(.success(participants))
         }
         self.container.add(participantLookupOperation)
+    }
+    
+    private func fetchCompetitionsFromDatabaseWithScope(_ scope: CKDatabase.Scope,
+                                                        then handler:
+                                                            @escaping (Result<[CompetitionRecord], Error>) -> Void) {
+        let database = container.database(with: scope)
+        let fetchZonesOperation = CKFetchRecordZonesOperation.fetchAllRecordZonesOperation()
+        
+        fetchZonesOperation.qualityOfService = .userInitiated
+        fetchZonesOperation.fetchRecordZonesCompletionBlock = { recordZones, error in
+            if let error = error {
+                handler(.failure(error))
+                return
+            }
+            guard let zones = recordZones?.map({ $0.value }) else {
+                handler(.failure(CompetitionsControllerError.unknownError))
+                return
+            }
+            guard !zones.isEmpty else {
+                handler(.success([]))
+                return
+            }
+            
+            let dispatchGroup = DispatchGroup()
+            
+            var competitions = [CompetitionRecord]()
+            
+            dispatchGroup.notify(queue: .main) {
+                handler(.success(competitions))
+            }
+            
+            for zone in zones {
+                dispatchGroup.enter()
+                let fetchRecordOperation = CKQueryOperation(query: CKQuery(recordType: CompetitionRecord.type,
+                                                                           predicate: NSPredicate(value: true)))
+                fetchRecordOperation.qualityOfService = .userInitiated
+                fetchRecordOperation.zoneID = zone.zoneID
+                fetchRecordOperation.recordFetchedBlock = { record in
+                    competitions.append(CompetitionRecord(record: record))
+                    dispatchGroup.leave()
+                }
+                
+                database.add(fetchRecordOperation)
+            }
+        }
+        
+        database.add(fetchZonesOperation)
     }
     
     // MARK: Competition Controller Error
