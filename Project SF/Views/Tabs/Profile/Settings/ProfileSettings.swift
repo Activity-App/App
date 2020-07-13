@@ -21,71 +21,68 @@ struct ProfileSettings: View {
     var body: some View {
         // This VStack and empty text is required to fix the navigation title glitching out on scroll
         // so ScrollView isn't the topmost view.
-        VStack(spacing: 0) {
-            Text("")
-            ScrollView(showsIndicators: false) {
-                Button(action: {
-                    showImageSelectionView = true
-                }, label: {
-                    if profilePicture == nil {
-                        Image(systemName: "person.crop.circle.badge.plus")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 100, height: 100)
-                    } else {
-                        Image(uiImage: profilePicture!)
-                            .renderingMode(.original)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 100, height: 100)
-                            .clipShape(Circle())
-                    }
-                })
-                .padding(.bottom)
+        NavScrollView {
+            Button(action: {
+                showImageSelectionView = true
+            }, label: {
+                if profilePicture == nil {
+                    Image(systemName: "person.crop.circle.badge.plus")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 100, height: 100)
+                } else {
+                    Image(uiImage: profilePicture!)
+                        .renderingMode(.original)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 100, height: 100)
+                        .clipShape(Circle())
+                }
+            })
+            .padding(.bottom)
 
-                TextField("Name", text: $name)
-                    .font(.headline)
-                    .padding(.horizontal)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .frame(minHeight: 50)
-                            .foregroundColor(Color(.secondarySystemBackground))
-                    )
-                    .frame(minHeight: 50)
-                    .padding(.bottom, 8)
-                
-                TextField("Username", text: $username)
-                    .font(.headline)
-                    .padding(.horizontal)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .frame(minHeight: 50)
-                            .foregroundColor(Color(.secondarySystemBackground))
-                    )
-                    .frame(minHeight: 50)
-                    .padding(.bottom, 8)
-
-                ZStack {
+            TextField("Name", text: $name)
+                .font(.headline)
+                .padding(.horizontal)
+                .background(
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
                         .frame(minHeight: 50)
                         .foregroundColor(Color(.secondarySystemBackground))
-                        .onTapGesture {
-                            UIApplication.shared.endEditing(true)
-                        }
-                    VStack {
-                        Text("Bio/Description")
-                            .foregroundColor(Color(.tertiaryLabel))
-                            .bold()
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        TextEditor(text: $description)
-                            .cornerRadius(10)
+                )
+                .frame(minHeight: 50)
+                .padding(.bottom, 8)
+            
+            TextField("Username", text: $username)
+                .font(.headline)
+                .padding(.horizontal)
+                .background(
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .frame(minHeight: 50)
+                        .foregroundColor(Color(.secondarySystemBackground))
+                )
+                .frame(minHeight: 50)
+                .padding(.bottom, 8)
+
+            ZStack {
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .frame(minHeight: 50)
+                    .foregroundColor(Color(.secondarySystemBackground))
+                    .onTapGesture {
+                        UIApplication.shared.endEditing(true)
                     }
-                    .padding(16)
+                VStack {
+                    Text("Bio/Description")
+                        .foregroundColor(Color(.tertiaryLabel))
+                        .bold()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    TextEditor(text: $description)
+                        .cornerRadius(10)
                 }
-                .frame(height: 250)
-                
-                Spacer(minLength: keyboard.currentHeight)
+                .padding(16)
             }
+            .frame(height: 250)
+            
+            Spacer(minLength: keyboard.currentHeight)
         }
         .padding(.horizontal)
         .navigationTitle("Profile")

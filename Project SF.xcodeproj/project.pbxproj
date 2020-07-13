@@ -36,6 +36,7 @@
 		30D321BD24BB65D5009CD9D0 /* ProfileSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D321B124BB65D5009CD9D0 /* ProfileSettings.swift */; };
 		30D321BE24BB65D5009CD9D0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D321B224BB65D5009CD9D0 /* ProfileView.swift */; };
 		30D321BF24BB65D5009CD9D0 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D321B424BB65D5009CD9D0 /* FriendsView.swift */; };
+		30D321C124BC1886009CD9D0 /* NavScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D321C024BC1886009CD9D0 /* NavScrollView.swift */; };
 		30F1EA3B24B951CA00FF89FC /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F1EA3A24B951CA00FF89FC /* OnboardingView.swift */; };
 		30FCC84C24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FCC84B24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift */; };
 		30FCC84E24BB318000862C01 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FCC84D24BB318000862C01 /* KeyboardManager.swift */; };
@@ -105,6 +106,7 @@
 		30D321B124BB65D5009CD9D0 /* ProfileSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSettings.swift; sourceTree = "<group>"; };
 		30D321B224BB65D5009CD9D0 /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		30D321B424BB65D5009CD9D0 /* FriendsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
+		30D321C024BC1886009CD9D0 /* NavScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavScrollView.swift; sourceTree = "<group>"; };
 		30F1EA3A24B951CA00FF89FC /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		30FABF2B24BB5423004B8B62 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		30FCC84B24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignKeyboardOnDragGesture.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				9C6C74AB24BADD1800C657B0 /* RoundedNavigationButton.swift */,
 				308FAD9D24B9A0DC00126F3F /* NavigationBarLabel.swift */,
 				30D3217724BB430E009CD9D0 /* RoundedTextField.swift */,
+				30D321C024BC1886009CD9D0 /* NavScrollView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -535,6 +538,7 @@
 				30BFC8CE24B75E6C00DAC6D9 /* ProjectSFApp.swift in Sources */,
 				9CCFDD1F24B971D600162B0F /* NetworkManager.swift in Sources */,
 				9CCFDD2624B9753F00162B0F /* Main.swift in Sources */,
+				30D321C124BC1886009CD9D0 /* NavScrollView.swift in Sources */,
 				30BFC8E924B804CC00DAC6D9 /* ActivityRingView.swift in Sources */,
 				30D321BD24BB65D5009CD9D0 /* ProfileSettings.swift in Sources */,
 				30BFC8DF24B7637F00DAC6D9 /* VisualEffectView.swift in Sources */,
@@ -719,7 +723,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Project SF/Project SF.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = W9K99K5JN4;
+				DEVELOPMENT_TEAM = 939BQQZ3GG;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -727,7 +731,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.priva28.ProjectSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -740,9 +744,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Project SF/Project SF.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = W9K99K5JN4;
+				DEVELOPMENT_TEAM = 939BQQZ3GG;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -750,8 +755,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.priva28.ProjectSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

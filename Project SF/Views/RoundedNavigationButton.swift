@@ -56,7 +56,7 @@ private struct RoundedRectBackground: ViewModifier {
         content
             .padding(12)
             .frame(maxWidth: .infinity, minHeight: 55)
-            .background(Color.blue)
+            .background(Color.accentColor)
             .foregroundColor(.white)
             .cornerRadius(16)
             .padding()
