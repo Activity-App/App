@@ -67,7 +67,7 @@ struct NavigationButton: View {
 
     let title: String? = nil
     let systemName: String
-    let action: () -> ()
+    let action: () -> Void
 
     var body: some View {
         Button(

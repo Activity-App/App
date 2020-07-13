@@ -53,7 +53,7 @@ struct CompetitionsView: View {
                 Section(header: Text("Currently Competing")) {
                     ForEach(competitions.indices) { index in
                         CompetitionCell(
-                            competition: competitions[index]
+                            competitions[index]
                         )
                     }
                 }

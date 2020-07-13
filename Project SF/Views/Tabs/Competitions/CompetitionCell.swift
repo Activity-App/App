@@ -41,11 +41,15 @@ struct CompetitionCell: View {
             })
             .padding(.vertical, 8)
     }
+
+    init(_ competition: Competition) {
+        self.competition = competition
+    }
 }
 
 struct CompetitionCell_Previews: PreviewProvider {
     static var previews: some View {
-        CompetitionCell(competition: Competition(name: "Test", startDate: Date(), endDate: Date()))
+        CompetitionCell(Competition(name: "Test", startDate: Date(), endDate: Date()))
             .frame(width: 200, height: 40)
     }
 }
