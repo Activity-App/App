@@ -16,7 +16,7 @@ struct OnboardingInfoCell: View {
         HStack(alignment: .center) {
             Image(systemName: imageName)
                 .font(.largeTitle)
-                .foregroundColor(.blue)
+                .foregroundColor(.accentColor)
                 .padding()
                 .frame(width: 60, height: 60)
                 .aspectRatio(contentMode: .fit)

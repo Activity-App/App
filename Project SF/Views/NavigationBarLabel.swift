@@ -47,8 +47,10 @@ struct NavigationLabel<Destination: View>: View {
             label: {
                 if let title = title {
                     Label(title, systemImage: systemName)
+                        .contentShape(Rectangle())
                 } else {
                     Image(systemName: systemName)
+                        .contentShape(Rectangle())
                 }
             }
         )
