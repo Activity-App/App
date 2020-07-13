@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct NavigationLabel<Destination: View>: View {
-    let title: String
+
+    let title: String?
     let systemName: String
     let destination: Destination
 
@@ -16,13 +17,30 @@ struct NavigationLabel<Destination: View>: View {
         NavigationLink(
             destination: destination,
             label: {
-                Label(title, systemImage: systemName)
-            })
+                if let title = title {
+                    Label(title, systemImage: systemName)
+                        .font(.title2)
+                } else {
+                    Image(systemName: systemName)
+                        .font(.title2)
+                }
+            }
+        )
+    }
+
+    init(title: String? = nil, systemName: String, destination: Destination) {
+        self.title = title
+        self.systemName = systemName
+        self.destination = destination
     }
 }
 
-//struct NavigationLabel_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NavigationLabel()
-//    }
-//}
+struct NavigationLabel_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            Text("Hello, World!")
+                .navigationTitle("Title")
+                .navigationBarItems(trailing: NavigationLabel(systemName: "plus", destination: Text("123")))
+        }
+    }
+}

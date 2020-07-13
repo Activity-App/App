@@ -12,6 +12,7 @@ import SwiftUI
 struct RoundedButton: View {
     let title: String
     let action: () -> Void
+    @Environment(\.isEnabled) var isEnabled
 
     var body: some View {
         Button(action: action) {
@@ -20,7 +21,7 @@ struct RoundedButton: View {
                 .fontWeight(.semibold)
                 .padding(12)
                 .frame(maxWidth: .infinity, minHeight: 55)
-                .background(Color.blue)
+                .background(isEnabled ? Color.blue : Color.blue.opacity(0.3))
                 .foregroundColor(.white)
                 .cornerRadius(16)
                 .padding()
@@ -39,6 +40,9 @@ struct RoundedButton: View {
 
 struct RoundedButton_Previews: PreviewProvider {
     static var previews: some View {
-        RoundedButton("Button title")
+        VStack {
+            RoundedButton("Button title")
+            RoundedButton("Button title").disabled(true)
+        }
     }
 }
