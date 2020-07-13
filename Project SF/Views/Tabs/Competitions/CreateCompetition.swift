@@ -44,7 +44,9 @@ struct CreateCompetition: View {
                         DatePicker("", selection: $competitionEndDate)
                             .frame(maxHeight: 50)
                             .transition(
-                                AnyTransition.asymmetric(insertion: AnyTransition.opacity.animation(.easeInOut), removal: AnyTransition.identity
+                                AnyTransition.asymmetric(
+                                    insertion: AnyTransition.opacity.animation(.easeInOut),
+                                    removal: AnyTransition.identity
                                 )
                             )
                     }
