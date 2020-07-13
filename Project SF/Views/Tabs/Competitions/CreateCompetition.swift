@@ -154,7 +154,7 @@ struct CreateCompetition: View {
                     }
                     .frame(maxWidth: .infinity)
                     .buttonStyle(PlainButtonStyle())
-                    .accentColor(.accentColor)
+                    .foregroundColor(.accentColor)
 
                     if !invitedFriends.isEmpty {
                         List(invitedFriends.indices) { index in
