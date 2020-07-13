@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Friend: Identifiable {
+struct TemporaryFriend: Identifiable {
     var id = UUID()
     var name: String
     var activity: ActivityRings
@@ -15,8 +15,8 @@ struct Friend: Identifiable {
 
 struct FriendsView: View {
     
-    let friends: [Friend] = [
-        Friend(
+    let friends: [TemporaryFriend] = [
+        TemporaryFriend(
             name: "Friend1",
             activity: .init(
                 moveCurrent: 10,
@@ -27,7 +27,7 @@ struct FriendsView: View {
                 standGoal: 12
             )
         ),
-        Friend(
+        TemporaryFriend(
             name: "Friend2",
             activity: .init(
                 moveCurrent: 340,
@@ -38,7 +38,7 @@ struct FriendsView: View {
                 standGoal: 12
             )
         ),
-        Friend(
+        TemporaryFriend(
             name: "Friend3",
             activity: .init(
                 moveCurrent: 380,

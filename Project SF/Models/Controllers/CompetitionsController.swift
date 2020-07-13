@@ -23,6 +23,17 @@ class CompetitionsController {
     // MARK: Methods
     
     func createCompetition(type: CompetitionRecord.CompetitionType) {
+        /*let competitionRecord = CompetitionRecord()
+        competitionRecord.type = type
+        competitionRecord.startDate = Date()
+        competitionRecord.endDate = Date().addingTimeInterval(7 * 24 * 60 * 60) // temporary
+        
+        cloudKitStore.saveRecord(competitionRecord.record, scope: .public) { result in
+            print(result)
+        }
+        
+        let zone = CKRecordZone(zoneName: UUID().uuidString)
+        let operation = CKModifyRecordZonesOperation(recordZonesToSave: [zone], recordZoneIDsToDelete: nil)*/
     }
     
     /// Requests permission from the user to discover their contacts.

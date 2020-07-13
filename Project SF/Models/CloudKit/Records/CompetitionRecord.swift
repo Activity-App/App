@@ -26,7 +26,7 @@ class CompetitionRecord: DynamicRecord {
     
     // MARK: Model
     
-    struct Model: ModelProtocol {
+    struct Model {
         
         let type = ModelItem<Int>(key: "type")
         
