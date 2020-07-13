@@ -93,8 +93,8 @@ struct CreateCompetition: View {
                                     stepsGoalInt = stepsGoalInt == 0 ? 1 : stepsGoalInt
                                     stepsGoal = String(stepsGoalInt)
                                 }
-                                    .keyboardType(.numberPad)
-                                    .multilineTextAlignment(.trailing)
+                                .keyboardType(.numberPad)
+                                .multilineTextAlignment(.trailing)
                                 Text("steps")
                                     .foregroundColor(.secondary)
                             }
@@ -119,8 +119,8 @@ struct CreateCompetition: View {
                                     distanceGoalInt = distanceGoalInt == 0 ? 1 : distanceGoalInt
                                     distanceGoal = String(distanceGoalInt)
                                 }
-                                    .keyboardType(.numberPad)
-                                    .multilineTextAlignment(.trailing)
+                                .keyboardType(.numberPad)
+                                .multilineTextAlignment(.trailing)
                                 Text("km")
                                     .foregroundColor(.secondary)
                             }
@@ -154,7 +154,7 @@ struct CreateCompetition: View {
                     }
                     .frame(maxWidth: .infinity)
                     .buttonStyle(PlainButtonStyle())
-
+                    
                     if !invitedFriends.isEmpty {
                         List(invitedFriends.indices) { index in
                             Section {
