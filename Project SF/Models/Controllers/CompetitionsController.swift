@@ -82,13 +82,12 @@ class CompetitionsController {
             }
             
             operation.completionBlock = {
-                guard let savedShare = savedShare,
-                      let _ = savedCompetitionRecord else {
+                guard let savedShare = savedShare, let url = savedShare.url else {
                     handler(.failure(CompetitionsControllerError.unknownError))
                     return
                 }
                 
-                let url = savedShare.url
+                
             }
             
             container.privateCloudDatabase.add(operation)
