@@ -57,9 +57,9 @@ struct CompetitionsView: View {
                     }
                 }
 
-                Section(header: Text("Pending Invites")) {
-                    // TODO: Pending Invites
-                    Text("Show pending invites here")
+                Section(header: Text("Rescent competitions")) {
+                    // TODO: Rescent competitions
+                    Text("Show Rescent competitions here")
                 }
             }
             .listStyle(InsetGroupedListStyle())
