@@ -28,7 +28,7 @@ struct CompetitionsView: View {
     var body: some View {
         NavigationView {
             List {
-                Section(header:Text("Current Activity")) {
+                Section(header: Text("Current Activity")) {
                     HStack {
                         VStack(alignment: .leading) {
                             Text("Move: \(Int(healthKit.latestActivityData.moveCurrent))/\(Int(healthKit.latestActivityData.moveGoal))")
