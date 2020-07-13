@@ -26,7 +26,14 @@ struct CreateCompetition: View {
     @State var distanceGoalInt = 10
 
     var body: some View {
-        NavScrollView {
+        ScrollView(showsIndicators: false) {
+            
+            Text("Create Competition")
+                .font(.largeTitle)
+                .bold()
+                .padding(.top, 48)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                
             RoundedTextField("Competition Name", text: $competitionName)
                 .padding(.bottom, 8)
 
