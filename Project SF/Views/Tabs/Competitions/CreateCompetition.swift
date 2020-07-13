@@ -19,9 +19,11 @@ struct CreateCompetition: View {
     @State var exercise = true
     @State var stand = true
     @State var steps = false
-    @State var stepsGoal = 10000
+    @State var stepsGoal = "10000"
+    @State var stepsGoalInt = 10000
     @State var distance = false
-    @State var distanceGoal = 10
+    @State var distanceGoal = "10"
+    @State var distanceGoalInt = 10
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -82,14 +84,24 @@ struct CreateCompetition: View {
                             HStack {
                                 Image(systemName: "chevron.down")
                                     .foreground(Color(.tertiaryLabel))
-                                Stepper("Goal", value: $stepsGoal, in: 1000...50000, step: 1000)
+                                Stepper("Goal", value: $stepsGoalInt, in: 1000...50000, step: 1000)
                             }
-                            Text("\(stepsGoal) steps")
-                                .frame(maxWidth: .infinity, alignment: .trailing)
+                            HStack {
+                                Spacer()
+                                TextField("Amount", text: $stepsGoal) { _ in } onCommit: {
+                                    stepsGoalInt = Int(stepsGoal) ?? 10000
+                                    stepsGoalInt = stepsGoalInt == 0 ? 1 : stepsGoalInt
+                                    stepsGoal = String(stepsGoalInt)
+                                }
+                                .keyboardType(.numberPad)
+                                .multilineTextAlignment(.trailing)
+                                Text("steps")
+                                    .foregroundColor(.secondary)
+                            }
                         }
                         .transition(
-                            AnyTransition.asymmetric(insertion: AnyTransition.opacity.animation(.easeInOut), removal: AnyTransition.identity
-                            )
+                            AnyTransition.asymmetric(insertion: AnyTransition.opacity.animation(.easeInOut),
+                                                     removal: AnyTransition.identity)
                         )
                     }
                     Toggle("Walking/Running Distance", isOn: $distance)
@@ -98,14 +110,24 @@ struct CreateCompetition: View {
                             HStack {
                                 Image(systemName: "chevron.down")
                                     .foreground(Color(.tertiaryLabel))
-                                Stepper("Goal", value: $distanceGoal, in: 1...100, step: 1)
+                                Stepper("Goal", value: $distanceGoalInt, in: 1...100, step: 1)
                             }
-                            Text("\(distanceGoal) km")
-                                .frame(maxWidth: .infinity, alignment: .trailing)
+                            HStack {
+                                Spacer()
+                                TextField("Amount", text: $distanceGoal) { _ in } onCommit: {
+                                    distanceGoalInt = Int(distanceGoal) ?? 10
+                                    distanceGoalInt = distanceGoalInt == 0 ? 1 : distanceGoalInt
+                                    distanceGoal = String(distanceGoalInt)
+                                }
+                                .keyboardType(.numberPad)
+                                .multilineTextAlignment(.trailing)
+                                Text("km")
+                                    .foregroundColor(.secondary)
+                            }
                         }
                         .transition(
-                            AnyTransition.asymmetric(insertion: AnyTransition.opacity.animation(.easeInOut), removal: AnyTransition.identity
-                            )
+                            AnyTransition.asymmetric(insertion: AnyTransition.opacity.animation(.easeInOut),
+                                                     removal: AnyTransition.identity)
                         )
                     }
                 }
@@ -132,6 +154,7 @@ struct CreateCompetition: View {
                     }
                     .frame(maxWidth: .infinity)
                     .buttonStyle(PlainButtonStyle())
+                    .foregroundColor(.accentColor)
 
                     if !invitedFriends.isEmpty {
                         List(invitedFriends.indices) { index in
@@ -156,7 +179,7 @@ struct CreateCompetition: View {
                 guard !competitionName.isEmpty else { return }
                 presentationMode.wrappedValue.dismiss()
             }
-            .disabled(competitionName.isEmpty)
+            .disabled(competitionName.isEmpty && Int(stepsGoal) == nil)
         }
         .padding(.horizontal)
         .navigationBarTitle("Create Competition")
@@ -165,8 +188,6 @@ struct CreateCompetition: View {
 
 struct CreateCompetition_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            CreateCompetition()
-        }
+        CreateCompetition()
     }
 }
