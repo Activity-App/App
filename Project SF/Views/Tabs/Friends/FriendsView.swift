@@ -54,9 +54,8 @@ struct FriendsView: View {
     var body: some View {
         NavigationView {
             List {
-                Text("ACTIVITY")
-                ForEach(friends) { friend in
-                    Section {
+                Section(header: Text("Friend Activity")) {
+                    ForEach(friends) { friend in
                         HStack {
                             VStack(alignment: .leading) {
                                 Text(friend.name)
@@ -78,6 +77,14 @@ struct FriendsView: View {
                                 .padding(.vertical, 12)
                         }
                     }
+                }
+
+                Section(header: Text("Pending Invites")) {
+                    // TODO: Pending invites
+                    Text("Pending Invites")
+//                    ForEach(pendingFriends) { friend in
+//
+//                    }
                 }
             }
             .listStyle(InsetGroupedListStyle())
