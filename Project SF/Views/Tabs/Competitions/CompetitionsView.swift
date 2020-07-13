@@ -19,6 +19,7 @@ struct Competition: Identifiable {
 struct CompetitionsView: View {
 
     @EnvironmentObject var healthKit: HealthKitController
+    @State var showCreateCompetition = false
     
     // Temporary. Get these from CK when thats working.
     var competitions: [Competition] = [
@@ -64,10 +65,18 @@ struct CompetitionsView: View {
             }
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("Competitions")
-            .navigationBarItems(trailing: NavigationLabel(systemName: "plus", destination: CreateCompetition()))
+            .navigationBarItems(
+                trailing: NavigationButton(
+                    systemName: "plus",
+                    action: { showCreateCompetition = true }
+                )
+            )
         }
         .tabItem {
             Label("Competitions", systemImage: "star.fill")
+        }
+        .sheet(isPresented: $showCreateCompetition) {
+            CreateCompetition()
         }
 
     }
