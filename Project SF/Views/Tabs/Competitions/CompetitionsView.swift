@@ -14,20 +14,10 @@ struct Competition: Identifiable {
     var endDate: Date
 }
 
-struct CurrentlyCompetingHeader: View {
-    var index: Int
-    var body: some View {
-        if index == 0 {
-            return AnyView(Text("Currently Competing"))
-        } else {
-            return AnyView(EmptyView())
-        }
-    }
-}
-
 struct CompetitionsView: View {
 
     @EnvironmentObject var healthKit: HealthKitController
+    @State var showCreateCompetition = false
     
     // Temporary. Get these from CK when thats working.
     var competitions: [Competition] = [
@@ -42,33 +32,51 @@ struct CompetitionsView: View {
                 Section(header: Text("Current Activity")) {
                     HStack {
                         VStack(alignment: .leading) {
-                            Text("Move: \(Int(healthKit.moveCurrent))/\(Int(healthKit.moveGoal))")
+                            Text("Move: \(healthKit.latestActivityData.moveFraction)")
                                 .foregroundColor(RingType.move.color)
                                 .fontWeight(.medium)
-                            Text("Exercise: \(Int(healthKit.exerciseCurrent))/\(Int(healthKit.exerciseGoal))")
+                            Text("Exercise: \(healthKit.latestActivityData.exerciseFraction)")
                                 .foregroundColor(RingType.exercise.color)
                                 .fontWeight(.medium)
-                            Text("Stand: \(Int(healthKit.standCurrent))/\(Int(healthKit.standGoal))")
+                            Text("Stand: \(healthKit.latestActivityData.standFraction)")
                                 .foregroundColor(RingType.stand.darkColor)
                                 .fontWeight(.medium)
                         }
                         Spacer()
-                        ActivityRingsView(ringSize: .small)
+                        ActivityRingsView(values: $healthKit.latestActivityData, ringSize: .medium)
                             .padding(.vertical, 12)
                     }
                 }
-                ForEach(competitions.indices) { index in
-                    Section(header: CurrentlyCompetingHeader(index: index)) {
-                        CompetitionCell(competition: competitions[index])
+
+                Section(header: Text("Currently Competing")) {
+                    ForEach(competitions.indices) { index in
+                        CompetitionCell(
+                            competitionName: competitions[index].name,
+                            startDate: competitions[index].startDate,
+                            endDate: competitions[index].endDate
+                        )
                     }
+                }
+
+                Section(header: Text("Rescent competitions")) {
+                    // TODO: Rescent competitions
+                    Text("Show Rescent competitions here")
                 }
             }
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("Competitions")
-            .navigationBarItems(trailing: NavigationLabel(systemName: "plus", destination: CreateCompetition()))
+            .navigationBarItems(
+                trailing: NavigationButton(
+                    systemName: "plus",
+                    action: { showCreateCompetition = true }
+                )
+            )
         }
         .tabItem {
             Label("Competitions", systemImage: "star.fill")
+        }
+        .sheet(isPresented: $showCreateCompetition) {
+            CreateCompetition()
         }
 
     }

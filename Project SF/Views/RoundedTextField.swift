@@ -11,14 +11,14 @@ struct RoundedTextField: View {
     
     var title: String
     @Binding var text: String
-    var onEditingChanged: (Bool) -> ()
-    var onCommit: () -> ()
+    var onEditingChanged: (Bool) -> Void
+    var onCommit: () -> Void
     
     init(
         _ title: String,
         text: Binding<String>,
-        onEditingChanged: @escaping (Bool) -> () = { _ in },
-        onCommit: @escaping () -> () = { }
+        onEditingChanged: @escaping (Bool) -> Void = { _ in },
+        onCommit: @escaping () -> Void = { }
     ) {
         self.title = title
         self._text = text

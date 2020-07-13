@@ -15,7 +15,6 @@ struct CompetitionCell: View {
             destination: CompetitionDetailView(competition: competition),
             label: {
                 HStack {
-                    
                     VStack {
                         Text("1st")
                             .font(.largeTitle)
@@ -36,7 +35,9 @@ struct CompetitionCell: View {
                             .font(.headline)
                         Spacer()
                     }
+                    Spacer()
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
             })
             .padding(.vertical, 8)
     }
