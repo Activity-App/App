@@ -188,8 +188,6 @@ struct CreateCompetition: View {
 
 struct CreateCompetition_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            CreateCompetition()
-        }
+        CreateCompetition()
     }
 }
