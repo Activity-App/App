@@ -26,7 +26,7 @@ struct CompetitionsView: View {
         Competition(name: "Competition3", startDate: Date() - 100000, endDate: Date() + 9900000)
     ]
 
-    var rescentCompetitions: [Competition] = [
+    var recentCompetitions: [Competition] = [
         Competition(name: "Competition1", startDate: Date() - 100000, endDate: Date() - 1000),
         Competition(name: "Competition2", startDate: Date() - 1000000, endDate: Date() - 10000),
         Competition(name: "Competition3", startDate: Date() - 100000, endDate: Date() - 12345)
@@ -64,11 +64,11 @@ struct CompetitionsView: View {
                     }
                 }
 
-                Section(header: Text("Rescent competitions")) {
-                    ForEach(rescentCompetitions.indices) { index in
-                        CompetitionCell(competitionName: rescentCompetitions[index].name,
-                                        startDate: rescentCompetitions[index].startDate,
-                                        endDate: rescentCompetitions[index].endDate)
+                Section(header: Text("Recent competitions")) {
+                    ForEach(recentCompetitions.indices) { index in
+                        CompetitionCell(competitionName: recentCompetitions[index].name,
+                                        startDate: recentCompetitions[index].startDate,
+                                        endDate: recentCompetitions[index].endDate)
                     }
                 }
             }
