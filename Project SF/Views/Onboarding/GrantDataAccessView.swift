@@ -47,7 +47,7 @@ struct GrantDataAccessView: View {
                 .multilineTextAlignment(.center)
         }
         .padding(.horizontal)
-        .navigationTitle("iCloud")
+        .navigationTitle("Health Data")
         .highPriorityGesture(DragGesture())
     }
 }
