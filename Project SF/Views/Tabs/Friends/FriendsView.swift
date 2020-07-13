@@ -54,38 +54,40 @@ struct FriendsView: View {
     var body: some View {
         NavigationView {
             List {
-                Text("ACTIVITY")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                ForEach(friends) { friend in
-                    Section {
-                        GroupBox {
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text(friend.name)
-                                        .font(.title3)
-                                        .fontWeight(.black)
-                                        .padding(.bottom, 4)
-                                    Text("Move: \(Int(friend.activity.moveCurrent))/\(Int(friend.activity.moveGoal))")
-                                        .foregroundColor(RingType.move.color)
-                                        .fontWeight(.medium)
-                                    Text("Exercise: \(Int(friend.activity.exerciseCurrent))/\(Int(friend.activity.exerciseGoal))")
-                                        .foregroundColor(RingType.exercise.color)
-                                        .fontWeight(.medium)
-                                    Text("Stand: \(Int(friend.activity.standCurrent))/\(Int(friend.activity.standGoal))")
-                                        .foregroundColor(RingType.stand.darkColor)
-                                        .fontWeight(.medium)
-                                }
-                                Spacer()
-                                ActivityRingsView(values: .constant(friend.activity), ringSize: .small)
-                                    .padding(.vertical, 12)
+                Section(header: Text("Friend Activity")) {
+                    ForEach(friends) { friend in
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(friend.name)
+                                    .font(.title3)
+                                    .fontWeight(.black)
+                                    .padding(.bottom, 4)
+                                Text("Move: \(friend.activity.moveFraction)")
+                                    .foregroundColor(RingType.move.color)
+                                    .fontWeight(.medium)
+                                Text("Exercise: \(friend.activity.exerciseFraction)")
+                                    .foregroundColor(RingType.exercise.color)
+                                    .fontWeight(.medium)
+                                Text("Stand: \(friend.activity.standFraction)")
+                                    .foregroundColor(RingType.stand.darkColor)
+                                    .fontWeight(.medium)
                             }
+                            Spacer()
+                            ActivityRingsView(values: .constant(friend.activity), ringSize: .small)
+                                .padding(.vertical, 12)
                         }
                     }
                 }
+
+                Section(header: Text("Pending Invites")) {
+                    // TODO: Pending invites
+                    Text("Pending Invites")
+//                    ForEach(pendingFriends) { friend in
+//
+//                    }
+                }
             }
-            .listStyle(InsetListStyle())
+            .listStyle(InsetGroupedListStyle())
             .navigationTitle("Friends")
         }
         .tabItem {
