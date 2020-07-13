@@ -31,8 +31,14 @@ struct GrantDataAccessView: View {
                 .opacity(0.8)
             Spacer()
 
-            RoundedNavigationLink("Grant Health Data Access",
-                                  destination: GrantiCloudAccessView(showOnboarding: $showOnboarding))
+            RoundedButton("Grant Health Data Access") {
+                healthKit.authorizeHealthKit {
+                    if healthKit.authorizationState == .granted {
+                        showOnboarding = false
+                        healthKit.updateTodaysActivityData()
+                    }
+                }
+            }
                 .padding()
             Text("This application needs access to your health data to calculate the points in competitions.")
                 .padding(.horizontal, 16)
