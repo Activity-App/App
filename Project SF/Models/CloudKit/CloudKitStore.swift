@@ -41,6 +41,7 @@ class CloudKitStore {
                       then handler: @escaping (Result<[CKRecord], CloudKitStoreError>) -> Void) {
         let query = CKQuery(recordType: recordType, predicate: predicate)
         let queryOperation = CKQueryOperation(query: query)
+        queryOperation.qualityOfService = .userInitiated
 
         var records = [CKRecord]()
 
@@ -155,6 +156,7 @@ class CloudKitStore {
         
         let operation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
         operation.savePolicy = savePolicy
+        operation.qualityOfService = .userInitiated
         operation.perRecordCompletionBlock = { _, error in
             if let error = error {
                 handler(.failure(.other(error)))

@@ -22,19 +22,85 @@ class CompetitionsController {
     
     // MARK: Methods
     
-    func createCompetition(type: CompetitionRecord.CompetitionType) {
-        /*let competitionRecord = CompetitionRecord()
+    func createCompetition(type: CompetitionRecord.CompetitionType,
+                           endDate: Date,
+                           friends: [Friend],
+                           then handler: @escaping (Result<Bool, Error>) -> Void) {
+        /*let zone = CKRecordZone(zoneName: UUID().uuidString)
+        let zoneOperation = CKModifyRecordZonesOperation(recordZonesToSave: [zone], recordZoneIDsToDelete: nil)
+         zoneOperation.qualityOfService = .userInitiated
+        
+        zoneOperation.modifyRecordZonesCompletionBlock = { recordZones, _, error in
+            if let error = error {
+                handler(.failure(error))
+                return
+            }
+            guard let zone = recordZones?.first else {
+                handler(.failure(CompetitionsControllerError.unknownError))
+                return
+            }*/
+            
+        let competitionRecord = CompetitionRecord()
         competitionRecord.type = type
         competitionRecord.startDate = Date()
-        competitionRecord.endDate = Date().addingTimeInterval(7 * 24 * 60 * 60) // temporary
+        competitionRecord.endDate = endDate
         
-        cloudKitStore.saveRecord(competitionRecord.record, scope: .public) { result in
-            print(result)
+        let share = CKShare(rootRecord: competitionRecord.record)
+        share.publicPermission = .none
+        share[CKShare.SystemFieldKey.title] = "Competition"
+        
+        let friendLookupInfomation = friends.map { CKUserIdentity.LookupInfo(userRecordID: $0.recordID) }
+        let participantLookupOperation = CKFetchShareParticipantsOperation(userIdentityLookupInfos:
+                                                                            friendLookupInfomation)
+        participantLookupOperation.qualityOfService = .userInitiated
+        
+        var participants = [CKShare.Participant]()
+        
+        participantLookupOperation.shareParticipantFetchedBlock = { participant in
+            participants.append(participant)
         }
         
-        let zone = CKRecordZone(zoneName: UUID().uuidString)
-        let operation = CKModifyRecordZonesOperation(recordZonesToSave: [zone], recordZoneIDsToDelete: nil)*/
+        participantLookupOperation.fetchShareParticipantsCompletionBlock = { [container] error in
+            if let error = error, participants.count == 0 {
+                handler(.failure(error))
+                return
+            }
+            
+            let operation = CKModifyRecordsOperation(recordsToSave: [competitionRecord.record, share],
+                                                     recordIDsToDelete: nil)
+            operation.qualityOfService = .userInitiated
+            
+            var savedShare: CKShare?
+            var savedCompetitionRecord: CKRecord?
+            
+            operation.perRecordCompletionBlock = { record, error in
+                if let record = record as? CKShare {
+                    savedShare = record
+                } else {
+                    savedCompetitionRecord = record
+                }
+            }
+            
+            operation.completionBlock = {
+                guard let savedShare = savedShare,
+                      let _ = savedCompetitionRecord else {
+                    handler(.failure(CompetitionsControllerError.unknownError))
+                    return
+                }
+                
+                let url = savedShare.url
+            }
+            
+            container.privateCloudDatabase.add(operation)
+        }
+        
+        participantLookupOperation.start()
+        /*}
+        
+        container.privateCloudDatabase.add(zoneOperation)*/
     }
+    
+    // MARK: Friend Discovery
     
     /// Requests permission from the user to discover their contacts.
     /// - Parameter handler: The result handler. Not guaranteed to be executed on the main thread.
@@ -99,6 +165,8 @@ class CompetitionsController {
                         
                         handler(.success(friends))
                     }
+                    
+                    container.sharedCloudDatabase.add(operation)
                 }
             } else {
                 handler(.failure(CompetitionsControllerError.insufficientPermissions))
