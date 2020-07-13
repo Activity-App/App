@@ -55,37 +55,32 @@ struct FriendsView: View {
         NavigationView {
             List {
                 Text("ACTIVITY")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .frame(maxWidth: .infinity, alignment: .leading)
                 ForEach(friends) { friend in
                     Section {
-                        GroupBox {
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text(friend.name)
-                                        .font(.title3)
-                                        .fontWeight(.black)
-                                        .padding(.bottom, 4)
-                                    Text("Move: \(Int(friend.activity.moveCurrent))/\(Int(friend.activity.moveGoal))")
-                                        .foregroundColor(RingType.move.color)
-                                        .fontWeight(.medium)
-                                    Text("Exercise: \(Int(friend.activity.exerciseCurrent))/\(Int(friend.activity.exerciseGoal))")
-                                        .foregroundColor(RingType.exercise.color)
-                                        .fontWeight(.medium)
-                                    Text("Stand: \(Int(friend.activity.standCurrent))/\(Int(friend.activity.standGoal))")
-                                        .foregroundColor(RingType.stand.darkColor)
-                                        .fontWeight(.medium)
-                                }
-                                Spacer()
-                                ActivityRingsView(values: .constant(friend.activity), ringSize: .small)
-                                    .padding(.vertical, 12)
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(friend.name)
+                                    .font(.title3)
+                                    .fontWeight(.black)
+                                    .padding(.bottom, 4)
+                                Text("Move: \(Int(friend.activity.moveCurrent))/\(Int(friend.activity.moveGoal))")
+                                    .foregroundColor(RingType.move.color)
+                                    .fontWeight(.medium)
+                                Text("Exercise: \(Int(friend.activity.exerciseCurrent))/\(Int(friend.activity.exerciseGoal))")
+                                    .foregroundColor(RingType.exercise.color)
+                                    .fontWeight(.medium)
+                                Text("Stand: \(Int(friend.activity.standCurrent))/\(Int(friend.activity.standGoal))")
+                                    .foregroundColor(RingType.stand.darkColor)
+                                    .fontWeight(.medium)
                             }
+                            Spacer()
+                            ActivityRingsView(values: .constant(friend.activity), ringSize: .small)
+                                .padding(.vertical, 12)
                         }
                     }
                 }
             }
-            .listStyle(InsetListStyle())
+            .listStyle(InsetGroupedListStyle())
             .navigationTitle("Friends")
         }
         .tabItem {

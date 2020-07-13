@@ -38,8 +38,6 @@ struct CompetitionCell: View {
                         Spacer()
                     }
                     Spacer()
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(Color(.tertiaryLabel))
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             })
