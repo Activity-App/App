@@ -54,8 +54,8 @@ struct CompetitionsView: View {
                 Section(header: Text("Currently Competing")) {
                     ForEach(competitions.indices) { index in
                         CompetitionCell(
-                            activityRings: $healthKit.latestActivityData,
-                            competition: competitions[index]
+                            competitions[index],
+                            activityRings: $healthKit.latestActivityData
                         )
                     }
                 }

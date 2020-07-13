@@ -35,7 +35,7 @@ struct CompetitionCell: View {
                     
                     VStack(alignment: .leading) {
                         Spacer()
-                        Text(competition.endDate, style: .relative)
+                        Text("\(competition.endDate, style: .relative) \(competition.endDate < Date() ? "ago" : "")")
                             .foregroundColor(.secondary)
                             .font(.subheadline)
                         Spacer()
@@ -49,11 +49,27 @@ struct CompetitionCell: View {
             })
             .padding(.vertical, 8)
     }
+
+    init(_ competition: Competition, activityRings: Binding<ActivityRings>) {
+        self.competition = competition
+        self._activityRings = activityRings
+    }
 }
 
-//struct CompetitionCell_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CompetitionCell(competition: Competition(name: "Test", startDate: Date(), endDate: Date()))
-//            .frame(width: 200, height: 40)
-//    }
-//}
+struct CompetitionCell_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        
+        let activity = ActivityRings(
+            moveCurrent: 350,
+            moveGoal: 300,
+            exerciseCurrent: 4,
+            exerciseGoal: 30,
+            standCurrent: 1,
+            standGoal: 12
+        )
+        
+        return CompetitionCell(Competition(name: "Test", startDate: Date(), endDate: Date()), activityRings: .constant(activity))
+            .frame(width: 200, height: 40)
+    }
+}
