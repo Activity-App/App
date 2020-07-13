@@ -63,6 +63,28 @@ struct NavigationLabel<Destination: View>: View {
     }
 }
 
+struct NavigationButton: View {
+
+    let title: String? = nil
+    let systemName: String
+    let action: () -> ()
+
+    var body: some View {
+        Button(
+            action: action,
+            label: {
+                if let title = title {
+                    Label(title, systemImage: systemName)
+                        .contentShape(Rectangle())
+                } else {
+                    Image(systemName: systemName)
+                        .contentShape(Rectangle())
+                }
+            }
+        )
+    }
+}
+
 struct NavigationLabel_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
