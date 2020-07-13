@@ -31,13 +31,13 @@ struct CompetitionsView: View {
                 Section(header: Text("Current Activity")) {
                     HStack {
                         VStack(alignment: .leading) {
-                            Text("Move: \(Int(healthKit.latestActivityData.moveCurrent))/\(Int(healthKit.latestActivityData.moveGoal))")
+                            Text("Move: \(healthKit.latestActivityData.moveFraction)")
                                 .foregroundColor(RingType.move.color)
                                 .fontWeight(.medium)
-                            Text("Exercise: \(Int(healthKit.latestActivityData.exerciseCurrent))/\(Int(healthKit.latestActivityData.exerciseGoal))")
+                            Text("Exercise: \(healthKit.latestActivityData.exerciseFraction)")
                                 .foregroundColor(RingType.exercise.color)
                                 .fontWeight(.medium)
-                            Text("Stand: \(Int(healthKit.latestActivityData.standCurrent))/\(Int(healthKit.latestActivityData.standGoal))")
+                            Text("Stand: \(healthKit.latestActivityData.standFraction)")
                                 .foregroundColor(RingType.stand.darkColor)
                                 .fontWeight(.medium)
                         }
