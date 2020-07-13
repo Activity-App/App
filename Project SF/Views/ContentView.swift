@@ -22,7 +22,6 @@ struct ContentView: View {
             ProfileView()
                 .tag(3)
         }
-        .accentColor(Color.accentColor)
     }
 }
 

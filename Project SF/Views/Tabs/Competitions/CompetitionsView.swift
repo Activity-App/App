@@ -14,22 +14,6 @@ struct Competition: Identifiable {
     var endDate: Date
 }
 
-struct CurrentlyCompetingHeader: View {
-    var index: Int
-    var body: some View {
-        if index == 0 {
-            return AnyView(
-                Text("CURRENTLY COMPETING")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            )
-        } else {
-            return AnyView(EmptyView())
-        }
-    }
-}
-
 struct CompetitionsView: View {
 
     @EnvironmentObject var healthKit: HealthKitController
@@ -44,45 +28,41 @@ struct CompetitionsView: View {
     var body: some View {
         NavigationView {
             List {
-                Text("CURRENT ACTIVITY")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Section {
-                    GroupBox {
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text("Move: \(Int(healthKit.latestActivityData.moveCurrent))/\(Int(healthKit.latestActivityData.moveGoal))")
-                                    .foregroundColor(RingType.move.color)
-                                    .fontWeight(.medium)
-                                Text("Exercise: \(Int(healthKit.latestActivityData.exerciseCurrent))/\(Int(healthKit.latestActivityData.exerciseGoal))")
-                                    .foregroundColor(RingType.exercise.color)
-                                    .fontWeight(.medium)
-                                Text("Stand: \(Int(healthKit.latestActivityData.standCurrent))/\(Int(healthKit.latestActivityData.standGoal))")
-                                    .foregroundColor(RingType.stand.darkColor)
-                                    .fontWeight(.medium)
-                            }
-                            Spacer()
-                            ActivityRingsView(values: $healthKit.latestActivityData, ringSize: .medium)
-                                .padding(.vertical, 12)
+                Section(header: Text("Current Activity")) {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("Move: \(Int(healthKit.latestActivityData.moveCurrent))/\(Int(healthKit.latestActivityData.moveGoal))")
+                                .foregroundColor(RingType.move.color)
+                                .fontWeight(.medium)
+                            Text("Exercise: \(Int(healthKit.latestActivityData.exerciseCurrent))/\(Int(healthKit.latestActivityData.exerciseGoal))")
+                                .foregroundColor(RingType.exercise.color)
+                                .fontWeight(.medium)
+                            Text("Stand: \(Int(healthKit.latestActivityData.standCurrent))/\(Int(healthKit.latestActivityData.standGoal))")
+                                .foregroundColor(RingType.stand.darkColor)
+                                .fontWeight(.medium)
                         }
+                        Spacer()
+                        ActivityRingsView(values: $healthKit.latestActivityData, ringSize: .medium)
+                            .padding(.vertical, 12)
                     }
                 }
-                .padding(.bottom, 16)
-                ForEach(competitions.indices) { index in
-                    CurrentlyCompetingHeader(index: index)
-                    Section {
-                        GroupBox {
-                            CompetitionCell(
-                                competitionName: competitions[index].name,
-                                startDate: competitions[index].startDate,
-                                endDate: competitions[index].endDate
-                            )
-                        }
+
+                Section(header: Text("Currently Competing")) {
+                    ForEach(competitions.indices) { index in
+                        CompetitionCell(
+                            competitionName: competitions[index].name,
+                            startDate: competitions[index].startDate,
+                            endDate: competitions[index].endDate
+                        )
                     }
+                }
+
+                Section(header: Text("Rescent competitions")) {
+                    // TODO: Rescent competitions
+                    Text("Show Rescent competitions here")
                 }
             }
-            .listStyle(InsetListStyle())
+            .listStyle(InsetGroupedListStyle())
             .navigationTitle("Competitions")
             .navigationBarItems(trailing: NavigationLabel(systemName: "plus", destination: CreateCompetition()))
         }
