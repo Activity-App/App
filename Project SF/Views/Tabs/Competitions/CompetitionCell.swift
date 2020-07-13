@@ -16,10 +16,10 @@ struct CompetitionCell: View {
             label: {
                 HStack {
                     VStack {
-                        Text("1st")
+                        Text("\(competition.place)")
                             .font(.largeTitle)
                             .bold()
-                        Text("5 points")
+                        Text("\(competition.points) points")
                             .foregroundColor(.secondary)
                             .font(.subheadline)
                     }

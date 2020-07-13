@@ -12,6 +12,8 @@ struct Competition: Identifiable {
     var name: String
     var startDate: Date
     var endDate: Date
+    var points: Int = 0
+    var place: Int = 1
 }
 
 struct CompetitionsView: View {

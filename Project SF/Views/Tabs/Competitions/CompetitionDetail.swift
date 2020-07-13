@@ -12,12 +12,18 @@ struct CompetitionDetail: View {
     let competition: Competition
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            Spacer()
+        }
+        .navigationTitle(competition.name)
     }
 }
 
 struct CompetitionDetail_Previews: PreviewProvider {
     static var previews: some View {
-        CompetitionDetail(competition: Competition(name: "CompetitionName", startDate: Date(), endDate: Date() + 10000))
+        NavigationView {
+            CompetitionDetail(competition: Competition(name: "CompetitionName", startDate: Date(), endDate: Date() + 10000))
+        }
     }
 }
