@@ -18,22 +18,22 @@ class UserRecord: DynamicRecord {
 
     let record: CKRecord
     
+    // MARK: Model
+    
+    struct Model {
+        
+        let nickname = ModelItem<String>(key: "nickname")
+        
+        let bio = ModelItem<String>(key: "bio")
+        
+        let profilePictureURL = ModelItem<String>(key: "profilePictureURL")
+        
+    }
+    
     // MARK: Init
     
     required init(record: CKRecord) {
         self.record = record
-    }
-    
-    // MARK: Model
-    
-    struct Model: ModelProtocol {
-        
-        let nickname = ModelItem<String>(key: "nickname")
-                
-        let phoneNumberHash = ModelItem<String>(key: "phoneNumberHash")
-        
-        let bio = ModelItem<String>(key: "bio")
-        
     }
 
 }

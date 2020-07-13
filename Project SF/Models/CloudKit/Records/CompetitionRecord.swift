@@ -8,27 +8,32 @@
 import Foundation
 import CloudKit
 
-class CompetitionRecord: Record {
+class CompetitionRecord: DynamicRecord {
     
     // MARK: Properties
     
     static let type = "Competitions"
+    
+    static let model = Model()
 
     let record: CKRecord
 
-    var type: ChallengeType? {
-        get { ChallengeType(rawValue: record[Key.type] as? Int ?? -1) }
-        set { record[Key.type] = newValue?.rawValue }
+    // manually map from Int to ChallengeType
+    var type: CompetitionType? {
+        get { CompetitionType(rawValue: self[dynamicMember: \.type] ?? -1) }
+        set { self[dynamicMember: \.type] = newValue?.rawValue }
     }
     
-    var startDate: Date? {
-        get { record[Key.startDate] as? Date }
-        set { record[Key.startDate] = newValue }
-    }
+    // MARK: Model
     
-    var endDate: Date? {
-        get { record[Key.endDate] as? Date }
-        set { record[Key.endDate] = newValue }
+    struct Model: ModelProtocol {
+        
+        let type = ModelItem<Int>(key: "type")
+        
+        let startDate = ModelItem<Date>(key: "startDate")
+        
+        let endDate = ModelItem<Date>(key: "endDate")
+        
     }
     
     // MARK: Init
@@ -37,17 +42,9 @@ class CompetitionRecord: Record {
         self.record = record
     }
     
-    // MARK: Key
+    // MARK: CompetitionType
     
-    private enum Key: String, RecordKey {
-        case type
-        case startDate
-        case endDate
-    }
-    
-    // MARK: ChallengeType
-    
-    enum ChallengeType: Int {
+    enum CompetitionType: Int {
         case move = 0
     }
 

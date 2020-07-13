@@ -11,7 +11,7 @@ import CloudKit
 @dynamicMemberLookup
 protocol DynamicRecord: Record, AnyObject {
     
-    associatedtype Model: ModelProtocol
+    associatedtype Model
     
     static var model: Model { get }
     
@@ -21,8 +21,10 @@ protocol DynamicRecord: Record, AnyObject {
 
 extension DynamicRecord {
     
+    // possibly abuse of this api
     subscript<Type>(dynamicMember keyPath: KeyPath<Model, ModelItem<Type>>) -> Type? {
         get {
+            // TODO: investigate runtime cost of this
             let key = Self.model[keyPath: keyPath].key
             
             if let value = record[key] {
@@ -42,12 +44,6 @@ extension DynamicRecord {
             record[key] = newValue as? __CKRecordObjCValue
         }
     }
-    
-}
-
-protocol ModelProtocol {
-    
-    init()
     
 }
 
