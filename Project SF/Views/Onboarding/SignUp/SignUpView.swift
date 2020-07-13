@@ -14,8 +14,7 @@ struct SignUpView: View {
 
     var body: some View {
         VStack {
-            Text("") // This makes the scrollview not break the navtitle.
-            ScrollView {
+            NavScrollView {
                 Text("REQUIRED")
                     .font(.caption)
                     .foregroundColor(.secondary)

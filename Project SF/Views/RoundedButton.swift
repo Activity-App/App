@@ -21,10 +21,9 @@ struct RoundedButton: View {
                 .fontWeight(.semibold)
                 .padding(12)
                 .frame(maxWidth: .infinity, minHeight: 55)
-                .background(isEnabled ? Color.blue : Color.blue.opacity(0.3))
+                .background(isEnabled ? Color.accentColor : Color.accentColor.opacity(0.3))
                 .foregroundColor(.white)
                 .cornerRadius(16)
-                .padding()
         }
     }
 

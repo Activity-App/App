@@ -39,6 +39,7 @@ struct GrantDataAccessView: View {
                     }
                 }
             }
+            .padding()
             Text("This application needs access to your health data to calculate the points in competitions.")
                 .padding(.horizontal, 16)
                 .font(.caption)
