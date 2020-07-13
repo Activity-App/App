@@ -29,7 +29,7 @@ struct CompetitionCell: View {
                     
                     VStack(alignment: .leading) {
                         Spacer()
-                        Text(endDate, style: .relative)
+                        Text("\(endDate, style: .relative) \(endDate < Date() ? "ago" : "")")
                             .foregroundColor(.secondary)
                             .font(.subheadline)
                         Spacer()
@@ -47,7 +47,12 @@ struct CompetitionCell: View {
 
 struct CompetitionCell_Previews: PreviewProvider {
     static var previews: some View {
-        CompetitionCell(competitionName: "test", startDate: Date(), endDate: Date())
-            .frame(width: 200, height: 40)
+        VStack(spacing: 32) {
+            CompetitionCell(competitionName: "test", startDate: Date(), endDate: Date() + 1000)
+                .frame(width: 500, height: 40)
+
+            CompetitionCell(competitionName: "test", startDate: Date(), endDate: Date() - 1000)
+                .frame(width: 500, height: 40)
+        }
     }
 }
