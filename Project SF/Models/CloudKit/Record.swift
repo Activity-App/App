@@ -20,8 +20,12 @@ protocol Record {
 
 extension Record {
     
-    init() {
-        self.init(record: CKRecord(recordType: Self.type))
+    init(recordID: CKRecord.ID? = nil) {
+        if let recordID = recordID {
+            self.init(record: CKRecord(recordType: Self.type, recordID: recordID))
+        } else {
+            self.init(record: CKRecord(recordType: Self.type))
+        }
     }
     
 }

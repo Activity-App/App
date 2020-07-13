@@ -46,6 +46,7 @@
 		9C12BBE624B9D41600C050DB /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C12BBE524B9D41600C050DB /* SampleData.swift */; };
 		9C2445D824BC009F00D8F4FC /* RoundedNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6C74AB24BADD1800C657B0 /* RoundedNavigationButton.swift */; };
 		9C2445DA24BC0D8E00D8F4FC /* InvitationRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2445D924BC0D8E00D8F4FC /* InvitationRecord.swift */; };
+		9C2445DC24BC714100D8F4FC /* Invitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2445DB24BC714100D8F4FC /* Invitation.swift */; };
 		9C338BD524BAC4F4003E5048 /* CompetitionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C338BD424BAC4F4003E5048 /* CompetitionsController.swift */; };
 		9C338BD724BAD080003E5048 /* RecordKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C338BD624BAD080003E5048 /* RecordKey.swift */; };
 		9C338BD924BAD0D3003E5048 /* CompetitionRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C338BD824BAD0D3003E5048 /* CompetitionRecord.swift */; };
@@ -123,6 +124,7 @@
 		9C12BBE324B9D40A00C050DB /* FakeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeError.swift; sourceTree = "<group>"; };
 		9C12BBE524B9D41600C050DB /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		9C2445D924BC0D8E00D8F4FC /* InvitationRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationRecord.swift; sourceTree = "<group>"; };
+		9C2445DB24BC714100D8F4FC /* Invitation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invitation.swift; sourceTree = "<group>"; };
 		9C338BD424BAC4F4003E5048 /* CompetitionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsController.swift; sourceTree = "<group>"; };
 		9C338BD624BAD080003E5048 /* RecordKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordKey.swift; sourceTree = "<group>"; };
 		9C338BD824BAD0D3003E5048 /* CompetitionRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionRecord.swift; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 				302CF88924BA199E00FF79D7 /* RingType.swift */,
 				302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */,
 				9C6C74B524BBE57B00C657B0 /* Friend.swift */,
+				9C2445DB24BC714100D8F4FC /* Invitation.swift */,
 				30D3217C24BB4EDE009CD9D0 /* ActivityRings.swift */,
 			);
 			path = Models;
@@ -602,6 +605,7 @@
 				9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */,
 				30D321BA24BB65D5009CD9D0 /* NotificationSettings.swift in Sources */,
 				30BFC8E724B8041C00DAC6D9 /* ActivityRingsView.swift in Sources */,
+				9C2445DC24BC714100D8F4FC /* Invitation.swift in Sources */,
 				3090918224B9480F000E3B11 /* RoundedButton.swift in Sources */,
 				9CCFDD2424B9745E00162B0F /* UIApplication+IsTesting.swift in Sources */,
 				9CCFDD2824B9758A00162B0F /* TestApp.swift in Sources */,
