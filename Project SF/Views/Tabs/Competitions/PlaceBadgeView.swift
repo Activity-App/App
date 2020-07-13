@@ -81,8 +81,10 @@ struct PlaceBadgeView: View {
                 anchor: .center
             )
             .onTapGesture {
-                withAnimation(.spring()) {
-                    flipped.toggle()
+                if flippable {
+                    withAnimation(.spring()) {
+                        flipped.toggle()
+                    }
                 }
             }
         

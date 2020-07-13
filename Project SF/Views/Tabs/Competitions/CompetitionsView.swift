@@ -29,6 +29,12 @@ struct CompetitionsView: View {
         Competition(name: "Competition3", startDate: Date() - 100000, endDate: Date() + 9900000, place: 9)
     ]
 
+    var recentCompetitions: [Competition] = [
+        Competition(name: "Competition1", startDate: Date() - 100000, endDate: Date() - 1000),
+        Competition(name: "Competition2", startDate: Date() - 1000000, endDate: Date() - 10000),
+        Competition(name: "Competition3", startDate: Date() - 100000, endDate: Date() - 12345)
+    ]
+
     var body: some View {
         NavigationView {
             List {
@@ -53,16 +59,14 @@ struct CompetitionsView: View {
 
                 Section(header: Text("Currently Competing")) {
                     ForEach(competitions.indices) { index in
-                        CompetitionCell(
-                            competitions[index],
-                            activityRings: $healthKit.latestActivityData
-                        )
+                        CompetitionCell(competitions[index])
                     }
                 }
 
                 Section(header: Text("Recent competitions")) {
-                    // TODO: Rescent competitions
-                    Text("Show Rescent competitions here")
+                    ForEach(recentCompetitions.indices) { index in
+                        CompetitionCell(competitions[index])
+                    }
                 }
             }
             .listStyle(InsetGroupedListStyle())

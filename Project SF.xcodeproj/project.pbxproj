@@ -11,12 +11,13 @@
 		30278E9324BC553A00E87E80 /* CompetitionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30278E9224BC553A00E87E80 /* CompetitionDetail.swift */; };
 		302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88924BA199E00FF79D7 /* RingType.swift */; };
 		302CF88C24BA1A4000FF79D7 /* ActivityResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */; };
+		307648C924BC7DC5005D8531 /* GrantDataAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307648C824BC7DC4005D8531 /* GrantDataAccessView.swift */; };
+		307648CB24BC81C8005D8531 /* iCloudErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307648CA24BC81C8005D8531 /* iCloudErrorView.swift */; };
 		308FAD8B24B97E7E00126F3F /* OnboardingInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8A24B97E7E00126F3F /* OnboardingInfoCell.swift */; };
 		308FAD8D24B97E8A00126F3F /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8C24B97E8A00126F3F /* PrivacyView.swift */; };
 		308FAD9124B987F000126F3F /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD9024B987F000126F3F /* SignUpView.swift */; };
 		308FAD9E24B9A0DC00126F3F /* NavigationBarLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD9D24B9A0DC00126F3F /* NavigationBarLabel.swift */; };
 		3090918224B9480F000E3B11 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3090918124B9480F000E3B11 /* RoundedButton.swift */; };
-		30963C8D24BA90EB005D9EA7 /* GrantDataAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30963C8C24BA90EB005D9EA7 /* GrantDataAccessView.swift */; };
 		30BFC8CE24B75E6C00DAC6D9 /* ProjectSFApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8CD24B75E6C00DAC6D9 /* ProjectSFApp.swift */; };
 		30BFC8D024B75E6C00DAC6D9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8CF24B75E6C00DAC6D9 /* ContentView.swift */; };
 		30BFC8D224B75E6F00DAC6D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30BFC8D124B75E6F00DAC6D9 /* Assets.xcassets */; };
@@ -80,12 +81,13 @@
 		30278E9224BC553A00E87E80 /* CompetitionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionDetail.swift; sourceTree = "<group>"; };
 		302CF88924BA199E00FF79D7 /* RingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingType.swift; sourceTree = "<group>"; };
 		302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityResult.swift; sourceTree = "<group>"; };
+		307648C824BC7DC4005D8531 /* GrantDataAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrantDataAccessView.swift; sourceTree = "<group>"; };
+		307648CA24BC81C8005D8531 /* iCloudErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudErrorView.swift; sourceTree = "<group>"; };
 		308FAD8A24B97E7E00126F3F /* OnboardingInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingInfoCell.swift; sourceTree = "<group>"; };
 		308FAD8C24B97E8A00126F3F /* PrivacyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
 		308FAD9024B987F000126F3F /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		308FAD9D24B9A0DC00126F3F /* NavigationBarLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarLabel.swift; sourceTree = "<group>"; };
 		3090918124B9480F000E3B11 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
-		30963C8C24BA90EB005D9EA7 /* GrantDataAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrantDataAccessView.swift; sourceTree = "<group>"; };
 		30BFC8CA24B75E6C00DAC6D9 /* Project SF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project SF.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30BFC8CD24B75E6C00DAC6D9 /* ProjectSFApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSFApp.swift; sourceTree = "<group>"; };
 		30BFC8CF24B75E6C00DAC6D9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				308FAD8924B97E5500126F3F /* Onboarding */,
 				30BFC8E624B8041C00DAC6D9 /* ActivityRingsView.swift */,
 				30BFC8E824B804CC00DAC6D9 /* ActivityRingView.swift */,
+				307648CA24BC81C8005D8531 /* iCloudErrorView.swift */,
 				3090918124B9480F000E3B11 /* RoundedButton.swift */,
 				9C6C74AB24BADD1800C657B0 /* RoundedNavigationButton.swift */,
 				308FAD9D24B9A0DC00126F3F /* NavigationBarLabel.swift */,
@@ -206,7 +209,7 @@
 				30F1EA3A24B951CA00FF89FC /* OnboardingView.swift */,
 				308FAD8C24B97E8A00126F3F /* PrivacyView.swift */,
 				308FAD9024B987F000126F3F /* SignUpView.swift */,
-				30963C8C24BA90EB005D9EA7 /* GrantDataAccessView.swift */,
+				307648C824BC7DC4005D8531 /* GrantDataAccessView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -539,7 +542,6 @@
 				9C7B4D0824B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift in Sources */,
 				30BFC8D024B75E6C00DAC6D9 /* ContentView.swift in Sources */,
 				30FCC84C24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift in Sources */,
-				30963C8D24BA90EB005D9EA7 /* GrantDataAccessView.swift in Sources */,
 				30FCC84E24BB318000862C01 /* KeyboardManager.swift in Sources */,
 				30BFC8CE24B75E6C00DAC6D9 /* ProjectSFApp.swift in Sources */,
 				9CCFDD1F24B971D600162B0F /* NetworkManager.swift in Sources */,
@@ -563,6 +565,7 @@
 				9C8FAD4624B9E39E00571947 /* Record.swift in Sources */,
 				30D321B924BB65D5009CD9D0 /* ImageSelectionView.swift in Sources */,
 				30D3217D24BB4EDE009CD9D0 /* ActivityRings.swift in Sources */,
+				307648C924BC7DC5005D8531 /* GrantDataAccessView.swift in Sources */,
 				30D321BF24BB65D5009CD9D0 /* FriendsView.swift in Sources */,
 				302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */,
 				9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */,
@@ -577,6 +580,7 @@
 				30D321BB24BB65D5009CD9D0 /* PermissionSettings.swift in Sources */,
 				30278E9324BC553A00E87E80 /* CompetitionDetail.swift in Sources */,
 				30D321B824BB65D5009CD9D0 /* SettingsView.swift in Sources */,
+				307648CB24BC81C8005D8531 /* iCloudErrorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,7 +735,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Project SF/Project SF.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = W9K99K5JN4;
+				DEVELOPMENT_TEAM = 939BQQZ3GG;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -739,7 +743,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.priva28.ProjectSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -755,7 +759,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = W9K99K5JN4;
+				DEVELOPMENT_TEAM = 939BQQZ3GG;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -763,7 +767,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.priva28.ProjectSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

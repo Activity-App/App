@@ -9,19 +9,26 @@ import SwiftUI
 
 struct CompetitionCell: View {
     
-    @Binding var activityRings: ActivityRings
+    let activity = ActivityRings(
+        moveCurrent: 350,
+        moveGoal: 300,
+        exerciseCurrent: 4,
+        exerciseGoal: 30,
+        standCurrent: 1,
+        standGoal: 12
+    )
     let competition: Competition
 
     var body: some View {
         NavigationLink(
-            destination: CompetitionDetail(activityRings: $activityRings, competition: competition),
+            destination: CompetitionDetail(competition: competition),
             label: {
                 HStack {
                     VStack {
                         PlaceBadgeView(
                             place: competition.place,
                             flippable: false,
-                            activityRings: $activityRings,
+                            activityRings: .constant(activity),
                             font: .body,
                             innerPadding: 10,
                             outerPadding: 4
@@ -50,16 +57,15 @@ struct CompetitionCell: View {
             .padding(.vertical, 8)
     }
 
-    init(_ competition: Competition, activityRings: Binding<ActivityRings>) {
+    init(_ competition: Competition) {
         self.competition = competition
-        self._activityRings = activityRings
     }
 }
 
 struct CompetitionCell_Previews: PreviewProvider {
     
     static var previews: some View {
-        
+
         let activity = ActivityRings(
             moveCurrent: 350,
             moveGoal: 300,
@@ -69,7 +75,17 @@ struct CompetitionCell_Previews: PreviewProvider {
             standGoal: 12
         )
         
-        return CompetitionCell(Competition(name: "Test", startDate: Date(), endDate: Date()), activityRings: .constant(activity))
-            .frame(width: 200, height: 40)
+        var competitions: [Competition] = [
+            Competition(name: "Competition1", startDate: Date() - 100000, endDate: Date() + 100000, points: 5987, place: 1),
+            Competition(name: "Competition2", startDate: Date() - 100000, endDate: Date() + 30000000, place: 2),
+        ]
+
+        return VStack(spacing: 32) {
+            CompetitionCell(competitions[0])
+                .frame(width: 500, height: 40)
+
+            CompetitionCell(competitions[1])
+                .frame(width: 500, height: 40)
+        }
     }
 }

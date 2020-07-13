@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CompetitionDetail: View {
     
-    @Binding var activityRings: ActivityRings
+    @EnvironmentObject var healthKit: HealthKitController
     let competition: Competition
     
     var body: some View {
@@ -18,7 +18,7 @@ struct CompetitionDetail: View {
                 PlaceBadgeView(
                     place: competition.place,
                     flippable: true,
-                    activityRings: $activityRings
+                    activityRings: $healthKit.latestActivityData
                 )
                 VStack(alignment: .leading) {
                     Text("\(competition.points) points")
