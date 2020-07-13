@@ -1,5 +1,5 @@
 //
-//  GrantDataAccessView.swift
+//  GrantiCloudAccessView.swift
 //  Project SF
 //
 //  Created by Roman Esin on 12.07.2020.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct GrantDataAccessView: View {
+struct GrantiCloudAccessView: View {
 
     @Binding var showOnboarding: Bool
     @EnvironmentObject var healthKit: HealthKitController
@@ -17,7 +17,7 @@ struct GrantDataAccessView: View {
     var body: some View {
         VStack {
             Spacer()
-            Image(systemName: "heart.fill")
+            Image(systemName: "icloud.fill")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(.red)
@@ -31,22 +31,28 @@ struct GrantDataAccessView: View {
                 .opacity(0.8)
             Spacer()
 
-            RoundedNavigationLink("Grant Health Data Access",
-                                  destination: GrantiCloudAccessView(showOnboarding: $showOnboarding))
-                .padding()
-            Text("This application needs access to your health data to calculate the points in competitions.")
+            RoundedButton("Grant iCloud Access") {
+                healthKit.authorizeHealthKit {
+                    if healthKit.authorizationState == .granted {
+                        showOnboarding = false
+                        healthKit.updateTodaysActivityData()
+                    }
+                }
+            }
+            .padding()
+            Text("This application uses Apple's iCloud to store the competitions.")
                 .padding(.horizontal, 16)
                 .font(.caption)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
         }
         .padding(.horizontal)
-        .navigationTitle("iCloud")
+        .navigationTitle("Health Data")
         .highPriorityGesture(DragGesture())
     }
 }
 
-struct GrantDataAccessView_Previews: PreviewProvider {
+struct GrantiCloudAccessView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             GrantDataAccessView(showOnboarding: .constant(true))
