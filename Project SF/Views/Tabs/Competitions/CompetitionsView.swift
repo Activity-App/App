@@ -26,6 +26,12 @@ struct CompetitionsView: View {
         Competition(name: "Competition3", startDate: Date() - 100000, endDate: Date() + 9900000)
     ]
 
+    var rescentCompetitions: [Competition] = [
+        Competition(name: "Competition1", startDate: Date() - 100000, endDate: Date() - 1000),
+        Competition(name: "Competition2", startDate: Date() - 1000000, endDate: Date() - 10000),
+        Competition(name: "Competition3", startDate: Date() - 100000, endDate: Date() - 12345)
+    ]
+
     var body: some View {
         NavigationView {
             List {
@@ -59,8 +65,11 @@ struct CompetitionsView: View {
                 }
 
                 Section(header: Text("Rescent competitions")) {
-                    // TODO: Rescent competitions
-                    Text("Show Rescent competitions here")
+                    ForEach(rescentCompetitions.indices) { index in
+                        CompetitionCell(competitionName: rescentCompetitions[index].name,
+                                        startDate: rescentCompetitions[index].startDate,
+                                        endDate: rescentCompetitions[index].endDate)
+                    }
                 }
             }
             .listStyle(InsetGroupedListStyle())
