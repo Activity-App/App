@@ -8,13 +8,11 @@
 import SwiftUI
 
 struct CompetitionCell: View {
-    let competitionName: String
-    let startDate: Date
-    let endDate: Date
+    let competition: Competition
 
     var body: some View {
         NavigationLink(
-            destination: Text("Destination"),
+            destination: CompetitionDetail(competition: competition),
             label: {
                 HStack {
                     VStack {
@@ -29,11 +27,11 @@ struct CompetitionCell: View {
                     
                     VStack(alignment: .leading) {
                         Spacer()
-                        Text(endDate, style: .relative)
+                        Text(competition.endDate, style: .relative)
                             .foregroundColor(.secondary)
                             .font(.subheadline)
                         Spacer()
-                        Text(competitionName)
+                        Text(competition.name)
                             .font(.headline)
                         Spacer()
                     }
@@ -47,7 +45,7 @@ struct CompetitionCell: View {
 
 struct CompetitionCell_Previews: PreviewProvider {
     static var previews: some View {
-        CompetitionCell(competitionName: "test", startDate: Date(), endDate: Date())
+        CompetitionCell(competition: Competition(name: "Test", startDate: Date(), endDate: Date()))
             .frame(width: 200, height: 40)
     }
 }

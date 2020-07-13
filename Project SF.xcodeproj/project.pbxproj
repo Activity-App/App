@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30278E9324BC553A00E87E80 /* CompetitionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30278E9224BC553A00E87E80 /* CompetitionDetail.swift */; };
 		302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88924BA199E00FF79D7 /* RingType.swift */; };
 		302CF88C24BA1A4000FF79D7 /* ActivityResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */; };
 		308FAD8B24B97E7E00126F3F /* OnboardingInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8A24B97E7E00126F3F /* OnboardingInfoCell.swift */; };
@@ -73,6 +74,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		30278E9224BC553A00E87E80 /* CompetitionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionDetail.swift; sourceTree = "<group>"; };
 		302CF88924BA199E00FF79D7 /* RingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingType.swift; sourceTree = "<group>"; };
 		302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityResult.swift; sourceTree = "<group>"; };
 		308FAD8A24B97E7E00126F3F /* OnboardingInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingInfoCell.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 			children = (
 				30D321A724BB65D5009CD9D0 /* CompetitionsView.swift */,
 				30D321A824BB65D5009CD9D0 /* CompetitionCell.swift */,
+				30278E9224BC553A00E87E80 /* CompetitionDetail.swift */,
 				30D321A924BB65D5009CD9D0 /* CreateCompetition.swift */,
 			);
 			path = Competitions;
@@ -564,6 +567,7 @@
 				302CF88C24BA1A4000FF79D7 /* ActivityResult.swift in Sources */,
 				9C6C74AC24BADD1800C657B0 /* RoundedNavigationButton.swift in Sources */,
 				30D321BB24BB65D5009CD9D0 /* PermissionSettings.swift in Sources */,
+				30278E9324BC553A00E87E80 /* CompetitionDetail.swift in Sources */,
 				30D321B824BB65D5009CD9D0 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -719,7 +723,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Project SF/Project SF.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = W9K99K5JN4;
+				DEVELOPMENT_TEAM = 939BQQZ3GG;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -727,7 +731,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.priva28.ProjectSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -742,7 +746,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Project SF/Project SF.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SF/Preview Content\"";
-				DEVELOPMENT_TEAM = W9K99K5JN4;
+				DEVELOPMENT_TEAM = 939BQQZ3GG;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SF/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -750,7 +754,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.priva28.ProjectSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
