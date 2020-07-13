@@ -23,9 +23,10 @@ struct CompetitionsView: View {
     
     // Temporary. Get these from CK when thats working.
     var competitions: [Competition] = [
-        Competition(name: "Competition1", startDate: Date() - 100000, endDate: Date() + 100000),
-        Competition(name: "Competition2", startDate: Date() - 100000, endDate: Date() + 30000000),
-        Competition(name: "Competition3", startDate: Date() - 100000, endDate: Date() + 9900000)
+        Competition(name: "Competition1", startDate: Date() - 100000, endDate: Date() + 100000, points: 5987, place: 1),
+        Competition(name: "Competition2", startDate: Date() - 100000, endDate: Date() + 30000000, place: 2),
+        Competition(name: "Competition3", startDate: Date() - 100000, endDate: Date() + 9900000, points: 3091, place: 3),
+        Competition(name: "Competition3", startDate: Date() - 100000, endDate: Date() + 9900000, place: 9)
     ]
 
     var body: some View {
@@ -53,12 +54,13 @@ struct CompetitionsView: View {
                 Section(header: Text("Currently Competing")) {
                     ForEach(competitions.indices) { index in
                         CompetitionCell(
+                            activityRings: $healthKit.latestActivityData,
                             competition: competitions[index]
                         )
                     }
                 }
 
-                Section(header: Text("Rescent competitions")) {
+                Section(header: Text("Recent competitions")) {
                     // TODO: Rescent competitions
                     Text("Show Rescent competitions here")
                 }
