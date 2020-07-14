@@ -10,6 +10,7 @@ import SwiftUI
 struct CreateCompetition: View {
 
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.locale) var locale
     @State var competitionName = ""
     @State var competitionEndDate = Date() + 60 * 60 * 24
     @State var pickedDate = 0
@@ -91,7 +92,7 @@ struct CreateCompetition: View {
                                     stepsGoalInt = min(50000, max(1000, stepsGoalInt - 1000))
                                     stepsGoal = String(stepsGoalInt)
                                 }
-                                .opacity(Int(stepsGoal) == nil ? 1 : 1)
+                                .opacity(Int(stepsGoal) == nil ? 1 : 1) // Fixes stepper issue.
                             }
                             HStack {
                                 Spacer()
@@ -117,23 +118,32 @@ struct CreateCompetition: View {
                                 Image(systemName: "chevron.down")
                                     .foreground(Color(.tertiaryLabel))
                                 Stepper("Goal") {
-                                    distanceGoalInt = min(1000, max(1, distanceGoalInt + 1))
+                                    distanceGoalInt = min(
+                                        locale.usesMetricSystem ? 1000 : 600,
+                                        max(1, distanceGoalInt + 1)
+                                    )
                                     distanceGoal = String(distanceGoalInt)
                                 } onDecrement: {
-                                    distanceGoalInt = min(1000, max(1, distanceGoalInt - 1))
+                                    distanceGoalInt = min(
+                                        locale.usesMetricSystem ? 1000 : 600,
+                                        max(1, distanceGoalInt - 1)
+                                    )
                                     distanceGoal = String(distanceGoalInt)
                                 }
-                                .opacity(Int(distanceGoal) == nil ? 1 : 1)
+                                .opacity(Int(distanceGoal) == nil ? 1 : 1) // Fixes stepper issue.
                             }
                             HStack {
                                 Spacer()
                                 TextField("Amount", text: $distanceGoal, onEditingChanged: { _ in
-                                    distanceGoalInt = min(1000, max(1, Int(distanceGoal) ?? 10))
+                                    distanceGoalInt = min(
+                                        locale.usesMetricSystem ? 1000 : 600,
+                                        max(1, Int(distanceGoal) ?? 10)
+                                    )
                                     distanceGoal = String(distanceGoalInt)
                                 })
                                 .keyboardType(.numberPad)
                                 .multilineTextAlignment(.trailing)
-                                Text("km")
+                                Text(locale.usesMetricSystem ? "km" : "miles")
                                     .foregroundColor(.secondary)
                             }
                         }
