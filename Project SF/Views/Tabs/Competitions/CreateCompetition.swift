@@ -85,17 +85,18 @@ struct CreateCompetition: View {
                                 Image(systemName: "chevron.down")
                                     .foreground(Color(.tertiaryLabel))
                                 Stepper("Goal") {
-                                    stepsGoalInt = min(10000, max(1000, stepsGoalInt + 1000))
+                                    stepsGoalInt = min(50000, max(1000, stepsGoalInt + 1000))
                                     stepsGoal = String(stepsGoalInt)
                                 } onDecrement: {
-                                    stepsGoalInt = min(10000, max(1000, stepsGoalInt - 1000))
+                                    stepsGoalInt = min(50000, max(1000, stepsGoalInt - 1000))
                                     stepsGoal = String(stepsGoalInt)
                                 }
+                                .opacity(Int(stepsGoal) == nil ? 1 : 1)
                             }
                             HStack {
                                 Spacer()
                                 TextField("Amount", text: $stepsGoal, onEditingChanged: { _ in
-                                    stepsGoalInt = max(1000, min(0, Int(stepsGoal) ?? 10000))
+                                    stepsGoalInt = min(50000, max(1000, Int(stepsGoal) ?? 10000))
                                     stepsGoal = String(stepsGoalInt)
                                 })
                                 .keyboardType(.numberPad)
@@ -116,18 +117,18 @@ struct CreateCompetition: View {
                                 Image(systemName: "chevron.down")
                                     .foreground(Color(.tertiaryLabel))
                                 Stepper("Goal") {
-                                    distanceGoalInt += 1
+                                    distanceGoalInt = min(1000, max(1, distanceGoalInt + 1))
                                     distanceGoal = String(distanceGoalInt)
                                 } onDecrement: {
-                                    distanceGoalInt -= 1
+                                    distanceGoalInt = min(1000, max(1, distanceGoalInt - 1))
                                     distanceGoal = String(distanceGoalInt)
                                 }
+                                .opacity(Int(distanceGoal) == nil ? 1 : 1)
                             }
                             HStack {
                                 Spacer()
                                 TextField("Amount", text: $distanceGoal, onEditingChanged: { _ in
-                                    distanceGoalInt = Int(distanceGoal) ?? 10
-                                    distanceGoalInt = distanceGoalInt == 0 ? 1 : distanceGoalInt
+                                    distanceGoalInt = min(1000, max(1, Int(distanceGoal) ?? 10))
                                     distanceGoal = String(distanceGoalInt)
                                 })
                                 .keyboardType(.numberPad)
@@ -190,7 +191,7 @@ struct CreateCompetition: View {
                 guard !competitionName.isEmpty else { return }
                 presentationMode.wrappedValue.dismiss()
             }
-            .disabled(competitionName.isEmpty && Int(stepsGoal) == nil)
+            .disabled(competitionName.isEmpty)
         }
         .padding(.horizontal)
         .navigationBarTitle("Create Competition")
