@@ -40,11 +40,12 @@ struct CompetitionDetail: View {
                 .padding(.top)
                 .padding(.horizontal)
                 List {
-                    Text("Hello")
-                    Text("Hello")
-                    Text("Hello")
-                    Text("Hello")
-                    Text("Hello")
+                    ForEach(competition.people.sorted{ $0.points > $1.points }) { person in
+                        HStack {
+                            Text("\(competition.people.sorted{ $0.points > $1.points }.firstIndex(of: person)! + 1)")
+                            Text(person.name)
+                        }
+                    }
                 }
                 .listStyle(InsetGroupedListStyle())
                 Spacer()
@@ -66,7 +67,7 @@ struct CompetitionDetail_Previews: PreviewProvider {
                     people: [
                         CompetingPerson(name: "Person1", points: 100),
                         CompetingPerson(name: "Person2", points: 200),
-                        CompetingPerson(name: "Person3", points: 6000)
+                        CompetingPerson(name: "Person3", points: 0)
                     ]
                 )
             )
