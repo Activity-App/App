@@ -19,7 +19,9 @@ struct PlaceBadgeView: View {
     
     @State var flipped = false
     
-    init(place: Int, flippable: Bool, activityRings: Binding<ActivityRings>, font: Font = .title, innerPadding: CGFloat = 32, outerPadding: CGFloat = 16) {
+    init(place: Int, flippable: Bool,
+         activityRings: Binding<ActivityRings>, font: Font = .title,
+         innerPadding: CGFloat = 32, outerPadding: CGFloat = 16) {
         self.place = place
         self.flippable = flippable
         self._activityRings = activityRings
@@ -40,9 +42,9 @@ struct PlaceBadgeView: View {
                         Group {
                             if !flipped {
                                 place == 1 ? Color.yellow :
-                                place == 2 ? Color(.lightGray) :
-                                place == 3 ? Color.init(red: 0.6, green: 0.4, blue: 0.3) :
-                                             Color.accentColor
+                                    place == 2 ? Color(.lightGray) :
+                                    place == 3 ? Color.init(red: 0.6, green: 0.4, blue: 0.3) :
+                                    Color.accentColor
                             } else {
                                 GeometryReader { geometry in
                                     ZStack {
@@ -61,13 +63,11 @@ struct PlaceBadgeView: View {
                             }
                         }
                     )
-                    .shadow(color: Color("shadow"), radius: 10)
                     .overlay(
                         Group {
                             if !flipped {
                                 Circle()
                                     .stroke(lineWidth: 5)
-                                    .shadow(radius: 10)
                                     .clipShape(Circle())
                                     .foregroundColor(.clear)
                             }
@@ -80,13 +80,24 @@ struct PlaceBadgeView: View {
                 axis: (x: 0, y: 1, z: 0),
                 anchor: .center
             )
-            .onTapGesture {
-                if flippable {
-                    withAnimation(.spring()) {
-                        flipped.toggle()
-                    }
+            .modifier(OptionalTapGesture(condition: flippable, action: {
+                withAnimation(.spring()) {
+                    flipped.toggle()
                 }
-            }
-        
+            }))
+    }
+}
+
+struct OptionalTapGesture: ViewModifier {
+    var condition: Bool
+    var action: () -> Void
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        if condition {
+            content.onTapGesture(perform: action)
+        } else {
+            content
+        }
     }
 }
