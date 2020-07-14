@@ -24,6 +24,17 @@ struct CompetitionCell: View {
             destination: CompetitionDetail(competition: competition),
             label: {
                 HStack {
+                    VStack(alignment: .leading) {
+                        Spacer()
+                        Text("\(competition.endDate, style: .relative) \(competition.endDate < Date() ? "ago" : "")")
+                            .foregroundColor(.secondary)
+                            .font(.subheadline)
+                        Spacer()
+                        Text(competition.name)
+                            .font(.headline)
+                        Spacer()
+                    }
+                    Spacer()
                     VStack {
                         PlaceBadgeView(
                             place: competition.place,
@@ -37,6 +48,7 @@ struct CompetitionCell: View {
                             .foregroundColor(.secondary)
                             .font(.subheadline)
                             .frame(minWidth: 50)
+                            .minimumScaleFactor(0.8)
                     }
                     .frame(width: 85)
                     .padding(.horizontal, 8)
@@ -52,8 +64,9 @@ struct CompetitionCell: View {
                         Spacer()
                     }
                     Spacer()
+                    .frame(width: 100)
+//                    .padding(.horizontal, 8)
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
             })
             .padding(.vertical, 8)
     }
@@ -67,26 +80,30 @@ struct CompetitionCell_Previews: PreviewProvider {
     
     static var previews: some View {
 
-        let activity = ActivityRings(
-            moveCurrent: 350,
-            moveGoal: 300,
-            exerciseCurrent: 4,
-            exerciseGoal: 30,
-            standCurrent: 1,
-            standGoal: 12
-        )
+//        let activity = ActivityRings(
+//            moveCurrent: 350,
+//            moveGoal: 300,
+//            exerciseCurrent: 4,
+//            exerciseGoal: 30,
+//            standCurrent: 1,
+//            standGoal: 12
+//        )
         
         let competitions: [Competition] = [
-            Competition(name: "Competition1", startDate: Date() - 100000, endDate: Date() + 100000, points: 5987, place: 1),
-            Competition(name: "Competition2", startDate: Date() - 100000, endDate: Date() + 30000000, place: 2)
+            Competition(name: "Competition1",
+                        startDate: Date() - 100000, endDate: Date() + 100000,
+                        points: 5987, place: 1),
+            Competition(name: "Competition2",
+                        startDate: Date() - 100000, endDate: Date() + 30000000,
+                        place: 2)
         ]
 
         return VStack(spacing: 32) {
             CompetitionCell(competitions[0])
-                .frame(width: 500, height: 40)
-
-            CompetitionCell(competitions[1])
-                .frame(width: 500, height: 40)
+//                .frame(width: 500, height: 40)
+//
+//            CompetitionCell(competitions[1])
+//                .frame(width: 500, height: 40)
         }
     }
 }
