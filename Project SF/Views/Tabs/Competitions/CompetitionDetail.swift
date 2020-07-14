@@ -40,8 +40,8 @@ struct CompetitionDetail: View {
     }
 }
 
-//struct CompetitionDetail_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CompetitionDetail(competition: Competition(name: "CompetitionName", startDate: Date(), endDate: Date() + 10000, place: 1))
-//    }
-//}
+struct CompetitionDetail_Previews: PreviewProvider {
+    static var previews: some View {
+        CompetitionDetail(competition: Competition(name: "CompetitionName", startDate: Date(), endDate: Date() + 10000, place: 1))
+    }
+}

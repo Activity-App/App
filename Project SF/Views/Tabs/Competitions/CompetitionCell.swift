@@ -38,6 +38,7 @@ struct CompetitionCell: View {
                             .font(.subheadline)
                             .frame(minWidth: 50)
                     }
+                    .frame(width: 85)
                     .padding(.horizontal, 8)
                     
                     VStack(alignment: .leading) {
@@ -75,9 +76,9 @@ struct CompetitionCell_Previews: PreviewProvider {
             standGoal: 12
         )
         
-        var competitions: [Competition] = [
+        let competitions: [Competition] = [
             Competition(name: "Competition1", startDate: Date() - 100000, endDate: Date() + 100000, points: 5987, place: 1),
-            Competition(name: "Competition2", startDate: Date() - 100000, endDate: Date() + 30000000, place: 2),
+            Competition(name: "Competition2", startDate: Date() - 100000, endDate: Date() + 30000000, place: 2)
         ]
 
         return VStack(spacing: 32) {

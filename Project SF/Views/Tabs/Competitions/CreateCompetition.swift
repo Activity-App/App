@@ -84,15 +84,20 @@ struct CreateCompetition: View {
                             HStack {
                                 Image(systemName: "chevron.down")
                                     .foreground(Color(.tertiaryLabel))
-                                Stepper("Goal", value: $stepsGoalInt, in: 1000...50000, step: 1000)
+                                Stepper("Goal") {
+                                    stepsGoalInt = min(10000, max(1000, stepsGoalInt + 1000))
+                                    stepsGoal = String(stepsGoalInt)
+                                } onDecrement: {
+                                    stepsGoalInt = min(10000, max(1000, stepsGoalInt - 1000))
+                                    stepsGoal = String(stepsGoalInt)
+                                }
                             }
                             HStack {
                                 Spacer()
-                                TextField("Amount", text: $stepsGoal) { _ in } onCommit: {
-                                    stepsGoalInt = Int(stepsGoal) ?? 10000
-                                    stepsGoalInt = stepsGoalInt == 0 ? 1 : stepsGoalInt
+                                TextField("Amount", text: $stepsGoal, onEditingChanged: { _ in
+                                    stepsGoalInt = max(1000, min(0, Int(stepsGoal) ?? 10000))
                                     stepsGoal = String(stepsGoalInt)
-                                }
+                                })
                                 .keyboardType(.numberPad)
                                 .multilineTextAlignment(.trailing)
                                 Text("steps")
@@ -110,15 +115,21 @@ struct CreateCompetition: View {
                             HStack {
                                 Image(systemName: "chevron.down")
                                     .foreground(Color(.tertiaryLabel))
-                                Stepper("Goal", value: $distanceGoalInt, in: 1...100, step: 1)
+                                Stepper("Goal") {
+                                    distanceGoalInt += 1
+                                    distanceGoal = String(distanceGoalInt)
+                                } onDecrement: {
+                                    distanceGoalInt -= 1
+                                    distanceGoal = String(distanceGoalInt)
+                                }
                             }
                             HStack {
                                 Spacer()
-                                TextField("Amount", text: $distanceGoal) { _ in } onCommit: {
+                                TextField("Amount", text: $distanceGoal, onEditingChanged: { _ in
                                     distanceGoalInt = Int(distanceGoal) ?? 10
                                     distanceGoalInt = distanceGoalInt == 0 ? 1 : distanceGoalInt
                                     distanceGoal = String(distanceGoalInt)
-                                }
+                                })
                                 .keyboardType(.numberPad)
                                 .multilineTextAlignment(.trailing)
                                 Text("km")
