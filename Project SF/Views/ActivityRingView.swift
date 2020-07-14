@@ -33,7 +33,7 @@ struct ActivityRingView: View {
                         .trim(from: 0, to: CGFloat(fill))
                         .stroke(
                             AngularGradient(
-                                gradient: Gradient(colors: [ringType.darkColor, ringType.color]),
+                                gradient: Gradient(colors: [ringType.darkColor.opacity(0.7), ringType.color]),
                                 center: .center,
                                 startAngle: .degrees(0),
                                 endAngle: .degrees(360 * fill)
