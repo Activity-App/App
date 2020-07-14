@@ -33,7 +33,7 @@ struct ActivityRingView: View {
                         .trim(from: 0, to: CGFloat(fill))
                         .stroke(
                             AngularGradient(
-                                gradient: Gradient(colors: [ringType.darkColor, ringType.color]),
+                                gradient: Gradient(colors: [ringType.darkColor.opacity(0.7), ringType.color]),
                                 center: .center,
                                 startAngle: .degrees(0),
                                 endAngle: .degrees(360 * fill)
@@ -46,7 +46,7 @@ struct ActivityRingView: View {
                     // Fixes gradient when at 0 position
                     Circle()
                         .frame(width: ringWidth, height: ringWidth)
-                        .offset(y: -geometry.size.height/2)
+                        .offset(y: -geometry.size.height / 2)
                         .foregroundColor(
                             fill > 0.1 ? .clear : ringType.darkColor
                         )
@@ -54,14 +54,14 @@ struct ActivityRingView: View {
                     // Ring shadow
                     Circle()
                         .frame(width: ringWidth, height: ringWidth)
-                        .offset(y: -geometry.size.height/2)
+                        .offset(y: -geometry.size.height / 2)
                         .foregroundColor(
                             fill > 0.96 ? ringType.color : .clear
                         )
                         .shadow(
-                            color: Color.black.opacity(0.15),
-                            radius: ringWidth/8,
-                            x: ringWidth/3.5,
+                            color: Color.black.opacity(0.125),
+                            radius: ringWidth / 8,
+                            x: ringWidth / 3.5,
                             y: 0
                         )
                         .rotationEffect(.degrees(360 * fill))
@@ -69,19 +69,19 @@ struct ActivityRingView: View {
                     
                     ringType.icon
                         .resizable()
-                        .frame(width: ringWidth-4, height: ringWidth-4)
-                        .offset(y: -geometry.size.height/2)
+                        .frame(width: ringWidth - 4, height: ringWidth - 4)
+                        .offset(y: -geometry.size.height / 2)
                 }
             }
         }
         .onAppear {
-            fill = current/goal + 0.001
+            fill = current / goal + 0.001
         }
         .onChange(of: current) { newCurrent in
-            fill = newCurrent/goal + 0.001
+            fill = newCurrent / goal + 0.001
         }
         .onChange(of: goal) { newGoal in
-            fill = current/newGoal + 0.001
+            fill = current / newGoal + 0.001
         }
     }
 }
