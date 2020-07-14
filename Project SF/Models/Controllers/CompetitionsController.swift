@@ -187,6 +187,27 @@ class CompetitionsController {
             }
         }
         
+        dispatchGroup.enter()
+        fetchCompetitionsFromDatabaseWithScope(.private, then: { (result: Result<[CompetitionRecord], Error>) in
+            dispatchGroup.leave()
+            switch result {
+            case .success(let records):
+                competitionRecords.append(contentsOf: records)
+            case .failure(let error):
+                errors.append(error)
+            }
+        })
+        dispatchGroup.enter()
+        fetchCompetitionsFromDatabaseWithScope(.shared, then: { (result: Result<[CompetitionRecord], Error>) in
+            dispatchGroup.leave()
+            switch result {
+            case .success(let records):
+                competitionRecords.append(contentsOf: records)
+            case .failure(let error):
+                errors.append(error)
+            }
+        })
+        
         dispatchGroup.notify(queue: .main) {
             if competitionRecords.isEmpty, !errors.isEmpty {
                 handler(.failure(CompetitionsControllerError.multiple(errors)))
@@ -194,11 +215,6 @@ class CompetitionsController {
                 handler(.success(competitionRecords))
             }
         }
-        
-        dispatchGroup.enter()
-        fetchCompetitionsFromDatabaseWithScope(.private, then: recordFetchHandler)
-        dispatchGroup.enter()
-        fetchCompetitionsFromDatabaseWithScope(.shared, then: recordFetchHandler)
     }
     
     // MARK: Friend Discovery
@@ -366,6 +382,7 @@ class CompetitionsController {
         
         fetchZonesOperation.qualityOfService = .userInitiated
         fetchZonesOperation.fetchRecordZonesCompletionBlock = { recordZones, error in
+            print(scope)
             if let error = error {
                 handler(.failure(error))
                 return
@@ -382,10 +399,7 @@ class CompetitionsController {
             let dispatchGroup = DispatchGroup()
             
             var competitions = [CompetitionRecord]()
-            
-            dispatchGroup.notify(queue: .main) {
-                handler(.success(competitions))
-            }
+            var errors = [Error]()
             
             for zone in zones {
                 dispatchGroup.enter()
@@ -395,10 +409,24 @@ class CompetitionsController {
                 fetchRecordOperation.zoneID = zone.zoneID
                 fetchRecordOperation.recordFetchedBlock = { record in
                     competitions.append(CompetitionRecord(record: record))
-                    dispatchGroup.leave()
+                }
+                fetchRecordOperation.queryCompletionBlock = { _, error in
+                    defer { dispatchGroup.leave() }
+                    if let error = error {
+                        errors.append(error)
+                        return
+                    }
                 }
                 
                 database.add(fetchRecordOperation)
+            }
+            
+            dispatchGroup.notify(queue: .main) {
+                if !errors.isEmpty, competitions.isEmpty {
+                    handler(.failure(CompetitionsControllerError.multiple(errors)))
+                    return
+                }
+                handler(.success(competitions))
             }
         }
         
