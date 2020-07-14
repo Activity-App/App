@@ -33,18 +33,11 @@ struct CompetitionCell: View {
                             innerPadding: 10,
                             outerPadding: 4
                         )
-//                        Text("\(competition.points) points")
-//                            .foregroundColor(.secondary)
-//                            .font(.subheadline)
-//                            .lineLimit(1)
-//                            .minimumScaleFactor(0.8)
                     }
                     .padding(.trailing, 8)
-//                    .frame(width: 80)
-//                    .padding(.horizontal, 8)
 
                     VStack(alignment: .leading) {
-                        Text("\(competition.points) points, \(competition.endDate, style: .relative) \(competition.endDate < Date() ? "ago" : "")")
+                        Text("\(competition.points) points, \(competition.endDate, style: .relative) \(competition.endDate < Date() ? "ago" : "left")")
                             .foregroundColor(.secondary)
                             .font(.subheadline)
                             .lineLimit(1)
@@ -55,9 +48,6 @@ struct CompetitionCell: View {
                             .fontWeight(.bold)
                     }
                     .padding(.vertical, 8)
-//                    Spacer()
-//                    .frame(width: 100)
-//                    .padding(.horizontal, 8)
                 }
             })
             .padding(.vertical, 8)
