@@ -42,7 +42,7 @@ struct CompetitionsView: View {
                                 .foregroundColor(RingType.move.color)
                                 .fontWeight(.medium)
                             Text("Exercise: \(healthKit.latestActivityData.exerciseFraction)")
-                                .foregroundColor(RingType.exercise.color)
+                                .foregroundColor(RingType.exercise.darkColor)
                                 .fontWeight(.medium)
                             Text("Stand: \(healthKit.latestActivityData.standFraction)")
                                 .foregroundColor(RingType.stand.darkColor)
