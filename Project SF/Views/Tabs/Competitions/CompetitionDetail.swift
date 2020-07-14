@@ -40,9 +40,9 @@ struct CompetitionDetail: View {
                 .padding(.top)
                 .padding(.horizontal)
                 List {
-                    ForEach(competition.people.sorted{ $0.points > $1.points }) { person in
+                    ForEach(competition.people.sorted { $0.points > $1.points }) { person in
                         HStack {
-                            Text("\(competition.people.sorted{ $0.points > $1.points }.firstIndex(of: person)! + 1)")
+                            Text("\(competition.people.sorted { $0.points > $1.points }.firstIndex(of: person)! + 1)")
                             Text(person.name)
                         }
                     }

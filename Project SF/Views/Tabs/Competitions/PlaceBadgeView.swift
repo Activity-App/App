@@ -63,6 +63,7 @@ struct PlaceBadgeView: View {
                             }
                         }
                     )
+                    .padding(-4)
             )
             .padding(outerPadding)
             .rotation3DEffect(

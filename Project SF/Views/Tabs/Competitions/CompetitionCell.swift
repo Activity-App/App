@@ -24,34 +24,39 @@ struct CompetitionCell: View {
             destination: CompetitionDetail(competition: competition),
             label: {
                 HStack {
-                    VStack {
+                    VStack(spacing: 8) {
                         PlaceBadgeView(
                             place: competition.place,
                             flippable: false,
                             activityRings: .constant(activity),
-                            font: .body,
+                            font: .system(size: 23),
                             innerPadding: 10,
                             outerPadding: 4
                         )
-                        Text("\(competition.points) points")
-                            .foregroundColor(.secondary)
-                            .font(.subheadline)
-                            .minimumScaleFactor(0.8)
+//                        Text("\(competition.points) points")
+//                            .foregroundColor(.secondary)
+//                            .font(.subheadline)
+//                            .lineLimit(1)
+//                            .minimumScaleFactor(0.8)
                     }
-                    .frame(width: 80)
-                    .padding(.horizontal, 8)
+                    .padding(.trailing, 8)
+//                    .frame(width: 80)
+//                    .padding(.horizontal, 8)
+
                     VStack(alignment: .leading) {
-                        Spacer()
-                        Text("\(competition.endDate, style: .relative) \(competition.endDate < Date() ? "ago" : "")")
+                        Text("\(competition.points) points, \(competition.endDate, style: .relative) \(competition.endDate < Date() ? "ago" : "")")
                             .foregroundColor(.secondary)
                             .font(.subheadline)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.6)
                         Spacer()
                         Text(competition.name)
-                            .font(.headline)
-                        Spacer()
+                            .font(.title2)
+                            .fontWeight(.bold)
                     }
-                    Spacer()
-                    .frame(width: 100)
+                    .padding(.vertical, 8)
+//                    Spacer()
+//                    .frame(width: 100)
 //                    .padding(.horizontal, 8)
                 }
             })
@@ -66,7 +71,7 @@ struct CompetitionCell: View {
 struct CompetitionCell_Previews: PreviewProvider {
     
     static var previews: some View {
-        var competitions: [Competition] = [
+        let competitions: [Competition] = [
             Competition(
                 name: "Competition1",
                 startDate: Date() - 100000,
