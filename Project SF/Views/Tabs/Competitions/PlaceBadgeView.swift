@@ -75,6 +75,7 @@ struct PlaceBadgeView: View {
                     flipped.toggle()
                 }
             }))
+            .shadow(color: Color.black.opacity(0.1), radius: 10)
     }
 }
 

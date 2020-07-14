@@ -13,7 +13,27 @@ struct Competition: Identifiable {
     var startDate: Date
     var endDate: Date
     var points: Int = 0
-    var place: Int = 1
+    var people: [CompetingPerson]
+    
+    var place: Int {
+        let user = CompetingPerson(name: "Me", points: points)
+        var competing = people
+        
+        competing.append(user)
+        competing.sort {
+            $0.points > $1.points
+        }
+        
+        let index = competing.firstIndex(of: user) ?? 0
+    
+        return index + 1
+    }
+}
+
+struct CompetingPerson: Identifiable, Equatable {
+    var id = UUID()
+    var name: String
+    var points: Int = 0
 }
 
 struct CompetitionsView: View {
@@ -23,16 +43,53 @@ struct CompetitionsView: View {
     
     // Temporary. Get these from CK when thats working.
     var competitions: [Competition] = [
-        Competition(name: "Competition1", startDate: Date() - 100000, endDate: Date() + 100000, points: 5987, place: 1),
-        Competition(name: "Competition2", startDate: Date() - 100000, endDate: Date() + 30000000, place: 2),
-        Competition(name: "Competition3", startDate: Date() - 100000, endDate: Date() + 9900000, points: 3091, place: 3),
-        Competition(name: "Competition3", startDate: Date() - 100000, endDate: Date() + 9900000, place: 9)
+        Competition(
+            name: "Competition1",
+            startDate: Date() - 100000,
+            endDate: Date() + 100000,
+            points: 5987,
+            people: [
+                CompetingPerson(name: "Person1", points: 100),
+                CompetingPerson(name: "Person2", points: 200),
+                CompetingPerson(name: "Person3", points: 6000)
+            ]
+        ),
+        Competition(
+            name: "Competition2",
+            startDate: Date(),
+            endDate: Date() + 1000000,
+            points: 100,
+            people: [
+                CompetingPerson(name: "Person1", points: 5000),
+                CompetingPerson(name: "Person2", points: 200),
+                CompetingPerson(name: "Person3", points: 500)
+            ]
+        )
     ]
 
     var recentCompetitions: [Competition] = [
-        Competition(name: "Competition1", startDate: Date() - 100000, endDate: Date() - 1000),
-        Competition(name: "Competition2", startDate: Date() - 1000000, endDate: Date() - 10000),
-        Competition(name: "Competition3", startDate: Date() - 100000, endDate: Date() - 12345)
+        Competition(
+            name: "Competition1",
+            startDate: Date() - 100000,
+            endDate: Date() - 1000,
+            points: 5987,
+            people: [
+                CompetingPerson(name: "Person1", points: 100),
+                CompetingPerson(name: "Person2", points: 200),
+                CompetingPerson(name: "Person3", points: 6000)
+            ]
+        ),
+        Competition(
+            name: "Competition2",
+            startDate: Date() - 100000,
+            endDate: Date() - 10000,
+            points: 100,
+            people: [
+                CompetingPerson(name: "Person1", points: 5000),
+                CompetingPerson(name: "Person2", points: 200),
+                CompetingPerson(name: "Person3", points: 500)
+            ]
+        )
     ]
 
     var body: some View {
@@ -57,7 +114,7 @@ struct CompetitionsView: View {
                     }
                 }
 
-                Section(header: Text("Currently Competing")) {
+                Section(header: Text("Currently competing")) {
                     ForEach(competitions.indices) { index in
                         CompetitionCell(competitions[index])
                     }
@@ -91,5 +148,6 @@ struct CompetitionsView: View {
 struct CompetitionsView_Previews: PreviewProvider {
     static var previews: some View {
         CompetitionsView()
+            .environmentObject(HealthKitController())
     }
 }

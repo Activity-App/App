@@ -66,23 +66,29 @@ struct CompetitionCell: View {
 struct CompetitionCell_Previews: PreviewProvider {
     
     static var previews: some View {
-
-//        let activity = ActivityRings(
-//            moveCurrent: 350,
-//            moveGoal: 300,
-//            exerciseCurrent: 4,
-//            exerciseGoal: 30,
-//            standCurrent: 1,
-//            standGoal: 12
-//        )
-        
-        let competitions: [Competition] = [
-            Competition(name: "Competition1",
-                        startDate: Date() - 100000, endDate: Date() + 100000,
-                        points: 5987, place: 1),
-            Competition(name: "Competition2",
-                        startDate: Date() - 100000, endDate: Date() + 30000000,
-                        place: 2)
+        var competitions: [Competition] = [
+            Competition(
+                name: "Competition1",
+                startDate: Date() - 100000,
+                endDate: Date() + 100000,
+                points: 5987,
+                people: [
+                    CompetingPerson(name: "Person1", points: 100),
+                    CompetingPerson(name: "Person2", points: 200),
+                    CompetingPerson(name: "Person3", points: 6000)
+                ]
+            ),
+            Competition(
+                name: "Competition2",
+                startDate: Date(),
+                endDate: Date() + 1000000,
+                points: 100,
+                people: [
+                    CompetingPerson(name: "Person1", points: 5000),
+                    CompetingPerson(name: "Person2", points: 200),
+                    CompetingPerson(name: "Person3", points: 500)
+                ]
+            )
         ]
 
         return VStack(spacing: 32) {

@@ -13,35 +13,64 @@ struct CompetitionDetail: View {
     let competition: Competition
     
     var body: some View {
-        VStack {
-            HStack {
-                PlaceBadgeView(
-                    place: competition.place,
-                    flippable: true,
-                    activityRings: $healthKit.latestActivityData
-                )
-                VStack(alignment: .leading) {
-                    Text("\(competition.points) points")
-                        .font(.title)
-                        .fontWeight(.medium)
-                    HStack(spacing: 0) {
-                        Text(competition.endDate, style: .relative)
-                        Text(" to go.")
+        ZStack {
+            Rectangle()
+                .foregroundColor(Color(.secondarySystemBackground))
+                .edgesIgnoringSafeArea(.all)
+            VStack {
+                HStack {
+                    PlaceBadgeView(
+                        place: competition.place,
+                        flippable: true,
+                        activityRings: $healthKit.latestActivityData
+                    )
+                    VStack(alignment: .leading) {
+                        Text("\(competition.points) points")
+                            .font(.title)
+                            .fontWeight(.medium)
+                        HStack(spacing: 0) {
+                            Text(competition.endDate, style: .relative)
+                            Text(" to go.")
+                        }
+                        .font(.title3)
+                        .foregroundColor(Color(.tertiaryLabel))
                     }
-                    .font(.title3)
-                    .foregroundColor(Color(.tertiaryLabel))
+                    Spacer()
                 }
+                .padding(.top)
+                .padding(.horizontal)
+                List {
+                    Text("Hello")
+                    Text("Hello")
+                    Text("Hello")
+                    Text("Hello")
+                    Text("Hello")
+                }
+                .listStyle(InsetGroupedListStyle())
                 Spacer()
             }
-            .padding()
-            Spacer()
+            .navigationTitle(competition.name)
         }
-        .navigationTitle(competition.name)
     }
 }
 
 struct CompetitionDetail_Previews: PreviewProvider {
     static var previews: some View {
-        CompetitionDetail(competition: Competition(name: "CompetitionName", startDate: Date(), endDate: Date() + 10000, place: 1))
+        NavigationView {
+            CompetitionDetail(
+                competition: Competition(
+                    name: "CompetitionName",
+                    startDate: Date() - 100000,
+                    endDate: Date() + 100000,
+                    points: 5987,
+                    people: [
+                        CompetingPerson(name: "Person1", points: 100),
+                        CompetingPerson(name: "Person2", points: 200),
+                        CompetingPerson(name: "Person3", points: 6000)
+                    ]
+                )
+            )
+            .environmentObject(HealthKitController())
+        }
     }
 }
