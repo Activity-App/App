@@ -16,6 +16,7 @@ struct Competition: Identifiable {
 
 struct CompetitionsView: View {
 
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var healthKit: HealthKitController
     @State var showCreateCompetition = false
     
@@ -39,13 +40,16 @@ struct CompetitionsView: View {
                     HStack {
                         VStack(alignment: .leading) {
                             Text("Move: \(healthKit.latestActivityData.moveFraction)")
-                                .foregroundColor(RingType.move.color)
+                                .foregroundColor(colorScheme == .light ?
+                                                    RingType.move.color : RingType.move.darkColor)
                                 .fontWeight(.medium)
                             Text("Exercise: \(healthKit.latestActivityData.exerciseFraction)")
-                                .foregroundColor(RingType.exercise.darkColor)
+                                .foregroundColor(colorScheme == .light ?
+                                                    RingType.exercise.color : RingType.exercise.darkColor)
                                 .fontWeight(.medium)
                             Text("Stand: \(healthKit.latestActivityData.standFraction)")
-                                .foregroundColor(RingType.stand.darkColor)
+                                .foregroundColor(colorScheme == .light ?
+                                                    RingType.stand.color : RingType.stand.darkColor)
                                 .fontWeight(.medium)
                         }
                         Spacer()

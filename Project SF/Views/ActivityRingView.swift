@@ -33,7 +33,7 @@ struct ActivityRingView: View {
                         .trim(from: 0, to: CGFloat(fill))
                         .stroke(
                             AngularGradient(
-                                gradient: Gradient(colors: [ringType.darkColor.opacity(0.3), ringType.color]),
+                                gradient: Gradient(colors: [ringType.darkColor, ringType.color]),
                                 center: .center,
                                 startAngle: .degrees(0),
                                 endAngle: .degrees(360 * fill)
@@ -69,7 +69,7 @@ struct ActivityRingView: View {
                     
                     ringType.icon
                         .resizable()
-                        .frame(width: ringWidth-4, height: ringWidth-4)
+                        .frame(width: ringWidth - 4, height: ringWidth - 4)
                         .offset(y: -geometry.size.height / 2)
                 }
             }
