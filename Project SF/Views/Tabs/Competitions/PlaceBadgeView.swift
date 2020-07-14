@@ -63,16 +63,6 @@ struct PlaceBadgeView: View {
                             }
                         }
                     )
-                    .overlay(
-                        Group {
-                            if !flipped {
-                                Circle()
-                                    .stroke(lineWidth: 5)
-                                    .clipShape(Circle())
-                                    .foregroundColor(.clear)
-                            }
-                        }
-                    )
             )
             .padding(outerPadding)
             .rotation3DEffect(

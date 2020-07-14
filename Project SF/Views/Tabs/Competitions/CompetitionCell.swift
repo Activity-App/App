@@ -24,17 +24,6 @@ struct CompetitionCell: View {
             destination: CompetitionDetail(competition: competition),
             label: {
                 HStack {
-                    VStack(alignment: .leading) {
-                        Spacer()
-                        Text("\(competition.endDate, style: .relative) \(competition.endDate < Date() ? "ago" : "")")
-                            .foregroundColor(.secondary)
-                            .font(.subheadline)
-                        Spacer()
-                        Text(competition.name)
-                            .font(.headline)
-                        Spacer()
-                    }
-                    Spacer()
                     VStack {
                         PlaceBadgeView(
                             place: competition.place,
@@ -47,12 +36,10 @@ struct CompetitionCell: View {
                         Text("\(competition.points) points")
                             .foregroundColor(.secondary)
                             .font(.subheadline)
-                            .frame(minWidth: 50)
                             .minimumScaleFactor(0.8)
                     }
-                    .frame(width: 85)
+                    .frame(width: 80)
                     .padding(.horizontal, 8)
-                    
                     VStack(alignment: .leading) {
                         Spacer()
                         Text("\(competition.endDate, style: .relative) \(competition.endDate < Date() ? "ago" : "")")
@@ -100,10 +87,10 @@ struct CompetitionCell_Previews: PreviewProvider {
 
         return VStack(spacing: 32) {
             CompetitionCell(competitions[0])
-//                .frame(width: 500, height: 40)
-//
-//            CompetitionCell(competitions[1])
-//                .frame(width: 500, height: 40)
+                .frame(height: 100)
+
+            CompetitionCell(competitions[1])
+                .frame(width: 500, height: 40)
         }
     }
 }
