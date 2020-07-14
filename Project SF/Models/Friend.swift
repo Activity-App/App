@@ -8,7 +8,7 @@
 import Foundation
 import CloudKit
 
-struct Friend {
+struct Friend: Hashable {
     
     let name: String
     

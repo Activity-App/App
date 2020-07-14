@@ -24,7 +24,9 @@ class InvitationRecord: DynamicRecord {
         
         let inviteeID = ModelItem<String>(key: "inviteeID")
         
-        let url = ModelItem<String>(key: "url")
+        let competitionRecordInviteURL = ModelItem<String>(key: "competitionRecordInviteURL")
+        
+        let scoreURLHolderInviteURL = ModelItem<String>(key: "scoreURLHolderInviteURL")
         
     }
     

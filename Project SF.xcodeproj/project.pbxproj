@@ -57,6 +57,8 @@
 		9C7B4D0824B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B4D0724B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift */; };
 		9C7E74A824BDC05B0032CD88 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7E74A724BDC05B0032CD88 /* SignUpView.swift */; };
 		9C7E74AA24BDC0E10032CD88 /* GrantDataAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7E74A924BDC0E10032CD88 /* GrantDataAccessView.swift */; };
+		9C7E74AC24BDC7790032CD88 /* ScoreURLHolderRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7E74AB24BDC7790032CD88 /* ScoreURLHolderRecord.swift */; };
+		9C7E74AE24BDC87A0032CD88 /* ScoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7E74AD24BDC87A0032CD88 /* ScoreRecord.swift */; };
 		9C8FAD4624B9E39E00571947 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAD4524B9E39E00571947 /* Record.swift */; };
 		9C8FAD4824B9E7CC00571947 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAD4724B9E7CC00571947 /* UserController.swift */; };
 		9C8FAD4A24BAADA600571947 /* CKContainer+AppDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAD4924BAADA600571947 /* CKContainer+AppDefault.swift */; };
@@ -139,6 +141,8 @@
 		9C7B4D0724B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ConvertFromRangeToRange.swift"; sourceTree = "<group>"; };
 		9C7E74A724BDC05B0032CD88 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		9C7E74A924BDC0E10032CD88 /* GrantDataAccessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrantDataAccessView.swift; sourceTree = "<group>"; };
+		9C7E74AB24BDC7790032CD88 /* ScoreURLHolderRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreURLHolderRecord.swift; sourceTree = "<group>"; };
+		9C7E74AD24BDC87A0032CD88 /* ScoreRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreRecord.swift; sourceTree = "<group>"; };
 		9C8FAD4524B9E39E00571947 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		9C8FAD4724B9E7CC00571947 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		9C8FAD4924BAADA600571947 /* CKContainer+AppDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CKContainer+AppDefault.swift"; sourceTree = "<group>"; };
@@ -425,6 +429,8 @@
 				9CCFDD1824B971D600162B0F /* UserRecord.swift */,
 				9C2445D924BC0D8E00D8F4FC /* InvitationRecord.swift */,
 				9C338BD824BAD0D3003E5048 /* CompetitionRecord.swift */,
+				9C7E74AB24BDC7790032CD88 /* ScoreURLHolderRecord.swift */,
+				9C7E74AD24BDC87A0032CD88 /* ScoreRecord.swift */,
 			);
 			path = Records;
 			sourceTree = "<group>";
@@ -616,6 +622,7 @@
 				9C338BD724BAD080003E5048 /* RecordKey.swift in Sources */,
 				30D321B924BB65D5009CD9D0 /* ImageSelectionView.swift in Sources */,
 				30D3217D24BB4EDE009CD9D0 /* ActivityRings.swift in Sources */,
+				9C7E74AE24BDC87A0032CD88 /* ScoreRecord.swift in Sources */,
 				30D321BF24BB65D5009CD9D0 /* FriendsView.swift in Sources */,
 				302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */,
 				9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */,
@@ -629,6 +636,7 @@
 				9C6C74AF24BAE08800C657B0 /* SignUpController.swift in Sources */,
 				302CF88C24BA1A4000FF79D7 /* ActivityResult.swift in Sources */,
 				9C6C74B324BAEC0B00C657B0 /* DynamicRecord.swift in Sources */,
+				9C7E74AC24BDC7790032CD88 /* ScoreURLHolderRecord.swift in Sources */,
 				302CF88C24BA1A4000FF79D7 /* ActivityResult.swift in Sources */,
 				30D321BB24BB65D5009CD9D0 /* PermissionSettings.swift in Sources */,
 				30D321B824BB65D5009CD9D0 /* SettingsView.swift in Sources */,

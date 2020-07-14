@@ -8,7 +8,7 @@
 import Foundation
 import CloudKit
 
-// TODO: Possibly refactor into multiple controllers
+// NOTE: This is currently a prototype and contains some poorly written code.
 class CompetitionsController {
     
     // MARK: Properties
@@ -23,30 +23,41 @@ class CompetitionsController {
     
     // MARK: Competitions
     
+    /// Creates a competition
+    /// - Parameters:
+    ///   - type: The competition type.
+    ///   - endDate: The date the competition will end.
+    ///   - friends: The friends to invite to the competition. This currently can't be changed later.
+    ///   - handler: Called with the result of the operation.
     func createCompetition(type: CompetitionRecord.CompetitionType,
                            endDate: Date,
                            friends: [Friend],
                            then handler: @escaping (Result<Void, Error>) -> Void) {
+        // shares can't be saved to the default zone
         createZone { result in
             switch result {
             case .success(let zone):
                 self.fetchShareParticipantsFrom(friends: friends) { result in
                     switch result {
                     case .success(let participants):
+                        // create the main competition record
                         let competitionRecord = CompetitionRecord(recordID: CKRecord.ID(zoneID: zone.zoneID))
                         competitionRecord.type = type
                         competitionRecord.startDate = Date()
                         competitionRecord.endDate = endDate
                         
+                        // create the main share
                         let share = CKShare(rootRecord: competitionRecord.record)
                         share.publicPermission = .none
                         share[CKShare.SystemFieldKey.title] = "Competition"
                         
-                        for participant in participants {
+                        for participant in participants.map({ $0.0 }) {
+                            // no one except the creator can edit the competition metadata
                             participant.permission = .readOnly
                             share.addParticipant(participant)
                         }
                         
+                        // save the record and the share
                         let operation = CKModifyRecordsOperation(recordsToSave: [competitionRecord.record, share],
                                                                  recordIDsToDelete: nil)
                         operation.qualityOfService = .userInitiated
@@ -103,6 +114,7 @@ class CompetitionsController {
                 return
             }
             
+            // find invitations in the public database matching the users record id
             let operation = CKQueryOperation(query: CKQuery(recordType: InvitationRecord.type,
                                                             predicate: NSPredicate(format: "inviteeID == %@",
                                                                                    recordID.recordName)))
@@ -130,17 +142,27 @@ class CompetitionsController {
     }
     
     func acceptInvitation(_ invitation: InvitationRecord, then handler: @escaping (Result<Void, Error>) -> Void) {
-        guard let urlString = invitation.url, let url = URL(string: urlString) else {
+        guard let competitionRecordInviteURLString = invitation.competitionRecordInviteURL,
+              let scoreURLHolderInviteURLString = invitation.scoreURLHolderInviteURL,
+              let competitionRecordInviteURL = URL(string: competitionRecordInviteURLString),
+              let scoreURLHolderInviteURL = URL(string: scoreURLHolderInviteURLString) else {
             handler(.failure(CompetitionsControllerError.missingURL))
             return
         }
-        let metadataFetchOperation = CKFetchShareMetadataOperation(shareURLs: [url])
+        let metadataFetchOperation = CKFetchShareMetadataOperation(shareURLs: [competitionRecordInviteURL,
+                                                                               scoreURLHolderInviteURL])
         metadataFetchOperation.qualityOfService = .userInitiated
         
-        var shareMetadata: CKShare.Metadata?
+        var shareMetadata = [CKShare.Metadata]()
+        var errors = [Error]()
         
         metadataFetchOperation.perShareMetadataBlock = { _, metadata, error in
-            shareMetadata = metadata
+            if let error = error {
+                errors.append(error)
+                return
+            }
+            guard let metadata = metadata else { return }
+            shareMetadata.append(metadata)
         }
         
         metadataFetchOperation.fetchShareMetadataCompletionBlock = { error in
@@ -148,12 +170,11 @@ class CompetitionsController {
                 handler(.failure(error))
                 return
             }
-            guard let shareMetadata = shareMetadata else {
-                handler(.failure(CompetitionsControllerError.unknownError))
-                return
+            if !errors.isEmpty {
+                handler(.failure(CompetitionsControllerError.multiple(errors)))
             }
             
-            let acceptOperation = CKAcceptSharesOperation(shareMetadatas: [shareMetadata])
+            let acceptOperation = CKAcceptSharesOperation(shareMetadatas: shareMetadata)
             acceptOperation.qualityOfService = .userInitiated
             
             acceptOperation.acceptSharesCompletionBlock = { error in
@@ -161,6 +182,7 @@ class CompetitionsController {
                     handler(.failure(error))
                     return
                 }
+                // TODO: Create/get the existing share url for the ScoreRecord and add it to the ScoreURLHolderRecord
                 handler(.success(()))
             }
             
@@ -317,41 +339,75 @@ class CompetitionsController {
     private func inviteFriendsToCompetition(_ friends: [Friend],
                                             inviteURL: URL,
                                             then handler: @escaping (Result<Void, Error>) -> Void) {
-        var inviteRecords = [InvitationRecord]()
-        
-        for friend in friends {
-            let inviteRecord = InvitationRecord()
-            inviteRecord.url = "\(inviteURL)"
-            inviteRecord.inviteeID = friend.recordID.recordName
-            
-            inviteRecords.append(inviteRecord)
-        }
-        
-        let saveInvitesOperation = CKModifyRecordsOperation(recordsToSave: inviteRecords.map { $0.record },
-                                                            recordIDsToDelete: nil)
-        saveInvitesOperation.qualityOfService = .userInitiated
-        
-        var errors = [Error]()
-        
-        saveInvitesOperation.perRecordCompletionBlock = { record, error in
-            if let error = error {
-                errors.append(error)
+        fetchShareParticipantsFrom(friends: friends) { result in
+            switch result {
+            case .success(let participantsAndFriends):
+                var urlHolders = [ScoreURLHolderRecord]()
+                var shares = [CKShare]()
+                var shareForFriend = [Friend: CKShare]()
+                
+                for (participant, friend) in participantsAndFriends {
+                    let urlHolder = ScoreURLHolderRecord()
+                    urlHolder.isSet = false
+                    urlHolders.append(urlHolder)
+                    
+                    let publicShare = CKShare(rootRecord: urlHolder.record)
+                    publicShare.publicPermission = .none
+                    
+                    participant.permission = .readWrite
+                    publicShare.addParticipant(participant)
+                    
+                    shares.append(publicShare)
+                    
+                    shareForFriend[friend] = publicShare
+                }
+                
+                var recordsToSave = urlHolders.map { $0.record }
+                recordsToSave.append(contentsOf: shares)
+                
+                let saveInvitesOperation = CKModifyRecordsOperation(recordsToSave: recordsToSave,
+                                                                    recordIDsToDelete: nil)
+                saveInvitesOperation.qualityOfService = .userInitiated
+                
+                var errors = [Error]()
+                
+                saveInvitesOperation.perRecordCompletionBlock = { record, error in
+                    if let error = error {
+                        errors.append(error)
+                    }
+                }
+                
+                saveInvitesOperation.completionBlock = {
+                    if !errors.isEmpty {
+                        handler(.failure(CompetitionsControllerError.multiple(errors)))
+                        return
+                    }
+                    var inviteRecords = [InvitationRecord]()
+                    
+                    for friend in friends {
+                        guard let share = shareForFriend[friend], let shareURL = share.url else { continue }
+                        let inviteRecord = InvitationRecord()
+                        inviteRecord.competitionRecordInviteURL = "\(inviteURL)"
+                        inviteRecord.scoreURLHolderInviteURL = "\(shareURL)"
+                        inviteRecord.inviteeID = friend.recordID.recordName
+                        
+                        inviteRecords.append(inviteRecord)
+                    }
+                    
+                    handler(.success(()))
+                }
+                
+                self.container.publicCloudDatabase.add(saveInvitesOperation)
+            case .failure(let error):
+                handler(.failure(error))
             }
         }
-        
-        saveInvitesOperation.completionBlock = {
-            if !errors.isEmpty {
-                handler(.failure(CompetitionsControllerError.multiple(errors)))
-                return
-            }
-            handler(.success(()))
-        }
-        
-        container.publicCloudDatabase.add(saveInvitesOperation)
     }
     
     private func fetchShareParticipantsFrom(friends: [Friend],
-                                            then handler: @escaping (Result<[CKShare.Participant], Error>) -> Void) {
+                                            then handler: @escaping (Result<[(CKShare.Participant, Friend)], Error>) -> Void) {
+        var friendForUserRecordID: [CKRecord.ID: Friend] = Dictionary(uniqueKeysWithValues:
+                                                                        friends.map { (key: $0.recordID, value: $0) })
         let friendLookupInfomation = friends.map { CKUserIdentity.LookupInfo(userRecordID: $0.recordID) }
         let participantLookupOperation = CKFetchShareParticipantsOperation(userIdentityLookupInfos:
                                                                             friendLookupInfomation)
@@ -369,7 +425,16 @@ class CompetitionsController {
                 return
             }
             
-            handler(.success(participants))
+            let returnValue: [(CKShare.Participant, Friend)] = participants
+                .compactMap { participant in
+                    if let id = participant.userIdentity.userRecordID, let friend = friendForUserRecordID[id] {
+                        return (participant, friend)
+                    } else {
+                        return nil
+                    }
+                }
+            
+            handler(.success(returnValue))
         }
         self.container.add(participantLookupOperation)
     }
@@ -431,6 +496,15 @@ class CompetitionsController {
         }
         
         database.add(fetchZonesOperation)
+    }
+    
+    private func createScoreRecord(then handler: @escaping (Result<Void, Error>) -> Void) {
+        let scoreRecord = ScoreRecord()
+        
+        let share = CKShare(rootRecord: scoreRecord.record)
+        share.publicPermission = .readOnly
+        
+        // TODO: Save record and persist it to the private user profile
     }
     
     // MARK: Competition Controller Error

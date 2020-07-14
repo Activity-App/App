@@ -8,6 +8,7 @@
 import Foundation
 import CloudKit
 
+/// An object that directly correlates to a CloudKit record
 protocol Record {
     
     static var type: CKRecord.RecordType { get }

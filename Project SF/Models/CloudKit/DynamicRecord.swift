@@ -8,6 +8,7 @@
 import Foundation
 import CloudKit
 
+/// By conforming do DynamicRecord, you can define your Record using a Model struct. See [UserRecord](x-source-tag://UserRecord) for an example.
 @dynamicMemberLookup
 protocol DynamicRecord: Record, AnyObject {
     

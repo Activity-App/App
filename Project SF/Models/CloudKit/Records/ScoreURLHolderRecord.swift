@@ -1,19 +1,19 @@
 //
-//  User.swift
+//  ScoreURLHolderRecord.swift
 //  Project SF
 //
-//  Created by William Taylor on 10/7/20.
+//  Created by William Taylor on 14/7/20.
 //
 
 import Foundation
 import CloudKit
 
-/// - Tag: UserRecord
-class UserRecord: DynamicRecord {
+/// A record that holds an invite link for a shared ScoreRecord.
+class ScoreURLHolderRecord: DynamicRecord {
     
     // MARK: Properties
     
-    static let type = "Users"
+    static let type = "ScoreURLHolders"
     
     static let model = Model()
 
@@ -23,11 +23,9 @@ class UserRecord: DynamicRecord {
     
     struct Model {
         
-        let nickname = ModelItem<String>(key: "nickname")
+        let isSet = ModelItem<Bool>(key: "isSet")
         
-        let bio = ModelItem<String>(key: "bio")
-        
-        let profilePictureURL = ModelItem<String>(key: "profilePictureURL")
+        let url = ModelItem<String>(key: "url")
         
     }
     
