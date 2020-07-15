@@ -82,29 +82,26 @@ struct ActivityRingView: View {
         
         let newFill = currentIn / goalIn + 0.001
         
-        let animationTime = abs(fill - newFill) * 2
-        let over100AnimationTime = abs(1 - newFill) * 2
-        
         if fill < 0.96 && newFill > 0.96 {
-            withAnimation(.easeIn(duration: animationTime - over100AnimationTime)) {
+            withAnimation(.easeIn(duration: 1.5)) {
                 fill = 0.95
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + animationTime - over100AnimationTime - 0.15) {
-                withAnimation(.easeOut(duration: over100AnimationTime)) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5 - 0.1) {
+                withAnimation(.linear(duration: abs(1 - newFill * 1.5))) {
                     fill = newFill
                 }
             }
         } else if fill > 0.96 && newFill < 0.96 {
-            withAnimation(.easeIn(duration: animationTime - over100AnimationTime)) {
+            withAnimation(.linear(duration: abs(1 - newFill * 1.5))) {
                 fill = 1.1
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + animationTime - over100AnimationTime - 0.15) {
-                withAnimation(.easeOut(duration: over100AnimationTime)) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5 - 0.1) {
+                withAnimation(.linear(duration: 1)) {
                     fill = newFill
                 }
             }
         } else {
-            withAnimation(.easeInOut(duration: animationTime)) {
+            withAnimation(.easeInOut(duration: 1.5)) {
                 fill = newFill
             }
         }
