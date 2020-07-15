@@ -27,6 +27,7 @@ struct FriendDetailView: View {
                     HStack {
                         Image(systemName: "at")
                             .foregroundColor(.accentColor)
+                        // TODO: Use username here
                         Text("\(friend.name)")
                             .minimumScaleFactor(0.7)
                     }
