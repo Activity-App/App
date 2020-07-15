@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-///// Creates activity ring with the specified parameters.
-///// Use `.large`, `.medium` or `.small` to get default ring sizes.
+/// Creates activity ring with the specified parameters.
+/// Use `.large`, `.medium` or `.small` to get default ring sizes.
 struct RingSize {
     static var large: RingSize {
         RingSize(size: 150, width: 20, padding: 4)
@@ -48,12 +48,14 @@ struct RingSize {
 
 struct ActivityRingsView: View {
 
+    var shouldAnimate = true
     @Binding var values: ActivityRings
     let ringSize: RingSize
 
     var body: some View {
         ZStack {
             ActivityRingView(
+                shouldAnimate: shouldAnimate,
                 ringType: .move,
                 ringWidth: ringSize.width,
                 current: $values.moveCurrent,
@@ -61,6 +63,7 @@ struct ActivityRingsView: View {
             )
             .frame(width: ringSize.move, height: ringSize.move)
             ActivityRingView(
+                shouldAnimate: shouldAnimate,
                 ringType: .exercise,
                 ringWidth: ringSize.width,
                 current: $values.exerciseCurrent,
@@ -68,6 +71,7 @@ struct ActivityRingsView: View {
             )
             .frame(width: ringSize.exercise, height: ringSize.exercise)
             ActivityRingView(
+                shouldAnimate: shouldAnimate,
                 ringType: .stand,
                 ringWidth: ringSize.width,
                 current: $values.standCurrent,

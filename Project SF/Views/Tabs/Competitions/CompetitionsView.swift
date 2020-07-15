@@ -37,25 +37,7 @@ struct CompetitionsView: View {
         NavigationView {
             List {
                 Section(header: Text("Current Activity")) {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("Move: \(healthKit.latestActivityData.moveFraction)")
-                                .foregroundColor(colorScheme == .light ?
-                                                    RingType.move.darkColor : RingType.move.color)
-                                .fontWeight(.medium)
-                            Text("Exercise: \(healthKit.latestActivityData.exerciseFraction)")
-                                .foregroundColor(colorScheme == .light ?
-                                                    RingType.exercise.darkColor : RingType.exercise.color)
-                                .fontWeight(.medium)
-                            Text("Stand: \(healthKit.latestActivityData.standFraction)")
-                                .foregroundColor(colorScheme == .light ?
-                                                    RingType.stand.darkColor : RingType.stand.color)
-                                .fontWeight(.medium)
-                        }
-                        Spacer()
-                        ActivityRingsView(values: $healthKit.latestActivityData, ringSize: .medium)
-                            .padding(.vertical, 12)
-                    }
+                    ActivityOverview(activity: $healthKit.latestActivityData)
                 }
 
                 Section(header: Text("Currently Competing")) {
