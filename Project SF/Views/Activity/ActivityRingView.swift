@@ -31,7 +31,6 @@ struct ActivityRingView: View {
                         .opacity(0.3)
                         .foregroundColor(ringType.darkColor)
                     
-                    
                     // The activity ring
                     Circle()
                         .trim(from: 0, to: CGFloat(fill))
