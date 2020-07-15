@@ -310,8 +310,8 @@
 		30D321AA24BB65D5009CD9D0 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				30D321AB24BB65D5009CD9D0 /* Settings */,
 				30D321B224BB65D5009CD9D0 /* ProfileView.swift */,
+				30D321AB24BB65D5009CD9D0 /* Settings */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
