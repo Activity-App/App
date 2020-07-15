@@ -51,7 +51,7 @@ struct FriendDetailView: View {
                     // TODO: Unfriend / Friend
                 }) {
                     HStack {
-                        Image(systemName: "plus.circle")
+                        Image(systemName: "minus.circle")
                         Text("Unfriend")
                             .foregroundColor(.secondary)
                     }
