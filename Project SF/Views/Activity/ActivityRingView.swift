@@ -93,7 +93,7 @@ struct ActivityRingView: View {
         let goalIn = newGoal ?? goal
         
         let newFill = currentIn == 0 ? 0 : currentIn / goalIn
-        let animationDuration: Double = 1.8
+        let animationDuration: Double = 1
         
         if newFill > 0.96 {
             if fill < 0.96 && animate {
@@ -114,8 +114,14 @@ struct ActivityRingView: View {
         } else {
             showShadow = false
         }
-        
-        withAnimation(.easeInOut(duration: animate ? animationDuration : 0)) {
+
+        let delay = ringType == .move ? 0 : ringType == .exercise ? 0.15 : 0.3
+
+        if animate {
+            withAnimation(Animation.spring(response: 1, dampingFraction: 0.7, blendDuration: 0.2).delay(delay)) {
+                fill = newFill
+            }
+        } else {
             fill = newFill
         }
     }
