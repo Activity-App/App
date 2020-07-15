@@ -18,6 +18,7 @@ struct ActivityRingView: View {
     @Binding var goal: Double
     
     @State var fill: Double = 0
+    @State var showShadow = false
 
     var body: some View {
         GeometryReader { geometry in
@@ -29,6 +30,7 @@ struct ActivityRingView: View {
                         .stroke(lineWidth: ringWidth)
                         .opacity(0.3)
                         .foregroundColor(ringType.darkColor)
+                    
                     
                     // The activity ring
                     Circle()
@@ -43,13 +45,22 @@ struct ActivityRingView: View {
                             style: StrokeStyle(lineWidth: ringWidth, lineCap: .round))
                         .opacity(1)
                         .rotationEffect(.degrees(-90))
+                    
+                    // Fixes when gradient == 0
+                    Circle()
+                        .frame(width: ringWidth, height: ringWidth)
+                        .offset(y: -geometry.size.height / 2)
+                        .foregroundColor(
+                            fill < 0.02 ? ringType.color : .clear
+                        )
+                        .animation(nil)
 
                     // Ring shadow
                     Circle()
                         .frame(width: ringWidth, height: ringWidth)
                         .offset(y: -geometry.size.height / 2)
                         .foregroundColor(
-                            ringType.color
+                            showShadow ? ringType.color : .clear
                         )
                         .shadow(
                             color: Color.black.opacity(0.125),
@@ -69,14 +80,44 @@ struct ActivityRingView: View {
                 }
             }
         }
-        .onChange(of: current) { _ in
+        .onChange(of: current) { newCurrent in
             if shouldAnimate {
-                withAnimation(.easeInOut(duration: 1.3)) {
-                    fill = current == 0 ? 0 : current / goal
+                updateRingFill(newCurrent: newCurrent)
+            } else {
+                updateRingFill(animate: false)
+            }
+        }
+    }
+    
+    func updateRingFill(animate: Bool = true, newCurrent: Double? = nil, newGoal: Double? = nil) {
+        let currentIn = newCurrent == nil ? current : newCurrent!
+        let goalIn = newGoal == nil ? goal : newGoal!
+        
+        let newFill = currentIn / goalIn + 0.001
+        let animationDuration: Double = 1.8
+        
+        if newFill > 0.96 {
+            if fill < 0.96 && animate {
+                DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration*0.5) {
+                    showShadow = true
                 }
             } else {
-                fill = current == 0 ? 0 : current / goal
+                showShadow = true
             }
+        } else if fill > 0.96 && newFill < 0.96 {
+            if fill > 0.96 && animate {
+                DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration*0.9) {
+                    showShadow = false
+                }
+            } else {
+                showShadow = false
+            }
+        } else {
+            showShadow = false
+        }
+        
+        withAnimation(.easeInOut(duration: animate ? animationDuration : 0)) {
+            fill = newFill
         }
     }
 }
