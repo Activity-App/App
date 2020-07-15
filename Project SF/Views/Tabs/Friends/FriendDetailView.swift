@@ -107,6 +107,10 @@ struct FriendDetailView: View {
                     )
                 }
             }
+
+            Section(header: Text("Prizes")) {
+                // TODO: Prizes
+            }
         }
         .listStyle(InsetGroupedListStyle())
         .navigationTitle(friend.name)
