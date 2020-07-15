@@ -95,16 +95,16 @@ struct ActivityRingView: View {
         let newFill = currentIn == 0 ? 0 : currentIn / goalIn
         let animationDuration: Double = 1
         
-        if newFill > 0.96 {
-            if fill < 0.96 && animate {
-                DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration * 0.5) {
+        if newFill > 0.9 {
+            if fill < 0.9 && animate {
+                DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration * 0.2) {
                     showShadow = true
                 }
             } else {
                 showShadow = true
             }
-        } else if fill > 0.96 && newFill < 0.96 {
-            if fill > 0.96 && animate {
+        } else if fill > 0.9 && newFill < 0.9 {
+            if fill > 0.9 && animate {
                 DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration * 0.9) {
                     showShadow = false
                 }
