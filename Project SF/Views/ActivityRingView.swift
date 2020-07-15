@@ -41,15 +41,6 @@ struct ActivityRingView: View {
                             style: StrokeStyle(lineWidth: ringWidth, lineCap: .round))
                         .opacity(1)
                         .rotationEffect(.degrees(-90))
-                        .animation(.easeInOut(duration: 2.5))
-                    
-                    // Fixes gradient when at 0 position
-                    Circle()
-                        .frame(width: ringWidth, height: ringWidth)
-                        .offset(y: -geometry.size.height / 2)
-                        .foregroundColor(
-                            fill > 0.1 ? .clear : ringType.darkColor
-                        )
 
                     // Ring shadow
                     Circle()
@@ -64,8 +55,8 @@ struct ActivityRingView: View {
                             x: ringWidth / 3.5,
                             y: 0
                         )
+                        .animation(nil)
                         .rotationEffect(.degrees(360 * fill))
-                        .animation(.easeInOut(duration: 2.5))
                     
                     ringType.icon
                         .resizable()
@@ -75,20 +66,54 @@ struct ActivityRingView: View {
             }
         }
         .onAppear {
-            fill = current / goal + 0.001
+            updateRingFill()
         }
         .onChange(of: current) { newCurrent in
-            fill = newCurrent / goal + 0.001
+            updateRingFill(newCurrent: newCurrent)
         }
         .onChange(of: goal) { newGoal in
-            fill = current / newGoal + 0.001
+            updateRingFill(newGoal: newGoal)
+        }
+    }
+    
+    func updateRingFill(newCurrent: Double? = nil, newGoal: Double? = nil) {
+        let currentIn = newCurrent == nil ? current : newCurrent!
+        let goalIn = newGoal == nil ? goal : newGoal!
+        
+        let newFill = currentIn / goalIn + 0.001
+        
+        let animationTime = abs(fill - newFill) * 2
+        let over100AnimationTime = abs(1 - newFill) * 2
+        
+        if fill < 0.96 && newFill > 0.96 {
+            withAnimation(.easeIn(duration: animationTime - over100AnimationTime)) {
+                fill = 0.95
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + animationTime - over100AnimationTime - 0.15) {
+                withAnimation(.easeOut(duration: over100AnimationTime)) {
+                    fill = newFill
+                }
+            }
+        } else if fill > 0.96 && newFill < 0.96 {
+            withAnimation(.easeIn(duration: animationTime - over100AnimationTime)) {
+                fill = 1.1
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + animationTime - over100AnimationTime - 0.15) {
+                withAnimation(.easeOut(duration: over100AnimationTime)) {
+                    fill = newFill
+                }
+            }
+        } else {
+            withAnimation(.easeInOut(duration: animationTime)) {
+                fill = newFill
+            }
         }
     }
 }
 
 struct ActivityRing_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityRingView(ringType: .stand, ringWidth: 30, current: .constant(19), goal: .constant(100))
-            .frame(width: 300, height: 300)
+        ActivityRingView(ringType: .move, ringWidth: 18, current: .constant(150), goal: .constant(100))
+            .frame(width: 100, height: 100)
     }
 }
