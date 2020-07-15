@@ -82,29 +82,26 @@ struct ActivityRingView: View {
         
         let newFill = currentIn / goalIn + 0.001
         
-        let animationTime = abs(fill - newFill) * 2
-        let over100AnimationTime = abs(1 - newFill) * 2
-        
         if fill < 0.96 && newFill > 0.96 {
-            withAnimation(.easeIn(duration: animationTime - over100AnimationTime)) {
+            withAnimation(.easeIn(duration: 0.95)) {
                 fill = 0.95
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + animationTime - over100AnimationTime - 0.15) {
-                withAnimation(.easeOut(duration: over100AnimationTime)) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.95 - 0.1) {
+                withAnimation(.easeOut(duration: abs(0.95 - newFill))) {
                     fill = newFill
                 }
             }
         } else if fill > 0.96 && newFill < 0.96 {
-            withAnimation(.easeIn(duration: animationTime - over100AnimationTime)) {
+            withAnimation(.easeIn(duration: abs(1.1 - fill))) {
                 fill = 1.1
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + animationTime - over100AnimationTime - 0.15) {
-                withAnimation(.easeOut(duration: over100AnimationTime)) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.1 - 0.1) {
+                withAnimation(.easeOut(duration: 1.1)) {
                     fill = newFill
                 }
             }
         } else {
-            withAnimation(.easeInOut(duration: animationTime)) {
+            withAnimation(.easeInOut(duration: 1.3)) {
                 fill = newFill
             }
         }
@@ -113,7 +110,8 @@ struct ActivityRingView: View {
 
 struct ActivityRing_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityRingView(ringType: .move, ringWidth: 18, current: .constant(150), goal: .constant(100))
+        ActivityRingView(ringType: .move, ringWidth: 18, current: .constant(98), goal: .constant(100))
             .frame(width: 100, height: 100)
     }
 }
+
