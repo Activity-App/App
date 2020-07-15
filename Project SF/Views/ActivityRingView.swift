@@ -57,19 +57,21 @@ struct ActivityRingView: View {
                         )
                         .animation(nil)
                         .rotationEffect(.degrees(360 * fill))
-                    
-                    ringType.icon
-                        .resizable()
-                        .frame(width: ringWidth - 4, height: ringWidth - 4)
-                        .offset(y: -geometry.size.height / 2)
+
+                    if ringWidth > 13 {
+                        ringType.icon
+                            .resizable()
+                            .frame(width: ringWidth - 4, height: ringWidth - 4)
+                            .offset(y: -geometry.size.height / 2)
+                    }
                 }
             }
         }
-        .onAppear {
-            withAnimation(.easeInOut(duration: 1.3)) {
-                fill = current == 0 ? 0 : current / goal
-            }
-        }
+//        .onAppear {
+//            withAnimation(.easeInOut(duration: 1.3)) {
+//                fill = current == 0 ? 0 : current / goal
+//            }
+//        }
         .onChange(of: current) { _ in
             withAnimation(.easeInOut(duration: 1.3)) {
                 fill = current == 0 ? 0 : current / goal
@@ -87,6 +89,8 @@ struct ActivityRing_Previews: PreviewProvider {
                 .frame(width: 100, height: 100)
             ActivityRingView(ringType: .stand, ringWidth: 18, current: .constant(120), goal: .constant(90))
                 .frame(width: 100, height: 100)
+            ActivityRingView(ringType: .stand, ringWidth: 13, current: .constant(120), goal: .constant(90))
+                .frame(width: 60, height: 60)
         }
     }
 }
