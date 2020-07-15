@@ -11,7 +11,7 @@ struct GrantDataAccessView: View {
 
     @Binding var showOnboarding: Bool
     @EnvironmentObject var healthKit: HealthKitController
-    
+
     @State var beatingHeart = false
 
     var body: some View {
@@ -30,7 +30,7 @@ struct GrantDataAccessView: View {
                 }
                 .opacity(0.8)
             Spacer()
-            
+
             RoundedButton("Grant Health Data Access") {
                 healthKit.authorizeHealthKit {
                     if healthKit.authorizationState == .granted {
@@ -39,7 +39,7 @@ struct GrantDataAccessView: View {
                     }
                 }
             }
-            .padding()
+                .padding()
             Text("This application needs access to your health data to calculate the points in competitions.")
                 .padding(.horizontal, 16)
                 .font(.caption)
