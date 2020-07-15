@@ -26,6 +26,7 @@
 		30BFC8E324B76BB900DAC6D9 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30BFC8E224B76BB900DAC6D9 /* HealthKit.framework */; };
 		30BFC8E724B8041C00DAC6D9 /* ActivityRingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8E624B8041C00DAC6D9 /* ActivityRingsView.swift */; };
 		30BFC8E924B804CC00DAC6D9 /* ActivityRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8E824B804CC00DAC6D9 /* ActivityRingView.swift */; };
+		30CCF30724BED9EA00103C1E /* ActivityOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CCF30624BED9EA00103C1E /* ActivityOverview.swift */; };
 		30D3217824BB430E009CD9D0 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D3217724BB430E009CD9D0 /* RoundedTextField.swift */; };
 		30D3217D24BB4EDE009CD9D0 /* ActivityRings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D3217C24BB4EDE009CD9D0 /* ActivityRings.swift */; };
 		30D321B524BB65D5009CD9D0 /* CompetitionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D321A724BB65D5009CD9D0 /* CompetitionsView.swift */; };
@@ -99,6 +100,7 @@
 		30BFC8E224B76BB900DAC6D9 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		30BFC8E624B8041C00DAC6D9 /* ActivityRingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRingsView.swift; sourceTree = "<group>"; };
 		30BFC8E824B804CC00DAC6D9 /* ActivityRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRingView.swift; sourceTree = "<group>"; };
+		30CCF30624BED9EA00103C1E /* ActivityOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityOverview.swift; sourceTree = "<group>"; };
 		30D3217724BB430E009CD9D0 /* RoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
 		30D3217C24BB4EDE009CD9D0 /* ActivityRings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRings.swift; sourceTree = "<group>"; };
 		30D321A724BB65D5009CD9D0 /* CompetitionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitionsView.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				308FAD9D24B9A0DC00126F3F /* NavigationBarLabel.swift */,
 				30D3217724BB430E009CD9D0 /* RoundedTextField.swift */,
 				30D321C024BC1886009CD9D0 /* NavScrollView.swift */,
+				30CCF30624BED9EA00103C1E /* ActivityOverview.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -570,6 +573,7 @@
 				30D321BF24BB65D5009CD9D0 /* FriendsView.swift in Sources */,
 				302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */,
 				9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */,
+				30CCF30724BED9EA00103C1E /* ActivityOverview.swift in Sources */,
 				30D321BA24BB65D5009CD9D0 /* NotificationSettings.swift in Sources */,
 				30BFC8E724B8041C00DAC6D9 /* ActivityRingsView.swift in Sources */,
 				3090918224B9480F000E3B11 /* RoundedButton.swift in Sources */,
