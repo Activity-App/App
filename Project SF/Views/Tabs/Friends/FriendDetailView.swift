@@ -21,21 +21,36 @@ struct FriendDetailView: View {
     var body: some View {
         List {
             Section {
-                Text("@\(friend.name)")
-                    .contextMenu {
-                        Button(action: {
-                            UIPasteboard.general.string = friend.name
-                        }) {
-                            Label("Copy", systemImage: "doc.on.clipboard")
-                        }
+                Button(action: {
+
+                }) {
+                    HStack {
+                        Image(systemName: "at")
+                            .foregroundColor(.accentColor)
+                        Text("\(friend.name)")
+                            .minimumScaleFactor(0.7)
                     }
+                }
+                .contextMenu {
+                    Button(action: {
+                        UIPasteboard.general.string = friend.name
+                    }) {
+                        Label("Copy", systemImage: "doc.on.clipboard")
+                    }
+                }
 
                 // TODO: add emails to friends
-                HStack {
-                    Image(systemName: "square.and.pencil")
-                        .foregroundColor(.accentColor)
-                    Text("thisIsSomeEmail@mailservice.com")
-                        .minimumScaleFactor(0.7)
+                Button(action: {
+                    UIApplication.shared.open(URL(string: "mailto:thisIsSomeEmail@mailservice.com")!,
+                                              options: [:],
+                                              completionHandler: nil)
+                }) {
+                    HStack {
+                        Image(systemName: "square.and.pencil")
+                            .foregroundColor(.accentColor)
+                        Text("thisIsSomeEmail@mailservice.com")
+                            .minimumScaleFactor(0.7)
+                    }
                 }
                 .contextMenu {
                     Button(action: {
