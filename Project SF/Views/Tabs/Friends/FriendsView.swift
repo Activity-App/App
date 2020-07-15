@@ -48,6 +48,17 @@ struct FriendsView: View {
                 standCurrent: 14,
                 standGoal: 12
             )
+        ),
+        Friend(
+            name: "Friend3",
+            activity: .init(
+                moveCurrent: 0,
+                moveGoal: 400,
+                exerciseCurrent: 0,
+                exerciseGoal: 30,
+                standCurrent: 0,
+                standGoal: 12
+            )
         )
     ]
 

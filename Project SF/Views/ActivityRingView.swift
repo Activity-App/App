@@ -47,7 +47,7 @@ struct ActivityRingView: View {
                         .frame(width: ringWidth, height: ringWidth)
                         .offset(y: -geometry.size.height / 2)
                         .foregroundColor(
-                            fill > 0.96 ? ringType.color : .clear
+                            ringType.color
                         )
                         .shadow(
                             color: Color.black.opacity(0.125),
@@ -66,43 +66,13 @@ struct ActivityRingView: View {
             }
         }
         .onAppear {
-            updateRingFill()
-        }
-        .onChange(of: current) { newCurrent in
-            updateRingFill(newCurrent: newCurrent)
-        }
-        .onChange(of: goal) { newGoal in
-            updateRingFill(newGoal: newGoal)
-        }
-    }
-    
-    func updateRingFill(newCurrent: Double? = nil, newGoal: Double? = nil) {
-        let currentIn = newCurrent == nil ? current : newCurrent!
-        let goalIn = newGoal == nil ? goal : newGoal!
-        
-        let newFill = currentIn / goalIn + 0.001
-        
-        if fill < 0.96 && newFill > 0.96 {
-            withAnimation(.easeIn(duration: 0.95)) {
-                fill = 0.95
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.95 - 0.1) {
-                withAnimation(.easeOut(duration: abs(0.95 - newFill))) {
-                    fill = newFill
-                }
-            }
-        } else if fill > 0.96 && newFill < 0.96 {
-            withAnimation(.easeIn(duration: abs(1.1 - fill))) {
-                fill = 1.1
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.1 - 0.1) {
-                withAnimation(.easeOut(duration: 1.1)) {
-                    fill = newFill
-                }
-            }
-        } else {
             withAnimation(.easeInOut(duration: 1.3)) {
-                fill = newFill
+                fill = current == 0 ? 0 : current / goal
+            }
+        }
+        .onChange(of: current) { _ in
+            withAnimation(.easeInOut(duration: 1.3)) {
+                fill = current == 0 ? 0 : current / goal
             }
         }
     }
@@ -110,8 +80,13 @@ struct ActivityRingView: View {
 
 struct ActivityRing_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityRingView(ringType: .move, ringWidth: 18, current: .constant(98), goal: .constant(100))
-            .frame(width: 100, height: 100)
+        VStack(spacing: 32) {
+            ActivityRingView(ringType: .move, ringWidth: 18, current: .constant(70), goal: .constant(90))
+                .frame(width: 100, height: 100)
+            ActivityRingView(ringType: .exercise, ringWidth: 18, current: .constant(10), goal: .constant(90))
+                .frame(width: 100, height: 100)
+            ActivityRingView(ringType: .stand, ringWidth: 18, current: .constant(120), goal: .constant(90))
+                .frame(width: 100, height: 100)
+        }
     }
 }
-
