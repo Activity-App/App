@@ -87,7 +87,7 @@ struct ActivityRingView: View {
         
         if fill < 0.96 && newFill > 0.96 {
             withAnimation(.easeIn(duration: animationTime - over100AnimationTime)) {
-                fill = 0.96
+                fill = 0.95
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + animationTime - over100AnimationTime - 0.15) {
                 withAnimation(.easeOut(duration: over100AnimationTime)) {
