@@ -16,6 +16,7 @@ struct Competition: Identifiable {
 
 struct CompetitionsView: View {
 
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var healthKit: HealthKitController
     @State var showCreateCompetition = false
     
@@ -26,6 +27,12 @@ struct CompetitionsView: View {
         Competition(name: "Competition3", startDate: Date() - 100000, endDate: Date() + 9900000)
     ]
 
+    var recentCompetitions: [Competition] = [
+        Competition(name: "Competition1", startDate: Date() - 100000, endDate: Date() - 1000),
+        Competition(name: "Competition2", startDate: Date() - 1000000, endDate: Date() - 10000),
+        Competition(name: "Competition3", startDate: Date() - 100000, endDate: Date() - 12345)
+    ]
+
     var body: some View {
         NavigationView {
             List {
@@ -33,13 +40,16 @@ struct CompetitionsView: View {
                     HStack {
                         VStack(alignment: .leading) {
                             Text("Move: \(healthKit.latestActivityData.moveFraction)")
-                                .foregroundColor(RingType.move.color)
+                                .foregroundColor(colorScheme == .light ?
+                                                    RingType.move.darkColor : RingType.move.color)
                                 .fontWeight(.medium)
                             Text("Exercise: \(healthKit.latestActivityData.exerciseFraction)")
-                                .foregroundColor(RingType.exercise.color)
+                                .foregroundColor(colorScheme == .light ?
+                                                    RingType.exercise.darkColor : RingType.exercise.color)
                                 .fontWeight(.medium)
                             Text("Stand: \(healthKit.latestActivityData.standFraction)")
-                                .foregroundColor(RingType.stand.darkColor)
+                                .foregroundColor(colorScheme == .light ?
+                                                    RingType.stand.darkColor : RingType.stand.color)
                                 .fontWeight(.medium)
                         }
                         Spacer()
@@ -58,9 +68,12 @@ struct CompetitionsView: View {
                     }
                 }
 
-                Section(header: Text("Rescent competitions")) {
-                    // TODO: Rescent competitions
-                    Text("Show Rescent competitions here")
+                Section(header: Text("Recent competitions")) {
+                    ForEach(recentCompetitions.indices) { index in
+                        CompetitionCell(competitionName: recentCompetitions[index].name,
+                                        startDate: recentCompetitions[index].startDate,
+                                        endDate: recentCompetitions[index].endDate)
+                    }
                 }
             }
             .listStyle(InsetGroupedListStyle())
