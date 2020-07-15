@@ -15,7 +15,7 @@ struct RingSize {
     }
 
     static var medium: RingSize {
-        RingSize(size: 100, width: 14, padding: 2)
+        RingSize(size: 100, width: 13, padding: 2)
     }
 
     static var small: RingSize {
