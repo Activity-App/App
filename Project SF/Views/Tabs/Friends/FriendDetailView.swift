@@ -22,12 +22,29 @@ struct FriendDetailView: View {
         List {
             Section {
                 Text("@\(friend.name)")
+                    .contextMenu {
+                        Button(action: {
+                            UIPasteboard.general.string = friend.name
+                        }) {
+                            Label("Copy", systemImage: "doc.on.clipboard")
+                        }
+                    }
+
+                // TODO: add emails to friends
                 HStack {
                     Text("thisIsSomeEmail@mailservice.com")
+                        .minimumScaleFactor(0.7)
                     Spacer()
-                    Link(destination: URL(string: "mailto:esinroomanswift@gmail.com")!) {
-                        Image(systemName: "square.and.pencil")
-                            .foregroundColor(.accentColor)
+                    Image(systemName: "square.and.pencil")
+                        .foregroundColor(.accentColor)
+                }
+                .contextMenu {
+                    Button(action: {
+                        UIApplication.shared.open(URL(string: "mailto:thisIsSomeEmail@mailservice.com")!,
+                                                  options: [:],
+                                                  completionHandler: nil)
+                    }) {
+                        Label("Write an email", systemImage: "square.and.pencil")
                     }
                 }
             }
