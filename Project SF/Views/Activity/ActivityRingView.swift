@@ -90,15 +90,15 @@ struct ActivityRingView: View {
     }
     
     func updateRingFill(animate: Bool = true, newCurrent: Double? = nil, newGoal: Double? = nil) {
-        let currentIn = newCurrent == nil ? current : newCurrent!
-        let goalIn = newGoal == nil ? goal : newGoal!
+        let currentIn = newCurrent ?? current
+        let goalIn = newGoal ?? goal
         
-        let newFill = currentIn / goalIn + 0.001
+        let newFill = currentIn == 0 ? 0 : currentIn / goalIn
         let animationDuration: Double = 1.8
         
         if newFill > 0.96 {
             if fill < 0.96 && animate {
-                DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration*0.5) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration * 0.5) {
                     showShadow = true
                 }
             } else {
@@ -106,7 +106,7 @@ struct ActivityRingView: View {
             }
         } else if fill > 0.96 && newFill < 0.96 {
             if fill > 0.96 && animate {
-                DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration*0.9) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration * 0.9) {
                     showShadow = false
                 }
             } else {
