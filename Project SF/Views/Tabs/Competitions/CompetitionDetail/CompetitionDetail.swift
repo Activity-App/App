@@ -10,12 +10,13 @@ import SwiftUI
 struct CompetitionDetail: View {
     
     @EnvironmentObject var healthKit: HealthKitController
+    @Environment(\.colorScheme) var colorScheme
     let competition: Competition
     
     var body: some View {
         ZStack {
             Rectangle()
-                .foregroundColor(Color(.secondarySystemBackground))
+                .foregroundColor(Color(colorScheme == .light ? .secondarySystemBackground : .systemBackground))
                 .edgesIgnoringSafeArea(.all)
             VStack {
                 HStack {
@@ -25,7 +26,7 @@ struct CompetitionDetail: View {
                         activityRings: $healthKit.latestActivityData
                     )
                     VStack(alignment: .leading) {
-                        Text("\(competition.points) points")
+                        Text("\(competition.creatingUser.points) points")
                             .font(.title)
                             .fontWeight(.medium)
                         HStack(spacing: 0) {
@@ -40,11 +41,13 @@ struct CompetitionDetail: View {
                 .padding(.top)
                 .padding(.horizontal)
                 List {
-                    ForEach(competition.people.sorted { $0.points > $1.points }) { person in
-                        HStack {
-                            Text("\(competition.people.sorted { $0.points > $1.points }.firstIndex(of: person)! + 1)")
-                            Text(person.name)
+                    Section(header: Text("Leaderboard")) {
+                        ForEach(competition.people.sorted { $0.points > $1.points }) { person in
+                            CompetitorCell(competition: competition, person: person)
                         }
+                    }
+                    Section(header: Text("History")) {
+                        
                     }
                 }
                 .listStyle(InsetGroupedListStyle())
@@ -63,7 +66,7 @@ struct CompetitionDetail_Previews: PreviewProvider {
                     name: "CompetitionName",
                     startDate: Date() - 100000,
                     endDate: Date() + 100000,
-                    points: 5987,
+                    creatingUser: CompetingPerson(name: "Me", points: 150),
                     people: [
                         CompetingPerson(name: "Person1", points: 100),
                         CompetingPerson(name: "Person2", points: 200),

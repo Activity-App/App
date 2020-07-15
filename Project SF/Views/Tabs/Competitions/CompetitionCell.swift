@@ -37,7 +37,7 @@ struct CompetitionCell: View {
                     .padding(.trailing, 8)
 
                     VStack(alignment: .leading) {
-                        Text("\(competition.points) points, \(competition.endDate, style: .relative) \(competition.endDate < Date() ? "ago" : "left")")
+                        Text("\(competition.creatingUser.points) points, \(competition.endDate, style: .relative) \(competition.endDate < Date() ? "ago" : "left")")
                             .foregroundColor(.secondary)
                             .font(.subheadline)
                             .lineLimit(1)
@@ -61,12 +61,12 @@ struct CompetitionCell: View {
 struct CompetitionCell_Previews: PreviewProvider {
     
     static var previews: some View {
-        let competitions: [Competition] = [
+        var competitions: [Competition] = [
             Competition(
                 name: "Competition1",
                 startDate: Date() - 100000,
                 endDate: Date() + 100000,
-                points: 5987,
+                creatingUser: CompetingPerson(name: "Me", points: 300),
                 people: [
                     CompetingPerson(name: "Person1", points: 100),
                     CompetingPerson(name: "Person2", points: 200),
@@ -77,7 +77,7 @@ struct CompetitionCell_Previews: PreviewProvider {
                 name: "Competition2",
                 startDate: Date(),
                 endDate: Date() + 1000000,
-                points: 100,
+                creatingUser: CompetingPerson(name: "Me", points: 5500),
                 people: [
                     CompetingPerson(name: "Person1", points: 5000),
                     CompetingPerson(name: "Person2", points: 200),

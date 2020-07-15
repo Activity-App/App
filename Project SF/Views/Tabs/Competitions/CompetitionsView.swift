@@ -12,21 +12,25 @@ struct Competition: Identifiable {
     var name: String
     var startDate: Date
     var endDate: Date
-    var points: Int = 0
-    var people: [CompetingPerson]
+    let creatingUser: CompetingPerson
+    var people: [CompetingPerson] = []
     
-    var place: Int {
-        let user = CompetingPerson(name: "Me", points: points)
-        var competing = people
+    var place: Int
+    
+    init(name: String, startDate: Date, endDate: Date, creatingUser: CompetingPerson, people: [CompetingPerson] = []) {
+        self.name = name
+        self.startDate = startDate
+        self.endDate = endDate
+        self.creatingUser = creatingUser
+        self.people = people
         
-        competing.append(user)
-        competing.sort {
+        self.people.append(self.creatingUser)
+        self.people.sort {
             $0.points > $1.points
         }
         
-        let index = competing.firstIndex(of: user) ?? 0
-    
-        return index + 1
+        let index = self.people.firstIndex(of: creatingUser) ?? 0
+        self.place = index + 1
     }
 }
 
@@ -48,7 +52,7 @@ struct CompetitionsView: View {
             name: "Competition1",
             startDate: Date() - 100000,
             endDate: Date() + 100000,
-            points: 5987,
+            creatingUser: CompetingPerson(name: "Me", points: 300),
             people: [
                 CompetingPerson(name: "Person1", points: 100),
                 CompetingPerson(name: "Person2", points: 200),
@@ -59,7 +63,7 @@ struct CompetitionsView: View {
             name: "Competition2",
             startDate: Date(),
             endDate: Date() + 1000000,
-            points: 100,
+            creatingUser: CompetingPerson(name: "Me", points: 5500),
             people: [
                 CompetingPerson(name: "Person1", points: 5000),
                 CompetingPerson(name: "Person2", points: 200),
@@ -73,7 +77,7 @@ struct CompetitionsView: View {
             name: "Competition1",
             startDate: Date() - 100000,
             endDate: Date() - 1000,
-            points: 5987,
+            creatingUser: CompetingPerson(name: "Me", points: 50),
             people: [
                 CompetingPerson(name: "Person1", points: 100),
                 CompetingPerson(name: "Person2", points: 200),
@@ -84,7 +88,7 @@ struct CompetitionsView: View {
             name: "Competition2",
             startDate: Date() - 100000,
             endDate: Date() - 10000,
-            points: 100,
+            creatingUser: CompetingPerson(name: "Me", points: 300),
             people: [
                 CompetingPerson(name: "Person1", points: 5000),
                 CompetingPerson(name: "Person2", points: 200),
