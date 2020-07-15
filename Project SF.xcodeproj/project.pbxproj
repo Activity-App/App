@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3003451424BF04D9007F7835 /* ProjectSFUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3003451324BF04D9007F7835 /* ProjectSFUITests.swift */; };
 		302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88924BA199E00FF79D7 /* RingType.swift */; };
 		302CF88C24BA1A4000FF79D7 /* ActivityResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */; };
 		3067712F24BDE0080085F152 /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3067712E24BDE0080085F152 /* FriendsCell.swift */; };
@@ -68,6 +69,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3003451624BF04D9007F7835 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 30BFC8C224B75E6C00DAC6D9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 30BFC8C924B75E6C00DAC6D9;
+			remoteInfo = "Project SF";
+		};
 		9CD7F12024B89C5000DDAD8C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 30BFC8C224B75E6C00DAC6D9 /* Project object */;
@@ -78,6 +86,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3003451124BF04D8007F7835 /* ProjectSFUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProjectSFUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3003451324BF04D9007F7835 /* ProjectSFUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSFUITests.swift; sourceTree = "<group>"; };
+		3003451524BF04D9007F7835 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		302CF88924BA199E00FF79D7 /* RingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingType.swift; sourceTree = "<group>"; };
 		302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityResult.swift; sourceTree = "<group>"; };
 		3067712E24BDE0080085F152 /* FriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
@@ -147,6 +158,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3003450E24BF04D8007F7835 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		30BFC8C724B75E6C00DAC6D9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -166,6 +184,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3003451224BF04D8007F7835 /* ProjectSFUITests */ = {
+			isa = PBXGroup;
+			children = (
+				3003451324BF04D9007F7835 /* ProjectSFUITests.swift */,
+				3003451524BF04D9007F7835 /* Info.plist */,
+			);
+			path = ProjectSFUITests;
+			sourceTree = "<group>";
+		};
 		3029AF5024B8869E003F0324 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,6 +247,7 @@
 			children = (
 				30BFC8CC24B75E6C00DAC6D9 /* Project SF */,
 				9CD7F11C24B89C5000DDAD8C /* Project SFTests */,
+				3003451224BF04D8007F7835 /* ProjectSFUITests */,
 				30BFC8CB24B75E6C00DAC6D9 /* Products */,
 				30BFC8E124B76BB900DAC6D9 /* Frameworks */,
 				30D3217E24BB6484009CD9D0 /* Recovered References */,
@@ -231,6 +259,7 @@
 			children = (
 				30BFC8CA24B75E6C00DAC6D9 /* Project SF.app */,
 				9CD7F11B24B89C5000DDAD8C /* Project SFTests.xctest */,
+				3003451124BF04D8007F7835 /* ProjectSFUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -425,6 +454,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		3003451024BF04D8007F7835 /* ProjectSFUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3003451824BF04D9007F7835 /* Build configuration list for PBXNativeTarget "ProjectSFUITests" */;
+			buildPhases = (
+				3003450D24BF04D8007F7835 /* Sources */,
+				3003450E24BF04D8007F7835 /* Frameworks */,
+				3003450F24BF04D8007F7835 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3003451724BF04D9007F7835 /* PBXTargetDependency */,
+			);
+			name = ProjectSFUITests;
+			productName = ProjectSFUITests;
+			productReference = 3003451124BF04D8007F7835 /* ProjectSFUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		30BFC8C924B75E6C00DAC6D9 /* Project SF */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 30BFC8D924B75E6F00DAC6D9 /* Build configuration list for PBXNativeTarget "Project SF" */;
@@ -472,6 +519,10 @@
 				LastSwiftUpdateCheck = 1200;
 				LastUpgradeCheck = 1200;
 				TargetAttributes = {
+					3003451024BF04D8007F7835 = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = 30BFC8C924B75E6C00DAC6D9;
+					};
 					30BFC8C924B75E6C00DAC6D9 = {
 						CreatedOnToolsVersion = 12.0;
 					};
@@ -499,11 +550,19 @@
 			targets = (
 				30BFC8C924B75E6C00DAC6D9 /* Project SF */,
 				9CD7F11A24B89C5000DDAD8C /* Project SFTests */,
+				3003451024BF04D8007F7835 /* ProjectSFUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3003450F24BF04D8007F7835 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		30BFC8C824B75E6C00DAC6D9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -544,6 +603,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3003450D24BF04D8007F7835 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3003451424BF04D9007F7835 /* ProjectSFUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		30BFC8C624B75E6C00DAC6D9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -615,6 +682,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3003451724BF04D9007F7835 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 30BFC8C924B75E6C00DAC6D9 /* Project SF */;
+			targetProxy = 3003451624BF04D9007F7835 /* PBXContainerItemProxy */;
+		};
 		9CD7F12124B89C5000DDAD8C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 30BFC8C924B75E6C00DAC6D9 /* Project SF */;
@@ -623,6 +695,44 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		3003451924BF04D9007F7835 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W9K99K5JN4;
+				INFOPLIST_FILE = ProjectSFUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSFUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Project SF";
+			};
+			name = Debug;
+		};
+		3003451A24BF04D9007F7835 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W9K99K5JN4;
+				INFOPLIST_FILE = ProjectSFUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.RomanEsin.ProjectSFUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Project SF";
+			};
+			name = Release;
+		};
 		30BFC8D724B75E6F00DAC6D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -835,6 +945,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3003451824BF04D9007F7835 /* Build configuration list for PBXNativeTarget "ProjectSFUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3003451924BF04D9007F7835 /* Debug */,
+				3003451A24BF04D9007F7835 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		30BFC8C524B75E6C00DAC6D9 /* Build configuration list for PBXProject "Project SF" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
