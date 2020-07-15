@@ -78,7 +78,7 @@ struct FriendDetailView: View {
             .foregroundColor(.secondary)
 
             Section(header: Text("Current Activity")) {
-                ActivityOverview(activity: friend.activity)
+                ActivityOverview(shouldAnimate: false, activity: .constant(friend.activity))
             }
 
             Section(header: Text("Current Competitions")) {

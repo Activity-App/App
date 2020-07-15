@@ -9,8 +9,9 @@ import SwiftUI
 
 struct ActivityOverview: View {
 
+    var shouldAnimate = true
     @Environment(\.colorScheme) var colorScheme
-    let activity: ActivityRings
+    @Binding var activity: ActivityRings
 
     var body: some View {
         HStack {
@@ -28,7 +29,7 @@ struct ActivityOverview: View {
                     .fontWeight(.medium)
             }
             Spacer()
-            ActivityRingsView(values: .constant(activity), ringSize: .medium)
+            ActivityRingsView(shouldAnimate: shouldAnimate, values: $activity, ringSize: .medium)
                 .padding(.vertical, 12)
         }
     }
@@ -36,13 +37,13 @@ struct ActivityOverview: View {
 
 struct ActivityOverview_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityOverview(activity: .init(
+        ActivityOverview(activity: .constant(.init(
             moveCurrent: 0,
             moveGoal: 400,
             exerciseCurrent: 0,
             exerciseGoal: 30,
             standCurrent: 0,
             standGoal: 12
-        ))
+        )))
     }
 }

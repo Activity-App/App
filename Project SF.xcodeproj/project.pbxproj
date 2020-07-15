@@ -172,15 +172,13 @@
 				30BFC8CF24B75E6C00DAC6D9 /* ContentView.swift */,
 				30D321A524BB65D5009CD9D0 /* Tabs */,
 				308FAD8924B97E5500126F3F /* Onboarding */,
-				30BFC8E624B8041C00DAC6D9 /* ActivityRingsView.swift */,
-				30BFC8E824B804CC00DAC6D9 /* ActivityRingView.swift */,
+				30CCF30824BEE91300103C1E /* Activity */,
 				307648CA24BC81C8005D8531 /* iCloudErrorView.swift */,
 				3090918124B9480F000E3B11 /* RoundedButton.swift */,
 				9C6C74AB24BADD1800C657B0 /* RoundedNavigationButton.swift */,
 				308FAD9D24B9A0DC00126F3F /* NavigationBarLabel.swift */,
 				30D3217724BB430E009CD9D0 /* RoundedTextField.swift */,
 				30D321C024BC1886009CD9D0 /* NavScrollView.swift */,
-				30CCF30624BED9EA00103C1E /* ActivityOverview.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -267,6 +265,16 @@
 				30BFC8E224B76BB900DAC6D9 /* HealthKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		30CCF30824BEE91300103C1E /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				30CCF30624BED9EA00103C1E /* ActivityOverview.swift */,
+				30BFC8E624B8041C00DAC6D9 /* ActivityRingsView.swift */,
+				30BFC8E824B804CC00DAC6D9 /* ActivityRingView.swift */,
+			);
+			path = Activity;
 			sourceTree = "<group>";
 		};
 		30D3217E24BB6484009CD9D0 /* Recovered References */ = {

@@ -37,7 +37,7 @@ struct CompetitionsView: View {
         NavigationView {
             List {
                 Section(header: Text("Current Activity")) {
-                    ActivityOverview(activity: healthKit.latestActivityData)
+                    ActivityOverview(activity: $healthKit.latestActivityData)
                 }
 
                 Section(header: Text("Currently Competing")) {

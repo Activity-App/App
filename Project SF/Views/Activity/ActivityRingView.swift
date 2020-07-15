@@ -9,9 +9,11 @@ import SwiftUI
 
 struct ActivityRingView: View {
 
+    var shouldAnimate = true
     var ringType: RingType
     var ringWidth: CGFloat
-    
+
+    @Environment(\.presentationMode) var presentationMode
     @Binding var current: Double
     @Binding var goal: Double
     
@@ -68,6 +70,7 @@ struct ActivityRingView: View {
             }
         }
         .onChange(of: current) { _ in
+            guard shouldAnimate else { return }
             withAnimation(.easeInOut(duration: 1.3)) {
                 fill = current == 0 ? 0 : current / goal
             }

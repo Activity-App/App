@@ -19,6 +19,7 @@ struct FriendsCell: View {
                         .font(.title3)
                         .fontWeight(.black)
                         .padding(.bottom, 4)
+                        .foregroundColor(.white)
                     Text("Move: \(friend.activity.moveFraction)")
                         .foregroundColor(RingType.move.color)
                         .fontWeight(.medium)
@@ -44,16 +45,22 @@ struct FriendsCell: View {
 
 struct FriendsCell_Previews: PreviewProvider {
     static var previews: some View {
-        FriendsCell(Friend(
-            name: "Friend3",
-            activity: .init(
-                moveCurrent: 380,
-                moveGoal: 400,
-                exerciseCurrent: 39,
-                exerciseGoal: 30,
-                standCurrent: 14,
-                standGoal: 12
+        NavigationView {
+            RoundedNavigationLink("Show", destination:
+                                    GroupBox {
+                                        FriendsCell(Friend(
+                                            name: "Friend3",
+                                            activity: .init(
+                                                moveCurrent: 380,
+                                                moveGoal: 400,
+                                                exerciseCurrent: 39,
+                                                exerciseGoal: 30,
+                                                standCurrent: 14,
+                                                standGoal: 12
+                                            )
+                                        ))
+                                    }
             )
-        ))
+        }
     }
 }
