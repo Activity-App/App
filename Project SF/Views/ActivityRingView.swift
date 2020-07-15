@@ -98,13 +98,13 @@ struct ActivityRingView: View {
             withAnimation(.easeIn(duration: animationTime - over100AnimationTime)) {
                 fill = 1.1
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + animationTime - over100AnimationTime - 0.1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + animationTime - over100AnimationTime - 0.15) {
                 withAnimation(.easeOut(duration: over100AnimationTime)) {
                     fill = newFill
                 }
             }
         } else {
-            withAnimation(.spring()) {
+            withAnimation(.easeInOut(duration: animationTime)) {
                 fill = newFill
             }
         }
