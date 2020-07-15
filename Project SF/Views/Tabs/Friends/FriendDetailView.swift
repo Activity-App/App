@@ -32,11 +32,10 @@ struct FriendDetailView: View {
 
                 // TODO: add emails to friends
                 HStack {
-                    Text("thisIsSomeEmail@mailservice.com")
-                        .minimumScaleFactor(0.7)
-                    Spacer()
                     Image(systemName: "square.and.pencil")
                         .foregroundColor(.accentColor)
+                    Text("thisIsSomeEmail@mailservice.com")
+                        .minimumScaleFactor(0.7)
                 }
                 .contextMenu {
                     Button(action: {
@@ -47,6 +46,17 @@ struct FriendDetailView: View {
                         Label("Write an email", systemImage: "square.and.pencil")
                     }
                 }
+
+                Button(action: {
+                    // TODO: Unfriend / Friend
+                }) {
+                    HStack {
+                        Image(systemName: "plus.circle")
+                        Text("Unfriend")
+                            .foregroundColor(.secondary)
+                    }
+                }
+                .foregroundColor(.accentColor)
             }
             .foregroundColor(.secondary)
 
