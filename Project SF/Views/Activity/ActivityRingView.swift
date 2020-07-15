@@ -70,8 +70,11 @@ struct ActivityRingView: View {
             }
         }
         .onChange(of: current) { _ in
-            guard shouldAnimate else { return }
-            withAnimation(.easeInOut(duration: 1.3)) {
+            if shouldAnimate {
+                withAnimation(.easeInOut(duration: 1.3)) {
+                    fill = current == 0 ? 0 : current / goal
+                }
+            } else {
                 fill = current == 0 ? 0 : current / goal
             }
         }
