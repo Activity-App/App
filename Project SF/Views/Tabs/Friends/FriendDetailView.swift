@@ -10,6 +10,7 @@ import SwiftUI
 struct FriendDetailView: View {
 
     @Environment(\.colorScheme) var colorScheme
+    @State var isAlertShown = false
     let friend: Friend
 
     var competitions: [Competition] = [
@@ -64,7 +65,7 @@ struct FriendDetailView: View {
                 }
 
                 Button(action: {
-                    // TODO: Unfriend / Friend
+                    isAlertShown = true
                 }) {
                     HStack {
                         Image(systemName: "minus.circle")
@@ -113,6 +114,12 @@ struct FriendDetailView: View {
         }
         .listStyle(InsetGroupedListStyle())
         .navigationTitle(friend.name)
+        .alert(isPresented: $isAlertShown) {
+            Alert(title: Text("Are you sure youo want to unfriend \(friend.name)?"),
+                  primaryButton: .destructive(Text("Unfriend")) {
+                // TODO: Friend / Unfriend
+            }, secondaryButton: .cancel(Text("Cancel")))
+        }
     }
 
     init(_ friend: Friend) {
