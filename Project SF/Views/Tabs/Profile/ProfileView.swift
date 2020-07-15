@@ -12,8 +12,7 @@ struct ProfileView: View {
         NavigationView {
             Text("Profile View")
                 .navigationTitle("Profile")
-                .navigationBarItems(trailing: NavigationBarLabel(systemName: "gearshape.fill",
-                                                                 destination: SettingsView()))
+                .navigationBarItems(trailing: NavigationBarLabel(systemName: "gearshape", destination: SettingsView()))
         }
         .tabItem {
             Label("Profile", systemImage: "person.crop.circle")

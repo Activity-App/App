@@ -33,7 +33,7 @@ struct ActivityRingView: View {
                         .trim(from: 0, to: CGFloat(fill))
                         .stroke(
                             AngularGradient(
-                                gradient: Gradient(colors: [ringType.darkColor.opacity(0.7), ringType.color]),
+                                gradient: Gradient(colors: [ringType.darkColor, ringType.color]),
                                 center: .center,
                                 startAngle: .degrees(0),
                                 endAngle: .degrees(360 * fill)
@@ -41,79 +41,54 @@ struct ActivityRingView: View {
                             style: StrokeStyle(lineWidth: ringWidth, lineCap: .round))
                         .opacity(1)
                         .rotationEffect(.degrees(-90))
+                        .animation(.easeInOut(duration: 2.5))
+                    
+                    // Fixes gradient when at 0 position
+                    Circle()
+                        .frame(width: ringWidth, height: ringWidth)
+                        .offset(y: -geometry.size.height/2)
+                        .foregroundColor(
+                            fill > 0.1 ? .clear : ringType.darkColor
+                        )
 
                     // Ring shadow
                     Circle()
                         .frame(width: ringWidth, height: ringWidth)
-                        .offset(y: -geometry.size.height / 2)
+                        .offset(y: -geometry.size.height/2)
                         .foregroundColor(
                             fill > 0.96 ? ringType.color : .clear
                         )
                         .shadow(
-                            color: Color.black.opacity(0.125),
-                            radius: ringWidth / 8,
-                            x: ringWidth / 3.5,
+                            color: Color.black.opacity(0.15),
+                            radius: ringWidth/8,
+                            x: ringWidth/3.5,
                             y: 0
                         )
-                        .animation(nil)
                         .rotationEffect(.degrees(360 * fill))
+                        .animation(.easeInOut(duration: 2.5))
                     
                     ringType.icon
                         .resizable()
-                        .frame(width: ringWidth - 4, height: ringWidth - 4)
-                        .offset(y: -geometry.size.height / 2)
+                        .frame(width: ringWidth-4, height: ringWidth-4)
+                        .offset(y: -geometry.size.height/2)
                 }
             }
         }
         .onAppear {
-            updateRingFill()
+            fill = current/goal + 0.001
         }
         .onChange(of: current) { newCurrent in
-            updateRingFill(newCurrent: newCurrent)
+            fill = newCurrent/goal + 0.001
         }
         .onChange(of: goal) { newGoal in
-            updateRingFill(newGoal: newGoal)
-        }
-    }
-    
-    func updateRingFill(newCurrent: Double? = nil, newGoal: Double? = nil) {
-        let currentIn = newCurrent == nil ? current : newCurrent!
-        let goalIn = newGoal == nil ? goal : newGoal!
-        
-        let newFill = currentIn / goalIn + 0.001
-        
-        let animationTime = abs(fill - newFill) * 2
-        let over100AnimationTime = abs(1 - newFill) * 2
-        
-        if fill < 0.96 && newFill > 0.96 {
-            withAnimation(.easeIn(duration: animationTime - over100AnimationTime)) {
-                fill = 0.95
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + animationTime - over100AnimationTime - 0.15) {
-                withAnimation(.easeOut(duration: over100AnimationTime)) {
-                    fill = newFill
-                }
-            }
-        } else if fill > 0.96 && newFill < 0.96 {
-            withAnimation(.easeIn(duration: animationTime - over100AnimationTime)) {
-                fill = 1.1
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + animationTime - over100AnimationTime - 0.15) {
-                withAnimation(.easeOut(duration: over100AnimationTime)) {
-                    fill = newFill
-                }
-            }
-        } else {
-            withAnimation(.easeInOut(duration: animationTime)) {
-                fill = newFill
-            }
+            fill = current/newGoal + 0.001
         }
     }
 }
 
 struct ActivityRing_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityRingView(ringType: .move, ringWidth: 18, current: .constant(150), goal: .constant(100))
-            .frame(width: 100, height: 100)
+        ActivityRingView(ringType: .stand, ringWidth: 30, current: .constant(19), goal: .constant(100))
+            .frame(width: 300, height: 300)
     }
 }
