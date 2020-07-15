@@ -88,8 +88,7 @@ struct FriendDetailView: View {
                                                 RingType.exercise.darkColor : RingType.exercise.color)
                             .fontWeight(.medium)
                         Text("Stand: \(friend.activity.standFraction)")
-                            .foregroundColor(colorScheme == .light ?
-                                                RingType.stand.darkColor : RingType.stand.color)
+                            .foregroundColor(RingType.stand.darkColor)
                             .fontWeight(.medium)
                     }
                     Spacer()
