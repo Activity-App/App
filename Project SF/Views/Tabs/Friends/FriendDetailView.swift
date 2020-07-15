@@ -78,24 +78,7 @@ struct FriendDetailView: View {
             .foregroundColor(.secondary)
 
             Section(header: Text("Current Activity")) {
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text("Move: \(friend.activity.moveFraction)")
-                            .foregroundColor(colorScheme == .light ?
-                                                RingType.move.darkColor : RingType.move.color)
-                            .fontWeight(.medium)
-                        Text("Exercise: \(friend.activity.exerciseFraction)")
-                            .foregroundColor(colorScheme == .light ?
-                                                RingType.exercise.darkColor : RingType.exercise.color)
-                            .fontWeight(.medium)
-                        Text("Stand: \(friend.activity.standFraction)")
-                            .foregroundColor(RingType.stand.darkColor)
-                            .fontWeight(.medium)
-                    }
-                    Spacer()
-                    ActivityRingsView(values: .constant(friend.activity), ringSize: .medium)
-                        .padding(.vertical, 12)
-                }
+                ActivityOverview(activity: friend.activity)
             }
 
             Section(header: Text("Current Competitions")) {
