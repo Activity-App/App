@@ -67,11 +67,6 @@ struct ActivityRingView: View {
                 }
             }
         }
-//        .onAppear {
-//            withAnimation(.easeInOut(duration: 1.3)) {
-//                fill = current == 0 ? 0 : current / goal
-//            }
-//        }
         .onChange(of: current) { _ in
             withAnimation(.easeInOut(duration: 1.3)) {
                 fill = current == 0 ? 0 : current / goal
