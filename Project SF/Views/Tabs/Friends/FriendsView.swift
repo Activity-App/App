@@ -48,6 +48,17 @@ struct FriendsView: View {
                 standCurrent: 14,
                 standGoal: 12
             )
+        ),
+        Friend(
+            name: "Friend3",
+            activity: .init(
+                moveCurrent: 0,
+                moveGoal: 400,
+                exerciseCurrent: 0,
+                exerciseGoal: 30,
+                standCurrent: 0,
+                standGoal: 12
+            )
         )
     ]
 
@@ -56,26 +67,7 @@ struct FriendsView: View {
             List {
                 Section(header: Text("Friend Activity")) {
                     ForEach(friends) { friend in
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(friend.name)
-                                    .font(.title3)
-                                    .fontWeight(.black)
-                                    .padding(.bottom, 4)
-                                Text("Move: \(friend.activity.moveFraction)")
-                                    .foregroundColor(RingType.move.color)
-                                    .fontWeight(.medium)
-                                Text("Exercise: \(friend.activity.exerciseFraction)")
-                                    .foregroundColor(RingType.exercise.color)
-                                    .fontWeight(.medium)
-                                Text("Stand: \(friend.activity.standFraction)")
-                                    .foregroundColor(RingType.stand.darkColor)
-                                    .fontWeight(.medium)
-                            }
-                            Spacer()
-                            ActivityRingsView(values: .constant(friend.activity), ringSize: .small)
-                                .padding(.vertical, 12)
-                        }
+                        FriendsCell(friend)
                     }
                 }
 
