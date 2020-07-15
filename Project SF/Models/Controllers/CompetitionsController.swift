@@ -9,6 +9,7 @@ import Foundation
 import CloudKit
 
 // NOTE: This is currently a prototype and contains some poorly written code.
+// TODO: Refactor into multiple classes
 class CompetitionsController {
     
     // MARK: Properties
@@ -23,12 +24,14 @@ class CompetitionsController {
     
     // MARK: Competitions
     
-    /// Creates a competition
+    /// Creates a competition.
     /// - Parameters:
     ///   - type: The competition type.
     ///   - endDate: The date the competition will end.
     ///   - friends: The friends to invite to the competition. This currently can't be changed later.
-    ///   - handler: Called with the result of the operation.
+    ///   - handler: Called with the result of the operation. Not guaranteed to be on the main thread..
+    ///
+    /// Internally, this creates a `CompetitionRecord` which is shared to all friend participants (with read only access). The `CompetitionRecord` contains all the competition metadata and a list of references to `ScoreURLHolderRecord`s which, if the participant has joined the competition, contain a share url that will grant access to the participants score infomation.
     func createCompetition(type: CompetitionRecord.CompetitionType,
                            endDate: Date,
                            friends: [Friend],
@@ -103,6 +106,10 @@ class CompetitionsController {
         }
     }
     
+    /// Fetches pending invitations.
+    /// - Parameter handler: Called with the result of the operation. Not guaranteed to be on the main thread.
+    ///
+    /// Internally, this queries the public database for `InvitationRecord`s matching the users record ID. It is appropriate to store these URLs in the public database as they will only work for the recipient of the invitation.
     func fetchPendingInvitations(then handler: @escaping (Result<[InvitationRecord], Error>) -> Void) {
         container.fetchUserRecordID { recordID, error in
             if let error = error {
@@ -141,6 +148,12 @@ class CompetitionsController {
         }
     }
     
+    /// Accpets a competition invitation.
+    /// - Parameters:
+    ///   - invitation: The invitation to accept.
+    ///   - handler: Called with the result of the operation. Not guaranteed to be on the main thread.
+    ///
+    /// Internally, this accepts both share URLs present in the invitation (the `CompetitionRecord` share and the `ScoreURLHolder` share), and modifies the `ScoreURLHolder` to contain the share url for the users score infomation.
     func acceptInvitation(_ invitation: InvitationRecord, then handler: @escaping (Result<Void, Error>) -> Void) {
         guard let competitionRecordInviteURLString = invitation.competitionRecordInviteURL,
               let scoreURLHolderInviteURLString = invitation.scoreURLHolderInviteURL,
@@ -192,6 +205,10 @@ class CompetitionsController {
         container.add(metadataFetchOperation)
     }
     
+    /// Fetches all competitions that the user is a participant in, including ones the created.
+    /// - Parameter handler: Called with the result of the operation. Not guaranteed to be on the main thread.
+    ///
+    /// Internally, this queries both the private and the shared database for competitions.
     func fetchCompetitions(then handler: @escaping (Result<[CompetitionRecord], Error>) -> Void) {
         // TODO: Should be optimized with caching
         let dispatchGroup = DispatchGroup()
@@ -210,25 +227,9 @@ class CompetitionsController {
         }
         
         dispatchGroup.enter()
-        fetchCompetitionsFromDatabaseWithScope(.private, then: { (result: Result<[CompetitionRecord], Error>) in
-            dispatchGroup.leave()
-            switch result {
-            case .success(let records):
-                competitionRecords.append(contentsOf: records)
-            case .failure(let error):
-                errors.append(error)
-            }
-        })
+        fetchCompetitionsFromDatabaseWithScope(.private, then: recordFetchHandler)
         dispatchGroup.enter()
-        fetchCompetitionsFromDatabaseWithScope(.shared, then: { (result: Result<[CompetitionRecord], Error>) in
-            dispatchGroup.leave()
-            switch result {
-            case .success(let records):
-                competitionRecords.append(contentsOf: records)
-            case .failure(let error):
-                errors.append(error)
-            }
-        })
+        fetchCompetitionsFromDatabaseWithScope(.shared, then: recordFetchHandler)
         
         dispatchGroup.notify(queue: .main) {
             if competitionRecords.isEmpty, !errors.isEmpty {
@@ -239,7 +240,7 @@ class CompetitionsController {
         }
     }
     
-    // MARK: Friend Discovery
+    // MARK: Friend Discovery (should be moved out of this class)
     
     /// Requests permission from the user to discover their contacts.
     /// - Parameter handler: The result handler. Not guaranteed to be executed on the main thread.
@@ -315,6 +316,7 @@ class CompetitionsController {
     
     // MARK: Helper Methods
     
+    /// Utility method to create a zone with a randomised identifier.
     private func createZone(then handler: @escaping (Result<CKRecordZone, Error>) -> Void) {
         let zone = CKRecordZone(zoneName: UUID().uuidString)
         let zoneOperation = CKModifyRecordZonesOperation(recordZonesToSave: [zone], recordZoneIDsToDelete: nil)
@@ -336,6 +338,9 @@ class CompetitionsController {
         container.privateCloudDatabase.add(zoneOperation)
     }
     
+    /// Invites friends to a competition with a designated `inviteURL`. The share that the `inviteURL` corresponds to must already have the friend as a participant.
+    ///
+    /// This creates a CKShare for each invitee that points to a new `ScoreURLHolderRecord`. The invitee can edit this when the accept their invite to contain a share URL that links to their personal `ScoreRecord`.
     private func inviteFriendsToCompetition(_ friends: [Friend],
                                             inviteURL: URL,
                                             then handler: @escaping (Result<Void, Error>) -> Void) {
@@ -404,9 +409,10 @@ class CompetitionsController {
         }
     }
     
+    /// Fetches share participants that can be used with a CKShare.
     private func fetchShareParticipantsFrom(friends: [Friend],
                                             then handler: @escaping (Result<[(CKShare.Participant, Friend)], Error>) -> Void) {
-        var friendForUserRecordID: [CKRecord.ID: Friend] = Dictionary(uniqueKeysWithValues:
+        let friendForUserRecordID: [CKRecord.ID: Friend] = Dictionary(uniqueKeysWithValues:
                                                                         friends.map { (key: $0.recordID, value: $0) })
         let friendLookupInfomation = friends.map { CKUserIdentity.LookupInfo(userRecordID: $0.recordID) }
         let participantLookupOperation = CKFetchShareParticipantsOperation(userIdentityLookupInfos:
@@ -498,6 +504,7 @@ class CompetitionsController {
         database.add(fetchZonesOperation)
     }
     
+    /// Creates a score record for the user. Should only be called if the score record doesn't already exist.
     private func createScoreRecord(then handler: @escaping (Result<Void, Error>) -> Void) {
         let scoreRecord = ScoreRecord()
         
