@@ -28,7 +28,7 @@ extension UIImage {
                 bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedFirst.rawValue),
                 provider: providerRef,
                 decode: nil,
-                shouldInterpolate: true,
+                shouldInterpolate: false,
                 intent: .defaultIntent)
         else { return nil }
         self.init(cgImage: cgim)

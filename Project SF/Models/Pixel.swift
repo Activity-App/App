@@ -37,22 +37,23 @@ class PixelImage {
     ///   - height: Height of the image.
     /// - Returns: Random symmetrixal `PixelImage` with given size.
     static func randomSymmetrical(width: Int, height: Int) -> PixelImage {
-        // Yes, this makes sence.
-        let width = 2 * width / 2
-        let height = 2 * height / 2
-
         var pixels: [Pixel] = []
-        let clear = Pixel(a: 0, r: 0, g: 0, b: 0)
+        let clear = Pixel(a: 255,
+                          r: 240,
+                          g: 240,
+                          b: 240)
+
         let color = Pixel(a: 255,
                           r: .random(in: 0...255),
                           g: .random(in: 0...255),
                           b: .random(in: 0...255))
 
         var slice: [Pixel] = []
+        let num = width % 2
         for _ in 0..<height {
             loop: for j in 0..<width {
-                if j == width / 2 {
-                    pixels.append(contentsOf: slice.reversed())
+                if j - num == width / 2 {
+                    pixels.append(contentsOf: slice[..<(slice.count - num)].reversed())
                     slice = []
                     break loop
                 } else {

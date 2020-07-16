@@ -17,15 +17,17 @@ struct ProfileSettings: View {
     
     @State var profilePicture: UIImage?
     @State var showImageSelectionView = false
+    @State var showProfileImageCreator = false
+    @State var showSelectAlert = false
 
     var body: some View {
         // This VStack and empty text is required to fix the navigation title glitching out on scroll
         // so ScrollView isn't the topmost view.
         NavScrollView {
             Button(action: {
-//                showImageSelectionView = true
-                profilePicture = UIImage(pixelImage: .randomSymmetrical(width: 6, height: 6))
-            }, label: {
+//                profilePicture = UIImage(pixelImage: .randomSymmetrical(width: 6, height: 6))
+                showSelectAlert = true
+            }) {
                 if profilePicture == nil {
                     Image(systemName: "person.crop.circle.badge.plus")
                         .resizable()
@@ -33,14 +35,31 @@ struct ProfileSettings: View {
                         .frame(width: 100, height: 100)
                 } else {
                     Image(uiImage: profilePicture!)
+                        .interpolation(.none)
                         .renderingMode(.original)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 100, height: 100)
                         .clipShape(Circle())
                 }
-            })
-            .padding(.bottom)
+            }
+
+//            if profilePicture == nil {
+//                Image(systemName: "person.crop.circle.badge.plus")
+//                    .resizable()
+//                    .aspectRatio(contentMode: .fit)
+//                    .frame(width: 100, height: 100)
+//                    .padding(.bottom)
+//            } else {
+//                Image(uiImage: profilePicture!)
+//                    .interpolation(.none)
+//                    .renderingMode(.original)
+//                    .resizable()
+//                    .aspectRatio(contentMode: .fill)
+//                    .frame(width: 100, height: 100)
+//                    .clipShape(Circle())
+//                    .padding(.bottom)
+//            }
 
             TextField("Name", text: $name)
                 .font(.headline)
@@ -87,6 +106,17 @@ struct ProfileSettings: View {
         }
         .padding(.horizontal)
         .navigationTitle("Profile")
+        .actionSheet(isPresented: $showSelectAlert) {
+            ActionSheet(title: Text("Select profile image"),
+                        message: nil,
+                        buttons: [
+                            .default(Text("Open profile image creator"), action: {
+                                showProfileImageCreator = true
+//                                profilePicture = UIImage(pixelImage: .randomSymmetrical(width: 7, height: 7))
+                            }), .default(Text("Select from image gallery"), action: {
+                                showImageSelectionView = true
+                            }), .cancel()])
+        }
         .sheet(isPresented: $showImageSelectionView) {
             ImageSelectionView(image: $profilePicture)
         }

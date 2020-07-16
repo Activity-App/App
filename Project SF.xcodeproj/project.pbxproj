@@ -20,6 +20,7 @@
 		3090918224B9480F000E3B11 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3090918124B9480F000E3B11 /* RoundedButton.swift */; };
 		30B2818824BFF2F600647B83 /* UIImage+PixelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2818724BFF2F600647B83 /* UIImage+PixelData.swift */; };
 		30B2818A24C001A000647B83 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2818924C001A000647B83 /* Pixel.swift */; };
+		30B2818C24C07F4700647B83 /* ProfileImageCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2818B24C07F4700647B83 /* ProfileImageCreator.swift */; };
 		30BFC8CE24B75E6C00DAC6D9 /* ProjectSFApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8CD24B75E6C00DAC6D9 /* ProjectSFApp.swift */; };
 		30BFC8D024B75E6C00DAC6D9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8CF24B75E6C00DAC6D9 /* ContentView.swift */; };
 		30BFC8D224B75E6F00DAC6D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30BFC8D124B75E6F00DAC6D9 /* Assets.xcassets */; };
@@ -93,6 +94,7 @@
 		3090918124B9480F000E3B11 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		30B2818724BFF2F600647B83 /* UIImage+PixelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+PixelData.swift"; sourceTree = "<group>"; };
 		30B2818924C001A000647B83 /* Pixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
+		30B2818B24C07F4700647B83 /* ProfileImageCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageCreator.swift; sourceTree = "<group>"; };
 		30BFC8CA24B75E6C00DAC6D9 /* Project SF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project SF.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30BFC8CD24B75E6C00DAC6D9 /* ProjectSFApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSFApp.swift; sourceTree = "<group>"; };
 		30BFC8CF24B75E6C00DAC6D9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 				30D321AF24BB65D5009CD9D0 /* PermissionSettings.swift */,
 				30D321B024BB65D5009CD9D0 /* PrivacyAbout.swift */,
 				30D321B124BB65D5009CD9D0 /* ProfileSettings.swift */,
+				30B2818B24C07F4700647B83 /* ProfileImageCreator.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -594,6 +597,7 @@
 				30BFC8E724B8041C00DAC6D9 /* ActivityRingsView.swift in Sources */,
 				3090918224B9480F000E3B11 /* RoundedButton.swift in Sources */,
 				9CCFDD2424B9745E00162B0F /* UIApplication+IsTesting.swift in Sources */,
+				30B2818C24C07F4700647B83 /* ProfileImageCreator.swift in Sources */,
 				9CCFDD2824B9758A00162B0F /* TestApp.swift in Sources */,
 				302CF88C24BA1A4000FF79D7 /* ActivityResult.swift in Sources */,
 				3067713124BDE3950085F152 /* FriendDetailView.swift in Sources */,
