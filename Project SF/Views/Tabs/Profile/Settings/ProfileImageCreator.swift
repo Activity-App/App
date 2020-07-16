@@ -27,7 +27,7 @@ struct ProfileImageCreator: View {
                         .animation(.spring())
 
                     // TODO: Dynamically change color of the image
-                    ColorPicker("Select foreground color", selection: $color)
+                    ColorPicker("Select foreground color", selection: $color, supportsOpacity: false)
                         .padding(.top)
                 }
                 RoundedButton("Generate image") {
@@ -39,9 +39,6 @@ struct ProfileImageCreator: View {
             }
             .padding(.horizontal)
             .navigationTitle("Profile Image Creator")
-            .navigationBarItems(trailing: NavigationBarButton(systemName: "xmark.circle.fill", action: {
-                presentationMode.wrappedValue.dismiss()
-            }))
         }
     }
 
