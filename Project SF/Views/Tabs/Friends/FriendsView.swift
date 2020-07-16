@@ -84,6 +84,7 @@ struct FriendsView: View {
         }
         .tabItem {
             Label("Friends", systemImage: "person.3.fill")
+                .font(.title2)
         }
     }
 }
