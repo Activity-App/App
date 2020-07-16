@@ -26,6 +26,35 @@ extension Array where Element == Pixel {
         }
         return pixels
     }
+
+    static func randomSymmetrical(width: Int, height: Int) -> [Pixel] {
+        // Yes, this makes sence.
+        let width = 2 * width / 2
+        let height = 2 * height / 2
+
+        var pixels: [Pixel] = []
+        let clear = Pixel(a: 0, r: 0, g: 0, b: 0)
+        let color = Pixel(a: 255,
+                          r: .random(in: 0...255),
+                          g: .random(in: 0...255),
+                          b: .random(in: 0...255))
+
+        var slice: [Pixel] = []
+        for _ in 0..<height {
+            loop: for j in 0..<width {
+                if j == width / 2 {
+                    pixels.append(contentsOf: slice.reversed())
+                    slice = []
+                    break loop
+                } else {
+                    let color = Bool.random() ? clear : color
+                    pixels.append(color)
+                    slice.append(color)
+                }
+            }
+        }
+        return pixels
+    }
 }
 
 extension UIImage {
