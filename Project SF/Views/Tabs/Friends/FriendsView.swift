@@ -49,7 +49,7 @@ struct FriendsView: View {
                 standGoal: 12
             )
         ),
-        Friend(
+        TemporaryFriend(
             name: "Friend3",
             activity: .init(
                 moveCurrent: 0,

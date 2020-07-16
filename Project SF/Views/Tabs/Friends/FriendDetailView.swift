@@ -11,7 +11,7 @@ struct FriendDetailView: View {
 
     @Environment(\.colorScheme) var colorScheme
     @State var isAlertShown = false
-    let friend: Friend
+    let friend: TemporaryFriend
 
     var competitions: [Competition] = [
         Competition(name: "Competition1", startDate: Date() - 100000, endDate: Date() + 100000),
@@ -105,7 +105,7 @@ struct FriendDetailView: View {
         }
     }
 
-    init(_ friend: Friend) {
+    init(_ friend: TemporaryFriend) {
         self.friend = friend
     }
 }
@@ -113,7 +113,7 @@ struct FriendDetailView: View {
 struct FriendDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            FriendDetailView(Friend(
+            FriendDetailView(TemporaryFriend(
                 name: "Friend3",
                 activity: .init(
                     moveCurrent: 380,

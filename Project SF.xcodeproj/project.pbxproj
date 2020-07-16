@@ -11,7 +11,6 @@
 		302CF88C24BA1A4000FF79D7 /* ActivityResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */; };
 		3067712F24BDE0080085F152 /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3067712E24BDE0080085F152 /* FriendsCell.swift */; };
 		3067713124BDE3950085F152 /* FriendDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3067713024BDE3950085F152 /* FriendDetailView.swift */; };
-		307648C924BC7DC5005D8531 /* GrantDataAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307648C824BC7DC4005D8531 /* GrantDataAccessView.swift */; };
 		307648CB24BC81C8005D8531 /* iCloudErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307648CA24BC81C8005D8531 /* iCloudErrorView.swift */; };
 		308FAD8B24B97E7E00126F3F /* OnboardingInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8A24B97E7E00126F3F /* OnboardingInfoCell.swift */; };
 		308FAD8D24B97E8A00126F3F /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8C24B97E8A00126F3F /* PrivacyView.swift */; };
@@ -54,12 +53,12 @@
 		9C338BD524BAC4F4003E5048 /* CompetitionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C338BD424BAC4F4003E5048 /* CompetitionsController.swift */; };
 		9C338BD724BAD080003E5048 /* RecordKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C338BD624BAD080003E5048 /* RecordKey.swift */; };
 		9C338BD924BAD0D3003E5048 /* CompetitionRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C338BD824BAD0D3003E5048 /* CompetitionRecord.swift */; };
+		9C39F69524C07BAA0073C9FF /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7E74A724BDC05B0032CD88 /* SignUpView.swift */; };
 		9C6C74AF24BAE08800C657B0 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6C74AE24BAE08800C657B0 /* SignUpController.swift */; };
 		9C6C74B324BAEC0B00C657B0 /* DynamicRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6C74B224BAEC0B00C657B0 /* DynamicRecord.swift */; };
 		9C6C74B624BBE57B00C657B0 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6C74B524BBE57B00C657B0 /* Friend.swift */; };
 		9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */; };
 		9C7B4D0824B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B4D0724B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift */; };
-		9C7E74A824BDC05B0032CD88 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7E74A724BDC05B0032CD88 /* SignUpView.swift */; };
 		9C7E74AA24BDC0E10032CD88 /* GrantDataAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7E74A924BDC0E10032CD88 /* GrantDataAccessView.swift */; };
 		9C7E74AC24BDC7790032CD88 /* ScoreURLHolderRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7E74AB24BDC7790032CD88 /* ScoreURLHolderRecord.swift */; };
 		9C7E74AE24BDC87A0032CD88 /* ScoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7E74AD24BDC87A0032CD88 /* ScoreRecord.swift */; };
@@ -301,14 +300,6 @@
 				30BFC8E824B804CC00DAC6D9 /* ActivityRingView.swift */,
 			);
 			path = Activity;
-			sourceTree = "<group>";
-		};
-		30D3217E24BB6484009CD9D0 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				30FABF2B24BB5423004B8B62 /* ProfileView.swift */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		30D321A524BB65D5009CD9D0 /* Tabs */ = {
@@ -660,13 +651,13 @@
 				3090918224B9480F000E3B11 /* RoundedButton.swift in Sources */,
 				9CCFDD2424B9745E00162B0F /* UIApplication+IsTesting.swift in Sources */,
 				9CCFDD2824B9758A00162B0F /* TestApp.swift in Sources */,
+				9C39F69524C07BAA0073C9FF /* SignUpView.swift in Sources */,
 				9C6C74AF24BAE08800C657B0 /* SignUpController.swift in Sources */,
 				302CF88C24BA1A4000FF79D7 /* ActivityResult.swift in Sources */,
 				9C6C74B324BAEC0B00C657B0 /* DynamicRecord.swift in Sources */,
 				9C7E74AC24BDC7790032CD88 /* ScoreURLHolderRecord.swift in Sources */,
 				302CF88C24BA1A4000FF79D7 /* ActivityResult.swift in Sources */,
 				3067713124BDE3950085F152 /* FriendDetailView.swift in Sources */,
-				9C6C74AC24BADD1800C657B0 /* RoundedNavigationButton.swift in Sources */,
 				30D321BB24BB65D5009CD9D0 /* PermissionSettings.swift in Sources */,
 				30D321B824BB65D5009CD9D0 /* SettingsView.swift in Sources */,
 				307648CB24BC81C8005D8531 /* iCloudErrorView.swift in Sources */,
