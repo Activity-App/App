@@ -16,8 +16,9 @@ struct ProfileSettings: View {
     @StateObject var keyboard = KeyboardManager()
     
     @State var profilePicture: UIImage?
-    @State var showImageSelectionView = false
-    @State var showProfileImageCreator = false
+
+    @State var showSheet = false
+    @State var selectedSheet = 0
     @State var showSelectAlert = false
 
     var body: some View {
@@ -43,23 +44,6 @@ struct ProfileSettings: View {
                         .clipShape(Circle())
                 }
             }
-
-//            if profilePicture == nil {
-//                Image(systemName: "person.crop.circle.badge.plus")
-//                    .resizable()
-//                    .aspectRatio(contentMode: .fit)
-//                    .frame(width: 100, height: 100)
-//                    .padding(.bottom)
-//            } else {
-//                Image(uiImage: profilePicture!)
-//                    .interpolation(.none)
-//                    .renderingMode(.original)
-//                    .resizable()
-//                    .aspectRatio(contentMode: .fill)
-//                    .frame(width: 100, height: 100)
-//                    .clipShape(Circle())
-//                    .padding(.bottom)
-//            }
 
             TextField("Name", text: $name)
                 .font(.headline)
@@ -111,14 +95,19 @@ struct ProfileSettings: View {
                         message: nil,
                         buttons: [
                             .default(Text("Open profile image creator"), action: {
-                                showProfileImageCreator = true
-//                                profilePicture = UIImage(pixelImage: .randomSymmetrical(width: 7, height: 7))
+                                selectedSheet = 0
+                                showSheet = true
                             }), .default(Text("Select from image gallery"), action: {
-                                showImageSelectionView = true
+                                selectedSheet = 1
+                                showSheet = true
                             }), .cancel()])
         }
-        .sheet(isPresented: $showImageSelectionView) {
-            ImageSelectionView(image: $profilePicture)
+        .sheet(isPresented: $showSheet) {
+            if selectedSheet == 0 {
+                ProfileImageCreator($profilePicture)
+            } else {
+                ImageSelectionView(image: $profilePicture)
+            }
         }
     }
 }
