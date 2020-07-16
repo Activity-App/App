@@ -128,6 +128,7 @@ struct CompetitionsView: View {
         }
         .tabItem {
             Label("Competitions", systemImage: "star.fill")
+                .font(.title2)
         }
         .sheet(isPresented: $showCreateCompetition) {
             CreateCompetition()
