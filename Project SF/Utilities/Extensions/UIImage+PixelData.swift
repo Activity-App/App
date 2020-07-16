@@ -15,19 +15,23 @@ struct Pixel {
     var b: UInt8
 }
 
-extension Array where Element == Pixel {
-    static func random(width: Int, height: Int) -> [Pixel] {
+class PixelImage {
+    var width: Int
+    var height: Int
+    var pixels: [Pixel]
+
+    static func random(width: Int, height: Int) -> PixelImage {
         var pixels: [Pixel] = []
         for _ in 0..<(width * height) {
             pixels.append(Pixel(a: 255,
-                                r: .random(in: 0...255), 
+                                r: .random(in: 0...255),
                                 g: .random(in: 0...255),
                                 b: .random(in: 0...255)))
         }
-        return pixels
+        return PixelImage(width: width, height: height, pixels: pixels)
     }
 
-    static func randomSymmetrical(width: Int, height: Int) -> [Pixel] {
+    static func randomSymmetrical(width: Int, height: Int) -> PixelImage {
         // Yes, this makes sence.
         let width = 2 * width / 2
         let height = 2 * height / 2
@@ -53,12 +57,22 @@ extension Array where Element == Pixel {
                 }
             }
         }
-        return pixels
+        return PixelImage(width: width, height: height, pixels: pixels)
+    }
+
+    init(width: Int, height: Int, pixels: [Pixel]) {
+        self.width = width
+        self.height = height
+        self.pixels = pixels
     }
 }
 
 extension UIImage {
-    convenience init?(pixels: [Pixel], width: Int, height: Int) {
+    convenience init?(pixelImage: PixelImage) {
+        let width = pixelImage.width
+        let height = pixelImage.height
+        let pixels = pixelImage.pixels
+
         guard width > 0 && height > 0, pixels.count == width * height else { return nil }
         var data = pixels
         guard let providerRef = CGDataProvider(data: Data(bytes: &data,
