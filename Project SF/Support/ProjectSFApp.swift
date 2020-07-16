@@ -31,6 +31,13 @@ struct ProjectSFApp: App {
                     .transition(AnyTransition.opacity.animation(.linear(duration: 1)))
             }
         }
-        
+    }
+
+    init() {
+        if ProcessInfo.processInfo.arguments.contains("ui-testing") {
+            UserDefaults.standard.dictionaryRepresentation().forEach { key, _ in
+                UserDefaults.standard.setValue(nil, forKey: key)
+            }
+        }
     }
 }

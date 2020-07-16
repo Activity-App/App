@@ -25,6 +25,7 @@ struct RoundedButton: View {
                 .foregroundColor(.white)
                 .cornerRadius(16)
         }
+        .accessibility(identifier: title)
     }
 
     /// Basic Init method.

@@ -14,34 +14,34 @@ struct CompetitionCell: View {
 
     var body: some View {
         NavigationLink(
-            destination: Text("Destination"),
-            label: {
-                HStack {
-                    VStack {
-                        Text("1st")
-                            .font(.largeTitle)
-                            .bold()
-                        Text("5 points")
-                            .foregroundColor(.secondary)
-                            .font(.subheadline)
-                    }
-                    .padding(.horizontal, 8)
-                    
-                    VStack(alignment: .leading) {
-                        Spacer()
-                        Text("\(endDate, style: .relative) \(endDate < Date() ? "ago" : "")")
-                            .foregroundColor(.secondary)
-                            .font(.subheadline)
-                        Spacer()
-                        Text(competitionName)
-                            .font(.headline)
-                        Spacer()
-                    }
+            destination: Text("Destination")) {
+            HStack {
+                VStack {
+                    Text("1st")
+                        .font(.largeTitle)
+                        .bold()
+                    Text("5 points")
+                        .foregroundColor(.secondary)
+                        .font(.subheadline)
+                }
+                .padding(.horizontal, 8)
+
+                VStack(alignment: .leading) {
+                    Spacer()
+                    Text("\(endDate, style: .relative) \(endDate < Date() ? "ago" : "")")
+                        .foregroundColor(.secondary)
+                        .font(.subheadline)
+                    Spacer()
+                    Text(competitionName)
+                        .font(.headline)
                     Spacer()
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-            })
-            .padding(.vertical, 8)
+                Spacer()
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .padding(.vertical, 8)
+        .accessibility(identifier: competitionName)
     }
 }
 
