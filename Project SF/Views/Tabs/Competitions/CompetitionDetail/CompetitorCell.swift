@@ -16,7 +16,7 @@ struct CompetitorCell: View {
         if competition.creatingUser == person {
             cellBody()
         } else {
-            NavigationLink(destination: CompetitorDetail()) {
+            NavigationLink(destination: CompetitorDetail(competition: competition, person: person)) {
                 cellBody()
             }
         }

@@ -21,7 +21,7 @@ struct PlaceBadgeView: View {
     
     init(place: Int, flippable: Bool,
          activityRings: Binding<ActivityRings>, font: Font = .title,
-         innerPadding: CGFloat = 32, outerPadding: CGFloat = 16) {
+         innerPadding: CGFloat = 24, outerPadding: CGFloat = 4) {
         self.place = place
         self.flippable = flippable
         self._activityRings = activityRings
@@ -65,7 +65,6 @@ struct PlaceBadgeView: View {
                     )
                     .padding(-4)
             )
-            .padding(outerPadding)
             .rotation3DEffect(
                 flipped ? .degrees(180) : .degrees(0),
                 axis: (x: 0, y: 1, z: 0),

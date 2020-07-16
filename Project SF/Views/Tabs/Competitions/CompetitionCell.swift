@@ -34,6 +34,7 @@ struct CompetitionCell: View {
                             outerPadding: 4
                         )
                     }
+                    .frame(width: 65)
                     .padding(.trailing, 8)
 
                     VStack(alignment: .leading) {

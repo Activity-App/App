@@ -14,47 +14,40 @@ struct CompetitionDetail: View {
     let competition: Competition
     
     var body: some View {
-        ZStack {
-            Rectangle()
-                .foregroundColor(Color(colorScheme == .light ? .secondarySystemBackground : .systemBackground))
-                .edgesIgnoringSafeArea(.all)
-            VStack {
-                HStack {
-                    PlaceBadgeView(
-                        place: competition.place,
-                        flippable: true,
-                        activityRings: $healthKit.latestActivityData
-                    )
-                    VStack(alignment: .leading) {
-                        Text("\(competition.creatingUser.points) points")
-                            .font(.title)
-                            .fontWeight(.medium)
-                        HStack(spacing: 0) {
-                            Text(competition.endDate, style: .relative)
-                            Text(" to go.")
-                        }
-                        .font(.title3)
-                        .foregroundColor(Color(.tertiaryLabel))
+        List {
+            HStack {
+                PlaceBadgeView(
+                    place: competition.place,
+                    flippable: true,
+                    activityRings: $healthKit.latestActivityData
+                )
+                VStack(alignment: .leading) {
+                    Text("\(competition.creatingUser.points) points")
+                        .font(.title)
+                        .fontWeight(.medium)
+                    HStack(spacing: 0) {
+                        Text(competition.endDate, style: .relative)
+                        Text(" to go.")
                     }
-                    Spacer()
+                    .font(.title3)
+                    .foregroundColor(Color(.tertiaryLabel))
                 }
-                .padding(.top)
-                .padding(.horizontal)
-                List {
-                    Section(header: Text("Leaderboard")) {
-                        ForEach(competition.people.sorted { $0.points > $1.points }) { person in
-                            CompetitorCell(competition: competition, person: person)
-                        }
-                    }
-                    Section(header: Text("History")) {
-                        
-                    }
-                }
-                .listStyle(InsetGroupedListStyle())
-                Spacer()
             }
-            .navigationTitle(competition.name)
+            .padding(.vertical)
+            .padding(.horizontal)
+            
+            Section(header: Text("Leaderboard")) {
+                ForEach(competition.people.sorted { $0.points > $1.points }) { person in
+                    CompetitorCell(competition: competition, person: person)
+                }
+            }
+            Section(header: Text("Your Points History")) {
+                PointsGraph()
+                    .frame(height: 220)
+            }
         }
+        .listStyle(InsetGroupedListStyle())
+        .navigationTitle(competition.name)
     }
 }
 
