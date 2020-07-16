@@ -38,6 +38,7 @@ struct CompetingPerson: Identifiable, Equatable {
     var id = UUID()
     var name: String
     var points: Int = 0
+    var history: [Int] = []
 }
 
 struct CompetitionsView: View {

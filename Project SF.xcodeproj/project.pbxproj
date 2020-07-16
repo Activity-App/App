@@ -10,6 +10,7 @@
 		3019CD9924BC9792002564AD /* PlaceBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3019CD9824BC9792002564AD /* PlaceBadgeView.swift */; };
 		30251C1924BFC1A50058D6D2 /* CompetitorDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30251C1824BFC1A50058D6D2 /* CompetitorDetail.swift */; };
 		30251C1B24BFC1B10058D6D2 /* CompetitorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30251C1A24BFC1B10058D6D2 /* CompetitorCell.swift */; };
+		30251C1E24BFE1D50058D6D2 /* PointsGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30251C1D24BFE1D50058D6D2 /* PointsGraph.swift */; };
 		30278E9324BC553A00E87E80 /* CompetitionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30278E9224BC553A00E87E80 /* CompetitionDetail.swift */; };
 		302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88924BA199E00FF79D7 /* RingType.swift */; };
 		302CF88C24BA1A4000FF79D7 /* ActivityResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */; };
@@ -85,6 +86,7 @@
 		3019CD9824BC9792002564AD /* PlaceBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceBadgeView.swift; sourceTree = "<group>"; };
 		30251C1824BFC1A50058D6D2 /* CompetitorDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitorDetail.swift; sourceTree = "<group>"; };
 		30251C1A24BFC1B10058D6D2 /* CompetitorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitorCell.swift; sourceTree = "<group>"; };
+		30251C1D24BFE1D50058D6D2 /* PointsGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsGraph.swift; sourceTree = "<group>"; };
 		30278E9224BC553A00E87E80 /* CompetitionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionDetail.swift; sourceTree = "<group>"; };
 		302CF88924BA199E00FF79D7 /* RingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingType.swift; sourceTree = "<group>"; };
 		302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityResult.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				30278E9224BC553A00E87E80 /* CompetitionDetail.swift */,
 				30251C1824BFC1A50058D6D2 /* CompetitorDetail.swift */,
 				30251C1A24BFC1B10058D6D2 /* CompetitorCell.swift */,
+				30251C1D24BFE1D50058D6D2 /* PointsGraph.swift */,
 			);
 			path = CompetitionDetail;
 			sourceTree = "<group>";
@@ -605,6 +608,7 @@
 				30251C1B24BFC1B10058D6D2 /* CompetitorCell.swift in Sources */,
 				30CCF30724BED9EA00103C1E /* ActivityOverview.swift in Sources */,
 				30D321BA24BB65D5009CD9D0 /* NotificationSettings.swift in Sources */,
+				30251C1E24BFE1D50058D6D2 /* PointsGraph.swift in Sources */,
 				30BFC8E724B8041C00DAC6D9 /* ActivityRingsView.swift in Sources */,
 				3090918224B9480F000E3B11 /* RoundedButton.swift in Sources */,
 				9CCFDD2424B9745E00162B0F /* UIApplication+IsTesting.swift in Sources */,

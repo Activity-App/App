@@ -19,16 +19,17 @@ struct ProjectSFApp: App {
                 OnboardingView(showOnboarding: $showOnboarding)
                     .environmentObject(healthKit)
             } else {
-                ContentView()
-                    .environmentObject(healthKit)
-                    .onAppear {
-                        healthKit.authorizeHealthKit {
-                            if healthKit.authorizationState == .granted {
-                                healthKit.updateTodaysActivityData()
-                            }
-                        }
-                    }
-                    .transition(AnyTransition.opacity.animation(.linear(duration: 1)))
+//                ContentView()
+//                    .environmentObject(healthKit)
+//                    .onAppear {
+//                        healthKit.authorizeHealthKit {
+//                            if healthKit.authorizationState == .granted {
+//                                healthKit.updateTodaysActivityData()
+//                            }
+//                        }
+//                    }
+//                    .transition(AnyTransition.opacity.animation(.linear(duration: 1)))
+                PointsGraph()
             }
         }
         
