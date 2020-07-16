@@ -10,6 +10,10 @@ import CloudKit
 
 // NOTE: This is currently a prototype and contains some poorly written code.
 // TODO: Refactor into multiple classes
+// TODO: Add proper error handling with retrying
+// TODO: Make sure all operations have their quality of service set to .userInitiated
+// swiftlint:disable type_body_length
+// NOTE: SwiftLint disable is temporary
 class CompetitionsController {
     
     // MARK: Properties
@@ -85,10 +89,25 @@ class CompetitionsController {
                                 return
                             }
                             
-                            self.inviteFriendsToCompetition(friends, inviteURL: url) { result in
+                            self.inviteFriendsToCompetition(friends, inviteURL: url, zoneID: zone.zoneID) { result in
                                 switch result {
-                                case .success:
-                                    handler(.success(()))
+                                case .success(let scoreURLHolderShareURLs):
+                                    competitionRecord.scoreURLHolderShareURLs = scoreURLHolderShareURLs.map { "\($0)" }
+                                    
+                                    let finalSaveOperation = CKModifyRecordsOperation(recordsToSave: [competitionRecord.record],
+                                                                                      recordIDsToDelete: nil)
+                                    finalSaveOperation.qualityOfService = .userInitiated
+                                    
+                                    finalSaveOperation.modifyRecordsCompletionBlock = { _, _, error in
+                                        if let error = error {
+                                            handler(.failure(error))
+                                            return
+                                        }
+                                        
+                                        handler(.success(()))
+                                    }
+                                    
+                                    self.container.privateCloudDatabase.add(finalSaveOperation)
                                 case .failure(let error):
                                     handler(.failure(error))
                                 }
@@ -186,6 +205,10 @@ class CompetitionsController {
             if !errors.isEmpty {
                 handler(.failure(CompetitionsControllerError.multiple(errors)))
             }
+            guard let scoreURLHolderShareMetadata = shareMetadata.first(where: { $0.share.url == scoreURLHolderInviteURL }) else {
+                handler(.failure(CompetitionsControllerError.unknownError))
+                return
+            }
             
             let acceptOperation = CKAcceptSharesOperation(shareMetadatas: shareMetadata)
             acceptOperation.qualityOfService = .userInitiated
@@ -196,7 +219,44 @@ class CompetitionsController {
                     return
                 }
                 // TODO: Create/get the existing share url for the ScoreRecord and add it to the ScoreURLHolderRecord
-                handler(.success(()))
+                self.fetchScoreRecordShareURL { result in
+                    switch result {
+                    case .success(let url):
+                        let fetchURLHolderOperation = CKFetchRecordsOperation(recordIDs: [scoreURLHolderShareMetadata.rootRecordID])
+                        fetchURLHolderOperation.qualityOfService = .userInitiated
+                        fetchURLHolderOperation.fetchRecordsCompletionBlock = { records, error in
+                            if let error = error {
+                                handler(.failure(error))
+                                return
+                            }
+                            guard let recordRaw = records?.first?.value else {
+                                handler(.failure(CompetitionsControllerError.unknownError))
+                                return
+                            }
+                            let record = ScoreURLHolderRecord(record: recordRaw)
+                            record.isSet = true
+                            record.url = "\(url)"
+                            
+                            let saveRecordOperation = CKModifyRecordsOperation(recordsToSave: [record.record],
+                                                                               recordIDsToDelete: nil)
+                            saveRecordOperation.qualityOfService = .userInitiated
+                            saveRecordOperation.modifyRecordsCompletionBlock = { _, _, error in
+                                if let error = error {
+                                    handler(.failure(error))
+                                    return
+                                }
+                                
+                                handler(.success(()))
+                            }
+                            
+                            self.container.sharedCloudDatabase.add(saveRecordOperation)
+                        }
+                        
+                        self.container.sharedCloudDatabase.add(fetchURLHolderOperation)
+                    case .failure(let error):
+                        handler(.failure(error))
+                    }
+                }
             }
             
             self.container.add(acceptOperation)
@@ -343,46 +403,53 @@ class CompetitionsController {
     /// This creates a CKShare for each invitee that points to a new `ScoreURLHolderRecord`. The invitee can edit this when the accept their invite to contain a share URL that links to their personal `ScoreRecord`.
     private func inviteFriendsToCompetition(_ friends: [Friend],
                                             inviteURL: URL,
-                                            then handler: @escaping (Result<Void, Error>) -> Void) {
+                                            zoneID: CKRecordZone.ID,
+                                            then handler: @escaping (Result<[URL], Error>) -> Void) {
         fetchShareParticipantsFrom(friends: friends) { result in
             switch result {
             case .success(let participantsAndFriends):
                 var urlHolders = [ScoreURLHolderRecord]()
                 var shares = [CKShare]()
-                var shareForFriend = [Friend: CKShare]()
+                var friendToShare = [Friend: CKShare]()
                 
                 for (participant, friend) in participantsAndFriends {
-                    let urlHolder = ScoreURLHolderRecord()
+                    let urlHolder = ScoreURLHolderRecord(recordID: CKRecord.ID(zoneID: zoneID))
                     urlHolder.isSet = false
                     urlHolders.append(urlHolder)
                     
-                    let publicShare = CKShare(rootRecord: urlHolder.record)
-                    publicShare.publicPermission = .none
+                    let share = CKShare(rootRecord: urlHolder.record)
+                    share.publicPermission = .none
                     
-                    participant.permission = .readWrite
-                    publicShare.addParticipant(participant)
+                    for (participantToAdd, _) in participantsAndFriends {
+                        if participant == participantToAdd {
+                            participant.permission = .readWrite
+                        } else {
+                            participant.permission = .readOnly
+                        }
+                        share.addParticipant(participant)
+                    }
                     
-                    shares.append(publicShare)
+                    shares.append(share)
                     
-                    shareForFriend[friend] = publicShare
+                    friendToShare[friend] = share
                 }
                 
                 var recordsToSave = urlHolders.map { $0.record }
                 recordsToSave.append(contentsOf: shares)
                 
-                let saveInvitesOperation = CKModifyRecordsOperation(recordsToSave: recordsToSave,
+                let saveScoreURLHoldersOperation = CKModifyRecordsOperation(recordsToSave: recordsToSave,
                                                                     recordIDsToDelete: nil)
-                saveInvitesOperation.qualityOfService = .userInitiated
+                saveScoreURLHoldersOperation.qualityOfService = .userInitiated
                 
                 var errors = [Error]()
                 
-                saveInvitesOperation.perRecordCompletionBlock = { record, error in
+                saveScoreURLHoldersOperation.perRecordCompletionBlock = { record, error in
                     if let error = error {
                         errors.append(error)
                     }
                 }
                 
-                saveInvitesOperation.completionBlock = {
+                saveScoreURLHoldersOperation.completionBlock = {
                     if !errors.isEmpty {
                         handler(.failure(CompetitionsControllerError.multiple(errors)))
                         return
@@ -390,7 +457,7 @@ class CompetitionsController {
                     var inviteRecords = [InvitationRecord]()
                     
                     for friend in friends {
-                        guard let share = shareForFriend[friend], let shareURL = share.url else { continue }
+                        guard let share = friendToShare[friend], let shareURL = share.url else { continue }
                         let inviteRecord = InvitationRecord()
                         inviteRecord.competitionRecordInviteURL = "\(inviteURL)"
                         inviteRecord.scoreURLHolderInviteURL = "\(shareURL)"
@@ -399,10 +466,22 @@ class CompetitionsController {
                         inviteRecords.append(inviteRecord)
                     }
                     
-                    handler(.success(()))
+                    let saveInvitationsOperations = CKModifyRecordsOperation(recordsToSave: inviteRecords.map({ $0.record }),
+                                                                             recordIDsToDelete: nil)
+                    
+                    saveInvitationsOperations.modifyRecordsCompletionBlock = { _, _, error in
+                        if let error = error {
+                            handler(.failure(error))
+                            return
+                        }
+                        
+                        handler(.success(shares.compactMap { $0.url }))
+                    }
+                    
+                    self.container.publicCloudDatabase.add(saveInvitationsOperations)
                 }
                 
-                self.container.publicCloudDatabase.add(saveInvitesOperation)
+                self.container.privateCloudDatabase.add(saveScoreURLHoldersOperation)
             case .failure(let error):
                 handler(.failure(error))
             }
@@ -504,14 +583,102 @@ class CompetitionsController {
         database.add(fetchZonesOperation)
     }
     
+    func fetchScoreRecordShareURL(then handler: @escaping (Result<URL, Error>) -> Void) {
+        // TODO: Add caching
+        
+        let fetchUserRecordOperation = CKFetchRecordsOperation.fetchCurrentUserRecordOperation()
+        fetchUserRecordOperation.fetchRecordsCompletionBlock = { records, error in
+            if let error = error {
+                handler(.failure(error))
+                return
+            }
+            guard let userRecordRaw = records?.first?.value else {
+                handler(.failure(CompetitionsControllerError.unknownError))
+                return
+            }
+            let userRecord = UserRecord(record: userRecordRaw)
+            
+            if let shareURLString = userRecord.scoreRecordPublicShareURL,
+               let shareURL = URL(string: shareURLString) {
+                handler(.success(shareURL))
+            } else {
+                self.createScoreRecord { result in
+                    switch result {
+                    case .success(let url):
+                        handler(.success(url))
+                    case .failure(let error):
+                        handler(.failure(error))
+                    }
+                }
+            }
+        }
+        
+        container.privateCloudDatabase.add(fetchUserRecordOperation)
+    }
+    
     /// Creates a score record for the user. Should only be called if the score record doesn't already exist.
-    private func createScoreRecord(then handler: @escaping (Result<Void, Error>) -> Void) {
-        let scoreRecord = ScoreRecord()
-        
-        let share = CKShare(rootRecord: scoreRecord.record)
-        share.publicPermission = .readOnly
-        
-        // TODO: Save record and persist it to the private user profile
+    private func createScoreRecord(then handler: @escaping (Result<URL, Error>) -> Void) {
+        self.createZone { result in
+            switch result {
+            case .success(let zone):
+                
+                let scoreRecord = ScoreRecord(recordID: CKRecord.ID(zoneID: zone.zoneID))
+                
+                let share = CKShare(rootRecord: scoreRecord.record)
+                share.publicPermission = .readOnly
+                
+                let recordsToSave = [scoreRecord.record, share]
+                let saveOperation = CKModifyRecordsOperation(recordsToSave: recordsToSave,
+                                                             recordIDsToDelete: nil)
+                
+                saveOperation.modifyRecordsCompletionBlock = { _, _, error in
+                    if let error = error {
+                        handler(.failure(error))
+                        return
+                    }
+                    guard let shareURL = share.url else {
+                        handler(.failure(CompetitionsControllerError.unknownError))
+                        return
+                    }
+                    
+                    let userRecordFetchOperation = CKFetchRecordsOperation.fetchCurrentUserRecordOperation()
+                    userRecordFetchOperation.fetchRecordsCompletionBlock = { records, error in
+                        if let error = error {
+                            handler(.failure(error))
+                            return
+                        }
+                        guard let userRecordRaw = records?.first?.value else {
+                            handler(.failure(CompetitionsControllerError.unknownError))
+                            return
+                        }
+                        
+                        let userRecord = UserRecord(record: userRecordRaw)
+                        
+                        userRecord.scoreRecordZoneName = scoreRecord.record.recordID.zoneID.zoneName
+                        userRecord.scoreRecordRecordName = scoreRecord.record.recordID.recordName
+                        userRecord.scoreRecordPublicShareURL = "\(shareURL)"
+                        
+                        let userRecordSaveOperation = CKModifyRecordsOperation(recordsToSave: [userRecord.record], recordIDsToDelete: nil)
+                        userRecordSaveOperation.modifyRecordsCompletionBlock = { _, _, error in
+                            if let error = error {
+                                handler(.failure(error))
+                                return
+                            }
+                            
+                            handler(.success(shareURL))
+                        }
+                        
+                        self.container.privateCloudDatabase.add(userRecordSaveOperation)
+                    }
+                    
+                    self.container.privateCloudDatabase.add(userRecordFetchOperation)
+                }
+                
+                self.container.privateCloudDatabase.add(saveOperation)
+            case .failure(let error):
+                handler(.failure(error))
+            }
+        }
     }
     
     // MARK: Competition Controller Error

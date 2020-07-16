@@ -34,6 +34,8 @@ class CompetitionRecord: DynamicRecord {
         
         let endDate = ModelItem<Date>(key: "endDate")
         
+        let scoreURLHolderShareURLs = ModelItem<[String]>(key: "scoreURLHolderShareURLs")
+        
     }
     
     // MARK: Init

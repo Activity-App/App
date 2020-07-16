@@ -29,6 +29,12 @@ class UserRecord: DynamicRecord {
         
         let profilePictureURL = ModelItem<String>(key: "profilePictureURL")
         
+        let scoreRecordZoneName = ModelItem<String>(key: "scoreRecordZoneName")
+        
+        let scoreRecordRecordName = ModelItem<String>(key: "scoreRecordRecordName")
+        
+        let scoreRecordPublicShareURL = ModelItem<String>(key: "scoreRecordPublicShareURL")
+        
     }
     
     // MARK: Init
