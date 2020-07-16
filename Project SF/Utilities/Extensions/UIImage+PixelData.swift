@@ -32,7 +32,8 @@ extension UIImage {
     convenience init?(pixels: [Pixel], width: Int, height: Int) {
         guard width > 0 && height > 0, pixels.count == width * height else { return nil }
         var data = pixels
-        guard let providerRef = CGDataProvider(data: Data(bytes: &data, count: data.count * MemoryLayout<Pixel>.size) as CFData)
+        guard let providerRef = CGDataProvider(data: Data(bytes: &data,
+                                                          count: data.count * MemoryLayout<Pixel>.size) as CFData)
         else { return nil }
         guard let cgim = CGImage(
                 width: width,
