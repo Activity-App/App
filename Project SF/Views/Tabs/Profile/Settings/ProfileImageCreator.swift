@@ -11,6 +11,7 @@ struct ProfileImageCreator: View {
 
     @Environment(\.presentationMode) var presentationMode
     @Binding var image: UIImage?
+    @State var color = Color.accentColor
 
     var body: some View {
         NavigationView {
@@ -24,10 +25,14 @@ struct ProfileImageCreator: View {
                         .frame(width: 200, height: 200)
                         .clipShape(Circle())
                         .animation(.spring())
+
+                    // TODO: Dynamically change color of the image
+                    ColorPicker("Select foreground color", selection: $color)
+                        .padding(.top)
                 }
                 RoundedButton("Generate image") {
                     withAnimation {
-                        image = UIImage(pixelImage: .randomSymmetrical(width: 7, height: 7))
+                        image = UIImage(pixelImage: .randomSymmetrical(color: color, width: 7, height: 7))
                     }
                 }
                 .padding(.top)
@@ -47,6 +52,6 @@ struct ProfileImageCreator: View {
 
 struct ProfileImageCreator_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileImageCreator(.constant(UIImage(pixelImage: .randomSymmetrical(width: 10, height: 10))))
+        ProfileImageCreator(.constant(UIImage(pixelImage: .randomSymmetrical(color: .red, width: 10, height: 10))))
     }
 }
