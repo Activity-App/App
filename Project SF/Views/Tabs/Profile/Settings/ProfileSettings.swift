@@ -24,7 +24,7 @@ struct ProfileSettings: View {
         NavScrollView {
             Button(action: {
 //                showImageSelectionView = true
-                profilePicture = UIImage(pixelImage: .randomSymmetrical(width: 8, height: 8))
+                profilePicture = UIImage(pixelImage: .randomSymmetrical(width: 6, height: 6))
             }, label: {
                 if profilePicture == nil {
                     Image(systemName: "person.crop.circle.badge.plus")
