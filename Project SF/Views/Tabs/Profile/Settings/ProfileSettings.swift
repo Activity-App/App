@@ -23,7 +23,8 @@ struct ProfileSettings: View {
         // so ScrollView isn't the topmost view.
         NavScrollView {
             Button(action: {
-                showImageSelectionView = true
+//                showImageSelectionView = true
+                profilePicture = UIImage(pixels: .random(width: 10, height: 10), width: 10, height: 10)
             }, label: {
                 if profilePicture == nil {
                     Image(systemName: "person.crop.circle.badge.plus")
