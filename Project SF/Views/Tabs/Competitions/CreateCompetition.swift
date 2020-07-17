@@ -10,7 +10,6 @@ import SwiftUI
 struct CreateCompetition: View {
 
     @Environment(\.presentationMode) var presentationMode
-    @Environment(\.locale) var locale
     @State var competitionName = ""
     @State var competitionEndDate = Date() + 60 * 60 * 24
     @State var pickedDate = 0
@@ -85,21 +84,15 @@ struct CreateCompetition: View {
                             HStack {
                                 Image(systemName: "chevron.down")
                                     .foreground(Color(.tertiaryLabel))
-                                Stepper("Goal") {
-                                    stepsGoalInt = min(50000, max(1000, stepsGoalInt + 1000))
-                                    stepsGoal = String(stepsGoalInt)
-                                } onDecrement: {
-                                    stepsGoalInt = min(50000, max(1000, stepsGoalInt - 1000))
-                                    stepsGoal = String(stepsGoalInt)
-                                }
-                                .opacity(Int(stepsGoal) == nil ? 1 : 1) // Fixes stepper issue.
+                                Stepper("Goal", value: $stepsGoalInt, in: 1000...50000, step: 1000)
                             }
                             HStack {
                                 Spacer()
-                                TextField("Amount", text: $stepsGoal, onEditingChanged: { _ in
-                                    stepsGoalInt = min(50000, max(1000, Int(stepsGoal) ?? 10000))
+                                TextField("Amount", text: $stepsGoal) { _ in } onCommit: {
+                                    stepsGoalInt = Int(stepsGoal) ?? 10000
+                                    stepsGoalInt = stepsGoalInt == 0 ? 1 : stepsGoalInt
                                     stepsGoal = String(stepsGoalInt)
-                                })
+                                }
                                 .keyboardType(.numberPad)
                                 .multilineTextAlignment(.trailing)
                                 Text("steps")
@@ -117,33 +110,18 @@ struct CreateCompetition: View {
                             HStack {
                                 Image(systemName: "chevron.down")
                                     .foreground(Color(.tertiaryLabel))
-                                Stepper("Goal") {
-                                    distanceGoalInt = min(
-                                        locale.usesMetricSystem ? 1000 : 600,
-                                        max(1, distanceGoalInt + 1)
-                                    )
-                                    distanceGoal = String(distanceGoalInt)
-                                } onDecrement: {
-                                    distanceGoalInt = min(
-                                        locale.usesMetricSystem ? 1000 : 600,
-                                        max(1, distanceGoalInt - 1)
-                                    )
-                                    distanceGoal = String(distanceGoalInt)
-                                }
-                                .opacity(Int(distanceGoal) == nil ? 1 : 1) // Fixes stepper issue.
+                                Stepper("Goal", value: $distanceGoalInt, in: 1...100, step: 1)
                             }
                             HStack {
                                 Spacer()
-                                TextField("Amount", text: $distanceGoal, onEditingChanged: { _ in
-                                    distanceGoalInt = min(
-                                        locale.usesMetricSystem ? 1000 : 600,
-                                        max(1, Int(distanceGoal) ?? 10)
-                                    )
+                                TextField("Amount", text: $distanceGoal) { _ in } onCommit: {
+                                    distanceGoalInt = Int(distanceGoal) ?? 10
+                                    distanceGoalInt = distanceGoalInt == 0 ? 1 : distanceGoalInt
                                     distanceGoal = String(distanceGoalInt)
-                                })
+                                }
                                 .keyboardType(.numberPad)
                                 .multilineTextAlignment(.trailing)
-                                Text(locale.usesMetricSystem ? "km" : "miles")
+                                Text("km")
                                     .foregroundColor(.secondary)
                             }
                         }
@@ -201,7 +179,7 @@ struct CreateCompetition: View {
                 guard !competitionName.isEmpty else { return }
                 presentationMode.wrappedValue.dismiss()
             }
-            .disabled(competitionName.isEmpty)
+            .disabled(competitionName.isEmpty && Int(stepsGoal) == nil)
         }
         .padding(.horizontal)
         .navigationBarTitle("Create Competition")
