@@ -29,6 +29,7 @@ struct ProfileView: View {
         }
         .tabItem {
             Label("Profile", systemImage: "person.crop.circle")
+                .font(.title2)
         }
     }
 }

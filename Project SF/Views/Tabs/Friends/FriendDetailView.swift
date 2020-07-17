@@ -14,9 +14,28 @@ struct FriendDetailView: View {
     let friend: TemporaryFriend
 
     var competitions: [Competition] = [
-        Competition(name: "Competition1", startDate: Date() - 100000, endDate: Date() + 100000),
-        Competition(name: "Competition2", startDate: Date() - 100000, endDate: Date() + 30000000),
-        Competition(name: "Competition3", startDate: Date() - 100000, endDate: Date() + 9900000)
+        Competition(
+            name: "Competition1",
+            startDate: Date() - 100000,
+            endDate: Date() + 100000,
+            creatingUser: CompetingPerson(name: "Me", points: 300),
+            people: [
+                CompetingPerson(name: "Person1", points: 100),
+                CompetingPerson(name: "Person2", points: 200),
+                CompetingPerson(name: "Person3", points: 6000)
+            ]
+        ),
+        Competition(
+            name: "Competition2",
+            startDate: Date(),
+            endDate: Date() + 1000000,
+            creatingUser: CompetingPerson(name: "Me", points: 5500),
+            people: [
+                CompetingPerson(name: "Person1", points: 5000),
+                CompetingPerson(name: "Person2", points: 200),
+                CompetingPerson(name: "Person3", points: 500)
+            ]
+        )
     ]
 
     var body: some View {
@@ -83,11 +102,7 @@ struct FriendDetailView: View {
 
             Section(header: Text("Current Competitions")) {
                 ForEach(competitions.indices) { index in
-                    CompetitionCell(
-                        competitionName: competitions[index].name,
-                        startDate: competitions[index].startDate,
-                        endDate: competitions[index].endDate
-                    )
+                    CompetitionCell(competitions[index])
                 }
             }
 
