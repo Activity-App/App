@@ -11,7 +11,8 @@ struct CompetitorCell: View {
     
     let competition: Competition
     let person: CompetingPerson
-    
+
+    @ViewBuilder
     var body: some View {
         if competition.creatingUser == person {
             cellBody()
