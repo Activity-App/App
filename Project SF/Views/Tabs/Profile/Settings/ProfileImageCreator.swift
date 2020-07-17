@@ -19,20 +19,20 @@ struct ProfileImageCreator: View {
                 if let image = image {
                     Image(uiImage: image)
                         .interpolation(.none)
-                        .renderingMode(.original)
+                        .renderingMode(.template)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 200, height: 200)
                         .clipShape(Circle())
                         .animation(.spring())
+                        .foregroundColor(color)
 
-                    // TODO: Dynamically change color of the image
                     ColorPicker("Select foreground color", selection: $color, supportsOpacity: false)
                         .padding(.top)
                 }
                 RoundedButton("Generate image") {
                     withAnimation {
-                        image = UIImage(pixelImage: .randomSymmetrical(color: color, width: 7, height: 7))
+                        image = UIImage(pixelImage: .randomSymmetrical(color: .white, width: 7, height: 7))
                     }
                 }
                 .padding(.top)

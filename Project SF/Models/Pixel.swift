@@ -38,10 +38,10 @@ class PixelImage {
     /// - Returns: Random symmetrixal `PixelImage` with given size.
     static func randomSymmetrical(color: Color, width: Int, height: Int) -> PixelImage {
         var pixels: [Pixel] = []
-        let clear = Pixel(a: 255,
-                          r: 240,
-                          g: 240,
-                          b: 240)
+        let clear = Pixel(a: 0,
+                          r: 0,
+                          g: 0,
+                          b: 0)
 
         let uiColor = color.uiColor()
         var a: CGFloat = 0
