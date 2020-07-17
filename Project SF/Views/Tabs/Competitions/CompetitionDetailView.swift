@@ -18,6 +18,16 @@ struct CompetitionDetailView: View {
 
 struct CompetitionDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        CompetitionDetailView(competition: Competition(name: "Competition Name", startDate: Date(), endDate: Date() + 123))
+        CompetitionDetailView(competition: Competition(
+            name: "Competition2",
+            startDate: Date(),
+            endDate: Date() + 1000000,
+            creatingUser: CompetingPerson(name: "Me", points: 5500),
+            people: [
+                CompetingPerson(name: "Person1", points: 5000),
+                CompetingPerson(name: "Person2", points: 200),
+                CompetingPerson(name: "Person3", points: 500)
+            ]
+        ))
     }
 }

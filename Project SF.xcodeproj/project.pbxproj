@@ -7,14 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3019CD9924BC9792002564AD /* PlaceBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3019CD9824BC9792002564AD /* PlaceBadgeView.swift */; };
-		30251C1924BFC1A50058D6D2 /* CompetitorDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30251C1824BFC1A50058D6D2 /* CompetitorDetail.swift */; };
-		30251C1B24BFC1B10058D6D2 /* CompetitorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30251C1A24BFC1B10058D6D2 /* CompetitorCell.swift */; };
-		30251C1E24BFE1D50058D6D2 /* PointsGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30251C1D24BFE1D50058D6D2 /* PointsGraph.swift */; };
-		30278E9324BC553A00E87E80 /* CompetitionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30278E9224BC553A00E87E80 /* CompetitionDetail.swift */; };
 		302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88924BA199E00FF79D7 /* RingType.swift */; };
 		302CF88C24BA1A4000FF79D7 /* ActivityResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */; };
-		3050123624C0887D00E39019 /* Int+ConvertFromRangeToRange copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3050123524C0887D00E39019 /* Int+ConvertFromRangeToRange copy.swift */; };
+		3050123624C0887D00E39019 /* Int+ConvertFromRangeToRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3050123524C0887D00E39019 /* Int+ConvertFromRangeToRange.swift */; };
 		3067712F24BDE0080085F152 /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3067712E24BDE0080085F152 /* FriendsCell.swift */; };
 		3067713124BDE3950085F152 /* FriendDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3067713024BDE3950085F152 /* FriendDetailView.swift */; };
 		307648C924BC7DC5005D8531 /* GrantDataAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307648C824BC7DC4005D8531 /* GrantDataAccessView.swift */; };
@@ -28,6 +23,15 @@
 		30B2818A24C001A000647B83 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2818924C001A000647B83 /* Pixel.swift */; };
 		30B2818C24C07F4700647B83 /* ProfileImageCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2818B24C07F4700647B83 /* ProfileImageCreator.swift */; };
 		30B2818E24C091A400647B83 /* Color+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2818D24C091A400647B83 /* Color+UIColor.swift */; };
+		30B2819924C1A41300647B83 /* PointsGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2819024C1A41200647B83 /* PointsGraph.swift */; };
+		30B2819A24C1A41300647B83 /* CompetitorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2819124C1A41200647B83 /* CompetitorCell.swift */; };
+		30B2819B24C1A41300647B83 /* CompetitionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2819224C1A41200647B83 /* CompetitionDetail.swift */; };
+		30B2819C24C1A41300647B83 /* CompetitorDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2819324C1A41200647B83 /* CompetitorDetail.swift */; };
+		30B2819D24C1A41300647B83 /* CompetitionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2819424C1A41200647B83 /* CompetitionDetailView.swift */; };
+		30B2819E24C1A41300647B83 /* CompetitionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2819524C1A41200647B83 /* CompetitionsView.swift */; };
+		30B2819F24C1A41300647B83 /* CreateCompetition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2819624C1A41200647B83 /* CreateCompetition.swift */; };
+		30B281A024C1A41300647B83 /* CompetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2819724C1A41300647B83 /* CompetitionCell.swift */; };
+		30B281A124C1A41300647B83 /* PlaceBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2819824C1A41300647B83 /* PlaceBadgeView.swift */; };
 		30BFC8CE24B75E6C00DAC6D9 /* ProjectSFApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8CD24B75E6C00DAC6D9 /* ProjectSFApp.swift */; };
 		30BFC8D024B75E6C00DAC6D9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8CF24B75E6C00DAC6D9 /* ContentView.swift */; };
 		30BFC8D224B75E6F00DAC6D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30BFC8D124B75E6F00DAC6D9 /* Assets.xcassets */; };
@@ -39,9 +43,6 @@
 		30CCF30724BED9EA00103C1E /* ActivityOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CCF30624BED9EA00103C1E /* ActivityOverview.swift */; };
 		30D3217824BB430E009CD9D0 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D3217724BB430E009CD9D0 /* RoundedTextField.swift */; };
 		30D3217D24BB4EDE009CD9D0 /* ActivityRings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D3217C24BB4EDE009CD9D0 /* ActivityRings.swift */; };
-		30D321B524BB65D5009CD9D0 /* CompetitionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D321A724BB65D5009CD9D0 /* CompetitionsView.swift */; };
-		30D321B624BB65D5009CD9D0 /* CompetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D321A824BB65D5009CD9D0 /* CompetitionCell.swift */; };
-		30D321B724BB65D5009CD9D0 /* CreateCompetition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D321A924BB65D5009CD9D0 /* CreateCompetition.swift */; };
 		30D321B824BB65D5009CD9D0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D321AC24BB65D5009CD9D0 /* SettingsView.swift */; };
 		30D321B924BB65D5009CD9D0 /* ImageSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D321AD24BB65D5009CD9D0 /* ImageSelectionView.swift */; };
 		30D321BA24BB65D5009CD9D0 /* NotificationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D321AE24BB65D5009CD9D0 /* NotificationSettings.swift */; };
@@ -88,14 +89,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3019CD9824BC9792002564AD /* PlaceBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceBadgeView.swift; sourceTree = "<group>"; };
-		30251C1824BFC1A50058D6D2 /* CompetitorDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitorDetail.swift; sourceTree = "<group>"; };
-		30251C1A24BFC1B10058D6D2 /* CompetitorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitorCell.swift; sourceTree = "<group>"; };
-		30251C1D24BFE1D50058D6D2 /* PointsGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsGraph.swift; sourceTree = "<group>"; };
-		30278E9224BC553A00E87E80 /* CompetitionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionDetail.swift; sourceTree = "<group>"; };
 		302CF88924BA199E00FF79D7 /* RingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingType.swift; sourceTree = "<group>"; };
 		302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityResult.swift; sourceTree = "<group>"; };
-		3050123524C0887D00E39019 /* Int+ConvertFromRangeToRange copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+ConvertFromRangeToRange copy.swift"; sourceTree = "<group>"; };
+		3050123524C0887D00E39019 /* Int+ConvertFromRangeToRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+ConvertFromRangeToRange.swift"; sourceTree = "<group>"; };
 		3067712E24BDE0080085F152 /* FriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
 		3067713024BDE3950085F152 /* FriendDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetailView.swift; sourceTree = "<group>"; };
 		307648C824BC7DC4005D8531 /* GrantDataAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrantDataAccessView.swift; sourceTree = "<group>"; };
@@ -109,6 +105,15 @@
 		30B2818924C001A000647B83 /* Pixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
 		30B2818B24C07F4700647B83 /* ProfileImageCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageCreator.swift; sourceTree = "<group>"; };
 		30B2818D24C091A400647B83 /* Color+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+UIColor.swift"; sourceTree = "<group>"; };
+		30B2819024C1A41200647B83 /* PointsGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointsGraph.swift; sourceTree = "<group>"; };
+		30B2819124C1A41200647B83 /* CompetitorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitorCell.swift; sourceTree = "<group>"; };
+		30B2819224C1A41200647B83 /* CompetitionDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitionDetail.swift; sourceTree = "<group>"; };
+		30B2819324C1A41200647B83 /* CompetitorDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitorDetail.swift; sourceTree = "<group>"; };
+		30B2819424C1A41200647B83 /* CompetitionDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitionDetailView.swift; sourceTree = "<group>"; };
+		30B2819524C1A41200647B83 /* CompetitionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitionsView.swift; sourceTree = "<group>"; };
+		30B2819624C1A41200647B83 /* CreateCompetition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCompetition.swift; sourceTree = "<group>"; };
+		30B2819724C1A41300647B83 /* CompetitionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitionCell.swift; sourceTree = "<group>"; };
+		30B2819824C1A41300647B83 /* PlaceBadgeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBadgeView.swift; sourceTree = "<group>"; };
 		30BFC8CA24B75E6C00DAC6D9 /* Project SF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project SF.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30BFC8CD24B75E6C00DAC6D9 /* ProjectSFApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSFApp.swift; sourceTree = "<group>"; };
 		30BFC8CF24B75E6C00DAC6D9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -123,9 +128,6 @@
 		30CCF30624BED9EA00103C1E /* ActivityOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityOverview.swift; sourceTree = "<group>"; };
 		30D3217724BB430E009CD9D0 /* RoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
 		30D3217C24BB4EDE009CD9D0 /* ActivityRings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRings.swift; sourceTree = "<group>"; };
-		30D321A724BB65D5009CD9D0 /* CompetitionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitionsView.swift; sourceTree = "<group>"; };
-		30D321A824BB65D5009CD9D0 /* CompetitionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitionCell.swift; sourceTree = "<group>"; };
-		30D321A924BB65D5009CD9D0 /* CreateCompetition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCompetition.swift; sourceTree = "<group>"; };
 		30D321AC24BB65D5009CD9D0 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		30D321AD24BB65D5009CD9D0 /* ImageSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSelectionView.swift; sourceTree = "<group>"; };
 		30D321AE24BB65D5009CD9D0 /* NotificationSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSettings.swift; sourceTree = "<group>"; };
@@ -186,17 +188,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		30251C1C24BFC1B80058D6D2 /* CompetitionDetail */ = {
-			isa = PBXGroup;
-			children = (
-				30278E9224BC553A00E87E80 /* CompetitionDetail.swift */,
-				30251C1824BFC1A50058D6D2 /* CompetitorDetail.swift */,
-				30251C1A24BFC1B10058D6D2 /* CompetitorCell.swift */,
-				30251C1D24BFE1D50058D6D2 /* PointsGraph.swift */,
-			);
-			path = CompetitionDetail;
-			sourceTree = "<group>";
-		};
 		3029AF5024B8869E003F0324 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,7 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				9C7B4D0724B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift */,
-				3050123524C0887D00E39019 /* Int+ConvertFromRangeToRange copy.swift */,
+				3050123524C0887D00E39019 /* Int+ConvertFromRangeToRange.swift */,
 				9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */,
 				9CCFDD2324B9745E00162B0F /* UIApplication+IsTesting.swift */,
 				30B2818724BFF2F600647B83 /* UIImage+PixelData.swift */,
@@ -247,6 +238,17 @@
 				307648C824BC7DC4005D8531 /* GrantDataAccessView.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		30B2818F24C1A41200647B83 /* CompetitionDetail */ = {
+			isa = PBXGroup;
+			children = (
+				30B2819024C1A41200647B83 /* PointsGraph.swift */,
+				30B2819124C1A41200647B83 /* CompetitorCell.swift */,
+				30B2819224C1A41200647B83 /* CompetitionDetail.swift */,
+				30B2819324C1A41200647B83 /* CompetitorDetail.swift */,
+			);
+			path = CompetitionDetail;
 			sourceTree = "<group>";
 		};
 		30BFC8C124B75E6C00DAC6D9 = {
@@ -332,11 +334,12 @@
 		30D321A624BB65D5009CD9D0 /* Competitions */ = {
 			isa = PBXGroup;
 			children = (
-				30251C1C24BFC1B80058D6D2 /* CompetitionDetail */,
-				30D321A724BB65D5009CD9D0 /* CompetitionsView.swift */,
-				30D321A824BB65D5009CD9D0 /* CompetitionCell.swift */,
-				30D321A924BB65D5009CD9D0 /* CreateCompetition.swift */,
-				3019CD9824BC9792002564AD /* PlaceBadgeView.swift */,
+				30B2819724C1A41300647B83 /* CompetitionCell.swift */,
+				30B2818F24C1A41200647B83 /* CompetitionDetail */,
+				30B2819424C1A41200647B83 /* CompetitionDetailView.swift */,
+				30B2819524C1A41200647B83 /* CompetitionsView.swift */,
+				30B2819624C1A41200647B83 /* CreateCompetition.swift */,
+				30B2819824C1A41300647B83 /* PlaceBadgeView.swift */,
 			);
 			path = Competitions;
 			sourceTree = "<group>";
@@ -587,7 +590,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				308FAD9E24B9A0DC00126F3F /* NavigationBarLabel.swift in Sources */,
-				30D321B524BB65D5009CD9D0 /* CompetitionsView.swift in Sources */,
 				9C7B4D0824B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift in Sources */,
 				30BFC8D024B75E6C00DAC6D9 /* ContentView.swift in Sources */,
 				30FCC84C24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift in Sources */,
@@ -597,14 +599,16 @@
 				9CCFDD2624B9753F00162B0F /* Main.swift in Sources */,
 				30D321C124BC1886009CD9D0 /* NavScrollView.swift in Sources */,
 				30B2818824BFF2F600647B83 /* UIImage+PixelData.swift in Sources */,
+				30B281A124C1A41300647B83 /* PlaceBadgeView.swift in Sources */,
 				30BFC8E924B804CC00DAC6D9 /* ActivityRingView.swift in Sources */,
 				3067712F24BDE0080085F152 /* FriendsCell.swift in Sources */,
+				30B281A024C1A41300647B83 /* CompetitionCell.swift in Sources */,
 				30D321BD24BB65D5009CD9D0 /* ProfileSettings.swift in Sources */,
 				30BFC8DF24B7637F00DAC6D9 /* VisualEffectView.swift in Sources */,
 				9CCFDD1D24B971D600162B0F /* User.swift in Sources */,
-				30D321B624BB65D5009CD9D0 /* CompetitionCell.swift in Sources */,
 				30D321BC24BB65D5009CD9D0 /* PrivacyAbout.swift in Sources */,
-				30D321B724BB65D5009CD9D0 /* CreateCompetition.swift in Sources */,
+				30B2819C24C1A41300647B83 /* CompetitorDetail.swift in Sources */,
+				30B2819B24C1A41300647B83 /* CompetitionDetail.swift in Sources */,
 				308FAD8D24B97E8A00126F3F /* PrivacyView.swift in Sources */,
 				30D321BE24BB65D5009CD9D0 /* ProfileView.swift in Sources */,
 				308FAD8B24B97E7E00126F3F /* OnboardingInfoCell.swift in Sources */,
@@ -616,27 +620,29 @@
 				30B2818A24C001A000647B83 /* Pixel.swift in Sources */,
 				9C8FAD4624B9E39E00571947 /* Record.swift in Sources */,
 				30D321B924BB65D5009CD9D0 /* ImageSelectionView.swift in Sources */,
+				30B2819F24C1A41300647B83 /* CreateCompetition.swift in Sources */,
+				30B2819924C1A41300647B83 /* PointsGraph.swift in Sources */,
 				30D3217D24BB4EDE009CD9D0 /* ActivityRings.swift in Sources */,
 				307648C924BC7DC5005D8531 /* GrantDataAccessView.swift in Sources */,
 				30D321BF24BB65D5009CD9D0 /* FriendsView.swift in Sources */,
 				30B2818E24C091A400647B83 /* Color+UIColor.swift in Sources */,
 				302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */,
 				9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */,
-				30251C1B24BFC1B10058D6D2 /* CompetitorCell.swift in Sources */,
+				30B2819A24C1A41300647B83 /* CompetitorCell.swift in Sources */,
 				30CCF30724BED9EA00103C1E /* ActivityOverview.swift in Sources */,
 				30D321BA24BB65D5009CD9D0 /* NotificationSettings.swift in Sources */,
-				30251C1E24BFE1D50058D6D2 /* PointsGraph.swift in Sources */,
 				30BFC8E724B8041C00DAC6D9 /* ActivityRingsView.swift in Sources */,
 				3090918224B9480F000E3B11 /* RoundedButton.swift in Sources */,
 				9CCFDD2424B9745E00162B0F /* UIApplication+IsTesting.swift in Sources */,
 				30B2818C24C07F4700647B83 /* ProfileImageCreator.swift in Sources */,
+				30B2819D24C1A41300647B83 /* CompetitionDetailView.swift in Sources */,
 				9CCFDD2824B9758A00162B0F /* TestApp.swift in Sources */,
+				30B2819E24C1A41300647B83 /* CompetitionsView.swift in Sources */,
 				302CF88C24BA1A4000FF79D7 /* ActivityResult.swift in Sources */,
 				3067713124BDE3950085F152 /* FriendDetailView.swift in Sources */,
 				9C6C74AC24BADD1800C657B0 /* RoundedNavigationButton.swift in Sources */,
 				30D321BB24BB65D5009CD9D0 /* PermissionSettings.swift in Sources */,
-				3050123624C0887D00E39019 /* Int+ConvertFromRangeToRange copy.swift in Sources */,
-				30278E9324BC553A00E87E80 /* CompetitionDetail.swift in Sources */,
+				3050123624C0887D00E39019 /* Int+ConvertFromRangeToRange.swift in Sources */,
 				30D321B824BB65D5009CD9D0 /* SettingsView.swift in Sources */,
 				307648CB24BC81C8005D8531 /* iCloudErrorView.swift in Sources */,
 			);
