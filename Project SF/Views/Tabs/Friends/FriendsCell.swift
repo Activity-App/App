@@ -19,7 +19,6 @@ struct FriendsCell: View {
                         .font(.title3)
                         .fontWeight(.black)
                         .padding(.bottom, 4)
-                        .foregroundColor(.white)
                     Text("Move: \(friend.activity.moveFraction)")
                         .foregroundColor(RingType.move.color)
                         .fontWeight(.medium)
