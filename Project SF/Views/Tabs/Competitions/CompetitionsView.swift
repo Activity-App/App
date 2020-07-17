@@ -12,6 +12,33 @@ struct Competition: Identifiable {
     var name: String
     var startDate: Date
     var endDate: Date
+    let creatingUser: CompetingPerson
+    var people: [CompetingPerson] = []
+    
+    var place: Int
+    
+    init(name: String, startDate: Date, endDate: Date, creatingUser: CompetingPerson, people: [CompetingPerson] = []) {
+        self.name = name
+        self.startDate = startDate
+        self.endDate = endDate
+        self.creatingUser = creatingUser
+        self.people = people
+        
+        self.people.append(self.creatingUser)
+        self.people.sort {
+            $0.points > $1.points
+        }
+        
+        let index = self.people.firstIndex(of: creatingUser) ?? 0
+        self.place = index + 1
+    }
+}
+
+struct CompetingPerson: Identifiable, Equatable {
+    var id = UUID()
+    var name: String
+    var points: Int = 0
+    var history: [Int] = []
 }
 
 struct CompetitionsView: View {
@@ -22,15 +49,53 @@ struct CompetitionsView: View {
     
     // Temporary. Get these from CK when thats working.
     var competitions: [Competition] = [
-        Competition(name: "Competition1", startDate: Date() - 100000, endDate: Date() + 100000),
-        Competition(name: "Competition2", startDate: Date() - 100000, endDate: Date() + 30000000),
-        Competition(name: "Competition3", startDate: Date() - 100000, endDate: Date() + 9900000)
+        Competition(
+            name: "Competition1",
+            startDate: Date() - 100000,
+            endDate: Date() + 100000,
+            creatingUser: CompetingPerson(name: "Me", points: 300),
+            people: [
+                CompetingPerson(name: "Person1", points: 100),
+                CompetingPerson(name: "Person2", points: 200),
+                CompetingPerson(name: "Person3", points: 6000)
+            ]
+        ),
+        Competition(
+            name: "Competition2",
+            startDate: Date(),
+            endDate: Date() + 1000000,
+            creatingUser: CompetingPerson(name: "Me", points: 5500),
+            people: [
+                CompetingPerson(name: "Person1", points: 5000),
+                CompetingPerson(name: "Person2", points: 200),
+                CompetingPerson(name: "Person3", points: 500)
+            ]
+        )
     ]
 
     var recentCompetitions: [Competition] = [
-        Competition(name: "Competition1", startDate: Date() - 100000, endDate: Date() - 1000),
-        Competition(name: "Competition2", startDate: Date() - 1000000, endDate: Date() - 10000),
-        Competition(name: "Competition3", startDate: Date() - 100000, endDate: Date() - 12345)
+        Competition(
+            name: "Competition1",
+            startDate: Date() - 100000,
+            endDate: Date() - 1000,
+            creatingUser: CompetingPerson(name: "Me", points: 50),
+            people: [
+                CompetingPerson(name: "Person1", points: 100),
+                CompetingPerson(name: "Person2", points: 200),
+                CompetingPerson(name: "Person3", points: 6000)
+            ]
+        ),
+        Competition(
+            name: "Competition2",
+            startDate: Date() - 100000,
+            endDate: Date() - 10000,
+            creatingUser: CompetingPerson(name: "Me", points: 300),
+            people: [
+                CompetingPerson(name: "Person1", points: 5000),
+                CompetingPerson(name: "Person2", points: 200),
+                CompetingPerson(name: "Person3", points: 500)
+            ]
+        )
     ]
 
     var body: some View {
@@ -40,21 +105,15 @@ struct CompetitionsView: View {
                     ActivityOverview(activity: $healthKit.latestActivityData)
                 }
 
-                Section(header: Text("Currently Competing")) {
+                Section(header: Text("Currently competing")) {
                     ForEach(competitions.indices) { index in
-                        CompetitionCell(
-                            competitionName: competitions[index].name,
-                            startDate: competitions[index].startDate,
-                            endDate: competitions[index].endDate
-                        )
+                        CompetitionCell(competitions[index])
                     }
                 }
 
                 Section(header: Text("Recent competitions")) {
                     ForEach(recentCompetitions.indices) { index in
-                        CompetitionCell(competitionName: recentCompetitions[index].name,
-                                        startDate: recentCompetitions[index].startDate,
-                                        endDate: recentCompetitions[index].endDate)
+                        CompetitionCell(competitions[index])
                     }
                 }
             }
@@ -81,5 +140,6 @@ struct CompetitionsView: View {
 struct CompetitionsView_Previews: PreviewProvider {
     static var previews: some View {
         CompetitionsView()
+            .environmentObject(HealthKitController())
     }
 }
