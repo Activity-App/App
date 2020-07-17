@@ -18,6 +18,13 @@ struct PlaceBadgeView: View {
     let outerPadding: CGFloat
     
     @State var flipped = false
+
+    var placeColor: Color {
+        place == 1 ? Color.yellow :
+            place == 2 ? Color(.lightGray) :
+            place == 3 ? Color.init(red: 0.6, green: 0.4, blue: 0.3) :
+            Color.accentColor
+    }
     
     init(place: Int, flippable: Bool,
          activityRings: Binding<ActivityRings>, font: Font = .title,
@@ -41,10 +48,7 @@ struct PlaceBadgeView: View {
                     .foreground(
                         Group {
                             if !flipped {
-                                place == 1 ? Color.yellow :
-                                    place == 2 ? Color(.lightGray) :
-                                    place == 3 ? Color.init(red: 0.6, green: 0.4, blue: 0.3) :
-                                    Color.accentColor
+                                placeColor
                             } else {
                                 GeometryReader { geometry in
                                     ZStack {
@@ -75,7 +79,7 @@ struct PlaceBadgeView: View {
                     flipped.toggle()
                 }
             }))
-            .shadow(color: Color.black.opacity(0.1), radius: 10)
+            .shadow(color: placeColor.opacity(0.2), radius: 10)
     }
 }
 
