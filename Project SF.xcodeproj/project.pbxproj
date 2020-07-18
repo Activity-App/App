@@ -47,6 +47,7 @@
 		30D321BE24BB65D5009CD9D0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D321B224BB65D5009CD9D0 /* ProfileView.swift */; };
 		30D321BF24BB65D5009CD9D0 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D321B424BB65D5009CD9D0 /* FriendsView.swift */; };
 		30D321C124BC1886009CD9D0 /* NavScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D321C024BC1886009CD9D0 /* NavScrollView.swift */; };
+		30EAB9F924C29B9D005326C8 /* AccentSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EAB9F824C29B9D005326C8 /* AccentSettings.swift */; };
 		30F1EA3B24B951CA00FF89FC /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F1EA3A24B951CA00FF89FC /* OnboardingView.swift */; };
 		30FCC84C24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FCC84B24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift */; };
 		30FCC84E24BB318000862C01 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FCC84D24BB318000862C01 /* KeyboardManager.swift */; };
@@ -127,6 +128,7 @@
 		30D321B224BB65D5009CD9D0 /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		30D321B424BB65D5009CD9D0 /* FriendsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 		30D321C024BC1886009CD9D0 /* NavScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavScrollView.swift; sourceTree = "<group>"; };
+		30EAB9F824C29B9D005326C8 /* AccentSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentSettings.swift; sourceTree = "<group>"; };
 		30F1EA3A24B951CA00FF89FC /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		30FABF2B24BB5423004B8B62 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		30FCC84B24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignKeyboardOnDragGesture.swift; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 				30D321AC24BB65D5009CD9D0 /* SettingsView.swift */,
 				30D321AD24BB65D5009CD9D0 /* ImageSelectionView.swift */,
 				30D321AE24BB65D5009CD9D0 /* NotificationSettings.swift */,
+				30EAB9F824C29B9D005326C8 /* AccentSettings.swift */,
 				30D321AF24BB65D5009CD9D0 /* PermissionSettings.swift */,
 				30D321B024BB65D5009CD9D0 /* PrivacyAbout.swift */,
 				30D321B124BB65D5009CD9D0 /* ProfileSettings.swift */,
@@ -588,6 +591,7 @@
 				30BFC8E924B804CC00DAC6D9 /* ActivityRingView.swift in Sources */,
 				3067712F24BDE0080085F152 /* FriendsCell.swift in Sources */,
 				30D321BD24BB65D5009CD9D0 /* ProfileSettings.swift in Sources */,
+				30EAB9F924C29B9D005326C8 /* AccentSettings.swift in Sources */,
 				30BFC8DF24B7637F00DAC6D9 /* VisualEffectView.swift in Sources */,
 				9CCFDD1D24B971D600162B0F /* User.swift in Sources */,
 				30D321B624BB65D5009CD9D0 /* CompetitionCell.swift in Sources */,

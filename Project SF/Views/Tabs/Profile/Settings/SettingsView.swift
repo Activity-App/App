@@ -14,7 +14,7 @@ struct AboutFooter: View {
                 .padding(.top, 8)
                 .padding(.bottom, 4)
             Link("GitHub", destination: URL(string: "https://github.com/Activity-App/App")!)
-                .foregroundColor(.blue)
+                .foregroundColor(.accentColor)
         }
         .frame(maxWidth: .infinity)
     }
@@ -34,6 +34,9 @@ struct SettingsView: View {
                     systemName: "app.badge",
                     destination: NotificationSettings()
                 )
+                NavigationLabel(title: "Accent Color",
+                                systemName: "eyedropper",
+                                destination: AccentSettings())
             }
             
             Section(header: Text("Privacy"), footer: AboutFooter()) {
