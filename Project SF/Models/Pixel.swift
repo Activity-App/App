@@ -43,7 +43,7 @@ class PixelImage {
                           g: 0,
                           b: 0)
 
-        let uiColor = color.uiColor()
+        let uiColor = UIColor(color)
         var a: CGFloat = 0
         var r: CGFloat = 0
         var g: CGFloat = 0

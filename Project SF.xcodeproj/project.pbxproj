@@ -22,7 +22,6 @@
 		30B2818824BFF2F600647B83 /* UIImage+PixelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2818724BFF2F600647B83 /* UIImage+PixelData.swift */; };
 		30B2818A24C001A000647B83 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2818924C001A000647B83 /* Pixel.swift */; };
 		30B2818C24C07F4700647B83 /* ProfileImageCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2818B24C07F4700647B83 /* ProfileImageCreator.swift */; };
-		30B2818E24C091A400647B83 /* Color+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2818D24C091A400647B83 /* Color+UIColor.swift */; };
 		30B2819924C1A41300647B83 /* PointsGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2819024C1A41200647B83 /* PointsGraph.swift */; };
 		30B2819A24C1A41300647B83 /* CompetitorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2819124C1A41200647B83 /* CompetitorCell.swift */; };
 		30B2819B24C1A41300647B83 /* CompetitionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2819224C1A41200647B83 /* CompetitionDetail.swift */; };
@@ -104,7 +103,6 @@
 		30B2818724BFF2F600647B83 /* UIImage+PixelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+PixelData.swift"; sourceTree = "<group>"; };
 		30B2818924C001A000647B83 /* Pixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
 		30B2818B24C07F4700647B83 /* ProfileImageCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageCreator.swift; sourceTree = "<group>"; };
-		30B2818D24C091A400647B83 /* Color+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+UIColor.swift"; sourceTree = "<group>"; };
 		30B2819024C1A41200647B83 /* PointsGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointsGraph.swift; sourceTree = "<group>"; };
 		30B2819124C1A41200647B83 /* CompetitorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitorCell.swift; sourceTree = "<group>"; };
 		30B2819224C1A41200647B83 /* CompetitionDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitionDetail.swift; sourceTree = "<group>"; };
@@ -213,7 +211,6 @@
 				9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */,
 				9CCFDD2324B9745E00162B0F /* UIApplication+IsTesting.swift */,
 				30B2818724BFF2F600647B83 /* UIImage+PixelData.swift */,
-				30B2818D24C091A400647B83 /* Color+UIColor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -625,7 +622,6 @@
 				30D3217D24BB4EDE009CD9D0 /* ActivityRings.swift in Sources */,
 				307648C924BC7DC5005D8531 /* GrantDataAccessView.swift in Sources */,
 				30D321BF24BB65D5009CD9D0 /* FriendsView.swift in Sources */,
-				30B2818E24C091A400647B83 /* Color+UIColor.swift in Sources */,
 				302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */,
 				9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */,
 				30B2819A24C1A41300647B83 /* CompetitorCell.swift in Sources */,
