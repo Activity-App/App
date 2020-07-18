@@ -35,7 +35,7 @@ class CompetitionsController {
     ///   - friends: The friends to invite to the competition. This currently can't be changed later.
     ///   - handler: Called with the result of the operation. Not guaranteed to be on the main thread..
     ///
-    /// Internally, this creates a `CompetitionRecord` which is shared to all friend participants (with read only access). The `CompetitionRecord` contains all the competition metadata and a list of references to `ScoreURLHolderRecord`s which, if the participant has joined the competition, contain a share url that will grant access to the participants score infomation.
+    /// Internally, this creates a `CompetitionRecord` which is shared to all friend participants (with read only access). The `CompetitionRecord` contains all the competition metadata and a list of share urls pointing to `ScoreURLHolderRecord`s which, if the participant has joined the competition, contain a share url that will grant access to the participants score infomation.
     func createCompetition(type: CompetitionRecord.CompetitionType,
                            endDate: Date,
                            friends: [Friend],
@@ -219,7 +219,7 @@ class CompetitionsController {
                     return
                 }
                 // TODO: Create/get the existing share url for the ScoreRecord and add it to the ScoreURLHolderRecord
-                self.fetchScoreRecordShareURL { result in
+                self.fetchScoreRecordInfomation { result in
                     switch result {
                     case .success(let url):
                         let fetchURLHolderOperation = CKFetchRecordsOperation(recordIDs: [scoreURLHolderShareMetadata.rootRecordID])
@@ -297,6 +297,53 @@ class CompetitionsController {
             } else {
                 handler(.success(competitionRecords))
             }
+        }
+    }
+    
+    func fetchScoreRecordsFor(_ competition: CompetitionRecord,
+                              then handler: @escaping (Result<[ScoreRecord], Error>) -> Void) {
+        let dispatchGroup = DispatchGroup()
+        
+        var personalScoreRecordResult: Result<ScoreRecord, Error>?
+        var otherScoreRecordsResult: Result<[ScoreRecord], Error>?
+        
+        dispatchGroup.enter()
+        fetchPersonalScoreRecord { result in
+            personalScoreRecordResult = result
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.enter()
+        fetchExternalScoreRecordsFor(competition) { result in
+            otherScoreRecordsResult = result
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            guard let personalScoreRecordResult = personalScoreRecordResult,
+                  let otherScoreRecordsResult = otherScoreRecordsResult else {
+                handler(.failure(CompetitionsControllerError.unknownError))
+                return
+            }
+            
+            var records = [ScoreRecord]()
+            switch personalScoreRecordResult {
+            case .success(let record):
+                records.append(record)
+            case .failure(let error):
+                handler(.failure(error))
+                return
+            }
+            
+            switch otherScoreRecordsResult {
+            case .success(let scoreRecords):
+                records.append(contentsOf: scoreRecords)
+            case .failure(let error):
+                handler(.failure(error))
+                return
+            }
+            
+            handler(.success(records))
         }
     }
     
@@ -532,7 +579,6 @@ class CompetitionsController {
         
         fetchZonesOperation.qualityOfService = .userInitiated
         fetchZonesOperation.fetchRecordZonesCompletionBlock = { recordZones, error in
-            print(scope)
             if let error = error {
                 handler(.failure(error))
                 return
@@ -583,7 +629,7 @@ class CompetitionsController {
         database.add(fetchZonesOperation)
     }
     
-    func fetchScoreRecordShareURL(then handler: @escaping (Result<URL, Error>) -> Void) {
+    private func fetchScoreRecordInfomation(then handler: @escaping (Result<(shareURL: URL, recordID: CKRecord.ID), Error>) -> Void) {
         // TODO: Add caching
         
         let fetchUserRecordOperation = CKFetchRecordsOperation.fetchCurrentUserRecordOperation()
@@ -599,13 +645,17 @@ class CompetitionsController {
             let userRecord = UserRecord(record: userRecordRaw)
             
             if let shareURLString = userRecord.scoreRecordPublicShareURL,
-               let shareURL = URL(string: shareURLString) {
-                handler(.success(shareURL))
+               let shareURL = URL(string: shareURLString),
+               let scoreRecordZoneName = userRecord.scoreRecordZoneName,
+               let scoreRecordRecordName = userRecord.scoreRecordRecordName {
+                let recordID = CKRecord.ID(recordName: scoreRecordRecordName,
+                                           zoneID: CKRecordZone.ID(zoneName: scoreRecordZoneName))
+                handler(.success((shareURL, recordID)))
             } else {
                 self.createScoreRecord { result in
                     switch result {
-                    case .success(let url):
-                        handler(.success(url))
+                    case .success((let shareURL, let recordID)):
+                        handler(.success((shareURL, recordID)))
                     case .failure(let error):
                         handler(.failure(error))
                     }
@@ -617,7 +667,7 @@ class CompetitionsController {
     }
     
     /// Creates a score record for the user. Should only be called if the score record doesn't already exist.
-    private func createScoreRecord(then handler: @escaping (Result<URL, Error>) -> Void) {
+    private func createScoreRecord(then handler: @escaping (Result<(shareURL: URL, recordID: CKRecord.ID), Error>) -> Void) {
         self.createZone { result in
             switch result {
             case .success(let zone):
@@ -658,14 +708,15 @@ class CompetitionsController {
                         userRecord.scoreRecordRecordName = scoreRecord.record.recordID.recordName
                         userRecord.scoreRecordPublicShareURL = "\(shareURL)"
                         
-                        let userRecordSaveOperation = CKModifyRecordsOperation(recordsToSave: [userRecord.record], recordIDsToDelete: nil)
+                        let userRecordSaveOperation = CKModifyRecordsOperation(recordsToSave: [userRecord.record],
+                                                                               recordIDsToDelete: nil)
                         userRecordSaveOperation.modifyRecordsCompletionBlock = { _, _, error in
                             if let error = error {
                                 handler(.failure(error))
                                 return
                             }
                             
-                            handler(.success(shareURL))
+                            handler(.success((shareURL, scoreRecord.record.recordID)))
                         }
                         
                         self.container.privateCloudDatabase.add(userRecordSaveOperation)
@@ -675,6 +726,116 @@ class CompetitionsController {
                 }
                 
                 self.container.privateCloudDatabase.add(saveOperation)
+            case .failure(let error):
+                handler(.failure(error))
+            }
+        }
+    }
+    
+    private func fetchExternalScoreRecordsFor(_ competition: CompetitionRecord,
+                                              then handler: @escaping (Result<[ScoreRecord], Error>) -> Void) {
+        // TODO: Add caching
+        
+        guard let scoreURLHolderShareURLStrings = competition.scoreURLHolderShareURLs else {
+            handler(.success([]))
+            return
+        }
+        let urls = scoreURLHolderShareURLStrings.compactMap { URL(string: $0) }
+        
+        let shareMetadataFetchOperation = CKFetchShareMetadataOperation(shareURLs: urls)
+        shareMetadataFetchOperation.qualityOfService = .userInitiated
+        
+        var metadatas = [CKShare.Metadata]()
+        var errors = [Error]()
+        
+        shareMetadataFetchOperation.perShareMetadataBlock = { _, metadata, error in
+            if let error = error {
+                errors.append(error)
+                return
+            }
+            if let metadata = metadata {
+                metadatas.append(metadata)
+            }
+        }
+        shareMetadataFetchOperation.fetchShareMetadataCompletionBlock = { error in
+            if let error = error {
+                handler(.failure(error))
+                return
+            }
+            if metadatas.isEmpty, !errors.isEmpty {
+                handler(.failure(CompetitionsControllerError.multiple(errors)))
+                return
+            }
+            
+            var sharesNeedingAcceptance = [CKShare.Metadata]()
+            
+            for metadata in metadatas where metadata.participantStatus == .pending {
+                sharesNeedingAcceptance.append(metadata)
+            }
+            
+            func handleAllSharesSuccessfullyAccepted() {
+                let fetchRecordsOperation = CKFetchRecordsOperation(recordIDs: metadatas.map { $0.rootRecordID })
+                fetchRecordsOperation.fetchRecordsCompletionBlock = { records, error in
+                    if let error = error {
+                        handler(.failure(error))
+                        return
+                    }
+                    
+                    guard let records = records?.map({ $0.value }) else {
+                        handler(.failure(CompetitionsControllerError.unknownError))
+                        return
+                    }
+                    
+                    let scoreRecords = records.map { ScoreRecord(record: $0) }
+                    
+                    handler(.success(scoreRecords))
+                }
+                
+                self.container.sharedCloudDatabase.add(fetchRecordsOperation)
+            }
+            
+            if sharesNeedingAcceptance.isEmpty {
+                handleAllSharesSuccessfullyAccepted()
+            } else {
+                let acceptSharesOperation = CKAcceptSharesOperation(shareMetadatas: sharesNeedingAcceptance)
+                acceptSharesOperation.acceptSharesCompletionBlock = { error in
+                    if let error = error {
+                        handler(.failure(error))
+                        return
+                    }
+                    handleAllSharesSuccessfullyAccepted()
+                }
+                
+                self.container.add(acceptSharesOperation)
+            }
+        }
+        
+        container.add(shareMetadataFetchOperation)
+    }
+    
+    private func fetchPersonalScoreRecord(then handler: @escaping (Result<ScoreRecord, Error>) -> Void) {
+        fetchScoreRecordInfomation { result in
+            switch result {
+            case .success((_, let recordID)):
+                let fetchOperation = CKFetchRecordsOperation(recordIDs: [recordID])
+                fetchOperation.qualityOfService = .userInitiated
+                
+                fetchOperation.fetchRecordsCompletionBlock = { records, error in
+                    if let error = error {
+                        handler(.failure(error))
+                        return
+                    }
+                    guard let record = records?.first?.value else {
+                        handler(.failure(CompetitionsControllerError.unknownError))
+                        return
+                    }
+                    
+                    let scoreRecord = ScoreRecord(record: record)
+                    
+                    handler(.success(scoreRecord))
+                }
+                
+                self.container.privateCloudDatabase.add(fetchOperation)
             case .failure(let error):
                 handler(.failure(error))
             }
