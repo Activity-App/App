@@ -35,7 +35,9 @@ struct AccentSettings: View {
         }
         .padding(.horizontal)
         .onChange(of: color) { color in
-            UIApplication.shared.windows[0].tintColor = UIColor(color)
+            let color = UIColor(color)
+            UserDefaults.standard.set(color, forKey: "accentColor")
+            UIApplication.shared.windows[0].tintColor = color
         }
         .navigationTitle("Accent Color")
     }
