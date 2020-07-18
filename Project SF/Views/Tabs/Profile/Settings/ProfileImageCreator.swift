@@ -26,8 +26,10 @@ struct ProfileImageCreator: View {
                         .clipShape(Circle())
                         .foregroundColor(color)
 
-                    ColorPicker("Select foreground color", selection: $color, supportsOpacity: false)
-                        .padding(.top)
+                    GroupBox {
+                        ColorPicker("Select foreground color", selection: $color, supportsOpacity: false)
+                    }
+                    .padding(.top)
                 }
                 RoundedButton("Generate image") {
                     withAnimation {
@@ -40,19 +42,25 @@ struct ProfileImageCreator: View {
             .navigationTitle("Profile Image Creator")
         }
         .onDisappear {
-            print(321)
+            if image == nil {
+                color = .clear
+            }
         }
     }
 
     init(_ image: Binding<UIImage?>, color: Binding<Color>) {
-        _image = image
-        _color = color
-        if image.wrappedValue != nil, color.wrappedValue == .clear {
-            DispatchQueue.main.async {
-                image.wrappedValue = nil
+        DispatchQueue.main.async {
+            var shouldRemoveImage = false
+            if color.wrappedValue == .clear {
                 color.wrappedValue = .black
+                shouldRemoveImage = true
+            }
+            if image.wrappedValue != nil && shouldRemoveImage {
+                image.wrappedValue = nil
             }
         }
+        _image = image
+        _color = color
     }
 }
 
