@@ -14,7 +14,7 @@ struct AboutFooter: View {
                 .padding(.top, 8)
                 .padding(.bottom, 4)
             Link("GitHub", destination: URL(string: "https://github.com/Activity-App/App")!)
-                .foregroundColor(.blue)
+                .foregroundColor(.accentColor)
         }
         .frame(maxWidth: .infinity)
     }
