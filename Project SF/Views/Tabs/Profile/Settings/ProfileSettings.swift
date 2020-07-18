@@ -16,30 +16,45 @@ struct ProfileSettings: View {
     @StateObject var keyboard = KeyboardManager()
     
     @State var profilePicture: UIImage?
-    @State var showImageSelectionView = false
+    @State var color = Color.clear
+
+    @State var showSheet = false
+    @State var selectedSheet = 0
+    @State var showSelectAlert = false
 
     var body: some View {
         // This VStack and empty text is required to fix the navigation title glitching out on scroll
         // so ScrollView isn't the topmost view.
         NavScrollView {
             Button(action: {
-                showImageSelectionView = true
-            }, label: {
+//                profilePicture = UIImage(pixelImage: .randomSymmetrical(width: 6, height: 6))
+                showSelectAlert = true
+            }) {
                 if profilePicture == nil {
                     Image(systemName: "person.crop.circle.badge.plus")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 100, height: 100)
                 } else {
-                    Image(uiImage: profilePicture!)
-                        .renderingMode(.original)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 100, height: 100)
-                        .clipShape(Circle())
+                    if color != .clear {
+                        Image(uiImage: profilePicture!)
+                            .interpolation(.none)
+                            .renderingMode(.template)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 100, height: 100)
+                            .clipShape(Circle())
+                            .foregroundColor(color)
+                    } else {
+                        Image(uiImage: profilePicture!)
+                            .renderingMode(.original)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 100, height: 100)
+                            .clipShape(Circle())
+                    }
                 }
-            })
-            .padding(.bottom)
+            }
 
             TextField("Name", text: $name)
                 .font(.headline)
@@ -86,8 +101,29 @@ struct ProfileSettings: View {
         }
         .padding(.horizontal)
         .navigationTitle("Profile")
-        .sheet(isPresented: $showImageSelectionView) {
-            ImageSelectionView(image: $profilePicture)
+        .actionSheet(isPresented: $showSelectAlert) {
+            ActionSheet(title: Text("Select profile image"),
+                        message: nil,
+                        buttons: [
+                            .default(Text("Open profile image creator"), action: {
+                                selectedSheet = 0
+                                showSheet = true
+                            }), .default(Text("Select from image gallery"), action: {
+                                selectedSheet = 1
+                                showSheet = true
+                            }), .cancel()])
+        }
+        .onChange(of: showSheet, perform: { showSheet in
+            if !showSheet && selectedSheet == 1 {
+                color = .clear
+            }
+        })
+        .sheet(isPresented: $showSheet) {
+            if selectedSheet == 0 {
+                ProfileImageCreator($profilePicture, color: $color)
+            } else {
+                ImageSelectionView(image: $profilePicture)
+            }
         }
     }
 }

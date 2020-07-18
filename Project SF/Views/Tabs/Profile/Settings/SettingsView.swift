@@ -21,6 +21,9 @@ struct AboutFooter: View {
 }
 
 struct SettingsView: View {
+
+    @Environment(\.presentationMode) var presentationMode
+
     var body: some View {
         List {
             Section(header: Text("General")) {
