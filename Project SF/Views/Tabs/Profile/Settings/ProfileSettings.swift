@@ -16,6 +16,7 @@ struct ProfileSettings: View {
     @StateObject var keyboard = KeyboardManager()
     
     @State var profilePicture: UIImage?
+    @State var color = Color.clear
 
     @State var showSheet = false
     @State var selectedSheet = 0
@@ -35,13 +36,23 @@ struct ProfileSettings: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 100, height: 100)
                 } else {
-                    Image(uiImage: profilePicture!)
-                        .interpolation(.none)
-                        .renderingMode(.original)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 100, height: 100)
-                        .clipShape(Circle())
+                    if color != .clear {
+                        Image(uiImage: profilePicture!)
+                            .interpolation(.none)
+                            .renderingMode(.template)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 100, height: 100)
+                            .clipShape(Circle())
+                            .foregroundColor(color)
+                    } else {
+                        Image(uiImage: profilePicture!)
+                            .renderingMode(.original)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 100, height: 100)
+                            .clipShape(Circle())
+                    }
                 }
             }
 
@@ -102,9 +113,14 @@ struct ProfileSettings: View {
                                 showSheet = true
                             }), .cancel()])
         }
+        .onChange(of: showSheet, perform: { showSheet in
+            if !showSheet && selectedSheet == 1 {
+                color = .clear
+            }
+        })
         .sheet(isPresented: $showSheet) {
             if selectedSheet == 0 {
-                ProfileImageCreator($profilePicture)
+                ProfileImageCreator($profilePicture, color: $color)
             } else {
                 ImageSelectionView(image: $profilePicture)
             }

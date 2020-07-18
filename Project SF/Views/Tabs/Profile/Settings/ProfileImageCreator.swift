@@ -11,7 +11,7 @@ struct ProfileImageCreator: View {
 
     @Environment(\.presentationMode) var presentationMode
     @Binding var image: UIImage?
-    @State var color = Color.accentColor
+    @Binding var color: Color
 
     var body: some View {
         NavigationView {
@@ -24,7 +24,6 @@ struct ProfileImageCreator: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 200, height: 200)
                         .clipShape(Circle())
-                        .animation(.spring())
                         .foregroundColor(color)
 
                     ColorPicker("Select foreground color", selection: $color, supportsOpacity: false)
@@ -40,15 +39,26 @@ struct ProfileImageCreator: View {
             .padding(.horizontal)
             .navigationTitle("Profile Image Creator")
         }
+        .onDisappear {
+            print(321)
+        }
     }
 
-    init(_ image: Binding<UIImage?>) {
+    init(_ image: Binding<UIImage?>, color: Binding<Color>) {
         _image = image
+        _color = color
+        if image.wrappedValue != nil, color.wrappedValue == .clear {
+            DispatchQueue.main.async {
+                image.wrappedValue = nil
+                color.wrappedValue = .black
+            }
+        }
     }
 }
 
 struct ProfileImageCreator_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileImageCreator(.constant(UIImage(pixelImage: .randomSymmetrical(color: .red, width: 10, height: 10))))
+        ProfileImageCreator(.constant(UIImage(pixelImage: .randomSymmetrical(color: .red, width: 10, height: 10))),
+                            color: .constant(Color.red))
     }
 }
