@@ -34,6 +34,9 @@ struct SettingsView: View {
                     systemName: "app.badge",
                     destination: NotificationSettings()
                 )
+                NavigationLabel(title: "Accent Color",
+                                systemName: "eyedropper",
+                                destination: AccentSettings())
             }
             
             Section(header: Text("Privacy"), footer: AboutFooter()) {
