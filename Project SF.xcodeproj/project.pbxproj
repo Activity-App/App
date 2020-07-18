@@ -51,6 +51,7 @@
 		30D321BE24BB65D5009CD9D0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D321B224BB65D5009CD9D0 /* ProfileView.swift */; };
 		30D321BF24BB65D5009CD9D0 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D321B424BB65D5009CD9D0 /* FriendsView.swift */; };
 		30D321C124BC1886009CD9D0 /* NavScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D321C024BC1886009CD9D0 /* NavScrollView.swift */; };
+		30EAB9FB24C2A234005326C8 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EAB9FA24C2A234005326C8 /* ImageStore.swift */; };
 		30F1EA3B24B951CA00FF89FC /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F1EA3A24B951CA00FF89FC /* OnboardingView.swift */; };
 		30FCC84C24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FCC84B24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift */; };
 		30FCC84E24BB318000862C01 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FCC84D24BB318000862C01 /* KeyboardManager.swift */; };
@@ -135,6 +136,7 @@
 		30D321B224BB65D5009CD9D0 /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		30D321B424BB65D5009CD9D0 /* FriendsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 		30D321C024BC1886009CD9D0 /* NavScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavScrollView.swift; sourceTree = "<group>"; };
+		30EAB9FA24C2A234005326C8 /* ImageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
 		30F1EA3A24B951CA00FF89FC /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		30FABF2B24BB5423004B8B62 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		30FCC84B24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignKeyboardOnDragGesture.swift; sourceTree = "<group>"; };
@@ -416,6 +418,7 @@
 				302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */,
 				30D3217C24BB4EDE009CD9D0 /* ActivityRings.swift */,
 				30B2818924C001A000647B83 /* Pixel.swift */,
+				30EAB9FA24C2A234005326C8 /* ImageStore.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -605,6 +608,7 @@
 				9CCFDD1D24B971D600162B0F /* User.swift in Sources */,
 				30D321BC24BB65D5009CD9D0 /* PrivacyAbout.swift in Sources */,
 				30B2819C24C1A41300647B83 /* CompetitorDetail.swift in Sources */,
+				30EAB9FB24C2A234005326C8 /* ImageStore.swift in Sources */,
 				30B2819B24C1A41300647B83 /* CompetitionDetail.swift in Sources */,
 				308FAD8D24B97E8A00126F3F /* PrivacyView.swift in Sources */,
 				30D321BE24BB65D5009CD9D0 /* ProfileView.swift in Sources */,
