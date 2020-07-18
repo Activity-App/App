@@ -48,6 +48,7 @@
 		30D321BF24BB65D5009CD9D0 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D321B424BB65D5009CD9D0 /* FriendsView.swift */; };
 		30D321C124BC1886009CD9D0 /* NavScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D321C024BC1886009CD9D0 /* NavScrollView.swift */; };
 		30EAB9F924C29B9D005326C8 /* AccentSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EAB9F824C29B9D005326C8 /* AccentSettings.swift */; };
+		30EAB9FF24C325F2005326C8 /* UserDefaults+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EAB9FE24C325F2005326C8 /* UserDefaults+UIColor.swift */; };
 		30F1EA3B24B951CA00FF89FC /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F1EA3A24B951CA00FF89FC /* OnboardingView.swift */; };
 		30FCC84C24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FCC84B24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift */; };
 		30FCC84E24BB318000862C01 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FCC84D24BB318000862C01 /* KeyboardManager.swift */; };
@@ -129,6 +130,7 @@
 		30D321B424BB65D5009CD9D0 /* FriendsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 		30D321C024BC1886009CD9D0 /* NavScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavScrollView.swift; sourceTree = "<group>"; };
 		30EAB9F824C29B9D005326C8 /* AccentSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentSettings.swift; sourceTree = "<group>"; };
+		30EAB9FE24C325F2005326C8 /* UserDefaults+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+UIColor.swift"; sourceTree = "<group>"; };
 		30F1EA3A24B951CA00FF89FC /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		30FABF2B24BB5423004B8B62 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		30FCC84B24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignKeyboardOnDragGesture.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				3050123524C0887D00E39019 /* Int+ConvertFromRangeToRange copy.swift */,
 				9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */,
 				9CCFDD2324B9745E00162B0F /* UIApplication+IsTesting.swift */,
+				30EAB9FE24C325F2005326C8 /* UserDefaults+UIColor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 				9C8FAD4624B9E39E00571947 /* Record.swift in Sources */,
 				30D321B924BB65D5009CD9D0 /* ImageSelectionView.swift in Sources */,
 				30D3217D24BB4EDE009CD9D0 /* ActivityRings.swift in Sources */,
+				30EAB9FF24C325F2005326C8 /* UserDefaults+UIColor.swift in Sources */,
 				307648C924BC7DC5005D8531 /* GrantDataAccessView.swift in Sources */,
 				30D321BF24BB65D5009CD9D0 /* FriendsView.swift in Sources */,
 				302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */,

@@ -31,6 +31,12 @@ struct ProjectSFApp: App {
                     .transition(AnyTransition.opacity.animation(.linear(duration: 1)))
             }
         }
-        
+    }
+
+    init() {
+        DispatchQueue.main.async {
+            UIApplication.shared.windows[0].tintColor = UserDefaults.standard.uiColor(forKey: "accentColor")
+                ?? UIColor(Color.accentColor)
+        }
     }
 }
