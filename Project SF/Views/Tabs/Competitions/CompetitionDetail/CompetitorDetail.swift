@@ -65,5 +65,6 @@ struct CompetitorDetail_Previews: PreviewProvider {
             ),
             person: CompetingPerson(name: "Me", points: 150)
         )
+        .environmentObject(HealthKitController())
     }
 }

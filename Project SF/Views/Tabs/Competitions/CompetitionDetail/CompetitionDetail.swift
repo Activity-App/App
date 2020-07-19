@@ -13,24 +13,56 @@ struct CompetitionDetail: View {
     @Environment(\.colorScheme) var colorScheme
     let competition: Competition
     
+    @State var showMore = false
+    
     var body: some View {
         List {
-            HStack {
-                PlaceBadgeView(
-                    place: competition.place,
-                    flippable: true,
-                    activityRings: $healthKit.latestActivityData
-                )
-                VStack(alignment: .leading) {
-                    Text("\(competition.creatingUser.points) points")
-                        .font(.title)
-                        .fontWeight(.medium)
-                    HStack(spacing: 0) {
-                        Text(competition.endDate, style: .relative)
-                        Text(" to go.")
+            VStack {
+                HStack {
+                    PlaceBadgeView(
+                        place: competition.place,
+                        flippable: true,
+                        activityRings: $healthKit.latestActivityData
+                    )
+                    VStack(alignment: .leading) {
+                        Text("\(competition.creatingUser.points) points")
+                            .font(.title)
+                            .fontWeight(.medium)
+                        HStack(spacing: 0) {
+                            Text(competition.endDate, style: .relative)
+                            Text(" to go.")
+                        }
+                        .font(.title3)
+                        .foregroundColor(Color(.tertiaryLabel))
                     }
-                    .font(.title3)
-                    .foregroundColor(Color(.tertiaryLabel))
+                    
+                }
+                .padding(.vertical)
+                HStack {
+                    Spacer()
+                    VStack {
+                        Image(systemName: "figure.walk")
+                        if showMore { Text("Distance") }
+                        Text("10")
+                    }
+                    Spacer()
+                    VStack {
+                        Image(systemName: "figure.walk")
+                        if showMore { Text("Ste") }
+                        Text("10")
+                    }
+                    Spacer()
+                    VStack {
+                        Image(systemName: "figure.walk")
+                        if showMore { Text("Distance") }
+                        Text("10")
+                    }
+                    Spacer()
+                }
+                .onTapGesture {
+                    withAnimation(.spring()) {
+                        showMore.toggle()
+                    }
                 }
             }
             .padding(.vertical)
