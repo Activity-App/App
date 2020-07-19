@@ -30,13 +30,14 @@ class CompetitionsController {
     
     /// Creates a competition.
     /// - Parameters:
-    ///   - type: The competition type.
+    ///   - type: The competition types.
     ///   - endDate: The date the competition will end.
     ///   - friends: The friends to invite to the competition. This currently can't be changed later.
     ///   - handler: Called with the result of the operation. Not guaranteed to be on the main thread..
     ///
     /// Internally, this creates a `CompetitionRecord` which is shared to all friend participants (with read only access). The `CompetitionRecord` contains all the competition metadata and a list of share urls pointing to `ScoreURLHolderRecord`s which, if the participant has joined the competition, contain a share url that will grant access to the participants score infomation.
-    func createCompetition(type: CompetitionRecord.CompetitionType,
+    func createCompetition(type: CompetitionRecord.CompetitionTypes,
+                           title: String,
                            endDate: Date,
                            friends: [Friend],
                            then handler: @escaping (Result<Void, Error>) -> Void) {
@@ -50,6 +51,7 @@ class CompetitionsController {
                         // create the main competition record
                         let competitionRecord = CompetitionRecord(recordID: CKRecord.ID(zoneID: zone.zoneID))
                         competitionRecord.type = type
+                        competitionRecord.title = title
                         competitionRecord.startDate = Date()
                         competitionRecord.endDate = endDate
                         
