@@ -774,6 +774,8 @@ class CompetitionsController {
             }
             
             func handleAllSharesSuccessfullyAccepted() {
+                let competitionAuthorID = competition.record.creatorUserRecordID
+                
                 let fetchRecordsOperation = CKFetchRecordsOperation(recordIDs: metadatas.map { $0.rootRecordID })
                 fetchRecordsOperation.fetchRecordsCompletionBlock = { records, error in
                     if let error = error {
@@ -786,7 +788,10 @@ class CompetitionsController {
                         return
                     }
                     
-                    let scoreRecords = records.map { ScoreRecord(record: $0) }
+                    let scoreRecords = records
+                        // prevent competition creator from faking ScoreRecords
+                        .filter { $0.creatorUserRecordID == competitionAuthorID }
+                        .map { ScoreRecord(record: $0) }
                     
                     handler(.success(scoreRecords))
                 }
