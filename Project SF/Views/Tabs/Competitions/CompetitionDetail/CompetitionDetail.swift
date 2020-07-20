@@ -13,8 +13,6 @@ struct CompetitionDetail: View {
     @Environment(\.colorScheme) var colorScheme
     let competition: Competition
     
-    @State var showMore = false
-    
     var body: some View {
         List {
             HStack {
