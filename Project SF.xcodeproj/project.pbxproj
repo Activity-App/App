@@ -241,8 +241,8 @@
 				3050123524C0887D00E39019 /* Int+ConvertFromRangeToRange copy.swift */,
 				9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */,
 				9CCFDD2324B9745E00162B0F /* UIApplication+IsTesting.swift */,
-        9C8FAD4924BAADA600571947 /* CKContainer+AppDefault.swift */,
-        30EAB9FE24C325F2005326C8 /* UserDefaults+UIColor.swift */,
+				9C8FAD4924BAADA600571947 /* CKContainer+AppDefault.swift */,
+				30EAB9FE24C325F2005326C8 /* UserDefaults+UIColor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -267,6 +267,52 @@
 				9C6C74AD24BAE07A00C657B0 /* SignUp */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		30ABC14124C567DF0060825B /* Competitions */ = {
+			isa = PBXGroup;
+			children = (
+				9C338BD824BAD0D3003E5048 /* CompetitionRecord.swift */,
+				9C338BD424BAC4F4003E5048 /* CompetitionsController.swift */,
+			);
+			path = Competitions;
+			sourceTree = "<group>";
+		};
+		30ABC14224C568210060825B /* Invitations */ = {
+			isa = PBXGroup;
+			children = (
+				9C2445DB24BC714100D8F4FC /* Invitation.swift */,
+				9C2445D924BC0D8E00D8F4FC /* InvitationRecord.swift */,
+			);
+			path = Invitations;
+			sourceTree = "<group>";
+		};
+		30ABC14324C5684B0060825B /* User */ = {
+			isa = PBXGroup;
+			children = (
+				9CCFDD1824B971D600162B0F /* UserRecord.swift */,
+				9C8FAD4724B9E7CC00571947 /* UserController.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		30ABC14424C568A10060825B /* Scoring */ = {
+			isa = PBXGroup;
+			children = (
+				9C7E74AD24BDC87A0032CD88 /* ScoreRecord.swift */,
+				9C7E74AB24BDC7790032CD88 /* ScoreURLHolderRecord.swift */,
+			);
+			path = Scoring;
+			sourceTree = "<group>";
+		};
+		30ABC14524C569010060825B /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				30D3217C24BB4EDE009CD9D0 /* ActivityRings.swift */,
+				302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */,
+				302CF88924BA199E00FF79D7 /* RingType.swift */,
+			);
+			path = Activity;
 			sourceTree = "<group>";
 		};
 		30BFC8C124B75E6C00DAC6D9 = {
@@ -295,7 +341,7 @@
 				30BFC8E024B76BB800DAC6D9 /* Project SF.entitlements */,
 				3029AF5224B886CB003F0324 /* Support */,
 				3029AF5024B8869E003F0324 /* Views */,
-				9CCFDD1524B971D600162B0F /* Models */,
+				9CCFDD1524B971D600162B0F /* Logic */,
 				9C7B4D0A24B89B0F00FC4456 /* Utilities */,
 				30BFC8D124B75E6F00DAC6D9 /* Assets.xcassets */,
 				30BFC8D624B75E6F00DAC6D9 /* Info.plist */,
@@ -416,23 +462,22 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
-		9C6C74B424BBE56800C657B0 /* Controllers */ = {
+		9C6C74B424BBE56800C657B0 /* HealthKit */ = {
 			isa = PBXGroup;
 			children = (
 				9CCFDD1C24B971D600162B0F /* HealthKitController.swift */,
-				9C8FAD4724B9E7CC00571947 /* UserController.swift */,
-				9C338BD424BAC4F4003E5048 /* CompetitionsController.swift */,
+				30ABC14524C569010060825B /* Activity */,
 			);
-			path = Controllers;
+			path = HealthKit;
 			sourceTree = "<group>";
 		};
 		9C7B4D0A24B89B0F00FC4456 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				30BFC8DE24B7637F00DAC6D9 /* VisualEffectView.swift */,
-				3029AF5124B886A7003F0324 /* Extensions */,
 				30FCC84B24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift */,
 				30FCC84D24BB318000862C01 /* KeyboardManager.swift */,
+				3029AF5124B886A7003F0324 /* Extensions */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -445,19 +490,19 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
-		9CCFDD1524B971D600162B0F /* Models */ = {
+		9CCFDD1524B971D600162B0F /* Logic */ = {
 			isa = PBXGroup;
 			children = (
 				9CCFDD1624B971D600162B0F /* CloudKit */,
+				30ABC14324C5684B0060825B /* User */,
+				30ABC14124C567DF0060825B /* Competitions */,
+				30ABC14424C568A10060825B /* Scoring */,
+				30ABC14224C568210060825B /* Invitations */,
+				9C6C74B424BBE56800C657B0 /* HealthKit */,
 				9CCFDD1A24B971D600162B0F /* Networking */,
-				9C6C74B424BBE56800C657B0 /* Controllers */,
-				302CF88924BA199E00FF79D7 /* RingType.swift */,
-				302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */,
 				9C6C74B524BBE57B00C657B0 /* Friend.swift */,
-				9C2445DB24BC714100D8F4FC /* Invitation.swift */,
-				30D3217C24BB4EDE009CD9D0 /* ActivityRings.swift */,
 			);
-			path = Models;
+			path = Logic;
 			sourceTree = "<group>";
 		};
 		9CCFDD1624B971D600162B0F /* CloudKit */ = {
@@ -467,21 +512,8 @@
 				9C8FAD4524B9E39E00571947 /* Record.swift */,
 				9C6C74B224BAEC0B00C657B0 /* DynamicRecord.swift */,
 				9C338BD624BAD080003E5048 /* RecordKey.swift */,
-				9CCFDD1724B971D600162B0F /* Records */,
 			);
 			path = CloudKit;
-			sourceTree = "<group>";
-		};
-		9CCFDD1724B971D600162B0F /* Records */ = {
-			isa = PBXGroup;
-			children = (
-				9CCFDD1824B971D600162B0F /* UserRecord.swift */,
-				9C2445D924BC0D8E00D8F4FC /* InvitationRecord.swift */,
-				9C338BD824BAD0D3003E5048 /* CompetitionRecord.swift */,
-				9C7E74AB24BDC7790032CD88 /* ScoreURLHolderRecord.swift */,
-				9C7E74AD24BDC87A0032CD88 /* ScoreRecord.swift */,
-			);
-			path = Records;
 			sourceTree = "<group>";
 		};
 		9CCFDD1A24B971D600162B0F /* Networking */ = {
@@ -674,9 +706,8 @@
 				9C338BD724BAD080003E5048 /* RecordKey.swift in Sources */,
 				30D321B924BB65D5009CD9D0 /* ImageSelectionView.swift in Sources */,
 				30D3217D24BB4EDE009CD9D0 /* ActivityRings.swift in Sources */,
-        9C7E74AE24BDC87A0032CD88 /* ScoreRecord.swift in Sources */,
-        30EAB9FF24C325F2005326C8 /* UserDefaults+UIColor.swift in Sources */,
-				307648C924BC7DC5005D8531 /* GrantDataAccessView.swift in Sources */,
+				9C7E74AE24BDC87A0032CD88 /* ScoreRecord.swift in Sources */,
+				30EAB9FF24C325F2005326C8 /* UserDefaults+UIColor.swift in Sources */,
 				30D321BF24BB65D5009CD9D0 /* FriendsView.swift in Sources */,
 				302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */,
 				9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */,

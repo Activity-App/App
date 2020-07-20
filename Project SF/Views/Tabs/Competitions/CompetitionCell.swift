@@ -62,7 +62,7 @@ struct CompetitionCell: View {
 struct CompetitionCell_Previews: PreviewProvider {
     
     static var previews: some View {
-        var competitions: [Competition] = [
+        let competitions: [Competition] = [
             Competition(
                 name: "Competition1",
                 startDate: Date() - 100000,

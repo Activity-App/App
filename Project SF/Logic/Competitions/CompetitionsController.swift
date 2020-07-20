@@ -857,5 +857,4 @@ class CompetitionsController {
         case missingURL
         case multiple([Error])
     }
-    
 }
