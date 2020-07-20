@@ -17,56 +17,46 @@ struct CompetitionDetail: View {
     
     var body: some View {
         List {
-            VStack {
-                HStack {
-                    PlaceBadgeView(
-                        place: competition.place,
-                        flippable: true,
-                        activityRings: $healthKit.latestActivityData
-                    )
-                    VStack(alignment: .leading) {
-                        Text("\(competition.creatingUser.points) points")
-                            .font(.title)
-                            .fontWeight(.medium)
-                        HStack(spacing: 0) {
-                            Text(competition.endDate, style: .relative)
-                            Text(" to go.")
-                        }
-                        .font(.title3)
-                        .foregroundColor(Color(.tertiaryLabel))
+            HStack {
+                PlaceBadgeView(
+                    place: competition.place,
+                    flippable: true,
+                    activityRings: $healthKit.latestActivityData
+                )
+                VStack(alignment: .leading) {
+                    Text("\(competition.creatingUser.points) points")
+                        .font(.title)
+                        .fontWeight(.medium)
+                    HStack(spacing: 0) {
+                        Text(competition.endDate, style: .relative)
+                        Text(" to go.")
                     }
-                    
+                    .font(.title3)
+                    .foregroundColor(Color(.tertiaryLabel))
                 }
-                .padding(.vertical)
-                HStack {
-                    Spacer()
-                    VStack {
-                        Image(systemName: "figure.walk")
-                        if showMore { Text("Distance") }
-                        Text("10")
-                    }
-                    Spacer()
-                    VStack {
-                        Image(systemName: "figure.walk")
-                        if showMore { Text("Ste") }
-                        Text("10")
-                    }
-                    Spacer()
-                    VStack {
-                        Image(systemName: "figure.walk")
-                        if showMore { Text("Distance") }
-                        Text("10")
-                    }
-                    Spacer()
-                }
-                .onTapGesture {
-                    withAnimation(.spring()) {
-                        showMore.toggle()
-                    }
-                }
+                
             }
             .padding(.vertical)
             .padding(.horizontal)
+            
+            Section(header: Text("Point Summary")) {
+                HStack {
+                    Spacer()
+                    Group {
+                        pointsSummary(type: .move, points: 93)
+                        Spacer()
+                        pointsSummary(type: .exercise, points: 24)
+                        Spacer()
+                        pointsSummary(type: .stand, points: 5)
+                        Spacer()
+                        pointsSummary(type: .steps, points: 20)
+                        Spacer()
+                        pointsSummary(type: .distance, points: 8)
+                    }
+                    Spacer()
+                }
+                .padding(.vertical, 8)
+            }
             
             Section(header: Text("Leaderboard")) {
                 ForEach(competition.people.sorted { $0.points > $1.points }) { person in
@@ -80,6 +70,30 @@ struct CompetitionDetail: View {
         }
         .listStyle(InsetGroupedListStyle())
         .navigationTitle(competition.name)
+    }
+    
+    func pointsSummary(type: CompetitionType, points: Int) -> some View {
+        VStack {
+            if type == .move || type == .exercise || type == .stand {
+                ActivityRingView(
+                    ringType: RingType(rawValue: type.rawValue)!,
+                    ringWidth: 4,
+                    current: .constant(200),
+                    goal: .constant(300)
+                )
+                .frame(width: 20, height: 20)
+            } else {
+                Image(systemName: type == .steps ? "figure.walk" : "chevron.right.2")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 20, height: 20)
+            }
+            Text(type.rawValue.capitalized)
+                .font(.caption2)
+            Text("\(points)")
+                .fontWeight(.heavy)
+                .padding(.top, 4)
+        }
     }
 }
 
