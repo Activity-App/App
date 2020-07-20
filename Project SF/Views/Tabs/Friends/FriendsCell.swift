@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FriendsCell: View {
 
-    let friend: Friend
+    let friend: TemporaryFriend
 
     var body: some View {
         NavigationLink(destination: FriendDetailView(friend)) {
@@ -37,7 +37,7 @@ struct FriendsCell: View {
         }
     }
 
-    init(_ friend: Friend) {
+    init(_ friend: TemporaryFriend) {
         self.friend = friend
     }
 }
@@ -47,7 +47,7 @@ struct FriendsCell_Previews: PreviewProvider {
         NavigationView {
             RoundedNavigationLink("Show", destination:
                                     GroupBox {
-                                        FriendsCell(Friend(
+                                        FriendsCell(TemporaryFriend(
                                             name: "Friend3",
                                             activity: .init(
                                                 moveCurrent: 380,

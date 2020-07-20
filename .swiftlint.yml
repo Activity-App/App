@@ -6,5 +6,8 @@ identifier_name:
   excluded:
     - id
 
+line_length:
+  ignores_comments: true
+
 excluded:
   - "Project SFTests"
