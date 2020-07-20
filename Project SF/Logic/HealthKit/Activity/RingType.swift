@@ -8,7 +8,6 @@
 import SwiftUI
 
 enum RingType: String {
-    
     case move
     case exercise
     case stand
