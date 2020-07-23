@@ -10,55 +10,91 @@ import SwiftUI
 struct SignUpView: View {
 
     @Binding var showOnboarding: Bool
-    @AppStorage("username") var username = ""
+    
+    @State var name = ""
+    @State var username = ""
+    
+    @State var nextPage = false
+    @State var signedUp = false
+    @State var loading = false
+    
+    @StateObject var userController = UserController()
+    @EnvironmentObject var alert: AlertManager
 
     var body: some View {
-        VStack {
-            NavScrollView {
-                Text("REQUIRED")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 32)
-                GroupBox {
-                    TextField("Name", text: $username) { didChange in
-                        print(didChange)
-                    } onCommit: {
-                        print("Commited")
+        ZStack {
+            VStack {
+                NavScrollView {
+                    Text("REQUIRED")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 32)
+                    GroupBox {
+                        TextField("Name", text: $name)
                     }
-                }
-                GroupBox {
-                    TextField("Username", text: $username) { didChange in
-                        print(didChange)
-                    } onCommit: {
-                        print("Commited")
+                    GroupBox {
+                        TextField("Username", text: $username)
                     }
-                }
-                
-                Text("OPTIONAL")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 32)
-                GroupBox {
-                    TextField("Phone Number", text: $username) { didChange in
-                        print(didChange)
-                    } onCommit: {
-                        print("Commited")
+                    
+                    Text("OPTIONAL")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 32)
+                    GroupBox {
+                        TextField("Phone Number", text: $username)
                     }
+                    Text("This will be used so other people with your contact can discover you.")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                Text("This will be used so other people with your contact can discover you.")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                Spacer()
+                RoundedNavigationLinkButton(
+                    "Continue",
+                    destination: GrantDataAccessView(showOnboarding: $showOnboarding),
+                    isLoading: $loading,
+                    isActive: $nextPage
+                ) {
+                    signedUp = true
+                    userController.set(name: name, username: username)
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 16)
             }
-            Spacer()
-            RoundedNavigationLink(
-                "Continue", destination: GrantDataAccessView(showOnboarding: $showOnboarding)
-            )
+            .padding(.horizontal)
+            .navigationTitle("Sign Up")
         }
-        .padding(.horizontal)
-        .navigationTitle("Sign Up")
+        .onChange(of: userController.state) { newState in
+            switch newState {
+            case .loading:
+                loading = true
+            case .user:
+                loading = false
+                if signedUp {
+                    nextPage = true
+                }
+            case .failure(let error):
+                loading = false
+                print(error)
+                alert.present(
+                    icon: "exclamationmark.icloud.fill",
+                    message: "There was an error accessing iCloud. Please check your internet connection and that your device is signed into iCloud.",
+                    color: .orange,
+                    buttonAction: {
+                        alert.dismiss()
+                        userController.updateData()
+                    }
+                )
+            }
+        }
+        .onAppear {
+            userController.updateData()
+        }
+        .onDisappear {
+            signedUp = false
+        }
     }
 }
 

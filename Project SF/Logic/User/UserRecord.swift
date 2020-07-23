@@ -23,16 +23,12 @@ class UserRecord: DynamicRecord {
     
     struct Model {
         
-        let nickname = ModelItem<String>(key: "nickname")
-        
+        let name = ModelItem<String>(key: "name")
+        let username = ModelItem<String>(key: "username")
         let bio = ModelItem<String>(key: "bio")
-        
         let profilePictureURL = ModelItem<String>(key: "profilePictureURL")
-        
         let scoreRecordZoneName = ModelItem<String>(key: "scoreRecordZoneName")
-        
         let scoreRecordRecordName = ModelItem<String>(key: "scoreRecordRecordName")
-        
         let scoreRecordPublicShareURL = ModelItem<String>(key: "scoreRecordPublicShareURL")
         
     }

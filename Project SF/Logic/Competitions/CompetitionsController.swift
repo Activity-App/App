@@ -67,8 +67,10 @@ class CompetitionsController {
                         }
                         
                         // save the record and the share
-                        let operation = CKModifyRecordsOperation(recordsToSave: [competitionRecord.record, share],
-                                                                 recordIDsToDelete: nil)
+                        let operation = CKModifyRecordsOperation(
+                            recordsToSave: [competitionRecord.record, share],
+                            recordIDsToDelete: nil
+                        )
                         operation.qualityOfService = .userInitiated
                         
                         var savedShare: CKShare?
@@ -407,7 +409,7 @@ class CompetitionsController {
                         
                         let friends = records
                             .map {
-                                return Friend(name: $0.nickname ?? "",
+                                return Friend(name: $0.username ?? "",
                                               profilePicture: URL(string: $0.profilePictureURL ?? ""),
                                               recordID: $0.record.recordID)
                             }
