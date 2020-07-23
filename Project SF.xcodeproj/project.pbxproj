@@ -88,6 +88,7 @@
 		9CCFDD2624B9753F00162B0F /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD2524B9753F00162B0F /* Main.swift */; };
 		9CCFDD2824B9758A00162B0F /* TestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD2724B9758A00162B0F /* TestApp.swift */; };
 		9CD7F11E24B89C5000DDAD8C /* ProjectSFTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7F11D24B89C5000DDAD8C /* ProjectSFTests.swift */; };
+		9CD90D9724C99C4A00020288 /* FriendsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD90D9624C99C4A00020288 /* FriendsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -190,6 +191,7 @@
 		9CD7F11B24B89C5000DDAD8C /* Project SFTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Project SFTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CD7F11D24B89C5000DDAD8C /* ProjectSFTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSFTests.swift; sourceTree = "<group>"; };
 		9CD7F11F24B89C5000DDAD8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9CD90D9624C99C4A00020288 /* FriendsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -504,6 +506,7 @@
 				9CCFDD1624B971D600162B0F /* CloudKit */,
 				30ABC14324C5684B0060825B /* User */,
 				30ABC14124C567DF0060825B /* Competitions */,
+				9CD90D9524C99C3C00020288 /* Friends */,
 				30ABC14424C568A10060825B /* Scoring */,
 				30ABC14224C568210060825B /* Invitations */,
 				9C6C74B424BBE56800C657B0 /* HealthKit */,
@@ -545,6 +548,14 @@
 				9C9748E224B9AF1E00FB5F21 /* Project SFTests-Bridging-Header.h */,
 			);
 			path = "Project SFTests";
+			sourceTree = "<group>";
+		};
+		9CD90D9524C99C3C00020288 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				9CD90D9624C99C4A00020288 /* FriendsManager.swift */,
+			);
+			path = Friends;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -725,6 +736,7 @@
 				30251C1B24BFC1B10058D6D2 /* CompetitorCell.swift in Sources */,
 				30CCF30724BED9EA00103C1E /* ActivityOverview.swift in Sources */,
 				30D321BA24BB65D5009CD9D0 /* NotificationSettings.swift in Sources */,
+				9CD90D9724C99C4A00020288 /* FriendsManager.swift in Sources */,
 				30251C1E24BFE1D50058D6D2 /* PointsGraph.swift in Sources */,
 				30BFC8E724B8041C00DAC6D9 /* ActivityRingsView.swift in Sources */,
 				9C2445DC24BC714100D8F4FC /* Invitation.swift in Sources */,
