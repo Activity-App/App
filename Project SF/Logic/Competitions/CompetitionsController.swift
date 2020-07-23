@@ -351,9 +351,6 @@ class CompetitionsController {
         }
     }
     
-    // MARK: Friend Discovery (should be moved out of this class)
-   
-    
     // MARK: Helper Methods
     
     /// Utility method to create a zone with a randomised identifier.
