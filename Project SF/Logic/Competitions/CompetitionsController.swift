@@ -67,7 +67,10 @@ class CompetitionsController {
                         }
                         
                         // save the record and the share
-                        let operation = CKModifyRecordsOperation(recordsToSave: [competitionRecord.record, share], recordIDsToDelete: nil)
+                        let operation = CKModifyRecordsOperation(
+                            recordsToSave: [competitionRecord.record, share],
+                            recordIDsToDelete: nil
+                        )
                         operation.qualityOfService = .userInitiated
                         
                         var savedShare: CKShare?

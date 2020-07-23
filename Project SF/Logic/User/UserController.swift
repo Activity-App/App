@@ -97,7 +97,6 @@ class UserController: ObservableObject {
                     self.userRecord = record
                     self.updateStateToMatchUserRecord()
                 case .failure(let error):
-                    print(error)
                     self.state = .failure(error)
                 }
             }
@@ -145,12 +144,5 @@ class UserController: ObservableObject {
         let name: String?
         let username: String?
         let bio: String?
-    }
-    
-    enum CompetitionsControllerError: Error {
-        case unknownError
-        case insufficientPermissions
-        case missingURL
-        case multiple([Error])
     }
 }
