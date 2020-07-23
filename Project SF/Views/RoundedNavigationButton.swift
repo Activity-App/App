@@ -30,14 +30,59 @@ struct RoundedNavigationLink<Destination: View>: View {
                         .progressViewStyle(LightProgressViewStyle())
                         .modifier(RoundedRectBackground())
                 }
-            })
-            .disabled(isLoading)
+            }
+        )
+        .disabled(isLoading)
     }
 
-    init(_ title: String, destination: Destination, isLoading: Binding<Bool> = .constant(false)) {
+    init(_ title: String,
+         destination: Destination,
+         isLoading: Binding<Bool> = .constant(false)
+    ) {
         self.title = title
         self.destination = destination
         self._isLoading = isLoading
+    }
+}
+
+/// A custom NavigationLink with Text inside a rounded rect
+/// which spans across the whole width of the screen.
+struct RoundedNavigationLinkButton<Destination: View>: View {
+    let title: String
+    let destination: Destination
+    let action: () -> Void
+    
+    @Binding var isLoading: Bool
+    @Binding var isActive: Bool
+
+    var body: some View {
+        ZStack {
+            RoundedButton(isLoading ? "" : title, action: action)
+                .disabled(isLoading)
+            if isLoading {
+                ProgressView()
+            }
+            NavigationLink(
+                destination: destination,
+                isActive: $isActive,
+                label: {
+                    EmptyView()
+                }
+            )
+        }
+    }
+
+    init(_ title: String,
+         destination: Destination,
+         isLoading: Binding<Bool> = .constant(false),
+         isActive: Binding<Bool> = .constant(false),
+         action: @escaping () -> Void
+    ) {
+        self.title = title
+        self.destination = destination
+        self._isLoading = isLoading
+        self._isActive = isActive
+        self.action = action
     }
 }
 

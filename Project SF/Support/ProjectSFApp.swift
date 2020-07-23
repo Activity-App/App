@@ -10,33 +10,39 @@ struct ProjectSFApp: App {
  
     let cloudKitStore = CloudKitStore.shared
 
-    @AppStorage("showOnboarding") var showOnboarding = true
+    @State var showOnboarding = true
     @StateObject var healthKit = HealthKitController()
+    @StateObject var alert = AlertManager()
     
     var body: some Scene {
         WindowGroup {
-            if showOnboarding {
-                OnboardingView(showOnboarding: $showOnboarding)
-                    .environmentObject(healthKit)
-            } else {
-                ContentView()
-                    .environmentObject(healthKit)
-                    .onAppear {
-                        healthKit.authorizeHealthKit {
-                            if healthKit.authorizationState == .granted {
-                                healthKit.updateTodaysActivityData()
+            ZStack {
+                if showOnboarding {
+                    OnboardingView(showOnboarding: $showOnboarding)
+                } else {
+                    ContentView()
+                        .onAppear {
+                            healthKit.authorizeHealthKit {
+                                if healthKit.authorizationState == .granted {
+                                    healthKit.updateTodaysActivityData()
+                                }
                             }
                         }
-                    }
-                    .transition(AnyTransition.opacity.animation(.linear(duration: 1)))
+                        .transition(AnyTransition.opacity.animation(.linear(duration: 1)))
+                }
+                AlertView()
             }
+            .environmentObject(healthKit)
+            .environmentObject(alert)
         }
+        
     }
 
-    init() {
-        DispatchQueue.main.async {
-            UIApplication.shared.windows[0].tintColor = UserDefaults.standard.uiColor(forKey: "accentColor")
-                ?? UIColor(Color.accentColor)
-        }
-    }
+    // This is causing some index out of range errors.
+//    init() {
+//        DispatchQueue.main.async {
+//            UIApplication.shared.windows[0].tintColor = UserDefaults.standard.uiColor(forKey: "accentColor")
+//                ?? UIColor(Color.accentColor)
+//        }
+//    }
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CloudKit
 
 class UserController: ObservableObject {
     
@@ -32,21 +33,25 @@ class UserController: ObservableObject {
         updateData(setStateToLoading: true)
     }
     
-    /// Asynchronously updates the users nickname.
-    /// - Parameter nickname: The new nickname.
-    func setNickname(_ nickname: String) {
+    /// Asynchronously updates the users details.
+    /// - Parameter name: The new name.
+    /// - Parameter username: The new username.
+    /// - Parameter bio: The new bio.
+    func set(name: String? = nil, username: String? = nil, bio: String? = nil) {
         guard let userRecord = userRecord else { return }
-        userRecord.nickname = nickname
         
-        updateStateToMatchUserRecord()
-        syncRecord()
-    }
-    
-    func setBio(_ bio: String) {
-        guard let userRecord = userRecord else { return }
-        userRecord.bio = bio
+        state = .loading
         
-        updateStateToMatchUserRecord()
+        if let name = name {
+            userRecord.name = name
+        }
+        if let username = username {
+            userRecord.username = username
+        }
+        if let bio = bio {
+            userRecord.bio = bio
+        }
+        
         syncRecord()
     }
     
@@ -54,7 +59,7 @@ class UserController: ObservableObject {
     
     private func updateStateToMatchUserRecord() {
         guard let record = userRecord else { return }
-        self.state = .user(.init(nickname: record.nickname, bio: record.bio))
+        self.state = .user(.init(name: record.name, username: record.username, bio: record.bio))
     }
     
     private func syncRecord() {
@@ -92,6 +97,7 @@ class UserController: ObservableObject {
                     self.userRecord = record
                     self.updateStateToMatchUserRecord()
                 case .failure(let error):
+                    print(error)
                     self.state = .failure(error)
                 }
             }
@@ -100,20 +106,51 @@ class UserController: ObservableObject {
     
     // MARK: - State
     
-    enum State {
+    enum State: Equatable {
         case loading
         case user(UserViewModel)
         case failure(Error)
+        
+        /// Make equatable to detect changes.
+        static func == (lhs: UserController.State, rhs: UserController.State) -> Bool {
+            switch (lhs, rhs) {
+            case (.loading, .loading):
+                return true
+            case (.loading, .user),
+                 (.loading, .failure),
+                 (.failure, .user),
+                 (.user, .loading),
+                 (.user, .failure),
+                 (.failure, .loading):
+                return false
+            case (.user(let lhsUser), .user(let rhsUser)):
+                if lhsUser == rhsUser {
+                    return true
+                } else {
+                    return false
+                }
+            case (.failure(let lhsError), .failure(let rhsError)):
+                if lhsError.localizedDescription == rhsError.localizedDescription {
+                    return true
+                } else {
+                    return false
+                }
+            }
+        }
     }
     
     // MARK: - UserViewModel
     
-    struct UserViewModel {
-        
-        let nickname: String?
-        
+    struct UserViewModel: Equatable {
+        let name: String?
+        let username: String?
         let bio: String?
-        
     }
     
+    enum CompetitionsControllerError: Error {
+        case unknownError
+        case insufficientPermissions
+        case missingURL
+        case multiple([Error])
+    }
 }
