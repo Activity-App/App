@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		30132FF024CA78E000CB6683 /* CompetitionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30132FEF24CA78E000CB6683 /* CompetitionStruct.swift */; };
-		30132FF224CAB48700CB6683 /* CompetitionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30132FF124CAB48700CB6683 /* CompetitionsController.swift */; };
 		3019CD9924BC9792002564AD /* PlaceBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3019CD9824BC9792002564AD /* PlaceBadgeView.swift */; };
 		30251C1924BFC1A50058D6D2 /* CompetitorDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30251C1824BFC1A50058D6D2 /* CompetitorDetail.swift */; };
 		30251C1B24BFC1B10058D6D2 /* CompetitorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30251C1A24BFC1B10058D6D2 /* CompetitorCell.swift */; };
@@ -92,6 +91,7 @@
 		9CCFDD2824B9758A00162B0F /* TestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD2724B9758A00162B0F /* TestApp.swift */; };
 		9CD7F11E24B89C5000DDAD8C /* ProjectSFTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7F11D24B89C5000DDAD8C /* ProjectSFTests.swift */; };
 		9CD90D9724C99C4A00020288 /* FriendsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD90D9624C99C4A00020288 /* FriendsManager.swift */; };
+		9CD90D9F24CACF7300020288 /* CompetitionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD90D9E24CACF7300020288 /* CompetitionsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,7 +106,6 @@
 
 /* Begin PBXFileReference section */
 		30132FEF24CA78E000CB6683 /* CompetitionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionStruct.swift; sourceTree = "<group>"; };
-		30132FF124CAB48700CB6683 /* CompetitionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsController.swift; sourceTree = "<group>"; };
 		3019CD9824BC9792002564AD /* PlaceBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceBadgeView.swift; sourceTree = "<group>"; };
 		30251C1824BFC1A50058D6D2 /* CompetitorDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitorDetail.swift; sourceTree = "<group>"; };
 		30251C1A24BFC1B10058D6D2 /* CompetitorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitorCell.swift; sourceTree = "<group>"; };
@@ -198,6 +197,7 @@
 		9CD7F11D24B89C5000DDAD8C /* ProjectSFTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSFTests.swift; sourceTree = "<group>"; };
 		9CD7F11F24B89C5000DDAD8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9CD90D9624C99C4A00020288 /* FriendsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsManager.swift; sourceTree = "<group>"; };
+		9CD90D9E24CACF7300020288 /* CompetitionsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitionsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,7 +299,7 @@
 				30132FEF24CA78E000CB6683 /* CompetitionStruct.swift */,
 				9C338BD824BAD0D3003E5048 /* CompetitionRecord.swift */,
 				9C338BD424BAC4F4003E5048 /* CompetitionsManager.swift */,
-				30132FF124CAB48700CB6683 /* CompetitionsController.swift */,
+				9CD90D9E24CACF7300020288 /* CompetitionsController.swift */,
 			);
 			path = Competitions;
 			sourceTree = "<group>";
@@ -722,6 +722,7 @@
 				30EAB9F924C29B9D005326C8 /* AccentSettings.swift in Sources */,
 				30BFC8DF24B7637F00DAC6D9 /* VisualEffectView.swift in Sources */,
 				9CCFDD1D24B971D600162B0F /* UserRecord.swift in Sources */,
+				9CD90D9F24CACF7300020288 /* CompetitionsController.swift in Sources */,
 				9C6C74B624BBE57B00C657B0 /* FriendStruct.swift in Sources */,
 				9CCFDD1D24B971D600162B0F /* UserRecord.swift in Sources */,
 				9C2445D824BC009F00D8F4FC /* RoundedNavigationButton.swift in Sources */,
@@ -772,7 +773,6 @@
 				3067713124BDE3950085F152 /* FriendDetailView.swift in Sources */,
 				30D321BB24BB65D5009CD9D0 /* PermissionSettings.swift in Sources */,
 				304F753124CAC9BF005D46BA /* FriendsManager.swift in Sources */,
-				30132FF224CAB48700CB6683 /* CompetitionsController.swift in Sources */,
 				3050123624C0887D00E39019 /* Int+ConvertFromRangeToRange copy.swift in Sources */,
 				30278E9324BC553A00E87E80 /* CompetitionDetail.swift in Sources */,
 				30D321B824BB65D5009CD9D0 /* SettingsView.swift in Sources */,
