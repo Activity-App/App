@@ -9,23 +9,19 @@ import SwiftUI
 
 struct CompetitorCell: View {
     
-    let competition: CompetitionStruct
+    let competition: Competition
     let person: CompetingPerson
 
     @ViewBuilder
     var body: some View {
-        if competition.creatingUser == person {
+        NavigationLink(destination: CompetitorDetail(competition: competition, person: person)) {
             cellBody()
-        } else {
-            NavigationLink(destination: CompetitorDetail(competition: competition, person: person)) {
-                cellBody()
-            }
         }
     }
     
     func cellBody() -> some View {
         HStack {
-            Text("\(competition.people.sorted { $0.points > $1.points }.firstIndex(of: person)! + 1)")
+            Text("0")
                 .font(.caption)
                 .foregroundColor(Color(.tertiaryLabel))
             Image(systemName: "circle.fill")
@@ -52,17 +48,10 @@ struct CompetitorCell: View {
 struct CompetitorCell_Previews: PreviewProvider {
     static var previews: some View {
         CompetitorCell(
-            competition: CompetitionStruct(
-                name: "CompetitionName",
+            competition: Competition(
+                title: "CompetitionName",
                 startDate: Date() - 100000,
-                endDate: Date() + 100000,
-                creatingUser: CompetingPerson(name: "Me", points: 150),
-                people: [
-                    CompetingPerson(name: "Person1", points: 100),
-                    CompetingPerson(name: "Person2", points: 200),
-                    CompetingPerson(name: "Person3", points: 0),
-                    CompetingPerson(name: "Me", points: 150)
-                ]
+                endDate: Date() + 100000
             ),
             person: CompetingPerson(name: "Me", points: 150)
         )

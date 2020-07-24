@@ -7,33 +7,6 @@
 
 import SwiftUI
 
-struct CompetitionStruct: Identifiable {
-    var id = UUID()
-    var name: String
-    var startDate: Date
-    var endDate: Date
-    let creatingUser: CompetingPerson
-    var people: [CompetingPerson] = []
-    
-    var place: Int
-    
-    init(name: String, startDate: Date, endDate: Date, creatingUser: CompetingPerson, people: [CompetingPerson] = []) {
-        self.name = name
-        self.startDate = startDate
-        self.endDate = endDate
-        self.creatingUser = creatingUser
-        self.people = people
-        
-        self.people.append(self.creatingUser)
-        self.people.sort {
-            $0.points > $1.points
-        }
-        
-        let index = self.people.firstIndex(of: creatingUser) ?? 0
-        self.place = index + 1
-    }
-}
-
 struct CompetingPerson: Identifiable, Equatable {
     var id = UUID()
     var name: String

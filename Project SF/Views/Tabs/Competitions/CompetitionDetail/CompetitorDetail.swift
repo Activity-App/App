@@ -10,7 +10,7 @@ import SwiftUI
 struct CompetitorDetail: View {
     
     @EnvironmentObject var healthKit: HealthKitController
-    let competition: CompetitionStruct
+    let competition: Competition
     let person: CompetingPerson
     
     var body: some View {
@@ -18,7 +18,7 @@ struct CompetitorDetail: View {
             Section {
                 HStack {
                     PlaceBadgeView(
-                        place: competition.people.sorted { $0.points > $1.points }.firstIndex(of: person)! + 1,
+                        place: 0,
                         flippable: true,
                         activityRings: $healthKit.latestActivityData // TODO: Add real user activity here
                     )
@@ -51,17 +51,10 @@ struct CompetitorDetail: View {
 struct CompetitorDetail_Previews: PreviewProvider {
     static var previews: some View {
         CompetitorDetail(
-            competition: CompetitionStruct(
-                name: "CompetitionName",
+            competition: Competition(
+                title: "CompetitionName",
                 startDate: Date() - 100000,
-                endDate: Date() + 100000,
-                creatingUser: CompetingPerson(name: "Me", points: 150),
-                people: [
-                    CompetingPerson(name: "Person1", points: 100),
-                    CompetingPerson(name: "Person2", points: 200),
-                    CompetingPerson(name: "Person3", points: 0),
-                    CompetingPerson(name: "Me", points: 150)
-                ]
+                endDate: Date() + 100000
             ),
             person: CompetingPerson(name: "Me", points: 150)
         )
