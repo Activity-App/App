@@ -10,7 +10,7 @@ import SwiftUI
 struct CompetitorDetail: View {
     
     @EnvironmentObject var healthKit: HealthKitController
-    let competition: Competition
+    let competition: CompetitionStruct
     let person: CompetingPerson
     
     var body: some View {
@@ -51,7 +51,7 @@ struct CompetitorDetail: View {
 struct CompetitorDetail_Previews: PreviewProvider {
     static var previews: some View {
         CompetitorDetail(
-            competition: Competition(
+            competition: CompetitionStruct(
                 name: "CompetitionName",
                 startDate: Date() - 100000,
                 endDate: Date() + 100000,

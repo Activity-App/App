@@ -112,6 +112,7 @@ struct CreateCompetition: View {
                             AnyTransition.asymmetric(insertion: AnyTransition.opacity.animation(.easeInOut),
                                                      removal: AnyTransition.identity)
                         )
+                        .padding(.top, 4)
                     }
                     Toggle("Walking/Running Distance", isOn: $distance)
                     if distance {
@@ -149,6 +150,7 @@ struct CreateCompetition: View {
                                     .foregroundColor(.secondary)
                             }
                         }
+                        .padding(.top, 4)
                         .transition(
                             AnyTransition.asymmetric(insertion: AnyTransition.opacity.animation(.easeInOut),
                                                      removal: AnyTransition.identity)

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Competition: Identifiable {
+struct CompetitionStruct: Identifiable {
     var id = UUID()
     var name: String
     var startDate: Date
@@ -47,56 +47,10 @@ struct CompetitionsView: View {
     @EnvironmentObject var healthKit: HealthKitController
     @State var showCreateCompetition = false
     
-    // Temporary. Get these from CK when thats working.
-    var competitions: [Competition] = [
-        Competition(
-            name: "Competition1",
-            startDate: Date() - 100000,
-            endDate: Date() + 100000,
-            creatingUser: CompetingPerson(name: "Me", points: 300),
-            people: [
-                CompetingPerson(name: "Person1", points: 100),
-                CompetingPerson(name: "Person2", points: 200),
-                CompetingPerson(name: "Person3", points: 6000)
-            ]
-        ),
-        Competition(
-            name: "Competition2",
-            startDate: Date(),
-            endDate: Date() + 1000000,
-            creatingUser: CompetingPerson(name: "Me", points: 5500),
-            people: [
-                CompetingPerson(name: "Person1", points: 5000),
-                CompetingPerson(name: "Person2", points: 200),
-                CompetingPerson(name: "Person3", points: 500)
-            ]
-        )
-    ]
-
-    var recentCompetitions: [Competition] = [
-        Competition(
-            name: "Competition1",
-            startDate: Date() - 100000,
-            endDate: Date() - 1000,
-            creatingUser: CompetingPerson(name: "Me", points: 50),
-            people: [
-                CompetingPerson(name: "Person1", points: 100),
-                CompetingPerson(name: "Person2", points: 200),
-                CompetingPerson(name: "Person3", points: 6000)
-            ]
-        ),
-        Competition(
-            name: "Competition2",
-            startDate: Date() - 100000,
-            endDate: Date() - 10000,
-            creatingUser: CompetingPerson(name: "Me", points: 300),
-            people: [
-                CompetingPerson(name: "Person1", points: 5000),
-                CompetingPerson(name: "Person2", points: 200),
-                CompetingPerson(name: "Person3", points: 500)
-            ]
-        )
-    ]
+    @State var competitions: [Competition] = []
+    @EnvironmentObject var alert: AlertManager
+    
+    var competitionsController = CompetitionsController()
 
     var body: some View {
         NavigationView {
@@ -106,14 +60,8 @@ struct CompetitionsView: View {
                 }
 
                 Section(header: Text("Currently competing")) {
-                    ForEach(competitions.indices) { index in
-                        CompetitionCell(competitions[index])
-                    }
-                }
-
-                Section(header: Text("Recent competitions")) {
-                    ForEach(recentCompetitions.indices) { index in
-                        CompetitionCell(competitions[index])
+                    ForEach(competitions) { competition in
+                        CompetitionCell(competition)
                     }
                 }
             }
@@ -133,7 +81,28 @@ struct CompetitionsView: View {
         .sheet(isPresented: $showCreateCompetition) {
             CreateCompetition()
         }
-
+        .onAppear {
+            updateCompetitions()
+        }
+    }
+    
+    func updateCompetitions() {
+        competitionsController.fetchCompetitions { result in
+            switch result {
+            case .success(let competitions):
+                self.competitions = competitions.map { Competition(record: $0) }
+            case .failure(let error):
+                alert.present(
+                    icon: "exclamationmark.icloud.fill",
+                    message: "There was an error fetching competitions from iCloud. Please check you are connected to the internet and that your device is signed into iCloud.",
+                    color: .orange,
+                    buttonTitle: "Dismiss",
+                    buttonAction: {
+                        alert.dismiss()
+                    }
+                )
+            }
+        }
     }
 }
 

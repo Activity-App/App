@@ -15,26 +15,14 @@ struct FriendDetailView: View {
 
     var competitions: [Competition] = [
         Competition(
-            name: "Competition1",
+            title: "Competition1",
             startDate: Date() - 100000,
-            endDate: Date() + 100000,
-            creatingUser: CompetingPerson(name: "Me", points: 300),
-            people: [
-                CompetingPerson(name: "Person1", points: 100),
-                CompetingPerson(name: "Person2", points: 200),
-                CompetingPerson(name: "Person3", points: 6000)
-            ]
+            endDate: Date() + 100000
         ),
         Competition(
-            name: "Competition2",
+            title: "Competition2",
             startDate: Date(),
-            endDate: Date() + 1000000,
-            creatingUser: CompetingPerson(name: "Me", points: 5500),
-            people: [
-                CompetingPerson(name: "Person1", points: 5000),
-                CompetingPerson(name: "Person2", points: 200),
-                CompetingPerson(name: "Person3", points: 500)
-            ]
+            endDate: Date() + 1000000
         )
     ]
 

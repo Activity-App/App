@@ -34,15 +34,12 @@ struct ProjectSFApp: App {
             }
             .environmentObject(healthKit)
             .environmentObject(alert)
+            .onAppear {
+                DispatchQueue.main.async {
+                    UIApplication.shared.windows[0].tintColor = UserDefaults.standard.uiColor(forKey: "accentColor")
+                        ?? UIColor(Color.accentColor)
+                }
+            }
         }
-        
     }
-
-    // This is causing some index out of range errors.
-//    init() {
-//        DispatchQueue.main.async {
-//            UIApplication.shared.windows[0].tintColor = UserDefaults.standard.uiColor(forKey: "accentColor")
-//                ?? UIColor(Color.accentColor)
-//        }
-//    }
 }

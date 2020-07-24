@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CompetitorCell: View {
     
-    let competition: Competition
+    let competition: CompetitionStruct
     let person: CompetingPerson
 
     @ViewBuilder
@@ -52,7 +52,7 @@ struct CompetitorCell: View {
 struct CompetitorCell_Previews: PreviewProvider {
     static var previews: some View {
         CompetitorCell(
-            competition: Competition(
+            competition: CompetitionStruct(
                 name: "CompetitionName",
                 startDate: Date() - 100000,
                 endDate: Date() + 100000,

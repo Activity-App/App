@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30132FF024CA78E000CB6683 /* CompetitionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30132FEF24CA78E000CB6683 /* CompetitionStruct.swift */; };
 		3019CD9924BC9792002564AD /* PlaceBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3019CD9824BC9792002564AD /* PlaceBadgeView.swift */; };
 		30251C1924BFC1A50058D6D2 /* CompetitorDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30251C1824BFC1A50058D6D2 /* CompetitorDetail.swift */; };
 		30251C1B24BFC1B10058D6D2 /* CompetitorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30251C1A24BFC1B10058D6D2 /* CompetitorCell.swift */; };
@@ -101,6 +102,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		30132FEF24CA78E000CB6683 /* CompetitionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionStruct.swift; sourceTree = "<group>"; };
 		3019CD9824BC9792002564AD /* PlaceBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceBadgeView.swift; sourceTree = "<group>"; };
 		30251C1824BFC1A50058D6D2 /* CompetitorDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitorDetail.swift; sourceTree = "<group>"; };
 		30251C1A24BFC1B10058D6D2 /* CompetitorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitorCell.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 		30ABC14124C567DF0060825B /* Competitions */ = {
 			isa = PBXGroup;
 			children = (
+				30132FEF24CA78E000CB6683 /* CompetitionStruct.swift */,
 				9C338BD824BAD0D3003E5048 /* CompetitionRecord.swift */,
 				9C338BD424BAC4F4003E5048 /* CompetitionsController.swift */,
 			);
@@ -698,6 +701,7 @@
 				9CCFDD1D24B971D600162B0F /* UserRecord.swift in Sources */,
 				9C2445D824BC009F00D8F4FC /* RoundedNavigationButton.swift in Sources */,
 				30D321B624BB65D5009CD9D0 /* CompetitionCell.swift in Sources */,
+				30132FF024CA78E000CB6683 /* CompetitionStruct.swift in Sources */,
 				30ABC14024C565A40060825B /* CompetitionType.swift in Sources */,
 				30D321BC24BB65D5009CD9D0 /* PrivacyAbout.swift in Sources */,
 				30D321B724BB65D5009CD9D0 /* CreateCompetition.swift in Sources */,
