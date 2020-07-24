@@ -13,11 +13,13 @@ class FriendsManager {
     
     private let container: CKContainer
     
+    // MARK: Init
+    
     init(container: CKContainer = .appDefault) {
         self.container = container
     }
     
-    // MARK: Friend Discovery (should be moved out of this class)
+    // MARK: Methods
     
     /// Requests permission from the user to discover their contacts.
     /// - Parameter handler: The result handler. Not guaranteed to be executed on the main thread.
