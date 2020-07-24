@@ -26,7 +26,7 @@ struct CreateCompetition: View {
     @State var distanceGoal = "10"
     @State var distanceGoalInt = 10
     
-    let competitionController = CompetitionsController()
+    let competitionsManager = CompetitionsManager()
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -202,7 +202,7 @@ struct CreateCompetition: View {
             RoundedButton("Start the competition") {
                 guard !competitionName.isEmpty else { return }
                 
-                competitionController.createCompetition(
+                competitionsManager.createCompetition(
                     type: .init(
                         move: move,
                         exercise: exercise,

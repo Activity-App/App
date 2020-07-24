@@ -14,7 +14,7 @@ import CloudKit
 // TODO: Make sure all operations have their quality of service set to .userInitiated
 // swiftlint:disable type_body_length
 // NOTE: SwiftLint disable is temporary
-class CompetitionsController {
+class CompetitionsManager {
     
     // MARK: Properties
     
