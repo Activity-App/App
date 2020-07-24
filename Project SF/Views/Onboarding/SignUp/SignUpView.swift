@@ -32,9 +32,11 @@ struct SignUpView: View {
                         .padding(.top, 32)
                     GroupBox {
                         TextField("Name", text: $name)
+                            .autocapitalization(.words)
                     }
                     GroupBox {
                         TextField("Username", text: $username)
+                            .autocapitalization(.none)
                     }
                     
                     Text("OPTIONAL")
