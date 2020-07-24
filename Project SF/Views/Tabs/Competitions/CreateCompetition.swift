@@ -26,7 +26,7 @@ struct CreateCompetition: View {
     @State var distanceGoal = "10"
     @State var distanceGoalInt = 10
     
-    let competitionController = CompetitionsController()
+    @EnvironmentObject var competitionController: CompetitionsController
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -112,6 +112,7 @@ struct CreateCompetition: View {
                             AnyTransition.asymmetric(insertion: AnyTransition.opacity.animation(.easeInOut),
                                                      removal: AnyTransition.identity)
                         )
+                        .padding(.top, 4)
                     }
                     Toggle("Walking/Running Distance", isOn: $distance)
                     if distance {
@@ -149,6 +150,7 @@ struct CreateCompetition: View {
                                     .foregroundColor(.secondary)
                             }
                         }
+                        .padding(.top, 4)
                         .transition(
                             AnyTransition.asymmetric(insertion: AnyTransition.opacity.animation(.easeInOut),
                                                      removal: AnyTransition.identity)
@@ -202,24 +204,20 @@ struct CreateCompetition: View {
             RoundedButton("Start the competition") {
                 guard !competitionName.isEmpty else { return }
                 
-                competitionController.createCompetition(
-                    type: .init(
-                        move: move,
-                        exercise: exercise,
-                        stand: stand,
-                        steps: steps,
-                        distance: distance,
-                        stepsGoal: stepsGoalInt,
-                        distanceGoal: distanceGoalInt
-                    ),
+                let newCompetition = Competition(
                     title: competitionName,
-                    endDate: competitionEndDate,
-                    // TODO: Add support for inviting friends when creating competition.
-                    friends: [],
-                    then: { result in
-                        print(result)
-                    }
+                    move: move,
+                    exercise: exercise,
+                    stand: stand,
+                    steps: steps,
+                    distance: distance,
+                    stepsGoal: stepsGoalInt,
+                    distanceGoal: distanceGoalInt,
+                    startDate: Date(),
+                    endDate: competitionEndDate
                 )
+                
+                competitionController.create(competition: newCompetition, with: [])
                 
                 presentationMode.wrappedValue.dismiss()
             }
