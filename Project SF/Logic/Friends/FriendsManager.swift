@@ -2,10 +2,9 @@
 //  FriendsManager.swift
 //  Project SF
 //
-//  Created by William Taylor on 23/7/20.
+//  Created by Christian Privitelli on 24/7/20.
 //
 
-import Foundation
 import CloudKit
 
 class FriendsManager {
@@ -94,11 +93,10 @@ class FriendsManager {
         }
     }
     
-    // MARK: FriendsManagerError
+    // MARK: Friends Manager Error
     
     enum FriendsManagerError: Error {
-        case insufficientPermissions
         case unknownError
+        case insufficientPermissions
     }
-    
 }

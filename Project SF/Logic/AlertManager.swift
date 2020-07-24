@@ -16,7 +16,13 @@ class AlertManager: ObservableObject {
     @Published var buttonAction: () -> Void = {}
     @Published var color = Color.red
     
-    func present(icon: String? = nil, message: String? = nil, color: Color? = nil, buttonTitle: String? = nil, buttonAction: (() -> Void)? = nil) {
+    func present(
+        icon: String? = nil,
+        message: String? = nil,
+        color: Color? = nil,
+        buttonTitle: String? = nil,
+        buttonAction: (() -> Void)? = nil
+    ) {
         if let icon = icon {
             self.icon = icon
         }

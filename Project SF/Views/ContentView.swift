@@ -15,10 +15,8 @@ struct ContentView: View {
         TabView(selection: $page) {
             CompetitionsView()
                 .tag(1)
-
             FriendsView()
                 .tag(2)
-
             ProfileView()
                 .tag(3)
         }

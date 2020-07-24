@@ -26,7 +26,7 @@ struct CompetitionCell: View {
                 HStack {
                     VStack(spacing: 8) {
                         PlaceBadgeView(
-                            place: competition.place,
+                            place: 0,
                             flippable: false,
                             activityRings: .constant(activity),
                             font: .system(size: 23),
@@ -38,13 +38,13 @@ struct CompetitionCell: View {
                     .padding(.trailing, 8)
 
                     VStack(alignment: .leading) {
-                        Text("\(competition.creatingUser.points) points, \(competition.endDate, style: .relative) \(competition.endDate < Date() ? "ago" : "left")")
+                        Text("0 points, \(competition.endDate, style: .relative) \(competition.endDate < Date() ? "ago" : "left")")
                             .foregroundColor(.secondary)
                             .font(.subheadline)
                             .lineLimit(1)
                             .minimumScaleFactor(0.6)
                         Spacer()
-                        Text(competition.name)
+                        Text(competition.title)
                             .font(.title2)
                             .fontWeight(.bold)
                     }
@@ -64,26 +64,14 @@ struct CompetitionCell_Previews: PreviewProvider {
     static var previews: some View {
         let competitions: [Competition] = [
             Competition(
-                name: "Competition1",
+                title: "Competition1",
                 startDate: Date() - 100000,
-                endDate: Date() + 100000,
-                creatingUser: CompetingPerson(name: "Me", points: 300),
-                people: [
-                    CompetingPerson(name: "Person1", points: 100),
-                    CompetingPerson(name: "Person2", points: 200),
-                    CompetingPerson(name: "Person3", points: 6000)
-                ]
+                endDate: Date() + 100000
             ),
             Competition(
-                name: "Competition2",
+                title: "Competition2",
                 startDate: Date(),
-                endDate: Date() + 1000000,
-                creatingUser: CompetingPerson(name: "Me", points: 5500),
-                people: [
-                    CompetingPerson(name: "Person1", points: 5000),
-                    CompetingPerson(name: "Person2", points: 200),
-                    CompetingPerson(name: "Person3", points: 500)
-                ]
+                endDate: Date() + 1000000
             )
         ]
 
