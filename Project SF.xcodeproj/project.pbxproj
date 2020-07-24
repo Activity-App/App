@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		30132FF024CA78E000CB6683 /* CompetitionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30132FEF24CA78E000CB6683 /* CompetitionStruct.swift */; };
+		30132FF224CAB48700CB6683 /* CompetitionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30132FF124CAB48700CB6683 /* CompetitionsController.swift */; };
 		3019CD9924BC9792002564AD /* PlaceBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3019CD9824BC9792002564AD /* PlaceBadgeView.swift */; };
 		30251C1924BFC1A50058D6D2 /* CompetitorDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30251C1824BFC1A50058D6D2 /* CompetitorDetail.swift */; };
 		30251C1B24BFC1B10058D6D2 /* CompetitorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30251C1A24BFC1B10058D6D2 /* CompetitorCell.swift */; };
@@ -15,6 +16,7 @@
 		30278E9324BC553A00E87E80 /* CompetitionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30278E9224BC553A00E87E80 /* CompetitionDetail.swift */; };
 		302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88924BA199E00FF79D7 /* RingType.swift */; };
 		302CF88C24BA1A4000FF79D7 /* ActivityResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */; };
+		304F752F24CAB8E1005D46BA /* FriendsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304F752E24CAB8E1005D46BA /* FriendsManager.swift */; };
 		3050123624C0887D00E39019 /* Int+ConvertFromRangeToRange copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3050123524C0887D00E39019 /* Int+ConvertFromRangeToRange copy.swift */; };
 		306719E624C90438006B758D /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306719E524C90438006B758D /* AlertView.swift */; };
 		3067712F24BDE0080085F152 /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3067712E24BDE0080085F152 /* FriendsCell.swift */; };
@@ -62,13 +64,13 @@
 		9C2445D824BC009F00D8F4FC /* RoundedNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6C74AB24BADD1800C657B0 /* RoundedNavigationButton.swift */; };
 		9C2445DA24BC0D8E00D8F4FC /* InvitationRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2445D924BC0D8E00D8F4FC /* InvitationRecord.swift */; };
 		9C2445DC24BC714100D8F4FC /* Invitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2445DB24BC714100D8F4FC /* Invitation.swift */; };
-		9C338BD524BAC4F4003E5048 /* CompetitionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C338BD424BAC4F4003E5048 /* CompetitionsController.swift */; };
+		9C338BD524BAC4F4003E5048 /* CompetitionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C338BD424BAC4F4003E5048 /* CompetitionsManager.swift */; };
 		9C338BD724BAD080003E5048 /* RecordKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C338BD624BAD080003E5048 /* RecordKey.swift */; };
 		9C338BD924BAD0D3003E5048 /* CompetitionRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C338BD824BAD0D3003E5048 /* CompetitionRecord.swift */; };
 		9C39F69524C07BAA0073C9FF /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7E74A724BDC05B0032CD88 /* SignUpView.swift */; };
 		9C6C74AF24BAE08800C657B0 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6C74AE24BAE08800C657B0 /* SignUpController.swift */; };
 		9C6C74B324BAEC0B00C657B0 /* DynamicRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6C74B224BAEC0B00C657B0 /* DynamicRecord.swift */; };
-		9C6C74B624BBE57B00C657B0 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6C74B524BBE57B00C657B0 /* Friend.swift */; };
+		9C6C74B624BBE57B00C657B0 /* FriendStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6C74B524BBE57B00C657B0 /* FriendStruct.swift */; };
 		9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */; };
 		9C7B4D0824B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B4D0724B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift */; };
 		9C7E74AA24BDC0E10032CD88 /* GrantDataAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7E74A924BDC0E10032CD88 /* GrantDataAccessView.swift */; };
@@ -103,6 +105,7 @@
 
 /* Begin PBXFileReference section */
 		30132FEF24CA78E000CB6683 /* CompetitionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionStruct.swift; sourceTree = "<group>"; };
+		30132FF124CAB48700CB6683 /* CompetitionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsController.swift; sourceTree = "<group>"; };
 		3019CD9824BC9792002564AD /* PlaceBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceBadgeView.swift; sourceTree = "<group>"; };
 		30251C1824BFC1A50058D6D2 /* CompetitorDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitorDetail.swift; sourceTree = "<group>"; };
 		30251C1A24BFC1B10058D6D2 /* CompetitorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitorCell.swift; sourceTree = "<group>"; };
@@ -110,6 +113,7 @@
 		30278E9224BC553A00E87E80 /* CompetitionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionDetail.swift; sourceTree = "<group>"; };
 		302CF88924BA199E00FF79D7 /* RingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingType.swift; sourceTree = "<group>"; };
 		302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityResult.swift; sourceTree = "<group>"; };
+		304F752E24CAB8E1005D46BA /* FriendsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsManager.swift; sourceTree = "<group>"; };
 		3050123524C0887D00E39019 /* Int+ConvertFromRangeToRange copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+ConvertFromRangeToRange copy.swift"; sourceTree = "<group>"; };
 		306719E524C90438006B758D /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		3067712E24BDE0080085F152 /* FriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
@@ -160,13 +164,13 @@
 		9C12BBE524B9D41600C050DB /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		9C2445D924BC0D8E00D8F4FC /* InvitationRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationRecord.swift; sourceTree = "<group>"; };
 		9C2445DB24BC714100D8F4FC /* Invitation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invitation.swift; sourceTree = "<group>"; };
-		9C338BD424BAC4F4003E5048 /* CompetitionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsController.swift; sourceTree = "<group>"; };
+		9C338BD424BAC4F4003E5048 /* CompetitionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsManager.swift; sourceTree = "<group>"; };
 		9C338BD624BAD080003E5048 /* RecordKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordKey.swift; sourceTree = "<group>"; };
 		9C338BD824BAD0D3003E5048 /* CompetitionRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionRecord.swift; sourceTree = "<group>"; };
 		9C6C74AB24BADD1800C657B0 /* RoundedNavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedNavigationButton.swift; sourceTree = "<group>"; };
 		9C6C74AE24BAE08800C657B0 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		9C6C74B224BAEC0B00C657B0 /* DynamicRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicRecord.swift; sourceTree = "<group>"; };
-		9C6C74B524BBE57B00C657B0 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		9C6C74B524BBE57B00C657B0 /* FriendStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendStruct.swift; sourceTree = "<group>"; };
 		9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ForegroundModifier.swift"; sourceTree = "<group>"; };
 		9C7B4D0724B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ConvertFromRangeToRange.swift"; sourceTree = "<group>"; };
 		9C7E74A724BDC05B0032CD88 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -266,6 +270,15 @@
 			path = Support;
 			sourceTree = "<group>";
 		};
+		304F752D24CAB8D1005D46BA /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				9C6C74B524BBE57B00C657B0 /* FriendStruct.swift */,
+				304F752E24CAB8E1005D46BA /* FriendsManager.swift */,
+			);
+			path = Friends;
+			sourceTree = "<group>";
+		};
 		308FAD8924B97E5500126F3F /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -283,7 +296,8 @@
 			children = (
 				30132FEF24CA78E000CB6683 /* CompetitionStruct.swift */,
 				9C338BD824BAD0D3003E5048 /* CompetitionRecord.swift */,
-				9C338BD424BAC4F4003E5048 /* CompetitionsController.swift */,
+				9C338BD424BAC4F4003E5048 /* CompetitionsManager.swift */,
+				30132FF124CAB48700CB6683 /* CompetitionsController.swift */,
 			);
 			path = Competitions;
 			sourceTree = "<group>";
@@ -506,12 +520,12 @@
 			children = (
 				9CCFDD1624B971D600162B0F /* CloudKit */,
 				30ABC14324C5684B0060825B /* User */,
+				304F752D24CAB8D1005D46BA /* Friends */,
 				30ABC14124C567DF0060825B /* Competitions */,
 				30ABC14424C568A10060825B /* Scoring */,
 				30ABC14224C568210060825B /* Invitations */,
 				9C6C74B424BBE56800C657B0 /* HealthKit */,
 				9CCFDD1A24B971D600162B0F /* Networking */,
-				9C6C74B524BBE57B00C657B0 /* Friend.swift */,
 				30E2765524C93B130040D6AB /* AlertManager.swift */,
 			);
 			path = Logic;
@@ -697,7 +711,7 @@
 				30EAB9F924C29B9D005326C8 /* AccentSettings.swift in Sources */,
 				30BFC8DF24B7637F00DAC6D9 /* VisualEffectView.swift in Sources */,
 				9CCFDD1D24B971D600162B0F /* UserRecord.swift in Sources */,
-				9C6C74B624BBE57B00C657B0 /* Friend.swift in Sources */,
+				9C6C74B624BBE57B00C657B0 /* FriendStruct.swift in Sources */,
 				9CCFDD1D24B971D600162B0F /* UserRecord.swift in Sources */,
 				9C2445D824BC009F00D8F4FC /* RoundedNavigationButton.swift in Sources */,
 				30D321B624BB65D5009CD9D0 /* CompetitionCell.swift in Sources */,
@@ -716,7 +730,7 @@
 				9C8FAD4A24BAADA600571947 /* CKContainer+AppDefault.swift in Sources */,
 				302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */,
 				9C2445DA24BC0D8E00D8F4FC /* InvitationRecord.swift in Sources */,
-				9C338BD524BAC4F4003E5048 /* CompetitionsController.swift in Sources */,
+				9C338BD524BAC4F4003E5048 /* CompetitionsManager.swift in Sources */,
 				9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */,
 				9C338BD724BAD080003E5048 /* RecordKey.swift in Sources */,
 				30D321B924BB65D5009CD9D0 /* ImageSelectionView.swift in Sources */,
@@ -745,6 +759,8 @@
 				302CF88C24BA1A4000FF79D7 /* ActivityResult.swift in Sources */,
 				3067713124BDE3950085F152 /* FriendDetailView.swift in Sources */,
 				30D321BB24BB65D5009CD9D0 /* PermissionSettings.swift in Sources */,
+				304F752F24CAB8E1005D46BA /* FriendsManager.swift in Sources */,
+				30132FF224CAB48700CB6683 /* CompetitionsController.swift in Sources */,
 				3050123624C0887D00E39019 /* Int+ConvertFromRangeToRange copy.swift in Sources */,
 				30278E9324BC553A00E87E80 /* CompetitionDetail.swift in Sources */,
 				30D321B824BB65D5009CD9D0 /* SettingsView.swift in Sources */,

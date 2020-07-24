@@ -47,10 +47,9 @@ struct CompetitionsView: View {
     @EnvironmentObject var healthKit: HealthKitController
     @State var showCreateCompetition = false
     
-    @State var competitions: [Competition] = []
     @EnvironmentObject var alert: AlertManager
     
-    var competitionsController = CompetitionsController()
+    @StateObject var competitionsController = CompetitionsController()
 
     var body: some View {
         NavigationView {
@@ -60,7 +59,7 @@ struct CompetitionsView: View {
                 }
 
                 Section(header: Text("Currently competing")) {
-                    ForEach(competitions) { competition in
+                    ForEach(competitionsController.competitions) { competition in
                         CompetitionCell(competition)
                     }
                 }
@@ -80,28 +79,10 @@ struct CompetitionsView: View {
         }
         .sheet(isPresented: $showCreateCompetition) {
             CreateCompetition()
+                .environmentObject(competitionsController)
         }
         .onAppear {
-            updateCompetitions()
-        }
-    }
-    
-    func updateCompetitions() {
-        competitionsController.fetchCompetitions { result in
-            switch result {
-            case .success(let competitions):
-                self.competitions = competitions.map { Competition(record: $0) }
-            case .failure(let error):
-                alert.present(
-                    icon: "exclamationmark.icloud.fill",
-                    message: "There was an error fetching competitions from iCloud. Please check you are connected to the internet and that your device is signed into iCloud.",
-                    color: .orange,
-                    buttonTitle: "Dismiss",
-                    buttonAction: {
-                        alert.dismiss()
-                    }
-                )
-            }
+            competitionsController.update()
         }
     }
 }
