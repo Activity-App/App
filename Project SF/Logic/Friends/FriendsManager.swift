@@ -17,8 +17,6 @@ class FriendsManager {
         self.container = container
     }
     
-    // MARK: Friend Discovery (should be moved out of this class)
-    
     /// Requests permission from the user to discover their contacts.
     /// - Parameter handler: The result handler. Not guaranteed to be executed on the main thread.
     /// - Tag: requestDiscoveryPermission
@@ -58,32 +56,39 @@ class FriendsManager {
                         handler(.failure(FriendsManagerError.unknownError))
                         return
                     }
+                    print(identities)
                     
-                    let operation = CKFetchRecordsOperation(recordIDs: identities.compactMap { $0.userRecordID })
-                    operation.qualityOfService = .userInitiated
-                    operation.fetchRecordsCompletionBlock = { ckRecords, error in
-                        if let error = error {
-                            handler(.failure(error))
-                            return
-                        }
-                        guard let ckRecords = ckRecords else {
-                            handler(.failure(FriendsManagerError.unknownError))
-                            return
-                        }
-                        let records = ckRecords
-                            .map { UserRecord(record: $0.value) }
+                    var friends: [Friend] = []
+                    
+                    for identity in identities {
+                        let recordID = identity.userRecordID?.recordName ?? ""
+                        let predicate = NSPredicate(format: "userRecordID == %@", recordID)
                         
-                        let friends = records
-                            .map {
-                                return Friend(name: $0.username ?? "",
-                                              profilePicture: URL(string: $0.profilePictureURL ?? ""),
-                                              recordID: $0.record.recordID)
+                        CloudKitStore.shared.fetchRecords(
+                            with: UserInfoRecord.self,
+                            predicate: predicate,
+                            scope: .public
+                        ) { result in
+                            switch result {
+                            case .success(let records):
+                                for user in records {
+                                    let friend = Friend(
+                                        name: user.name ?? "",
+                                        username: user.username ?? "",
+                                        profilePicture: URL(string: user.profilePictureURL ?? ""),
+                                        recordID: CKRecord.ID(recordName: user.userRecordID ?? "")
+                                    )
+                                    friends.append(friend)
+                                    
+                                    if identity == identities.last && user.record == records.last?.record {
+                                        handler(.success(friends))
+                                    }
+                                }
+                            case .failure:
+                                break
                             }
-                        
-                        handler(.success(friends))
+                        }
                     }
-                    
-                    container.sharedCloudDatabase.add(operation)
                 }
             } else {
                 handler(.failure(FriendsManagerError.insufficientPermissions))

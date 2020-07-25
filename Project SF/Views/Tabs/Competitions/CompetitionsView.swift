@@ -23,10 +23,18 @@ struct CompetitionsView: View {
     @EnvironmentObject var alert: AlertManager
     
     @StateObject var competitionsController = CompetitionsController()
+    let friends = FriendsManager()
 
     var body: some View {
         NavigationView {
             List {
+                Button("access") {
+                    friends.requestDiscoveryPermission { _ in }
+                }
+                Button("search") {
+                    friends.discoverFriends { result in print(result) }
+                }
+                
                 Section(header: Text("Current Activity")) {
                     ActivityOverview(activity: $healthKit.latestActivityData)
                 }

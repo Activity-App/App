@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3004A97724CBD92F004D823D /* UserInfoRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004A97624CBD92F004D823D /* UserInfoRecord.swift */; };
+		3004A97924CC01BA004D823D /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004A97824CC01BA004D823D /* UserController.swift */; };
+		3004A97B24CC0486004D823D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004A97A24CC0486004D823D /* User.swift */; };
 		30132FF024CA78E000CB6683 /* CompetitionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30132FEF24CA78E000CB6683 /* CompetitionStruct.swift */; };
 		30132FF224CAB48700CB6683 /* CompetitionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30132FF124CAB48700CB6683 /* CompetitionsController.swift */; };
 		3019CD9924BC9792002564AD /* PlaceBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3019CD9824BC9792002564AD /* PlaceBadgeView.swift */; };
@@ -77,7 +80,6 @@
 		9C7E74AC24BDC7790032CD88 /* ScoreURLHolderRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7E74AB24BDC7790032CD88 /* ScoreURLHolderRecord.swift */; };
 		9C7E74AE24BDC87A0032CD88 /* ScoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7E74AD24BDC87A0032CD88 /* ScoreRecord.swift */; };
 		9C8FAD4624B9E39E00571947 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAD4524B9E39E00571947 /* Record.swift */; };
-		9C8FAD4824B9E7CC00571947 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAD4724B9E7CC00571947 /* UserController.swift */; };
 		9C8FAD4A24BAADA600571947 /* CKContainer+AppDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAD4924BAADA600571947 /* CKContainer+AppDefault.swift */; };
 		9C9748E024B9A9AA00FB5F21 /* HKHealthStoreMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9748DF24B9A9AA00FB5F21 /* HKHealthStoreMock.swift */; };
 		9C9748E524B9B05900FB5F21 /* HKActivitySummaryQuery+ResultsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9748E424B9B05900FB5F21 /* HKActivitySummaryQuery+ResultsHandler.m */; };
@@ -104,6 +106,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3004A97624CBD92F004D823D /* UserInfoRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRecord.swift; sourceTree = "<group>"; };
+		3004A97824CC01BA004D823D /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
+		3004A97A24CC0486004D823D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		30132FEF24CA78E000CB6683 /* CompetitionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionStruct.swift; sourceTree = "<group>"; };
 		30132FF124CAB48700CB6683 /* CompetitionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsController.swift; sourceTree = "<group>"; };
 		3019CD9824BC9792002564AD /* PlaceBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceBadgeView.swift; sourceTree = "<group>"; };
@@ -178,7 +183,6 @@
 		9C7E74AB24BDC7790032CD88 /* ScoreURLHolderRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreURLHolderRecord.swift; sourceTree = "<group>"; };
 		9C7E74AD24BDC87A0032CD88 /* ScoreRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreRecord.swift; sourceTree = "<group>"; };
 		9C8FAD4524B9E39E00571947 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
-		9C8FAD4724B9E7CC00571947 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		9C8FAD4924BAADA600571947 /* CKContainer+AppDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CKContainer+AppDefault.swift"; sourceTree = "<group>"; };
 		9C9748DF24B9A9AA00FB5F21 /* HKHealthStoreMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKHealthStoreMock.swift; sourceTree = "<group>"; };
 		9C9748E224B9AF1E00FB5F21 /* Project SFTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Project SFTests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -314,8 +318,10 @@
 		30ABC14324C5684B0060825B /* User */ = {
 			isa = PBXGroup;
 			children = (
+				3004A97A24CC0486004D823D /* User.swift */,
 				9CCFDD1824B971D600162B0F /* UserRecord.swift */,
-				9C8FAD4724B9E7CC00571947 /* UserController.swift */,
+				3004A97624CBD92F004D823D /* UserInfoRecord.swift */,
+				3004A97824CC01BA004D823D /* UserController.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -701,7 +707,6 @@
 				30E2765624C93B130040D6AB /* AlertManager.swift in Sources */,
 				30BFC8CE24B75E6C00DAC6D9 /* ProjectSFApp.swift in Sources */,
 				9CCFDD1F24B971D600162B0F /* NetworkManager.swift in Sources */,
-				9C8FAD4824B9E7CC00571947 /* UserController.swift in Sources */,
 				9CCFDD2624B9753F00162B0F /* Main.swift in Sources */,
 				30D321C124BC1886009CD9D0 /* NavScrollView.swift in Sources */,
 				30251C1924BFC1A50058D6D2 /* CompetitorDetail.swift in Sources */,
@@ -727,7 +732,9 @@
 				30D3217824BB430E009CD9D0 /* RoundedTextField.swift in Sources */,
 				9CCFDD2024B971D600162B0F /* HealthKitController.swift in Sources */,
 				9C8FAD4624B9E39E00571947 /* Record.swift in Sources */,
+				3004A97724CBD92F004D823D /* UserInfoRecord.swift in Sources */,
 				9C8FAD4A24BAADA600571947 /* CKContainer+AppDefault.swift in Sources */,
+				3004A97924CC01BA004D823D /* UserController.swift in Sources */,
 				302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */,
 				9C2445DA24BC0D8E00D8F4FC /* InvitationRecord.swift in Sources */,
 				9C338BD524BAC4F4003E5048 /* CompetitionsManager.swift in Sources */,
@@ -763,6 +770,7 @@
 				30132FF224CAB48700CB6683 /* CompetitionsController.swift in Sources */,
 				3050123624C0887D00E39019 /* Int+ConvertFromRangeToRange copy.swift in Sources */,
 				30278E9324BC553A00E87E80 /* CompetitionDetail.swift in Sources */,
+				3004A97B24CC0486004D823D /* User.swift in Sources */,
 				30D321B824BB65D5009CD9D0 /* SettingsView.swift in Sources */,
 				307648CB24BC81C8005D8531 /* iCloudErrorView.swift in Sources */,
 			);

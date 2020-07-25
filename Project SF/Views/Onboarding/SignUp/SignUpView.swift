@@ -16,7 +16,7 @@ struct SignUpView: View {
     
     @State var nextPage = false
     @State var signedUp = false
-    @State var loading = false
+    @State var makePublic = true
     
     @StateObject var userController = UserController()
     @EnvironmentObject var alert: AlertManager
@@ -45,9 +45,9 @@ struct SignUpView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.top, 32)
                     GroupBox {
-                        TextField("Phone Number", text: $username)
+                        Toggle("Searchable", isOn: $makePublic)
                     }
-                    Text("This will be used so other people with your contact can discover you.")
+                    Text("This will be used so other people can search for you and add you as a friend. You will recieve a friend request that you can accept when someone tries to friends you.")
                         .font(.caption)
                         .foregroundColor(.secondary)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -56,11 +56,28 @@ struct SignUpView: View {
                 RoundedNavigationLinkButton(
                     "Continue",
                     destination: GrantDataAccessView(showOnboarding: $showOnboarding),
-                    isLoading: $loading,
+                    isLoading: $userController.loading,
                     isActive: $nextPage
                 ) {
                     signedUp = true
-                    userController.set(name: name, username: username)
+                    userController.createUserInfoRecord { error in
+                        if let error = error {
+                            print(error)
+                            presentErrorAlert()
+                        } else {
+                            let newUser = User(name: name, username: username)
+                            userController.set(data: newUser, publicDb: makePublic) { error in
+                                if let error = error {
+                                    print(error)
+                                    presentErrorAlert()
+                                } else {
+                                    print("success")
+                                    nextPage = true
+                                }
+                            }
+                        }
+                    }
+                    
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 16)
@@ -68,35 +85,28 @@ struct SignUpView: View {
             .padding(.horizontal)
             .navigationTitle("Sign Up")
         }
-        .onChange(of: userController.state) { newState in
-            switch newState {
-            case .loading:
-                loading = true
-            case .user:
-                loading = false
-                if signedUp {
-                    nextPage = true
-                }
-            case .failure(let error):
-                loading = false
-                print(error)
-                alert.present(
-                    icon: "exclamationmark.icloud.fill",
-                    message: "There was an error accessing iCloud. Please check your internet connection and that your device is signed into iCloud.",
-                    color: .orange,
-                    buttonAction: {
-                        alert.dismiss()
-                        userController.updateData()
-                    }
-                )
-            }
-        }
         .onAppear {
-            userController.updateData()
+            userController.updateUser { error in
+                if let error = error {
+                    print(error)
+                    presentErrorAlert()
+                }
+            }
         }
         .onDisappear {
             signedUp = false
         }
+    }
+    
+    func presentErrorAlert() {
+        alert.present(
+            icon: "exclamationmark.icloud.fill",
+            message: "There was an error accessing iCloud. Please check your internet connection and that your device is signed into iCloud.",
+            color: .orange,
+            buttonAction: {
+                alert.dismiss()
+            }
+        )
     }
 }
 

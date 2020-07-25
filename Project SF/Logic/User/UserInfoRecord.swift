@@ -1,19 +1,17 @@
 //
-//  User.swift
+//  UserInfoRecord.swift
 //  Project SF
 //
-//  Created by William Taylor on 10/7/20.
+//  Created by Christian Privitelli on 25/7/20.
 //
 
-import Foundation
 import CloudKit
 
-/// - Tag: UserRecord
-class UserRecord: DynamicRecord {
+class UserInfoRecord: DynamicRecord {
     
     // MARK: Properties
     
-    static let type = "Users"
+    static let type = "UserInfo"
     
     static let model = Model()
 
@@ -26,10 +24,7 @@ class UserRecord: DynamicRecord {
         let username = ModelItem<String>(key: "username")
         let bio = ModelItem<String>(key: "bio")
         let profilePictureURL = ModelItem<String>(key: "profilePictureURL")
-        let userInfoRecordID = ModelItem<String>(key: "userInfoRecordID")
-        let scoreRecordZoneName = ModelItem<String>(key: "scoreRecordZoneName")
-        let scoreRecordRecordName = ModelItem<String>(key: "scoreRecordRecordName")
-        let scoreRecordPublicShareURL = ModelItem<String>(key: "scoreRecordPublicShareURL")
+        let userRecordID = ModelItem<String>(key: "userRecordID")
     }
     
     // MARK: Init
