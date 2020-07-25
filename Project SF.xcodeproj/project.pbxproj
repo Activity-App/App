@@ -24,6 +24,9 @@
 		306719E624C90438006B758D /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306719E524C90438006B758D /* AlertView.swift */; };
 		3067712F24BDE0080085F152 /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3067712E24BDE0080085F152 /* FriendsCell.swift */; };
 		3067713124BDE3950085F152 /* FriendDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3067713024BDE3950085F152 /* FriendDetailView.swift */; };
+		3074912924CC5B2200F54BF5 /* FriendInvitationRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3074912824CC5B2200F54BF5 /* FriendInvitationRecord.swift */; };
+		3074912B24CC607800F54BF5 /* UserActivityRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3074912A24CC607800F54BF5 /* UserActivityRecord.swift */; };
+		3074912D24CC61F900F54BF5 /* ActivitySharingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3074912C24CC61F900F54BF5 /* ActivitySharingManager.swift */; };
 		307648CB24BC81C8005D8531 /* iCloudErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307648CA24BC81C8005D8531 /* iCloudErrorView.swift */; };
 		308FAD8B24B97E7E00126F3F /* OnboardingInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8A24B97E7E00126F3F /* OnboardingInfoCell.swift */; };
 		308FAD8D24B97E8A00126F3F /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8C24B97E8A00126F3F /* PrivacyView.swift */; };
@@ -65,8 +68,7 @@
 		9C12BBE424B9D40A00C050DB /* FakeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C12BBE324B9D40A00C050DB /* FakeError.swift */; };
 		9C12BBE624B9D41600C050DB /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C12BBE524B9D41600C050DB /* SampleData.swift */; };
 		9C2445D824BC009F00D8F4FC /* RoundedNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6C74AB24BADD1800C657B0 /* RoundedNavigationButton.swift */; };
-		9C2445DA24BC0D8E00D8F4FC /* InvitationRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2445D924BC0D8E00D8F4FC /* InvitationRecord.swift */; };
-		9C2445DC24BC714100D8F4FC /* Invitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2445DB24BC714100D8F4FC /* Invitation.swift */; };
+		9C2445DA24BC0D8E00D8F4FC /* CompetitionInvitationRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2445D924BC0D8E00D8F4FC /* CompetitionInvitationRecord.swift */; };
 		9C338BD524BAC4F4003E5048 /* CompetitionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C338BD424BAC4F4003E5048 /* CompetitionsManager.swift */; };
 		9C338BD724BAD080003E5048 /* RecordKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C338BD624BAD080003E5048 /* RecordKey.swift */; };
 		9C338BD924BAD0D3003E5048 /* CompetitionRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C338BD824BAD0D3003E5048 /* CompetitionRecord.swift */; };
@@ -123,6 +125,9 @@
 		306719E524C90438006B758D /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		3067712E24BDE0080085F152 /* FriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
 		3067713024BDE3950085F152 /* FriendDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetailView.swift; sourceTree = "<group>"; };
+		3074912824CC5B2200F54BF5 /* FriendInvitationRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendInvitationRecord.swift; sourceTree = "<group>"; };
+		3074912A24CC607800F54BF5 /* UserActivityRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivityRecord.swift; sourceTree = "<group>"; };
+		3074912C24CC61F900F54BF5 /* ActivitySharingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySharingManager.swift; sourceTree = "<group>"; };
 		307648C824BC7DC4005D8531 /* GrantDataAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrantDataAccessView.swift; sourceTree = "<group>"; };
 		307648CA24BC81C8005D8531 /* iCloudErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudErrorView.swift; sourceTree = "<group>"; };
 		308FAD8A24B97E7E00126F3F /* OnboardingInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingInfoCell.swift; sourceTree = "<group>"; };
@@ -167,8 +172,7 @@
 		9C12BBE024B9D3D800C050DB /* HealthKitControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitControllerTests.swift; sourceTree = "<group>"; };
 		9C12BBE324B9D40A00C050DB /* FakeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeError.swift; sourceTree = "<group>"; };
 		9C12BBE524B9D41600C050DB /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
-		9C2445D924BC0D8E00D8F4FC /* InvitationRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationRecord.swift; sourceTree = "<group>"; };
-		9C2445DB24BC714100D8F4FC /* Invitation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invitation.swift; sourceTree = "<group>"; };
+		9C2445D924BC0D8E00D8F4FC /* CompetitionInvitationRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionInvitationRecord.swift; sourceTree = "<group>"; };
 		9C338BD424BAC4F4003E5048 /* CompetitionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsManager.swift; sourceTree = "<group>"; };
 		9C338BD624BAD080003E5048 /* RecordKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordKey.swift; sourceTree = "<group>"; };
 		9C338BD824BAD0D3003E5048 /* CompetitionRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionRecord.swift; sourceTree = "<group>"; };
@@ -279,6 +283,7 @@
 			children = (
 				9C6C74B524BBE57B00C657B0 /* FriendStruct.swift */,
 				304F753024CAC9BF005D46BA /* FriendsManager.swift */,
+				3074912C24CC61F900F54BF5 /* ActivitySharingManager.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -309,8 +314,8 @@
 		30ABC14224C568210060825B /* Invitations */ = {
 			isa = PBXGroup;
 			children = (
-				9C2445DB24BC714100D8F4FC /* Invitation.swift */,
-				9C2445D924BC0D8E00D8F4FC /* InvitationRecord.swift */,
+				9C2445D924BC0D8E00D8F4FC /* CompetitionInvitationRecord.swift */,
+				3074912824CC5B2200F54BF5 /* FriendInvitationRecord.swift */,
 			);
 			path = Invitations;
 			sourceTree = "<group>";
@@ -319,6 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				3004A97A24CC0486004D823D /* User.swift */,
+				3074912A24CC607800F54BF5 /* UserActivityRecord.swift */,
 				9CCFDD1824B971D600162B0F /* UserRecord.swift */,
 				3004A97624CBD92F004D823D /* UserInfoRecord.swift */,
 				3004A97824CC01BA004D823D /* UserController.swift */,
@@ -714,6 +720,7 @@
 				3067712F24BDE0080085F152 /* FriendsCell.swift in Sources */,
 				30D321BD24BB65D5009CD9D0 /* ProfileSettings.swift in Sources */,
 				30EAB9F924C29B9D005326C8 /* AccentSettings.swift in Sources */,
+				3074912D24CC61F900F54BF5 /* ActivitySharingManager.swift in Sources */,
 				30BFC8DF24B7637F00DAC6D9 /* VisualEffectView.swift in Sources */,
 				9CCFDD1D24B971D600162B0F /* UserRecord.swift in Sources */,
 				9C6C74B624BBE57B00C657B0 /* FriendStruct.swift in Sources */,
@@ -736,7 +743,7 @@
 				9C8FAD4A24BAADA600571947 /* CKContainer+AppDefault.swift in Sources */,
 				3004A97924CC01BA004D823D /* UserController.swift in Sources */,
 				302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */,
-				9C2445DA24BC0D8E00D8F4FC /* InvitationRecord.swift in Sources */,
+				9C2445DA24BC0D8E00D8F4FC /* CompetitionInvitationRecord.swift in Sources */,
 				9C338BD524BAC4F4003E5048 /* CompetitionsManager.swift in Sources */,
 				9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */,
 				9C338BD724BAD080003E5048 /* RecordKey.swift in Sources */,
@@ -750,9 +757,9 @@
 				30251C1B24BFC1B10058D6D2 /* CompetitorCell.swift in Sources */,
 				30CCF30724BED9EA00103C1E /* ActivityOverview.swift in Sources */,
 				30D321BA24BB65D5009CD9D0 /* NotificationSettings.swift in Sources */,
+				3074912B24CC607800F54BF5 /* UserActivityRecord.swift in Sources */,
 				30251C1E24BFE1D50058D6D2 /* PointsGraph.swift in Sources */,
 				30BFC8E724B8041C00DAC6D9 /* ActivityRingsView.swift in Sources */,
-				9C2445DC24BC714100D8F4FC /* Invitation.swift in Sources */,
 				3090918224B9480F000E3B11 /* RoundedButton.swift in Sources */,
 				9CCFDD2424B9745E00162B0F /* UIApplication+IsTesting.swift in Sources */,
 				3019CD9924BC9792002564AD /* PlaceBadgeView.swift in Sources */,
@@ -769,6 +776,7 @@
 				304F753124CAC9BF005D46BA /* FriendsManager.swift in Sources */,
 				30132FF224CAB48700CB6683 /* CompetitionsController.swift in Sources */,
 				3050123624C0887D00E39019 /* Int+ConvertFromRangeToRange copy.swift in Sources */,
+				3074912924CC5B2200F54BF5 /* FriendInvitationRecord.swift in Sources */,
 				30278E9324BC553A00E87E80 /* CompetitionDetail.swift in Sources */,
 				3004A97B24CC0486004D823D /* User.swift in Sources */,
 				30D321B824BB65D5009CD9D0 /* SettingsView.swift in Sources */,

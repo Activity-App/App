@@ -34,6 +34,12 @@ struct CompetitionsView: View {
                 Button("search") {
                     friends.discoverFriends { result in print(result) }
                 }
+                Button("friends") {
+                    friends.beginSharing()
+                }
+                Button("friend requests") {
+                    friends.fetchFriendRequest()
+                }
                 
                 Section(header: Text("Current Activity")) {
                     ActivityOverview(activity: $healthKit.latestActivityData)

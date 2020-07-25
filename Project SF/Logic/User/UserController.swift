@@ -15,7 +15,7 @@ class UserController: ObservableObject {
     private let cloudKitStore = CloudKitStore.shared
     
     private var userRecord: UserRecord?
-    private var userInfoRecord: UserInfoRecord?
+    var userInfoRecord: UserInfoRecord?
     
     @Published var user: User?
     

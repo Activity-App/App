@@ -181,6 +181,28 @@ class CloudKitStore {
         }
     }
     
+    /// Utility method to create a zone with a randomised identifier.
+    func createZone(then handler: @escaping (Result<CKRecordZone, CloudKitStoreError>) -> Void) {
+        let zone = CKRecordZone(zoneName: UUID().uuidString)
+        let zoneOperation = CKModifyRecordZonesOperation(recordZonesToSave: [zone], recordZoneIDsToDelete: nil)
+        zoneOperation.qualityOfService = .userInitiated
+        
+        zoneOperation.modifyRecordZonesCompletionBlock = { recordZones, _, error in
+            if let error = error {
+                handler(.failure(.other(error)))
+                return
+            }
+            guard let zone = recordZones?.first else {
+                handler(.failure(.unknownError))
+                return
+            }
+            
+            handler(.success(zone))
+        }
+        
+        container.privateCloudDatabase.add(zoneOperation)
+    }
+    
     // MARK: Deleting
     
     /// Asynchronously deletes a single record to the CloudKit database, with a low priority.
@@ -208,6 +230,7 @@ class CloudKitStore {
 
     enum CloudKitStoreError: Error {
         case other(Error)
+        case unknownError
         case missingRecord
         case missingID
     }

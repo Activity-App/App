@@ -1,18 +1,17 @@
 //
-//  InvitationRecord.swift
+//  CompetitionInvitationRecord.swift
 //  Project SF
 //
 //  Created by William Taylor on 13/7/20.
 //
 
-import Foundation
 import CloudKit
 
-class InvitationRecord: DynamicRecord {
+class CompetitionInvitationRecord: DynamicRecord {
     
     // MARK: Properties
     
-    static let type = "Invitations"
+    static let type = "CompetitionInvitation"
     
     static let model = Model()
 

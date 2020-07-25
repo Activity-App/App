@@ -44,7 +44,7 @@ class CompetitionsManager {
         then handler: @escaping (Result<Void, Error>) -> Void
     ) {
         // shares can't be saved to the default zone
-        createZone { result in
+        CloudKitStore.shared.createZone { result in
             switch result {
             case .success(let zone):
                 self.fetchShareParticipantsFrom(friends: friends) { result in
@@ -136,8 +136,8 @@ class CompetitionsManager {
     /// Fetches pending invitations.
     /// - Parameter handler: Called with the result of the operation. Not guaranteed to be on the main thread.
     ///
-    /// Internally, this queries the public database for `InvitationRecord`s matching the users record ID. It is appropriate to store these URLs in the public database as they will only work for the recipient of the invitation.
-    func fetchPendingInvitations(then handler: @escaping (Result<[InvitationRecord], Error>) -> Void) {
+    /// Internally, this queries the public database for `CompetitionInvitationRecord`s matching the users record ID. It is appropriate to store these URLs in the public database as they will only work for the recipient of the invitation.
+    func fetchPendingInvitations(then handler: @escaping (Result<[CompetitionInvitationRecord], Error>) -> Void) {
         container.fetchUserRecordID { recordID, error in
             if let error = error {
                 handler(.failure(error))
@@ -149,14 +149,14 @@ class CompetitionsManager {
             }
             
             // find invitations in the public database matching the users record id
-            let operation = CKQueryOperation(query: CKQuery(recordType: InvitationRecord.type,
+            let operation = CKQueryOperation(query: CKQuery(recordType: CompetitionInvitationRecord.type,
                                                             predicate: NSPredicate(format: "inviteeID == %@",
                                                                                    recordID.recordName)))
             operation.qualityOfService = .userInitiated
-            var invitationRecords = [InvitationRecord]()
+            var invitationRecords = [CompetitionInvitationRecord]()
             
             operation.recordFetchedBlock = { record in
-                invitationRecords.append(InvitationRecord(record: record))
+                invitationRecords.append(CompetitionInvitationRecord(record: record))
             }
             
             operation.queryCompletionBlock = { _, error in
@@ -181,7 +181,7 @@ class CompetitionsManager {
     ///   - handler: Called with the result of the operation. Not guaranteed to be on the main thread.
     ///
     /// Internally, this accepts both share URLs present in the invitation (the `CompetitionRecord` share and the `ScoreURLHolder` share), and modifies the `ScoreURLHolder` to contain the share url for the users score infomation.
-    func acceptInvitation(_ invitation: InvitationRecord, then handler: @escaping (Result<Void, Error>) -> Void) {
+    func acceptInvitation(_ invitation: CompetitionInvitationRecord, then handler: @escaping (Result<Void, Error>) -> Void) {
         guard let competitionRecordInviteURLString = invitation.competitionRecordInviteURL,
               let scoreURLHolderInviteURLString = invitation.scoreURLHolderInviteURL,
               let competitionRecordInviteURL = URL(string: competitionRecordInviteURLString),
@@ -359,28 +359,6 @@ class CompetitionsManager {
     
     // MARK: Helper Methods
     
-    /// Utility method to create a zone with a randomised identifier.
-    private func createZone(then handler: @escaping (Result<CKRecordZone, Error>) -> Void) {
-        let zone = CKRecordZone(zoneName: UUID().uuidString)
-        let zoneOperation = CKModifyRecordZonesOperation(recordZonesToSave: [zone], recordZoneIDsToDelete: nil)
-        zoneOperation.qualityOfService = .userInitiated
-        
-        zoneOperation.modifyRecordZonesCompletionBlock = { recordZones, _, error in
-            if let error = error {
-                handler(.failure(error))
-                return
-            }
-            guard let zone = recordZones?.first else {
-                handler(.failure(CompetitionsManagerError.unknownError))
-                return
-            }
-            
-            handler(.success(zone))
-        }
-        
-        container.privateCloudDatabase.add(zoneOperation)
-    }
-    
     /// Invites friends to a competition with a designated `inviteURL`. The share that the `inviteURL` corresponds to must already have the friend as a participant.
     ///
     /// This creates a CKShare for each invitee that points to a new `ScoreURLHolderRecord`. The invitee can edit this when the accept their invite to contain a share URL that links to their personal `ScoreRecord`.
@@ -439,11 +417,11 @@ class CompetitionsManager {
                         handler(.failure(CompetitionsManagerError.multiple(errors)))
                         return
                     }
-                    var inviteRecords = [InvitationRecord]()
+                    var inviteRecords = [CompetitionInvitationRecord]()
                     
                     for friend in friends {
                         guard let share = friendToShare[friend], let shareURL = share.url else { continue }
-                        let inviteRecord = InvitationRecord()
+                        let inviteRecord = CompetitionInvitationRecord()
                         inviteRecord.competitionRecordInviteURL = "\(inviteURL)"
                         inviteRecord.scoreURLHolderInviteURL = "\(shareURL)"
                         inviteRecord.inviteeID = friend.recordID.recordName
@@ -480,7 +458,6 @@ class CompetitionsManager {
     ) {
         let friendForUserRecordID: [CKRecord.ID: Friend] = Dictionary(uniqueKeysWithValues:
                                                                         friends.map { (key: $0.recordID, value: $0) })
-        print(friends)
         let friendLookupInfomation = friends.map { CKUserIdentity.LookupInfo(userRecordID: $0.recordID) }
         let participantLookupOperation = CKFetchShareParticipantsOperation(userIdentityLookupInfos:
                                                                             friendLookupInfomation)
@@ -614,7 +591,7 @@ class CompetitionsManager {
     private func createScoreRecord(
         then handler: @escaping (Result<(shareURL: URL, recordID: CKRecord.ID), Error>) -> Void
     ) {
-        self.createZone { result in
+        CloudKitStore.shared.createZone { result in
             switch result {
             case .success(let zone):
                 
