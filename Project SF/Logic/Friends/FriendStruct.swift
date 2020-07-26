@@ -12,5 +12,5 @@ struct Friend: Hashable {
     let name: String
     let username: String
     let profilePicture: URL?
-    let recordID: CKRecord.ID
+    let userRecordID: CKRecord.ID
 }

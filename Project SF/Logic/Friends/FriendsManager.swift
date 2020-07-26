@@ -7,16 +7,16 @@
 
 import CloudKit
 
-class FriendsManager {
+class FriendsManager: ObservableObject {
     
     // MARK: Properties
     
     private let container: CKContainer
     private let userController = UserController()
     
-    var friends: [Friend] = [
-        Friend(name: "christian", username: "priva28", profilePicture: nil, recordID: CKRecord.ID(recordName: "_ca83d0962e8569057e2d4bece6c0a335")),
-        Friend(name: "simulator", username: "11promax", profilePicture: nil, recordID: CKRecord.ID(recordName: "_9f53c520a678dda39e348fb0624c49c2"))
+    @Published var friends: [Friend] = [
+        Friend(name: "christian", username: "priva28", profilePicture: nil, userRecordID: CKRecord.ID(recordName: "_ca83d0962e8569057e2d4bece6c0a335")),
+        Friend(name: "simulator", username: "11promax", profilePicture: nil, userRecordID: CKRecord.ID(recordName: "_9f53c520a678dda39e348fb0624c49c2"))
     ]
     
     init(container: CKContainer = .appDefault) {
@@ -78,13 +78,7 @@ class FriendsManager {
                             switch result {
                             case .success(let records):
                                 for user in records {
-                                    let friend = Friend(
-                                        name: user.name ?? "",
-                                        username: user.username ?? "",
-                                        profilePicture: URL(string: user.profilePictureURL ?? ""),
-                                        recordID: CKRecord.ID(recordName: user.userRecordID ?? "")
-                                    )
-                                    friends.append(friend)
+                                    friends.append(user.asFriend())
                                     
                                     if identity == identities.last && user.record == records.last?.record {
                                         handler(.success(friends))
@@ -104,79 +98,88 @@ class FriendsManager {
     
     // ** DONT USE ANYTHING BELOW YET **
     
-    func beginSharing() {
+    /// Creates user activity record for current user as well as a share and saves it to the private db.
+    /// - Parameter handler: What to do when the operation completes.
+    func beginSharing(then handler: @escaping (Error?) -> Void) {
+        
+        /// Create new randomized zone in your private db to share your activity data.
         CloudKitStore.shared.createZone { result in
             switch result {
             case .success(let zone):
-                self.fetchShareParticipantsFrom(friends: self.friends) { result in
-                    switch result {
-                    case .success(let participants):
-                        let activityRecord = UserActivityRecord(recordID: CKRecord.ID(zoneID: zone.zoneID))
-                        activityRecord.move = 28
-                        
-                        let share = CKShare(rootRecord: activityRecord.record)
-                        print("herrrre")
-                        share.publicPermission = .none
-                        
-                        for participant in participants.map({ $0.0 }) {
-                            participant.permission = .readOnly
-                            share.addParticipant(participant)
-                        }
-                        
-                        let operation = CKModifyRecordsOperation(
-                            recordsToSave: [activityRecord.record, share],
-                            recordIDsToDelete: nil
-                        )
-                        operation.qualityOfService = .userInitiated
-                        
-                        var savedShare: CKShare?
-                        
-                        operation.perRecordCompletionBlock = { record, error in
-                            if let record = record as? CKShare {
-                                savedShare = record
-                            }
-                        }
-                        
-                        operation.completionBlock = {
-                            guard let savedShare = savedShare, let url = savedShare.url else {
-                                print("you're dumb and this is messed up")
-                                return
-                            }
-                            
-                            var inviteRecords: [FriendInvitationRecord] = []
-                            
-                            for friend in self.friends {
-                                let invite = FriendInvitationRecord()
-                                invite.inviteeID = friend.recordID.recordName
-                                invite.fromUserInfoID = self.userController.userInfoRecord?.record.recordID.recordName
-                                invite.privateShareURL = url.absoluteString
-                                inviteRecords.append(invite)
-                            }
-                            
-                            let saveInvitationsOperations = CKModifyRecordsOperation(
-                                recordsToSave: inviteRecords.map({ $0.record }),
-                                recordIDsToDelete: nil
-                            )
-                            
-                            saveInvitationsOperations.modifyRecordsCompletionBlock = { _, _, error in
-                                if let error = error {
-                                    print(error)
-                                    return
-                                }
-                                
-                                print("it workssss!")
-                            }
-                            
-                            self.container.publicCloudDatabase.add(saveInvitationsOperations)
-                        }
-                        
-                        self.container.privateCloudDatabase.add(operation)
-                    case .failure(let error):
-                        print(error)
+                /// Create an empty `UserActivityRecord` in the created zone.
+                let activityRecord = UserActivityRecord(recordID: CKRecord.ID(zoneID: zone.zoneID))
+                
+                /// Create a share from the created activity record and set the public permission to none so no one can access it unless we explicitly allow them.
+                let share = CKShare(rootRecord: activityRecord.record)
+                share.publicPermission = .none
+                
+                /// Save the activity record and share.
+                let operation = CKModifyRecordsOperation(
+                    recordsToSave: [activityRecord.record, share],
+                    recordIDsToDelete: nil
+                )
+                operation.qualityOfService = .userInitiated
+                
+                /// Placeholder for if saving share is successful.
+                var savedShare: CKShare?
+                
+                operation.perRecordCompletionBlock = { record, error in
+                    if let error = error {
+                        handler(error)
+                    }
+                    if let record = record as? CKShare {
+                        savedShare = record
                     }
                 }
+                
+                operation.completionBlock = {
+                    guard let savedShare = savedShare, let url = savedShare.url else {
+                        handler(FriendsManagerError.unknownError)
+                        return
+                    }
+                    
+                    var inviteRecords: [FriendInvitationRecord] = []
+                    
+                    for friend in self.friends {
+                        let invite = FriendInvitationRecord()
+                        invite.inviteeID = friend.userRecordID.recordName
+                        invite.fromUserInfoID = self.userController.userInfoRecord?.record.recordID.recordName
+                        invite.privateShareURL = url.absoluteString
+                        inviteRecords.append(invite)
+                    }
+                    
+                    let saveInvitationsOperations = CKModifyRecordsOperation(
+                        recordsToSave: inviteRecords.map({ $0.record }),
+                        recordIDsToDelete: nil
+                    )
+                    
+                    saveInvitationsOperations.modifyRecordsCompletionBlock = { _, _, error in
+                        if let error = error {
+                            print(error)
+                            return
+                        }
+                        
+                        print("it workssss!")
+                    }
+                    
+                    self.container.publicCloudDatabase.add(saveInvitationsOperations)
+                }
+                
+                self.container.privateCloudDatabase.add(operation)
             case .failure(let error):
+                handler(error)
                 print(error)
+            }
+        }
+    }
+    
+    func invite(friend: Friend, then handler: @escaping (Error?) -> Void) {
+        CloudKitStore.shared.fetchRecords(with: UserActivityRecord.self, scope: .private) { result in
+            switch result {
+            case .success(let records):
+                print(records)
+            case .failure(let error):
+                handler(error)
             }
         }
     }
@@ -252,7 +255,6 @@ class FriendsManager {
                     print(error)
                     return
                 }
-                
                 let fetchURLHolderOperation = CKFetchRecordsOperation(recordIDs: [shareURLMetadata!.rootRecordID])
                 fetchURLHolderOperation.qualityOfService = .userInitiated
                 fetchURLHolderOperation.fetchRecordsCompletionBlock = { records, error in
@@ -282,8 +284,8 @@ class FriendsManager {
         then handler: @escaping (Result<[(CKShare.Participant, Friend)], Error>) -> Void
     ) {
         let friendForUserRecordID: [CKRecord.ID: Friend] = Dictionary(uniqueKeysWithValues:
-                                                                        friends.map { (key: $0.recordID, value: $0) })
-        let friendLookupInfomation = friends.map { CKUserIdentity.LookupInfo(userRecordID: $0.recordID) }
+                                                                        friends.map { (key: $0.userRecordID, value: $0) })
+        let friendLookupInfomation = friends.map { CKUserIdentity.LookupInfo(userRecordID: $0.userRecordID) }
         let participantLookupOperation = CKFetchShareParticipantsOperation(userIdentityLookupInfos:
                                                                             friendLookupInfomation)
         participantLookupOperation.qualityOfService = .userInitiated

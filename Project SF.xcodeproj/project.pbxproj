@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		3004A97724CBD92F004D823D /* UserInfoRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004A97624CBD92F004D823D /* UserInfoRecord.swift */; };
 		3004A97924CC01BA004D823D /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004A97824CC01BA004D823D /* UserController.swift */; };
-		3004A97B24CC0486004D823D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004A97A24CC0486004D823D /* User.swift */; };
+		3004A97B24CC0486004D823D /* UserStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004A97A24CC0486004D823D /* UserStruct.swift */; };
 		30132FF024CA78E000CB6683 /* CompetitionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30132FEF24CA78E000CB6683 /* CompetitionStruct.swift */; };
 		30132FF224CAB48700CB6683 /* CompetitionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30132FF124CAB48700CB6683 /* CompetitionsController.swift */; };
 		3019CD9924BC9792002564AD /* PlaceBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3019CD9824BC9792002564AD /* PlaceBadgeView.swift */; };
@@ -110,7 +110,7 @@
 /* Begin PBXFileReference section */
 		3004A97624CBD92F004D823D /* UserInfoRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRecord.swift; sourceTree = "<group>"; };
 		3004A97824CC01BA004D823D /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
-		3004A97A24CC0486004D823D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		3004A97A24CC0486004D823D /* UserStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStruct.swift; sourceTree = "<group>"; };
 		30132FEF24CA78E000CB6683 /* CompetitionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionStruct.swift; sourceTree = "<group>"; };
 		30132FF124CAB48700CB6683 /* CompetitionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsController.swift; sourceTree = "<group>"; };
 		3019CD9824BC9792002564AD /* PlaceBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceBadgeView.swift; sourceTree = "<group>"; };
@@ -323,7 +323,7 @@
 		30ABC14324C5684B0060825B /* User */ = {
 			isa = PBXGroup;
 			children = (
-				3004A97A24CC0486004D823D /* User.swift */,
+				3004A97A24CC0486004D823D /* UserStruct.swift */,
 				3074912A24CC607800F54BF5 /* UserActivityRecord.swift */,
 				9CCFDD1824B971D600162B0F /* UserRecord.swift */,
 				3004A97624CBD92F004D823D /* UserInfoRecord.swift */,
@@ -778,7 +778,7 @@
 				3050123624C0887D00E39019 /* Int+ConvertFromRangeToRange copy.swift in Sources */,
 				3074912924CC5B2200F54BF5 /* FriendInvitationRecord.swift in Sources */,
 				30278E9324BC553A00E87E80 /* CompetitionDetail.swift in Sources */,
-				3004A97B24CC0486004D823D /* User.swift in Sources */,
+				3004A97B24CC0486004D823D /* UserStruct.swift in Sources */,
 				30D321B824BB65D5009CD9D0 /* SettingsView.swift in Sources */,
 				307648CB24BC81C8005D8531 /* iCloudErrorView.swift in Sources */,
 			);

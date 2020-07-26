@@ -32,5 +32,15 @@ class UserInfoRecord: DynamicRecord {
     required init(record: CKRecord) {
         self.record = record
     }
+    
+    func asFriend() -> Friend {
+        let friend = Friend(
+            name: self.name ?? "",
+            username: self.username ?? "",
+            profilePicture: URL(string: self.profilePictureURL ?? ""),
+            userRecordID: CKRecord.ID(recordName: self.userRecordID ?? "")
+        )
+        return friend
+    }
 
 }
