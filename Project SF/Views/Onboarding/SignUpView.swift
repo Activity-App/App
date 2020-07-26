@@ -13,10 +13,11 @@ struct SignUpView: View {
     
     @State var name = ""
     @State var username = ""
+    @State var bio = ""
     
     @State var nextPage = false
     @State var signedUp = false
-    @State var makePublic = true
+    @State var makePublic = false
     
     @StateObject var userController = UserController()
     @EnvironmentObject var alert: AlertManager
@@ -31,10 +32,6 @@ struct SignUpView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.top, 32)
                     GroupBox {
-                        TextField("Name", text: $name)
-                            .autocapitalization(.words)
-                    }
-                    GroupBox {
                         TextField("Username", text: $username)
                             .autocapitalization(.none)
                     }
@@ -45,9 +42,25 @@ struct SignUpView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.top, 32)
                     GroupBox {
-                        Toggle("Searchable", isOn: $makePublic)
+                        TextField("Name", text: $name)
+                            .autocapitalization(.words)
                     }
-                    Text("Enable searchability if you would like to share your activity data with friends. When someone tries to friend you, you can choose to accept the request and share your data.")
+                    GroupBox {
+                        VStack {
+                            HStack {
+                                Text("Bio")
+                                    .foregroundColor(Color(.tertiaryLabel))
+                                Spacer()
+                            }
+                            TextEditor(text: $bio)
+                                .frame(height: 120)
+                                .cornerRadius(8)
+                        }
+                    }
+                    GroupBox {
+                        Toggle("Public", isOn: $makePublic)
+                    }
+                    Text("Your name, bio and profile picture are private and only visible to your friends by default. You can choose to make this information public if you would like it to show to everyone.")
                         .font(.caption)
                         .foregroundColor(.secondary)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -65,7 +78,7 @@ struct SignUpView: View {
                             print(error)
                             presentErrorAlert()
                         } else {
-                            let newUser = User(name: name, username: username)
+                            let newUser = User(name: name, username: username, bio: bio)
                             userController.set(data: newUser, publicDb: makePublic) { error in
                                 if let error = error {
                                     print(error)

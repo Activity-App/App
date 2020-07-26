@@ -105,10 +105,11 @@ class FriendsManager: ObservableObject {
     /// - Parameter handler: What to do when the operation completes.
     func beginSharing(completion: @escaping (Error?) -> Void) {
         /// Create new randomized zone in your private db to share your activity data.
-        cloudKitStore.createZone(named: "UserActivityDataZone") { result in
+        cloudKitStore.createZone(named: "SharedToFriendsDataZone") { result in
             switch result {
             case .success(let zone):
                 /// Create an empty `UserActivityRecord` in the created zone.
+                let userInfo = UserInfoRecord(recordID: CKRecord.ID(zoneID: zone.zoneID))
                 let activityRecord = UserActivityRecord(recordID: CKRecord.ID(zoneID: zone.zoneID))
                 
                 /// Create a share from the created activity record and set the public permission to none so no one can access it unless we explicitly allow them.
@@ -117,7 +118,7 @@ class FriendsManager: ObservableObject {
                 
                 /// Operation to save the activity record and share.
                 let operation = CKModifyRecordsOperation(
-                    recordsToSave: [activityRecord.record, share],
+                    recordsToSave: [userInfo.record, activityRecord.record, share],
                     recordIDsToDelete: nil
                 )
                 operation.qualityOfService = .userInitiated

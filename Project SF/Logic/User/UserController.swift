@@ -7,6 +7,9 @@
 
 import CloudKit
 
+/// Handles the user of the application in CloudKit.
+///
+/// The UserRecord will be always saved to your private database with your information. If you choose, you can make your information public. This is done through the UserInfoRecord. Use the `set` method with `publicDb` to `true` to set new specified information to be exposed to the public db or`makeUserInfoPublic` to set all current info(name, bio, pfp) to the public db. Conversely, you can use `makeUserInfoPrivate` to remove all user info from the public db.
 class UserController: ObservableObject {
     
     // MARK: Properties
@@ -107,6 +110,7 @@ class UserController: ObservableObject {
                 self.loading = false
                 completion(error)
             } else {
+                self.tryToSyncUserInfoToPrivateDb()
                 if publicDb {
                     self.syncUserInfo { error in
                         self.loading = false
@@ -263,6 +267,33 @@ class UserController: ObservableObject {
                     self.loading = false
                     completion(error)
                 }
+            }
+        }
+    }
+    
+    /// Tries to sync user info to the UserInfo record in the SharedToFriendsDataZone. This ensures **MAKE SINGLE RECORD FOR ALL SHARED TO FRIENDS DATA**
+    private func tryToSyncUserInfoToPrivateDb() {
+        guard let userInfoRecord = userInfoRecord else { return }
+        cloudKitStore.fetchRecords(with: "UserInfo", zone: CKRecordZone.ID(zoneName: "SharedToFriendsDataZone"), scope: .private) { result in
+            switch result {
+            case .success(let records):
+                /// There was an existing user info record in the shared to friends data zone.
+                guard let record = records.first else { return }
+                let newRecord = UserInfoRecord(record: record)
+                newRecord.name = userInfoRecord.name
+                newRecord.username = userInfoRecord.username
+                newRecord.bio = userInfoRecord.bio
+                newRecord.profilePictureURL = userInfoRecord.profilePictureURL
+                self.cloudKitStore.saveRecord(newRecord.record, scope: .private) { result in
+                    switch result {
+                    case .success:
+                        print("Done")
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+            case .failure(let error):
+                print(error)
             }
         }
     }

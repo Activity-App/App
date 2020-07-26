@@ -22,19 +22,19 @@ struct PrivacyView: View {
             ScrollView {
                 VStack(alignment: .leading) {
                     OnboardingInfoCell(
-                        title: "Sharing",
-                        subTitle: "We don't share your data with other companies",
-                        imageName: "square.and.arrow.up.on.square"
+                        title: "Your data is yours.",
+                        subTitle: "We don't sell or collect data because it belongs to you. Full stop.",
+                        imageName: "key.fill"
                     )
                     OnboardingInfoCell(
-                        title: "This is a splash screen",
-                        subTitle: "something about using the apple watch trainings",
-                        imageName: "applewatch.watchface"
+                        title: "You choose what you share.",
+                        subTitle: "All users will be able to see your username and that's it. You can explicitly state whether you want to expose your name, bio or profile picture with other users.",
+                        imageName: "lock.shield.fill"
                     )
                     OnboardingInfoCell(
-                        title: "Test",
-                        subTitle: "idk maybe something else",
-                        imageName: "pencil"
+                        title: "Data is only shared with specific individuals.",
+                        subTitle: "Your activity and competition data will only be seen by you, people in a competition with you and people you are friends with. Not even we can see it.",
+                        imageName: "figure.walk"
                     )
                 }
             }

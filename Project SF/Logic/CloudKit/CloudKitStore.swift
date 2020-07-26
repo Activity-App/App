@@ -37,11 +37,13 @@ class CloudKitStore {
     ///   - handler: Called with the result of the operation. Not guaranteed to be on the main thread.
     func fetchRecords(with recordType: CKRecord.RecordType,
                       predicate: NSPredicate = NSPredicate(value: true),
+                      zone: CKRecordZone.ID,
                       scope: CKDatabase.Scope,
                       then handler: @escaping (Result<[CKRecord], CloudKitStoreError>) -> Void) {
         let query = CKQuery(recordType: recordType, predicate: predicate)
         let queryOperation = CKQueryOperation(query: query)
         queryOperation.qualityOfService = .userInitiated
+        queryOperation.zoneID = zone
 
         var records = [CKRecord]()
 
@@ -75,9 +77,10 @@ class CloudKitStore {
     ///   - handler: Called with the result of the operation. Not guaranteed to be on the main thread.
     func fetchRecords<RecordType: Record>(with record: RecordType.Type,
                                           predicate: NSPredicate = NSPredicate(value: true),
+                                          zone: CKRecordZone.ID = .default,
                                           scope: CKDatabase.Scope,
                                           then handler: @escaping (Result<[RecordType], CloudKitStoreError>) -> Void) {
-        fetchRecords(with: record.type, predicate: predicate, scope: scope) { result in
+        fetchRecords(with: record.type, predicate: predicate, zone: zone, scope: scope) { result in
             switch result {
             case .success(let records):
                 let records = records.map { RecordType.init(record: $0) }
