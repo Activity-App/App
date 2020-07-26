@@ -36,6 +36,7 @@ struct ProjectSFApp: App {
             .environmentObject(alert)
             .onAppear {
                 DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
                     UIApplication.shared.windows[0].tintColor = UserDefaults.standard.uiColor(forKey: "accentColor")
                         ?? UIColor(Color.accentColor)
                 }

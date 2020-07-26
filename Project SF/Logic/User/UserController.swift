@@ -5,7 +5,6 @@
 //  Created by William Taylor on 11/7/20.
 //
 
-import Foundation
 import CloudKit
 
 class UserController: ObservableObject {
@@ -98,6 +97,9 @@ class UserController: ObservableObject {
         }
         if let srShareURL = data.scoreRecordPublicShareURL {
             userRecord.scoreRecordPublicShareURL = srShareURL
+        }
+        if let friendShareURL = data.friendShareURL {
+            userRecord.friendShareURL = friendShareURL
         }
         
         syncUser { error in

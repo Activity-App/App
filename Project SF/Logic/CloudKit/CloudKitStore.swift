@@ -182,8 +182,8 @@ class CloudKitStore {
     }
     
     /// Utility method to create a zone with a randomised identifier.
-    func createZone(then handler: @escaping (Result<CKRecordZone, CloudKitStoreError>) -> Void) {
-        let zone = CKRecordZone(zoneName: UUID().uuidString)
+    func createZone(named zoneName: String = UUID().uuidString, then handler: @escaping (Result<CKRecordZone, CloudKitStoreError>) -> Void) {
+        let zone = CKRecordZone(zoneName: zoneName)
         let zoneOperation = CKModifyRecordZonesOperation(recordZonesToSave: [zone], recordZoneIDsToDelete: nil)
         zoneOperation.qualityOfService = .userInitiated
         

@@ -20,9 +20,9 @@ class FriendInvitationRecord: DynamicRecord {
     // MARK: Model
     
     struct Model {
-        let inviteeID = ModelItem<String>(key: "inviteeID")
-        let fromUserInfoID = ModelItem<String>(key: "fromUserInfoID")
-        let privateShareURL = ModelItem<String>(key: "privateShareURL")
+        let inviteeRecordName = ModelItem<String>(key: "inviteeRecordName")
+        let fromUserInfoWithRecordName = ModelItem<String>(key: "fromUserInfoWithRecordName")
+        let shareURL = ModelItem<String>(key: "shareURL")
     }
     
     // MARK: Init

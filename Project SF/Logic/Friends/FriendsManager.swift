@@ -12,12 +12,15 @@ class FriendsManager: ObservableObject {
     // MARK: Properties
     
     private let container: CKContainer
+    private let cloudKitStore = CloudKitStore.shared
     private let userController = UserController()
     
     @Published var friends: [Friend] = [
-        Friend(name: "christian", username: "priva28", profilePicture: nil, userRecordID: CKRecord.ID(recordName: "_ca83d0962e8569057e2d4bece6c0a335")),
-        Friend(name: "simulator", username: "11promax", profilePicture: nil, userRecordID: CKRecord.ID(recordName: "_9f53c520a678dda39e348fb0624c49c2"))
+        Friend(userRecordID: CKRecord.ID(recordName: "_ca83d0962e8569057e2d4bece6c0a335")),
+        Friend(userRecordID: CKRecord.ID(recordName: "_9f53c520a678dda39e348fb0624c49c2"))
     ]
+    
+    @Published var sharingPermission = false
     
     init(container: CKContainer = .appDefault) {
         self.container = container
@@ -98,12 +101,11 @@ class FriendsManager: ObservableObject {
     
     // ** DONT USE ANYTHING BELOW YET **
     
-    /// Creates user activity record for current user as well as a share and saves it to the private db.
+    /// Creates empty user activity record for current user as well as a share and saves it to the private db.
     /// - Parameter handler: What to do when the operation completes.
-    func beginSharing(then handler: @escaping (Error?) -> Void) {
-        
+    func beginSharing(completion: @escaping (Error?) -> Void) {
         /// Create new randomized zone in your private db to share your activity data.
-        CloudKitStore.shared.createZone { result in
+        cloudKitStore.createZone(named: "UserActivityDataZone") { result in
             switch result {
             case .success(let zone):
                 /// Create an empty `UserActivityRecord` in the created zone.
@@ -113,7 +115,7 @@ class FriendsManager: ObservableObject {
                 let share = CKShare(rootRecord: activityRecord.record)
                 share.publicPermission = .none
                 
-                /// Save the activity record and share.
+                /// Operation to save the activity record and share.
                 let operation = CKModifyRecordsOperation(
                     recordsToSave: [activityRecord.record, share],
                     recordIDsToDelete: nil
@@ -125,7 +127,7 @@ class FriendsManager: ObservableObject {
                 
                 operation.perRecordCompletionBlock = { record, error in
                     if let error = error {
-                        handler(error)
+                        completion(error)
                     }
                     if let record = record as? CKShare {
                         savedShare = record
@@ -134,52 +136,174 @@ class FriendsManager: ObservableObject {
                 
                 operation.completionBlock = {
                     guard let savedShare = savedShare, let url = savedShare.url else {
-                        handler(FriendsManagerError.unknownError)
+                        completion(FriendsManagerError.unknownError)
                         return
                     }
                     
-                    var inviteRecords: [FriendInvitationRecord] = []
-                    
-                    for friend in self.friends {
-                        let invite = FriendInvitationRecord()
-                        invite.inviteeID = friend.userRecordID.recordName
-                        invite.fromUserInfoID = self.userController.userInfoRecord?.record.recordID.recordName
-                        invite.privateShareURL = url.absoluteString
-                        inviteRecords.append(invite)
-                    }
-                    
-                    let saveInvitationsOperations = CKModifyRecordsOperation(
-                        recordsToSave: inviteRecords.map({ $0.record }),
-                        recordIDsToDelete: nil
-                    )
-                    
-                    saveInvitationsOperations.modifyRecordsCompletionBlock = { _, _, error in
-                        if let error = error {
-                            print(error)
-                            return
+                    /// Save the saved share url to the user record so it can be accessed later.
+                    self.cloudKitStore.fetchUserRecord { result in
+                        switch result {
+                        case .success(let record):
+                            record.friendShareURL = url.absoluteString
+                            self.cloudKitStore.saveUserRecord(record) { result in
+                                switch result {
+                                case .success:
+                                    completion(nil)
+                                case .failure(let error):
+                                    completion(error)
+                                }
+                            }
+                        case .failure(let error):
+                            completion(error)
                         }
-                        
-                        print("it workssss!")
                     }
-                    
-                    self.container.publicCloudDatabase.add(saveInvitationsOperations)
                 }
                 
                 self.container.privateCloudDatabase.add(operation)
             case .failure(let error):
-                handler(error)
-                print(error)
+                completion(error)
             }
         }
     }
     
-    func invite(friend: Friend, then handler: @escaping (Error?) -> Void) {
-        CloudKitStore.shared.fetchRecords(with: UserActivityRecord.self, scope: .private) { result in
+    func invite(friends: [Friend], completion: @escaping (Error?) -> Void) {
+        /// Get the current user record.
+        cloudKitStore.fetchUserRecord { result in
             switch result {
-            case .success(let records):
-                print(records)
+            case .success(let record):
+                
+                /// Get the friend share url from the fetched user record.
+                guard let shareURLString = record.friendShareURL,
+                      let shareURL = URL(string: shareURLString) else {
+                    completion(FriendsManagerError.unknownError)
+                    return
+                }
+                
+                /// Fetch the share metadata from the friend share URL.
+                let metadataFetchOperation = CKFetchShareMetadataOperation(shareURLs: [shareURL])
+                metadataFetchOperation.qualityOfService = .userInitiated
+                
+                var shareMetadata: [CKShare.Metadata] = []
+                
+                metadataFetchOperation.perShareMetadataBlock = { _, metadata, error in
+                    if let error = error {
+                        completion(error)
+                    }
+                    guard let metadata = metadata else { return }
+                    shareMetadata.append(metadata)
+                }
+                
+                metadataFetchOperation.fetchShareMetadataCompletionBlock = { error in
+                    if let error = error {
+                        completion(error)
+                    }
+                    
+                    /// Get the associated share from the share metadata.
+                    guard let shareURLMetadata = shareMetadata.first(where: { $0.share.url == shareURL }) else { return }
+                    let share = shareURLMetadata.share
+                    
+                    /// Convert friends into CKShare Participants.
+                    self.fetchShareParticipantsFrom(friends: friends) { result in
+                        switch result {
+                        case .success(let participants):
+                            
+                            /// Set the friends to have read access to the share. This will let them access your activity data.
+                            for participant in participants.map({ $0.0 }) {
+                                participant.permission = .readOnly
+                                share.addParticipant(participant)
+                            }
+                            
+                            let operation = CKModifyRecordsOperation(
+                                recordsToSave: [share],
+                                recordIDsToDelete: nil
+                            )
+                            operation.qualityOfService = .userInitiated
+                            
+                            var savedShare: CKShare?
+                            var shareCreationError: Error?
+                            
+                            operation.perRecordCompletionBlock = { record, error in
+                                if let record = record as? CKShare {
+                                    shareCreationError = error
+                                    savedShare = record
+                                }
+                            }
+                            
+                            operation.completionBlock = {
+                                if let error = shareCreationError {
+                                    completion(error)
+                                    return
+                                }
+                                guard let savedShare = savedShare, let url = savedShare.url else {
+                                    completion(FriendsManagerError.unknownError)
+                                    return
+                                }
+                                
+                                /// Invite the friends by creating an invite with the friends user record name and save it to the public db.
+                                var inviteRecords: [FriendInvitationRecord] = []
+                                
+                                for friend in friends {
+                                    let invite = FriendInvitationRecord()
+                                    invite.inviteeRecordName = friend.userRecordID.recordName
+                                    invite.fromUserInfoWithRecordName = self.userController.userInfoRecord?.record.recordID.recordName
+                                    invite.shareURL = url.absoluteString
+                                    inviteRecords.append(invite)
+                                }
+                                
+                                let saveInvitationsOperations = CKModifyRecordsOperation(
+                                    recordsToSave: inviteRecords.map({ $0.record }),
+                                    recordIDsToDelete: nil
+                                )
+                                
+                                saveInvitationsOperations.modifyRecordsCompletionBlock = { _, _, error in
+                                    if let error = error {
+                                        print(error)
+                                        return
+                                    }
+                                    completion(nil)
+                                }
+                                
+                                self.container.publicCloudDatabase.add(saveInvitationsOperations)
+                            }
+                            
+                            self.container.privateCloudDatabase.add(operation)
+                        case .failure(let error):
+                            print(error)
+                            completion(error)
+                        }
+                    }
+                }
+                self.container.add(metadataFetchOperation)
             case .failure(let error):
-                handler(error)
+                print(error)
+                completion(error)
+            }
+        }
+    }
+    
+    func subscribeToFriendRequests(completion: @escaping (Error?) -> Void) {
+        cloudKitStore.fetchUserRecord { result in
+            switch result {
+            case .success(let record):
+                let predicate = NSPredicate(format:"inviteeRecordName = %@", record.record.recordID.recordName)
+                let subscription = CKQuerySubscription(recordType: "FriendInvitation", predicate: predicate, options: .firesOnRecordCreation)
+                
+                let notification = CKSubscription.NotificationInfo()
+                notification.alertBody = "Someone added you as a friend!"
+                notification.soundName = "default"
+                notification.shouldBadge = true
+                notification.title = "New Friend!"
+                
+                subscription.notificationInfo = notification
+                
+                self.container.publicCloudDatabase.save(subscription) { result, error in
+                    if let error = error {
+                        completion(error)
+                    }
+                    completion(nil)
+                }
+            case .failure(let error):
+                completion(error)
             }
         }
     }
@@ -223,7 +347,7 @@ class FriendsManager: ObservableObject {
     }
     
     func acceptFriendRequest(invitation: FriendInvitationRecord) {
-        guard let shareURLString = invitation.privateShareURL,
+        guard let shareURLString = invitation.shareURL,
               let shareURL = URL(string: shareURLString) else {
             return
         }

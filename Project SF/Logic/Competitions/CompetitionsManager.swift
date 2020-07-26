@@ -424,7 +424,7 @@ class CompetitionsManager {
                         let inviteRecord = CompetitionInvitationRecord()
                         inviteRecord.competitionRecordInviteURL = "\(inviteURL)"
                         inviteRecord.scoreURLHolderInviteURL = "\(shareURL)"
-                        inviteRecord.inviteeID = friend.recordID.recordName
+                        inviteRecord.inviteeID = friend.userRecordID.recordName
                         
                         inviteRecords.append(inviteRecord)
                     }
@@ -457,8 +457,8 @@ class CompetitionsManager {
         then handler: @escaping (Result<[(CKShare.Participant, Friend)], Error>) -> Void
     ) {
         let friendForUserRecordID: [CKRecord.ID: Friend] = Dictionary(uniqueKeysWithValues:
-                                                                        friends.map { (key: $0.recordID, value: $0) })
-        let friendLookupInfomation = friends.map { CKUserIdentity.LookupInfo(userRecordID: $0.recordID) }
+                                                                        friends.map { (key: $0.userRecordID, value: $0) })
+        let friendLookupInfomation = friends.map { CKUserIdentity.LookupInfo(userRecordID: $0.userRecordID) }
         let participantLookupOperation = CKFetchShareParticipantsOperation(userIdentityLookupInfos:
                                                                             friendLookupInfomation)
         participantLookupOperation.qualityOfService = .userInitiated

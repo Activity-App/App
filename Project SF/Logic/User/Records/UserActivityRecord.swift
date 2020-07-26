@@ -7,14 +7,17 @@
 
 import CloudKit
 
+/// A dynamic record for getting or setting a users activity data. This should only be saved in the private db and shared through a CKShare and participants shared database.
 class UserActivityRecord: DynamicRecord {
     
     // MARK: Properties
     
+    /// The type of the record that will appear in CloudKit.
     static let type = "UserActivity"
     
     static let model = Model()
 
+    /// The user info record represented as a CKRecord that can be saved/deleted/modified to/from CloudKit.
     let record: CKRecord
     
     // MARK: Model
@@ -36,6 +39,5 @@ class UserActivityRecord: DynamicRecord {
     required init(record: CKRecord) {
         self.record = record
     }
-
 }
 

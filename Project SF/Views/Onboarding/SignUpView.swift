@@ -47,7 +47,7 @@ struct SignUpView: View {
                     GroupBox {
                         Toggle("Searchable", isOn: $makePublic)
                     }
-                    Text("This will be used so other people can search for you and add you as a friend. You will recieve a friend request that you can accept when someone tries to friends you.")
+                    Text("Enable searchability if you would like to share your activity data with friends. When someone tries to friend you, you can choose to accept the request and share your data.")
                         .font(.caption)
                         .foregroundColor(.secondary)
                         .frame(maxWidth: .infinity, alignment: .leading)

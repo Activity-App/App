@@ -5,7 +5,6 @@
 //  Created by William Taylor on 12/7/20.
 //
 
-import Foundation
 import CloudKit
 
 class CompetitionRecord: DynamicRecord {

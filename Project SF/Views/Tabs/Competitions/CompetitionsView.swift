@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct CompetingPerson: Identifiable, Equatable {
     var id = UUID()
@@ -24,21 +25,36 @@ struct CompetitionsView: View {
     
     @StateObject var competitionsController = CompetitionsController()
     let friends = FriendsManager()
+    let notifications = NotificationManager()
 
     var body: some View {
         NavigationView {
             List {
-                Button("access") {
-                    friends.requestDiscoveryPermission { _ in }
+//                Button("access") {
+//                    friends.requestDiscoveryPermission { _ in }
+//                }
+//                Button("search") {
+//                    friends.discoverFriends { result in print(result) }
+//                }
+                Button("Begin sharing") {
+                    friends.beginSharing { error in
+                        print(error ?? "success")
+                    }
                 }
-                Button("search") {
-                    friends.discoverFriends { result in print(result) }
+                Button("Allow Notifications") {
+                    notifications.requestPermission { error in
+                        print(error ?? "success")
+                    }
                 }
-                Button("friends") {
-                    friends.beginSharing()
+                Button("Subscribe to changes") {
+                    friends.subscribeToFriendRequests { error in
+                        print(error ?? "success")
+                    }
                 }
-                Button("friend requests") {
-                    friends.fetchFriendRequest()
+                Button("Invite user") {
+                    friends.invite(friends: [Friend(userRecordID: CKRecord.ID(recordName: "_ca83d0962e8569057e2d4bece6c0a335"))]) { error in
+                        print(error ?? "success")
+                    }
                 }
                 
                 Section(header: Text("Current Activity")) {
