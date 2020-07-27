@@ -27,7 +27,7 @@ class UserInfoRecord: DynamicRecord {
         let username = ModelItem<String>(key: "username")
         let bio = ModelItem<String>(key: "bio")
         let profilePictureURL = ModelItem<String>(key: "profilePictureURL")
-        let userRecordID = ModelItem<String>(key: "userRecordID")
+        let userRecordName = ModelItem<String>(key: "userRecordName")
     }
     
     // MARK: Init
@@ -41,7 +41,7 @@ class UserInfoRecord: DynamicRecord {
     func asFriend() -> Friend {
         let friend = Friend(
             userInfoRecordID: self.record.recordID,
-            userRecordID: CKRecord.ID(recordName: self.userRecordID ?? "")
+            userRecordID: CKRecord.ID(recordName: self.userRecordName ?? "")
         )
         return friend
     }

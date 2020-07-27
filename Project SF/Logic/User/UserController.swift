@@ -33,14 +33,14 @@ class UserController: ObservableObject {
         loading = true
         
         let recordName = UUID().uuidString
-        userRecord.userInfoRecordID = recordName
+        userRecord.userInfoRecordName = recordName
         
         syncUser { error in
             if let error = error {
                 completion(error)
             } else {
                 let newRecord = UserInfoRecord(recordID: CKRecord.ID(recordName: recordName))
-                newRecord.userRecordID = userRecord.record.recordID.recordName
+                newRecord.userRecordName = userRecord.record.recordID.recordName
                 
                 self.cloudKitStore.saveRecord(newRecord.record, scope: .public) { result in
                     DispatchQueue.main.async {
@@ -169,7 +169,7 @@ class UserController: ObservableObject {
         }
         loading = true
         
-        let recordID = CKRecord.ID(recordName: userRecord.userInfoRecordID ?? "")
+        let recordID = CKRecord.ID(recordName: userRecord.userInfoRecordName ?? "")
         cloudKitStore.fetchRecord(with: recordID, scope: .public) { result in
             DispatchQueue.main.async {
                 self.loading = false
@@ -271,10 +271,11 @@ class UserController: ObservableObject {
         }
     }
     
-    /// Tries to sync user info to the UserInfo record in the SharedToFriendsDataZone. This ensures **MAKE SINGLE RECORD FOR ALL SHARED TO FRIENDS DATA**
+    /// Tries to sync user info to the UserInfo record in the SharedToFriendsDataZone. This ensures data shared and public data is kept in sync. You should favor getting data from the public data if it is available rather than the shared db. This is only a backup for when the user does not want to store their data in the public db.XDDFG
     private func tryToSyncUserInfoToPrivateDb() {
         guard let userInfoRecord = userInfoRecord else { return }
-        cloudKitStore.fetchRecords(with: "UserInfo", zone: CKRecordZone.ID(zoneName: "SharedToFriendsDataZone"), scope: .private) { result in
+        let zone = CKRecordZone.ID(zoneName: "SharedToFriendsDataZone")
+        cloudKitStore.fetchRecords(with: "UserInfo", zone: zone, scope: .private) { result in
             switch result {
             case .success(let records):
                 /// There was an existing user info record in the shared to friends data zone.

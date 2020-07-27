@@ -60,7 +60,12 @@ struct SignUpView: View {
                     GroupBox {
                         Toggle("Public", isOn: $makePublic)
                     }
-                    Text("Your name, bio and profile picture are private and only visible to your friends by default. You can choose to make this information public if you would like it to show to everyone.")
+                    Text(
+                        """
+                        Your name, bio and profile picture are private and only visible to your friends by default.
+                        You can choose to make this information public if you would like it to show to everyone.
+                        """
+                    )
                         .font(.caption)
                         .foregroundColor(.secondary)
                         .frame(maxWidth: .infinity, alignment: .leading)

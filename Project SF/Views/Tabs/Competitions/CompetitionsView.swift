@@ -52,7 +52,7 @@ struct CompetitionsView: View {
                     }
                 }
                 Button("Invite user") {
-                    friends.invite(friends: [Friend(userRecordID: CKRecord.ID(recordName: "_ca83d0962e8569057e2d4bece6c0a335"))]) { error in
+                    friends.invite(users: ["_ca83d0962e8569057e2d4bece6c0a335"]) { error in
                         print(error ?? "success")
                     }
                 }

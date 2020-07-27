@@ -1,5 +1,5 @@
 //
-//  FriendInvitationRecord.swift
+//  FriendRequestRecord.swift
 //  Project SF
 //
 //  Created by Christian Privitelli on 25/7/20.
@@ -7,11 +7,11 @@
 
 import CloudKit
 
-class FriendInvitationRecord: DynamicRecord {
+class FriendRequestRecord: DynamicRecord {
     
     // MARK: Properties
     
-    static let type = "FriendInvitation"
+    static let type = "FriendRequest"
     
     static let model = Model()
 

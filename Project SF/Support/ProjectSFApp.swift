@@ -10,7 +10,9 @@ struct ProjectSFApp: App {
  
     let cloudKitStore = CloudKitStore.shared
 
-    @AppStorage("showOnboarding") var showOnboarding = true
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
+    @State var showOnboarding = true
     @StateObject var healthKit = HealthKitController()
     @StateObject var alert = AlertManager()
     
