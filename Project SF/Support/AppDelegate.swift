@@ -5,16 +5,59 @@
 //  Created by Christian Privitelli on 27/7/20.
 //
 
-import SwiftUI
+import UIKit
+import CloudKit
 
 class AppDelegate: NSObject, UIApplicationDelegate {
+    
+    let cloudKitStore = CloudKitStore.shared
+    
     func application(
         _ application: UIApplication,
         didReceiveRemoteNotification userInfo: [AnyHashable : Any],
         fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
     ) {
         print(userInfo)
-        completionHandler(.newData)
+        guard let ckInfo = userInfo["ck"] as? [String: Any] else { return }
+        guard let queryInfo = ckInfo["qry"] as? [String: Any] else { return }
+        let friendRequestRecordName = queryInfo["rid"] as? String ?? ""
+        
+        cloudKitStore.fetchRecord(with: CKRecord.ID(recordName: friendRequestRecordName), scope: .public) { result in
+            switch result {
+            case .success(let record):
+                let friendRequestRecord = FriendRequestRecord(record: record)
+                let userInfoRecordName = friendRequestRecord.fromUserInfoWithRecordName ?? ""
+                print(userInfoRecordName)
+                self.cloudKitStore.fetchRecord(with: CKRecord.ID(recordName: userInfoRecordName), scope: .public) { result in
+                    switch result {
+                    case .success(let userInfoRecordRaw):
+                        let userInfoRecord = UserInfoRecord(record: userInfoRecordRaw)
+                        guard let username = userInfoRecord.username else { return }
+                        let name = userInfoRecord.name
+
+                        let notification = UNMutableNotificationContent()
+                        notification.title = "New Friend Request"
+                        notification.sound = UNNotificationSound.default
+                        notification.userInfo = ["FRIEND_REQUEST_RECORD_NAME": friendRequestRecordName]
+                        notification.categoryIdentifier = "FRIEND_REQUEST"
+                        
+                        if let name = name, name != "" {
+                            notification.body = "\(name) sent you a friend request!"
+                        } else {
+                            notification.body = "New friend request from \(username)"
+                        }
+                        
+                        NotificationManager.shared.send(notification)
+                        
+                        completionHandler(.newData)
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
         // This is the data that is returned:
         /*
          [AnyHashable("aps"): {

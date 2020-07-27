@@ -25,7 +25,6 @@ struct CompetitionsView: View {
     
     @StateObject var competitionsController = CompetitionsController()
     let friends = FriendsManager()
-    let notifications = NotificationManager()
 
     var body: some View {
         NavigationView {
@@ -42,7 +41,7 @@ struct CompetitionsView: View {
                     }
                 }
                 Button("Allow Notifications") {
-                    notifications.requestPermission { error in
+                    NotificationManager.shared.requestPermission { error in
                         print(error ?? "success")
                     }
                 }

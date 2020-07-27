@@ -271,7 +271,7 @@ class UserController: ObservableObject {
         }
     }
     
-    /// Tries to sync user info to the UserInfo record in the SharedToFriendsDataZone. This ensures data shared and public data is kept in sync. You should favor getting data from the public data if it is available rather than the shared db. This is only a backup for when the user does not want to store their data in the public db.XDDFG
+    /// Tries to sync user info to the UserInfo record in the SharedToFriendsDataZone. This ensures data shared and public data is kept in sync. You should favor getting data from the public data if it is available rather than the shared db. This is only a backup for when the user does not want to store their data in the public db.
     private func tryToSyncUserInfoToPrivateDb() {
         guard let userInfoRecord = userInfoRecord else { return }
         let zone = CKRecordZone.ID(zoneName: "SharedToFriendsDataZone")

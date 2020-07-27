@@ -366,7 +366,7 @@ class FriendsManager: ObservableObject {
                     print("no friends oof")
                     return
                 }
-                self.acceptFriendRequest(invitation: invitationRecords.first!)
+                //self.acceptFriendRequest(invitation: invitationRecords.first!)
                 print("found 1")
             }
             
@@ -374,9 +374,10 @@ class FriendsManager: ObservableObject {
         }
     }
     
-    func acceptFriendRequest(invitation: FriendRequestRecord) {
+    func acceptFriendRequest(invitation: FriendRequestRecord, completion: @escaping (Error?) -> Void) {
         guard let shareURLString = invitation.shareURL,
               let shareURL = URL(string: shareURLString) else {
+            completion(FriendsManagerError.unknownError)
             return
         }
         
@@ -387,6 +388,7 @@ class FriendsManager: ObservableObject {
         
         metadataFetchOperation.perShareMetadataBlock = { _, metadata, error in
             if let error = error {
+                completion(error)
                 print(error)
                 return
             }
@@ -396,6 +398,7 @@ class FriendsManager: ObservableObject {
         
         metadataFetchOperation.fetchShareMetadataCompletionBlock = { error in
             if let error = error {
+                completion(error)
                 print(error)
             }
             let shareURLMetadata = shareMetadata.first { $0.share.url == shareURL }
@@ -404,6 +407,7 @@ class FriendsManager: ObservableObject {
             
             acceptOperation.acceptSharesCompletionBlock = { error in
                 if let error = error {
+                    completion(error)
                     print(error)
                     return
                 }
@@ -411,15 +415,16 @@ class FriendsManager: ObservableObject {
                 fetchURLHolderOperation.qualityOfService = .userInitiated
                 fetchURLHolderOperation.fetchRecordsCompletionBlock = { records, error in
                     if let error = error {
+                        completion(error)
                         print(error)
                         return
                     }
                     guard let recordRaw = records?.first?.value else {
-                        print("Oh no....")
+                        completion(error)
                         return
                     }
                     let record = SharedWithFriendsDataRecord(record: recordRaw)
-                    print(record.move!)
+                    completion(nil)
                 }
                 
                 self.container.sharedCloudDatabase.add(fetchURLHolderOperation)
