@@ -26,14 +26,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             switch result {
             case .success(let record):
                 let friendRequestRecord = FriendRequestRecord(record: record)
-                let userInfoRecordName = friendRequestRecord.fromUserInfoWithRecordName ?? ""
-                print(userInfoRecordName)
-                self.cloudKitStore.fetchRecord(with: CKRecord.ID(recordName: userInfoRecordName), scope: .public) { result in
+                let publicDataRecordName = friendRequestRecord.fromPublicDataWithRecordName ?? ""
+                print(publicDataRecordName)
+                self.cloudKitStore.fetchRecord(with: CKRecord.ID(recordName: publicDataRecordName), scope: .public) { result in
                     switch result {
-                    case .success(let userInfoRecordRaw):
-                        let userInfoRecord = UserInfoRecord(record: userInfoRecordRaw)
-                        guard let username = userInfoRecord.username else { return }
-                        let name = userInfoRecord.name
+                    case .success(let publicDataRecordRaw):
+                        let publicDataRecord = PublicUserRecord(record: publicDataRecordRaw)
+                        guard let username = publicDataRecord.username else { return }
+                        let name = publicDataRecord.name
 
                         let notification = UNMutableNotificationContent()
                         notification.title = "New Friend Request"

@@ -8,11 +8,11 @@
 import CloudKit
 
 struct Friend: Hashable {
-    let userInfoRecordID: CKRecord.ID?
-    let userRecordID: CKRecord.ID
+    let publicUserRecordID: CKRecord.ID?
+    let privateUserRecordID: CKRecord.ID
     
-    init(userInfoRecordID: CKRecord.ID? = nil, userRecordID: CKRecord.ID) {
-        self.userInfoRecordID = userInfoRecordID
-        self.userRecordID = userRecordID
+    init(publicUserRecordID: CKRecord.ID? = nil, privateUserRecordID: CKRecord.ID) {
+        self.publicUserRecordID = publicUserRecordID
+        self.privateUserRecordID = privateUserRecordID
     }
 }

@@ -61,14 +61,14 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
-        let friendRequestRecordName = userInfo["FRIEND_REQUEST_RECORD_NAME"] as! String
+        let friendRequestRecordName = userInfo["FRIEND_REQUEST_RECORD_NAME"] as? String ?? ""
         
         switch response.actionIdentifier {
         case "ACCEPT_ACTION":
             CloudKitStore.shared.fetchRecord(with: CKRecord.ID(recordName: friendRequestRecordName), scope: .public) { result in
                 switch result {
                 case .success(let record):
-                    FriendsManager().acceptFriendRequest(invitation: FriendRequestRecord(record: record)) {
+                    FriendsManager().acceptFriendRequest(invitation: FriendRequestRecord(record: record)) { _ in
                         completionHandler()
                     }
                 case .failure(let error):

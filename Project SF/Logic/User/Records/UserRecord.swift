@@ -27,8 +27,12 @@ class UserRecord: DynamicRecord {
         let username = ModelItem<String>(key: "username")
         let bio = ModelItem<String>(key: "bio")
         let profilePictureURL = ModelItem<String>(key: "profilePictureURL")
-        let userInfoRecordName = ModelItem<String>(key: "userInfoRecordName")
+        
+        let publicUserRecordName = ModelItem<String>(key: "publicUserRecordName")
+        
+        let friendPublicRecordNames = ModelItem<[String]>(key: "friendPublicRecordNames")
         let friendShareURL = ModelItem<String>(key: "friendShareURL")
+        
         let scoreRecordZoneName = ModelItem<String>(key: "scoreRecordZoneName")
         let scoreRecordRecordName = ModelItem<String>(key: "scoreRecordRecordName")
         let scoreRecordPublicShareURL = ModelItem<String>(key: "scoreRecordPublicShareURL")

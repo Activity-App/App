@@ -14,13 +14,6 @@ class FriendsManager: ObservableObject {
     private let container: CKContainer
     private let cloudKitStore = CloudKitStore.shared
     
-    @Published var friends: [Friend] = [
-        Friend(userRecordID: CKRecord.ID(recordName: "_ca83d0962e8569057e2d4bece6c0a335")),
-        Friend(userRecordID: CKRecord.ID(recordName: "_9f53c520a678dda39e348fb0624c49c2"))
-    ]
-    
-    @Published var sharingPermission = false
-    
     init(container: CKContainer = .appDefault) {
         self.container = container
     }
@@ -73,7 +66,7 @@ class FriendsManager: ObservableObject {
                         let predicate = NSPredicate(format: "userRecordID == %@", recordID)
                         
                         CloudKitStore.shared.fetchRecords(
-                            with: UserInfoRecord.self,
+                            with: PublicUserRecord.self,
                             predicate: predicate,
                             scope: .public
                         ) { result in
@@ -113,7 +106,7 @@ class FriendsManager: ObservableObject {
                     switch result {
                     case .success(let userRecord):
                         /// Create an empty `SharedWithFriendsData` record in the created zone.
-                        let sharedData = SharedWithFriendsDataRecord(recordID: CKRecord.ID(zoneID: zone.zoneID))
+                        let sharedData = SharedUserRecord(recordID: CKRecord.ID(zoneID: zone.zoneID))
                         sharedData.name = userRecord.name
                         sharedData.username = userRecord.username
                         sharedData.bio = userRecord.bio
@@ -183,7 +176,7 @@ class FriendsManager: ObservableObject {
     
     /// Creates friend requests for each friend in the array of friends input in the public db.
     /// - Parameters:
-    ///   - friends: The friends you would like to invite.
+    ///   - users: The users you would like to invite. Array of private user record names.
     ///   - completion: What to do when the operation completes.
     ///
     /// For this function to work correctly, a CKShare containing data to share with friends is required. Only run this function after you are  sure you have previously run `beginSharing`, otherwise it will fail.
@@ -268,7 +261,7 @@ class FriendsManager: ObservableObject {
                                 for userRecordName in users {
                                     let invite = FriendRequestRecord()
                                     invite.inviteeRecordName = userRecordName
-                                    invite.fromUserInfoWithRecordName = record.userInfoRecordName
+                                    invite.fromPublicUserWithRecordName = record.publicUserRecordName
                                     invite.shareURL = url.absoluteString
                                     inviteRecords.append(invite)
                                 }
@@ -304,7 +297,7 @@ class FriendsManager: ObservableObject {
         }
     }
     
-    /// Subscribe to new friend requests sent to the current user. A silent notification with the invite data
+    /// Subscribe to new friend requests sent to the current user. A silent notification with the invite data will be sent and handled in the AppDelegate.
     /// - Parameter completion: What to do when the operation completes.
     func subscribeToFriendRequests(completion: @escaping (Error?) -> Void) {
         cloudKitStore.fetchUserRecord { result in
@@ -423,7 +416,7 @@ class FriendsManager: ObservableObject {
                         completion(error)
                         return
                     }
-                    let record = SharedWithFriendsDataRecord(record: recordRaw)
+                    let record = SharedUserRecord(record: recordRaw)
                     completion(nil)
                 }
                 

@@ -78,7 +78,7 @@ struct SignUpView: View {
                     isActive: $nextPage
                 ) {
                     signedUp = true
-                    userController.createUserInfoRecord { error in
+                    userController.createPublicDataRecord { error in
                         if let error = error {
                             print(error)
                             presentErrorAlert()
@@ -104,7 +104,7 @@ struct SignUpView: View {
             .navigationTitle("Sign Up")
         }
         .onAppear {
-            userController.updateUser { error in
+            userController.updatePrivateUser { error in
                 if let error = error {
                     print(error)
                     presentErrorAlert()

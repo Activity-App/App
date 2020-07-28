@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3004A97724CBD92F004D823D /* UserInfoRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004A97624CBD92F004D823D /* UserInfoRecord.swift */; };
+		3004A97724CBD92F004D823D /* PublicUserRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004A97624CBD92F004D823D /* PublicUserRecord.swift */; };
 		3004A97924CC01BA004D823D /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004A97824CC01BA004D823D /* UserController.swift */; };
 		3004A97B24CC0486004D823D /* UserStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004A97A24CC0486004D823D /* UserStruct.swift */; };
 		30132FF024CA78E000CB6683 /* CompetitionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30132FEF24CA78E000CB6683 /* CompetitionStruct.swift */; };
@@ -25,8 +25,7 @@
 		3067712F24BDE0080085F152 /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3067712E24BDE0080085F152 /* FriendsCell.swift */; };
 		3067713124BDE3950085F152 /* FriendDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3067713024BDE3950085F152 /* FriendDetailView.swift */; };
 		3074912924CC5B2200F54BF5 /* FriendRequestRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3074912824CC5B2200F54BF5 /* FriendRequestRecord.swift */; };
-		3074912B24CC607800F54BF5 /* SharedWithFriendsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3074912A24CC607800F54BF5 /* SharedWithFriendsData.swift */; };
-		3074912D24CC61F900F54BF5 /* ActivitySharingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3074912C24CC61F900F54BF5 /* ActivitySharingManager.swift */; };
+		3074912B24CC607800F54BF5 /* SharedUserRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3074912A24CC607800F54BF5 /* SharedUserRecord.swift */; };
 		307648CB24BC81C8005D8531 /* iCloudErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307648CA24BC81C8005D8531 /* iCloudErrorView.swift */; };
 		308FAD8B24B97E7E00126F3F /* OnboardingInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8A24B97E7E00126F3F /* OnboardingInfoCell.swift */; };
 		308FAD8D24B97E8A00126F3F /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8C24B97E8A00126F3F /* PrivacyView.swift */; };
@@ -110,7 +109,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3004A97624CBD92F004D823D /* UserInfoRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRecord.swift; sourceTree = "<group>"; };
+		3004A97624CBD92F004D823D /* PublicUserRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicUserRecord.swift; sourceTree = "<group>"; };
 		3004A97824CC01BA004D823D /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		3004A97A24CC0486004D823D /* UserStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStruct.swift; sourceTree = "<group>"; };
 		30132FEF24CA78E000CB6683 /* CompetitionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionStruct.swift; sourceTree = "<group>"; };
@@ -128,8 +127,7 @@
 		3067712E24BDE0080085F152 /* FriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
 		3067713024BDE3950085F152 /* FriendDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetailView.swift; sourceTree = "<group>"; };
 		3074912824CC5B2200F54BF5 /* FriendRequestRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestRecord.swift; sourceTree = "<group>"; };
-		3074912A24CC607800F54BF5 /* SharedWithFriendsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedWithFriendsData.swift; sourceTree = "<group>"; };
-		3074912C24CC61F900F54BF5 /* ActivitySharingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySharingManager.swift; sourceTree = "<group>"; };
+		3074912A24CC607800F54BF5 /* SharedUserRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedUserRecord.swift; sourceTree = "<group>"; };
 		307648C824BC7DC4005D8531 /* GrantDataAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrantDataAccessView.swift; sourceTree = "<group>"; };
 		307648CA24BC81C8005D8531 /* iCloudErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudErrorView.swift; sourceTree = "<group>"; };
 		308FAD8A24B97E7E00126F3F /* OnboardingInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingInfoCell.swift; sourceTree = "<group>"; };
@@ -289,7 +287,6 @@
 				9C6C74B524BBE57B00C657B0 /* FriendStruct.swift */,
 				304F753024CAC9BF005D46BA /* FriendsManager.swift */,
 				AA69F54724CD270A005B97AC /* FriendsController.swift */,
-				3074912C24CC61F900F54BF5 /* ActivitySharingManager.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -576,8 +573,8 @@
 			isa = PBXGroup;
 			children = (
 				9CCFDD1824B971D600162B0F /* UserRecord.swift */,
-				3004A97624CBD92F004D823D /* UserInfoRecord.swift */,
-				3074912A24CC607800F54BF5 /* SharedWithFriendsData.swift */,
+				3004A97624CBD92F004D823D /* PublicUserRecord.swift */,
+				3074912A24CC607800F54BF5 /* SharedUserRecord.swift */,
 			);
 			path = Records;
 			sourceTree = "<group>";
@@ -727,7 +724,6 @@
 				3067712F24BDE0080085F152 /* FriendsCell.swift in Sources */,
 				30D321BD24BB65D5009CD9D0 /* ProfileSettings.swift in Sources */,
 				30EAB9F924C29B9D005326C8 /* AccentSettings.swift in Sources */,
-				3074912D24CC61F900F54BF5 /* ActivitySharingManager.swift in Sources */,
 				30BFC8DF24B7637F00DAC6D9 /* VisualEffectView.swift in Sources */,
 				30DBA52724CE725A005D9E04 /* AppDelegate.swift in Sources */,
 				9CCFDD1D24B971D600162B0F /* UserRecord.swift in Sources */,
@@ -747,7 +743,7 @@
 				30D3217824BB430E009CD9D0 /* RoundedTextField.swift in Sources */,
 				9CCFDD2024B971D600162B0F /* HealthKitController.swift in Sources */,
 				9C8FAD4624B9E39E00571947 /* Record.swift in Sources */,
-				3004A97724CBD92F004D823D /* UserInfoRecord.swift in Sources */,
+				3004A97724CBD92F004D823D /* PublicUserRecord.swift in Sources */,
 				9C8FAD4A24BAADA600571947 /* CKContainer+AppDefault.swift in Sources */,
 				3004A97924CC01BA004D823D /* UserController.swift in Sources */,
 				302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */,
@@ -765,7 +761,7 @@
 				30251C1B24BFC1B10058D6D2 /* CompetitorCell.swift in Sources */,
 				30CCF30724BED9EA00103C1E /* ActivityOverview.swift in Sources */,
 				30D321BA24BB65D5009CD9D0 /* NotificationSettings.swift in Sources */,
-				3074912B24CC607800F54BF5 /* SharedWithFriendsData.swift in Sources */,
+				3074912B24CC607800F54BF5 /* SharedUserRecord.swift in Sources */,
 				30251C1E24BFE1D50058D6D2 /* PointsGraph.swift in Sources */,
 				30BFC8E724B8041C00DAC6D9 /* ActivityRingsView.swift in Sources */,
 				3090918224B9480F000E3B11 /* RoundedButton.swift in Sources */,

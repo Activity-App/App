@@ -15,5 +15,4 @@ class FriendController: ObservableObject {
     @Published var receievedRequestsFromFriends: [Friend] = []
     @Published var sharingEnabled = UserDefaults.standard.bool(forKey: "sharingEnabled")
     
-    
 }

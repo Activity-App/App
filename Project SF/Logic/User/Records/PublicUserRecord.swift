@@ -1,5 +1,5 @@
 //
-//  UserInfoRecord.swift
+//  PublicDataRecord.swift
 //  Project SF
 //
 //  Created by Christian Privitelli on 25/7/20.
@@ -8,12 +8,12 @@
 import CloudKit
 
 /// A dynamic record for saving users info. This should only be stored in the public db for the purpose of being discoverable to other users.
-class UserInfoRecord: DynamicRecord {
+class PublicUserRecord: DynamicRecord {
     
     // MARK: Properties
     
     /// The type of the record that will appear in CloudKit.
-    static let type = "UserInfo"
+    static let type = "PublicUser"
     
     static let model = Model()
 
@@ -27,7 +27,7 @@ class UserInfoRecord: DynamicRecord {
         let username = ModelItem<String>(key: "username")
         let bio = ModelItem<String>(key: "bio")
         let profilePictureURL = ModelItem<String>(key: "profilePictureURL")
-        let userRecordName = ModelItem<String>(key: "userRecordName")
+        let privateUserRecordName = ModelItem<String>(key: "privateUserRecordName")
     }
     
     // MARK: Init
@@ -40,8 +40,8 @@ class UserInfoRecord: DynamicRecord {
     /// - Returns: Returns the user info for name, username, profile picture as well as a CKRecord.ID for the private user record.
     func asFriend() -> Friend {
         let friend = Friend(
-            userInfoRecordID: self.record.recordID,
-            userRecordID: CKRecord.ID(recordName: self.userRecordName ?? "")
+            publicUserRecordID: self.record.recordID,
+            privateUserRecordID: CKRecord.ID(recordName: self.privateUserRecordName ?? "")
         )
         return friend
     }

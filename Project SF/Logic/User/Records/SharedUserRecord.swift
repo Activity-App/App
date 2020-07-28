@@ -1,5 +1,5 @@
 //
-//  SharedWithFriendsData.swift
+//  SharedDataRecord.swift
 //  Project SF
 //
 //  Created by Christian Privitelli on 25/7/20.
@@ -8,12 +8,12 @@
 import CloudKit
 
 /// A dynamic record for getting or setting all data that should be shared with a users friends. This should only be saved in the private db and shared through a CKShare and participants shared database.
-class SharedWithFriendsDataRecord: DynamicRecord {
+class SharedUserRecord: DynamicRecord {
     
     // MARK: Properties
     
     /// The type of the record that will appear in CloudKit.
-    static let type = "SharedWithFriendsData"
+    static let type = "SharedUser"
     
     static let model = Model()
 
@@ -37,7 +37,7 @@ class SharedWithFriendsDataRecord: DynamicRecord {
         let username = ModelItem<String>(key: "username")
         let bio = ModelItem<String>(key: "bio")
         let profilePictureURL = ModelItem<String>(key: "profilePictureURL")
-        let userRecordID = ModelItem<String>(key: "userRecordID")
+        let privateUserRecordName = ModelItem<String>(key: "privateUserRecordName")
     }
     
     // MARK: Init

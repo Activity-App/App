@@ -16,48 +16,55 @@ class UserController: ObservableObject {
     
     private let cloudKitStore = CloudKitStore.shared
     
-    private var userRecord: UserRecord?
-    var userInfoRecord: UserInfoRecord?
+    private var privateUserRecord: UserRecord?
+    private var publicUserRecord: PublicUserRecord?
     
     @Published var user: User?
     
     @Published var loading = false
     
-    /// Creates a `UserInfo` record and saves it to the public DB.
+    /// Creates a `PublicUser` record and saves it to the public DB.
     /// - Parameter completion: What to do when the operation completes. Optional error is there if something fails.
-    func createUserInfoRecord(completion: @escaping (Error?) -> Void) {
-        guard let userRecord = userRecord else {
-            completion(UserControllerError.doesNotExist)
+    func createPublicUserRecord(completion: @escaping (UserControllerError?) -> Void) {
+        /// Look for currently saved private user.
+        guard let privateUserRecord = privateUserRecord else {
+            completion(.doesNotExist)
             return
         }
         loading = true
         
+        /// Create a new randomized record name and save it to the private record.
         let recordName = UUID().uuidString
-        userRecord.userInfoRecordName = recordName
         
-        syncUser { error in
-            if let error = error {
-                completion(error)
-            } else {
-                let newRecord = UserInfoRecord(recordID: CKRecord.ID(recordName: recordName))
-                newRecord.userRecordName = userRecord.record.recordID.recordName
-                
-                self.cloudKitStore.saveRecord(newRecord.record, scope: .public) { result in
-                    DispatchQueue.main.async {
-                        self.loading = false
-                        switch result {
-                        case .success:
-                            self.updateUserInfo { error in
+        let newRecord = PublicUserRecord(recordID: CKRecord.ID(recordName: recordName))
+        newRecord.privateUserRecordName = privateUserRecord.record.recordID.recordName
+        
+        self.cloudKitStore.saveRecord(newRecord.record, scope: .public) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    /// Check it was saved correctly and update the `publicUserRecord`
+                    self.updatePublicUser { error in
+                        if let error = error {
+                            completion(.cloudKitError(error))
+                            self.loading = false
+                        } else {
+                            /// Update the private user record with the record name of the public user record.
+                            privateUserRecord.publicUserRecordName = recordName
+                            self.syncPrivateUser { error in
                                 if let error = error {
-                                    completion(error)
+                                    completion(.cloudKitError(error))
+                                    self.loading = true
                                 } else {
                                     completion(nil)
+                                    self.loading = false
                                 }
                             }
-                        case .failure(let error):
-                            completion(error)
                         }
                     }
+                case .failure(let error):
+                    self.loading = false
+                    completion(.cloudKitError(error))
                 }
             }
         }
@@ -68,8 +75,8 @@ class UserController: ObservableObject {
     ///   - data: The data to save. Initialise a `User` with the values you would like to update in the cloud.
     ///   - publicDb: Should applicable user info data be saved in the public db.
     ///   - completion: What should happen when the operation is completed.
-    func set(data: User, publicDb: Bool, completion: @escaping (Error?) -> Void) {
-        guard let userInfoRecord = userInfoRecord, let userRecord = userRecord else {
+    func set(data: User, publicDb: Bool, completion: @escaping (UserControllerError?) -> Void) {
+        guard let publicUserRecord = publicUserRecord, let privateUserRecord = privateUserRecord else {
             completion(UserControllerError.doesNotExist)
             return
         }
@@ -77,59 +84,60 @@ class UserController: ObservableObject {
         loading = true
         
         if let name = data.name {
-            userRecord.name = name
-            userInfoRecord.name = name
+            privateUserRecord.name = name
+            publicUserRecord.name = name
         }
         if let username = data.username {
-            userRecord.username = username
-            userInfoRecord.username = username
+            privateUserRecord.username = username
+            publicUserRecord.username = username
         }
         if let bio = data.bio {
-            userRecord.bio = bio
-            userInfoRecord.bio = bio
+            privateUserRecord.bio = bio
+            publicUserRecord.bio = bio
         }
         if let pfp = data.profilePictureURL {
-            userRecord.profilePictureURL = pfp
-            userInfoRecord.profilePictureURL = pfp
+            privateUserRecord.profilePictureURL = pfp
+            publicUserRecord.profilePictureURL = pfp
         }
         if let srZone = data.scoreRecordZoneName {
-            userRecord.scoreRecordZoneName = srZone
+            privateUserRecord.scoreRecordZoneName = srZone
         }
         if let srRecordName = data.scoreRecordRecordName {
-            userRecord.scoreRecordRecordName = srRecordName
+            privateUserRecord.scoreRecordRecordName = srRecordName
         }
         if let srShareURL = data.scoreRecordPublicShareURL {
-            userRecord.scoreRecordPublicShareURL = srShareURL
+            privateUserRecord.scoreRecordPublicShareURL = srShareURL
         }
         if let friendShareURL = data.friendShareURL {
-            userRecord.friendShareURL = friendShareURL
+            privateUserRecord.friendShareURL = friendShareURL
         }
         
-        syncUser { error in
+        syncPrivateUser { error in
             if let error = error {
                 self.loading = false
-                completion(error)
+                completion(.cloudKitError(error))
             } else {
-                self.tryToSyncUserInfoToPrivateDb()
+                self.tryToSyncPublicUserToSharedUser()
                 if publicDb {
-                    self.syncUserInfo { error in
+                    self.syncPublicUser { error in
                         self.loading = false
                         if let error = error {
-                            completion(error)
+                            completion(.cloudKitError(error))
                         } else {
                             completion(nil)
                         }
                     }
                 } else {
+                    self.loading = false
                     completion(nil)
                 }
             }
         }
     }
     
-    /// Update local values for `Users` record with values from the cloud.
+    /// Update local values for `Users` record with values from the private db.
     /// - Parameter completion: What should happen when the operation is completed.
-    func updateUser(completion: @escaping (Error?) -> Void) {
+    func updatePrivateUser(completion: @escaping (UserControllerError?) -> Void) {
         loading = true
         
         cloudKitStore.fetchUserRecord { result in
@@ -137,54 +145,54 @@ class UserController: ObservableObject {
                 self.loading = false
                 switch result {
                 case .success(let record):
-                    self.userRecord = record
-                    self.user = self.userRecord.map {
+                    self.privateUserRecord = record
+                    self.user = self.privateUserRecord.map {
                         User(
                             name: $0.name,
                             username: $0.username,
                             bio: $0.bio,
-                            profilePictureURL: $0.profilePictureURL,
-                            scoreRecordZoneName: $0.scoreRecordZoneName,
-                            scoreRecordRecordName: $0.scoreRecordRecordName,
-                            scoreRecordPublicShareURL: $0.scoreRecordPublicShareURL
+                            profilePictureURL: $0.profilePictureURL
                         )
                     }
                     self.loading = false
                     completion(nil)
                 case .failure(let error):
                     self.loading = false
-                    completion(error)
+                    completion(.cloudKitError(error))
                 }
             }
         }
     }
     
-    /// Update local values for `UserInfo` record with values from the **PUBLIC** db.
-    /// This should only be used if you want to fetch specifically from the public db. Use `updateUser` for guaranteed results.
+    /// Update local values for `PublicUser` record with values from the public db.
     /// - Parameter completion: What should happen when the operation is completed.
-    func updateUserInfo(completion: @escaping (Error?) -> Void) {
-        guard let userRecord = userRecord else {
-            completion(UserControllerError.doesNotExist)
+    ///
+    /// This should only be used if you want to fetch specifically from the public db. Use `updatePrivateUser` for guaranteed results.
+    func updatePublicUser(completion: @escaping (UserControllerError?) -> Void) {
+        guard let privateUserRecord = privateUserRecord else {
+            completion(.doesNotExist)
             return
         }
         loading = true
         
-        let recordID = CKRecord.ID(recordName: userRecord.userInfoRecordName ?? "")
+        let recordID = CKRecord.ID(recordName: privateUserRecord.publicUserRecordName ?? "")
         cloudKitStore.fetchRecord(with: recordID, scope: .public) { result in
             DispatchQueue.main.async {
                 self.loading = false
                 switch result {
                 case .success(let record):
-                    self.userInfoRecord = UserInfoRecord(record: record)
-                    self.user?.name = self.userInfoRecord!.name
-                    self.user?.username = self.userInfoRecord!.username
-                    self.user?.bio = self.userInfoRecord!.bio
-                    self.user?.profilePictureURL = self.userInfoRecord!.profilePictureURL
-                    self.loading = false
+                    self.publicUserRecord = PublicUserRecord(record: record)
+                    self.user = self.publicUserRecord.map {
+                        User(
+                            name: $0.name,
+                            username: $0.username,
+                            bio: $0.bio,
+                            profilePictureURL: $0.profilePictureURL
+                        )
+                    }
                     completion(nil)
                 case .failure(let error):
-                    self.loading = false
-                    completion(error)
+                    completion(.cloudKitError(error))
                 }
             }
         }
@@ -192,20 +200,20 @@ class UserController: ObservableObject {
     
     /// Expose user info to the public db.
     /// - Parameter completion: What should happen when the operation is completed.
-    func makeUserInfoPublic(completion: @escaping (Error?) -> Void) {
-        guard let userInfoRecord = userInfoRecord, let userRecord = userRecord else {
+    func makePrivateUserInfoPublic(completion: @escaping (Error?) -> Void) {
+        guard let publicUserRecord = publicUserRecord, let privateUserRecord = privateUserRecord else {
             completion(UserControllerError.doesNotExist)
             return
         }
         
         loading = true
         
-        userInfoRecord.name = userRecord.name
-        userInfoRecord.username = userRecord.username
-        userInfoRecord.bio = userRecord.bio
-        userInfoRecord.profilePictureURL = userRecord.profilePictureURL
+        publicUserRecord.name = privateUserRecord.name
+        publicUserRecord.username = privateUserRecord.username
+        publicUserRecord.bio = privateUserRecord.bio
+        publicUserRecord.profilePictureURL = privateUserRecord.profilePictureURL
         
-        syncUserInfo { error in
+        syncPublicUser { error in
             self.loading = false
             if let error = error {
                 completion(error)
@@ -217,20 +225,20 @@ class UserController: ObservableObject {
     
     /// Hide user info from the public db.
     /// - Parameter completion: What should happen when the operation is completed.
-    func makeUserInfoPrivate(completion: @escaping (Error?) -> Void) {
-        guard let userInfoRecord = userInfoRecord else {
+    func makePublicUserInfoPrivate(completion: @escaping (Error?) -> Void) {
+        guard let publicUserDataRecord = publicUserRecord else {
             completion(UserControllerError.doesNotExist)
             return
         }
         
         loading = true
         
-        userInfoRecord.name = ""
-        userInfoRecord.username = ""
-        userInfoRecord.bio = ""
-        userInfoRecord.profilePictureURL = ""
+        publicUserDataRecord.name = ""
+        publicUserDataRecord.username = ""
+        publicUserDataRecord.bio = ""
+        publicUserDataRecord.profilePictureURL = ""
         
-        syncUserInfo { error in
+        syncPublicUser { error in
             self.loading = false
             if let error = error {
                 completion(error)
@@ -242,20 +250,20 @@ class UserController: ObservableObject {
     
     // MARK: Private Methods
     
-    /// Sync changes to the `userRecord` property to the cloud.
+    /// Sync changes to the `privateUserRecord` property to the cloud.
     /// - Parameter completion: What should happen when the operation is completed.
-    private func syncUser(completion: @escaping (Error?) -> Void) {
-        guard let userRecord = userRecord else {
+    private func syncPrivateUser(completion: @escaping (Error?) -> Void) {
+        guard let privateUserRecord = privateUserRecord else {
             completion(UserControllerError.doesNotExist)
             return
         }
         loading = true
         
-        cloudKitStore.saveUserRecord(userRecord, savePolicy: .changedKeys) { result in
+        cloudKitStore.saveUserRecord(privateUserRecord, savePolicy: .changedKeys) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success:
-                    self.updateUser { error in
+                    self.updatePrivateUser { error in
                         self.loading = false
                         if let error = error {
                             completion(error)
@@ -271,20 +279,20 @@ class UserController: ObservableObject {
         }
     }
     
-    /// Tries to sync user info to the UserInfo record in the SharedToFriendsDataZone. This ensures data shared and public data is kept in sync. You should favor getting data from the public data if it is available rather than the shared db. This is only a backup for when the user does not want to store their data in the public db.
-    private func tryToSyncUserInfoToPrivateDb() {
-        guard let userInfoRecord = userInfoRecord else { return }
+    /// Tries to sync user info to the SharedUser record in the SharedToFriendsDataZone. This ensures shared and public data is kept in sync. You should favor getting data from the public db if it is available rather than the shared db. This is only a backup for when the user does not want to store their data in the public db.
+    private func tryToSyncPublicUserToSharedUser() {
+        guard let publicUserDataRecord = publicUserRecord else { return }
         let zone = CKRecordZone.ID(zoneName: "SharedToFriendsDataZone")
-        cloudKitStore.fetchRecords(with: "UserInfo", zone: zone, scope: .private) { result in
+        cloudKitStore.fetchRecords(with: "PublicUserData", zone: zone, scope: .private) { result in
             switch result {
             case .success(let records):
                 /// There was an existing user info record in the shared to friends data zone.
                 guard let record = records.first else { return }
-                let newRecord = UserInfoRecord(record: record)
-                newRecord.name = userInfoRecord.name
-                newRecord.username = userInfoRecord.username
-                newRecord.bio = userInfoRecord.bio
-                newRecord.profilePictureURL = userInfoRecord.profilePictureURL
+                let newRecord = PublicUserRecord(record: record)
+                newRecord.name = publicUserDataRecord.name
+                newRecord.username = publicUserDataRecord.username
+                newRecord.bio = publicUserDataRecord.bio
+                newRecord.profilePictureURL = publicUserDataRecord.profilePictureURL
                 self.cloudKitStore.saveRecord(newRecord.record, scope: .private) { result in
                     switch result {
                     case .success:
@@ -299,20 +307,20 @@ class UserController: ObservableObject {
         }
     }
     
-    /// Sync changes to the `userInfoRecord` property to the cloud.
+    /// Sync changes to the `privateUserRecord` property to the cloud.
     /// - Parameter completion: What should happen when the operation is completed.
-    private func syncUserInfo(completion: @escaping (Error?) -> Void) {
-        guard let userInfoRecord = userInfoRecord else {
-            completion(UserControllerError.doesNotExist)
+    private func syncPublicUser(completion: @escaping (UserControllerError?) -> Void) {
+        guard let publicUserRecord = publicUserRecord else {
+            completion(.doesNotExist)
             return
         }
         loading = true
         
-        cloudKitStore.saveRecord(userInfoRecord.record, scope: .public) { result in
+        cloudKitStore.saveRecord(publicUserRecord.record, scope: .public) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success:
-                    self.updateUserInfo { error in
+                    self.updatePublicUser { error in
                         self.loading = false
                         if let error = error {
                             completion(error)
@@ -322,7 +330,7 @@ class UserController: ObservableObject {
                     }
                 case .failure(let error):
                     self.loading = false
-                    completion(error)
+                    completion(.cloudKitError(error))
                 }
             }
         }
@@ -332,8 +340,7 @@ class UserController: ObservableObject {
     
     enum UserControllerError: Error {
         case doesNotExist
-        case couldNotSync
-        case couldNotUpdate
         case unknownError
+        case cloudKitError(Error)
     }
 }
