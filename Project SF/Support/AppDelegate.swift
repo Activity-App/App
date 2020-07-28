@@ -14,7 +14,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
     func application(
         _ application: UIApplication,
-        didReceiveRemoteNotification userInfo: [AnyHashable : Any],
+        didReceiveRemoteNotification userInfo: [AnyHashable: Any],
         fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
     ) {
         print(userInfo)
@@ -26,7 +26,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             switch result {
             case .success(let record):
                 let friendRequestRecord = FriendRequestRecord(record: record)
-                let publicDataRecordName = friendRequestRecord.fromPublicDataWithRecordName ?? ""
+                let publicDataRecordName = friendRequestRecord.fromPublicUserWithRecordName ?? ""
                 print(publicDataRecordName)
                 self.cloudKitStore.fetchRecord(with: CKRecord.ID(recordName: publicDataRecordName), scope: .public) { result in
                     switch result {
