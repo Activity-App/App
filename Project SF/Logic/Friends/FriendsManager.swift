@@ -164,6 +164,50 @@ class FriendsManager: ObservableObject {
         }
     }
     
+    func fetchFriends(completion: @escaping (Result<[Friend], Error>) -> Void) {
+        cloudKitStore.fetchUserRecord { result in
+            switch result {
+            case .success(let privateUserRecord):
+                let friendShareURLs = privateUserRecord.friendShareURLs?.map { URL(string: $0)! } ?? []
+                let metadataFetchOperation = CKFetchShareMetadataOperation(shareURLs: friendShareURLs)
+                metadataFetchOperation.qualityOfService = .userInitiated
+                
+                var friends: [Friend] = []
+                
+                metadataFetchOperation.perShareMetadataBlock = { _, metadata, error in
+                    if let error = error {
+                        completion(.failure(error))
+                        print(error)
+                        return
+                    }
+                    guard let metadata = metadata else { return }
+                    let sharedUser = SharedUserRecord(record: metadata.rootRecord!)
+                    let publicUserRecordID = CKRecord.ID(recordName: sharedUser.publicUserRecordName ?? "")
+                    
+                    let friend = Friend(
+                        username: sharedUser.username ?? "",
+                        name: sharedUser.name ?? "",
+                        bio: sharedUser.bio ?? "",
+                        profilePictureURL: sharedUser.profilePictureURL ?? "",
+                        publicUserRecordID: publicUserRecordID,
+                        privateUserRecordID: privateUserRecord.record.recordID
+                    )
+                    
+                    friends.append(friend)
+                }
+                
+                metadataFetchOperation.fetchShareMetadataCompletionBlock = { error in
+                    if let error = error {
+                        completion(.failure(error))
+                    }
+                    completion(.success(friends))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
     /// Create a singular friend request to a friend and save it to the public db.
     /// - Parameters:
     ///   - friend: The friend you would like to invite.
@@ -260,9 +304,9 @@ class FriendsManager: ObservableObject {
                                 
                                 for userRecordName in users {
                                     let invite = FriendRequestRecord()
-                                    invite.inviteeRecordName = userRecordName
-                                    invite.fromPublicUserWithRecordName = record.publicUserRecordName
-                                    invite.shareURL = url.absoluteString
+                                    invite.inviteePrivateUserRecordName = userRecordName
+                                    invite.creatorPublicUserRecordName = record.publicUserRecordName
+                                    invite.creatorShareURL = url.absoluteString
                                     inviteRecords.append(invite)
                                 }
                                 
@@ -328,21 +372,30 @@ class FriendsManager: ObservableObject {
             }
         }
     }
-    
-    func fetchFriendRequest() {
+
+    func fetchFriendRequests(type: FriendRequestType, completion: @escaping (Result<[FriendRequestRecord], Error>) -> Void) {
         container.fetchUserRecordID { recordID, error in
             if let error = error {
-                print(error)
+                completion(.failure(error))
             }
             guard let recordID = recordID else {
-                print("something dumb")
+                completion(.failure(FriendsManagerError.unknownError))
                 return
             }
             
-            // find invitations in the public database matching the users record id
-            let operation = CKQueryOperation(query: CKQuery(recordType: FriendRequestRecord.type,
-                                                            predicate: NSPredicate(format: "inviteeID == %@",
-                                                                                   recordID.recordName)))
+            let userRecord = UserRecord(recordID: recordID)
+            
+            let predicate = NSPredicate(
+                format: type == .received ? "inviteePrivateUserRecordName == %@" :
+                                            "creatorPublicUserRecordName == %@",
+                type == .received ? recordID.recordName : userRecord.publicUserRecordName!
+            )
+            let query = CKQuery(
+                recordType: FriendRequestRecord.type,
+                predicate: type == .all ? NSPredicate(value: true) : predicate
+            )
+            let operation = CKQueryOperation(query: query)
+            
             operation.qualityOfService = .userInitiated
             var invitationRecords: [FriendRequestRecord] = []
             
@@ -352,23 +405,54 @@ class FriendsManager: ObservableObject {
             
             operation.queryCompletionBlock = { _, error in
                 if let error = error {
-                    print(error)
+                    completion(.failure(error))
                     return
                 }
-                if invitationRecords.count == 0 {
-                    print("no friends oof")
-                    return
-                }
-                //self.acceptFriendRequest(invitation: invitationRecords.first!)
-                print("found 1")
+                completion(.success(invitationRecords))
             }
             
             self.container.publicCloudDatabase.add(operation)
         }
     }
     
+    func fetchAndCleanAcceptedRequests(completion: @escaping (Error?) -> Void) {
+        cloudKitStore.fetchUserRecord { result in
+            switch result {
+            case .success(let privateUserRecord):
+                let creatorPredicate = NSPredicate(format: "creatorPublicUserRecordName", privateUserRecord.publicUserRecordName ?? "")
+                let acceptedPredicate = NSPredicate(format: "accepted == true")
+                let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [creatorPredicate, acceptedPredicate])
+                self.cloudKitStore.fetchRecords(with: FriendRequestRecord.self, predicate: predicate, scope: .public) { result in
+                    switch result {
+                    case .success(let friendRequests):
+                        for friendRequest in friendRequests {
+                            let friendRequestRecordID = friendRequest.record.recordID
+                            if friendRequest.inviteeShareURL != nil && friendRequest.accepted ?? false {
+                                privateUserRecord.friendShareURLs?.append(friendRequest.inviteeShareURL!)
+                                self.cloudKitStore.deleteRecord(with: friendRequestRecordID, scope: .public) { result in
+                                    switch result {
+                                    case .success:
+                                        if friendRequests.last?.record == friendRequest.record {
+                                            completion(nil)
+                                        }
+                                    case .failure(let error):
+                                        completion(error)
+                                    }
+                                }
+                            }
+                        }
+                    case .failure(let error):
+                        completion(error)
+                    }
+                }
+            case .failure(let error):
+                completion(error)
+            }
+        }
+    }
+    
     func acceptFriendRequest(invitation: FriendRequestRecord, completion: @escaping (Error?) -> Void) {
-        guard let shareURLString = invitation.shareURL,
+        guard let shareURLString = invitation.creatorShareURL,
               let shareURL = URL(string: shareURLString) else {
             completion(FriendsManagerError.unknownError)
             return
@@ -394,33 +478,42 @@ class FriendsManager: ObservableObject {
                 completion(error)
                 print(error)
             }
-            let shareURLMetadata = shareMetadata.first { $0.share.url == shareURL }
+
             let acceptOperation = CKAcceptSharesOperation(shareMetadatas: shareMetadata)
             acceptOperation.qualityOfService = .userInitiated
             
             acceptOperation.acceptSharesCompletionBlock = { error in
                 if let error = error {
                     completion(error)
-                    print(error)
-                    return
                 }
-                let fetchURLHolderOperation = CKFetchRecordsOperation(recordIDs: [shareURLMetadata!.rootRecordID])
-                fetchURLHolderOperation.qualityOfService = .userInitiated
-                fetchURLHolderOperation.fetchRecordsCompletionBlock = { records, error in
-                    if let error = error {
+                self.cloudKitStore.fetchUserRecord { result in
+                    switch result {
+                    case .success(let userRecord):
+                        if userRecord.friendShareURLs == nil {
+                            userRecord.friendShareURLs = []
+                        }
+                        userRecord.friendShareURLs!.append(shareURL.absoluteString)
+                        self.cloudKitStore.saveUserRecord(userRecord) { result in
+                            switch result {
+                            case .success:
+                                invitation.inviteeShareURL = userRecord.friendShareURL
+                                invitation.accepted = true
+                                self.cloudKitStore.saveRecord(invitation.record, scope: .public) { result in
+                                    switch result {
+                                    case .success:
+                                        completion(nil)
+                                    case .failure(let error):
+                                        completion(error)
+                                    }
+                                }
+                            case .failure(let error):
+                                completion(error)
+                            }
+                        }
+                    case .failure(let error):
                         completion(error)
-                        print(error)
-                        return
                     }
-                    guard let recordRaw = records?.first?.value else {
-                        completion(error)
-                        return
-                    }
-                    let record = SharedUserRecord(record: recordRaw)
-                    completion(nil)
                 }
-                
-                self.container.sharedCloudDatabase.add(fetchURLHolderOperation)
             }
             
             self.container.add(acceptOperation)
@@ -462,4 +555,33 @@ class FriendsManager: ObservableObject {
         case unknownError
         case insufficientPermissions
     }
+    
+    enum FriendRequestType {
+        case sent
+        case received
+        case all
+    }
 }
+//let shareURLMetadata = shareMetadata.first { $0.share.url == shareURL }
+//if let error = error {
+//    completion(error)
+//    print(error)
+//    return
+//}
+//let fetchURLHolderOperation = CKFetchRecordsOperation(recordIDs: [shareURLMetadata!.rootRecordID])
+//fetchURLHolderOperation.qualityOfService = .userInitiated
+//fetchURLHolderOperation.fetchRecordsCompletionBlock = { records, error in
+//    if let error = error {
+//        completion(error)
+//        print(error)
+//        return
+//    }
+//    guard let recordRaw = records?.first?.value else {
+//        completion(error)
+//        return
+//    }
+//    //let record = SharedUserRecord(record: recordRaw)
+//    completion(nil)
+//}
+//
+//self.container.sharedCloudDatabase.add(fetchURLHolderOperation)

@@ -10,6 +10,7 @@
 		3004A97724CBD92F004D823D /* PublicUserRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004A97624CBD92F004D823D /* PublicUserRecord.swift */; };
 		3004A97924CC01BA004D823D /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004A97824CC01BA004D823D /* UserController.swift */; };
 		3004A97B24CC0486004D823D /* UserStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004A97A24CC0486004D823D /* UserStruct.swift */; };
+		300E688C24D13F4100425008 /* FriendRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300E688B24D13F4100425008 /* FriendRequestCell.swift */; };
 		30132FF024CA78E000CB6683 /* CompetitionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30132FEF24CA78E000CB6683 /* CompetitionStruct.swift */; };
 		30132FF224CAB48700CB6683 /* CompetitionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30132FF124CAB48700CB6683 /* CompetitionsController.swift */; };
 		3019CD9924BC9792002564AD /* PlaceBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3019CD9824BC9792002564AD /* PlaceBadgeView.swift */; };
@@ -17,8 +18,6 @@
 		30251C1B24BFC1B10058D6D2 /* CompetitorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30251C1A24BFC1B10058D6D2 /* CompetitorCell.swift */; };
 		30251C1E24BFE1D50058D6D2 /* PointsGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30251C1D24BFE1D50058D6D2 /* PointsGraph.swift */; };
 		30278E9324BC553A00E87E80 /* CompetitionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30278E9224BC553A00E87E80 /* CompetitionDetail.swift */; };
-		302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88924BA199E00FF79D7 /* RingType.swift */; };
-		302CF88C24BA1A4000FF79D7 /* ActivityResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */; };
 		304F753124CAC9BF005D46BA /* FriendsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304F753024CAC9BF005D46BA /* FriendsManager.swift */; };
 		3050123624C0887D00E39019 /* Int+ConvertFromRangeToRange copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3050123524C0887D00E39019 /* Int+ConvertFromRangeToRange copy.swift */; };
 		306719E624C90438006B758D /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306719E524C90438006B758D /* AlertView.swift */; };
@@ -27,6 +26,10 @@
 		3074912924CC5B2200F54BF5 /* FriendRequestRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3074912824CC5B2200F54BF5 /* FriendRequestRecord.swift */; };
 		3074912B24CC607800F54BF5 /* SharedUserRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3074912A24CC607800F54BF5 /* SharedUserRecord.swift */; };
 		307648CB24BC81C8005D8531 /* iCloudErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307648CA24BC81C8005D8531 /* iCloudErrorView.swift */; };
+		307E6D3824D0E993009F16DD /* UserRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD1824B971D600162B0F /* UserRecord.swift */; };
+		307E6D3924D0E999009F16DD /* ActivityResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */; };
+		307E6D3A24D0E999009F16DD /* RingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88924BA199E00FF79D7 /* RingType.swift */; };
+		307E6D3B24D0E99D009F16DD /* View+ForegroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */; };
 		308FAD8B24B97E7E00126F3F /* OnboardingInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8A24B97E7E00126F3F /* OnboardingInfoCell.swift */; };
 		308FAD8D24B97E8A00126F3F /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8C24B97E8A00126F3F /* PrivacyView.swift */; };
 		308FAD9E24B9A0DC00126F3F /* NavigationBarLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD9D24B9A0DC00126F3F /* NavigationBarLabel.swift */; };
@@ -75,7 +78,6 @@
 		9C39F69524C07BAA0073C9FF /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7E74A724BDC05B0032CD88 /* SignUpView.swift */; };
 		9C6C74B324BAEC0B00C657B0 /* DynamicRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6C74B224BAEC0B00C657B0 /* DynamicRecord.swift */; };
 		9C6C74B624BBE57B00C657B0 /* FriendStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6C74B524BBE57B00C657B0 /* FriendStruct.swift */; };
-		9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */; };
 		9C7B4D0824B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B4D0724B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift */; };
 		9C7E74AA24BDC0E10032CD88 /* GrantDataAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7E74A924BDC0E10032CD88 /* GrantDataAccessView.swift */; };
 		9C7E74AC24BDC7790032CD88 /* ScoreURLHolderRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7E74AB24BDC7790032CD88 /* ScoreURLHolderRecord.swift */; };
@@ -85,7 +87,6 @@
 		9C9748E024B9A9AA00FB5F21 /* HKHealthStoreMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9748DF24B9A9AA00FB5F21 /* HKHealthStoreMock.swift */; };
 		9C9748E524B9B05900FB5F21 /* HKActivitySummaryQuery+ResultsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9748E424B9B05900FB5F21 /* HKActivitySummaryQuery+ResultsHandler.m */; };
 		9CCFDD0724B95E9600162B0F /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD0624B95E9600162B0F /* URLSessionMock.swift */; };
-		9CCFDD1D24B971D600162B0F /* UserRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD1824B971D600162B0F /* UserRecord.swift */; };
 		9CCFDD1E24B971D600162B0F /* CloudKitStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD1924B971D600162B0F /* CloudKitStore.swift */; };
 		9CCFDD1F24B971D600162B0F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD1B24B971D600162B0F /* NetworkManager.swift */; };
 		9CCFDD2024B971D600162B0F /* HealthKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFDD1C24B971D600162B0F /* HealthKitController.swift */; };
@@ -112,6 +113,7 @@
 		3004A97624CBD92F004D823D /* PublicUserRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicUserRecord.swift; sourceTree = "<group>"; };
 		3004A97824CC01BA004D823D /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		3004A97A24CC0486004D823D /* UserStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStruct.swift; sourceTree = "<group>"; };
+		300E688B24D13F4100425008 /* FriendRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestCell.swift; sourceTree = "<group>"; };
 		30132FEF24CA78E000CB6683 /* CompetitionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionStruct.swift; sourceTree = "<group>"; };
 		30132FF124CAB48700CB6683 /* CompetitionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsController.swift; sourceTree = "<group>"; };
 		3019CD9824BC9792002564AD /* PlaceBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceBadgeView.swift; sourceTree = "<group>"; };
@@ -466,6 +468,7 @@
 				30D321B424BB65D5009CD9D0 /* FriendsView.swift */,
 				3067712E24BDE0080085F152 /* FriendsCell.swift */,
 				3067713024BDE3950085F152 /* FriendDetailView.swift */,
+				300E688B24D13F4100425008 /* FriendRequestCell.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -705,6 +708,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				307E6D3B24D0E99D009F16DD /* View+ForegroundModifier.swift in Sources */,
+				307E6D3924D0E999009F16DD /* ActivityResult.swift in Sources */,
+				307E6D3A24D0E999009F16DD /* RingType.swift in Sources */,
+				307E6D3824D0E993009F16DD /* UserRecord.swift in Sources */,
 				308FAD9E24B9A0DC00126F3F /* NavigationBarLabel.swift in Sources */,
 				AA69F54824CD270A005B97AC /* FriendsController.swift in Sources */,
 				30D321B524BB65D5009CD9D0 /* CompetitionsView.swift in Sources */,
@@ -726,12 +733,11 @@
 				30EAB9F924C29B9D005326C8 /* AccentSettings.swift in Sources */,
 				30BFC8DF24B7637F00DAC6D9 /* VisualEffectView.swift in Sources */,
 				30DBA52724CE725A005D9E04 /* AppDelegate.swift in Sources */,
-				9CCFDD1D24B971D600162B0F /* UserRecord.swift in Sources */,
 				9C6C74B624BBE57B00C657B0 /* FriendStruct.swift in Sources */,
-				9CCFDD1D24B971D600162B0F /* UserRecord.swift in Sources */,
 				9C2445D824BC009F00D8F4FC /* RoundedNavigationButton.swift in Sources */,
 				30D321B624BB65D5009CD9D0 /* CompetitionCell.swift in Sources */,
 				30132FF024CA78E000CB6683 /* CompetitionStruct.swift in Sources */,
+				300E688C24D13F4100425008 /* FriendRequestCell.swift in Sources */,
 				30ABC14024C565A40060825B /* CompetitionType.swift in Sources */,
 				30D321BC24BB65D5009CD9D0 /* PrivacyAbout.swift in Sources */,
 				30D321B724BB65D5009CD9D0 /* CreateCompetition.swift in Sources */,
@@ -746,18 +752,14 @@
 				3004A97724CBD92F004D823D /* PublicUserRecord.swift in Sources */,
 				9C8FAD4A24BAADA600571947 /* CKContainer+AppDefault.swift in Sources */,
 				3004A97924CC01BA004D823D /* UserController.swift in Sources */,
-				302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */,
 				9C2445DA24BC0D8E00D8F4FC /* CompetitionInvitationRecord.swift in Sources */,
 				9C338BD524BAC4F4003E5048 /* CompetitionsManager.swift in Sources */,
-				9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */,
 				9C338BD724BAD080003E5048 /* RecordKey.swift in Sources */,
 				30D321B924BB65D5009CD9D0 /* ImageSelectionView.swift in Sources */,
 				30D3217D24BB4EDE009CD9D0 /* ActivityRings.swift in Sources */,
 				9C7E74AE24BDC87A0032CD88 /* ScoreRecord.swift in Sources */,
 				30EAB9FF24C325F2005326C8 /* UserDefaults+UIColor.swift in Sources */,
 				30D321BF24BB65D5009CD9D0 /* FriendsView.swift in Sources */,
-				302CF88A24BA199E00FF79D7 /* RingType.swift in Sources */,
-				9C7B4D0624B89AC700FC4456 /* View+ForegroundModifier.swift in Sources */,
 				30251C1B24BFC1B10058D6D2 /* CompetitorCell.swift in Sources */,
 				30CCF30724BED9EA00103C1E /* ActivityOverview.swift in Sources */,
 				30D321BA24BB65D5009CD9D0 /* NotificationSettings.swift in Sources */,
@@ -771,10 +773,8 @@
 				306719E624C90438006B758D /* AlertView.swift in Sources */,
 				9CCFDD2824B9758A00162B0F /* TestApp.swift in Sources */,
 				9C39F69524C07BAA0073C9FF /* SignUpView.swift in Sources */,
-				302CF88C24BA1A4000FF79D7 /* ActivityResult.swift in Sources */,
 				9C6C74B324BAEC0B00C657B0 /* DynamicRecord.swift in Sources */,
 				9C7E74AC24BDC7790032CD88 /* ScoreURLHolderRecord.swift in Sources */,
-				302CF88C24BA1A4000FF79D7 /* ActivityResult.swift in Sources */,
 				3067713124BDE3950085F152 /* FriendDetailView.swift in Sources */,
 				30D321BB24BB65D5009CD9D0 /* PermissionSettings.swift in Sources */,
 				304F753124CAC9BF005D46BA /* FriendsManager.swift in Sources */,

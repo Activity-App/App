@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ActivityRings {
+struct ActivityRings: Equatable, Hashable {
     var moveCurrent: Double
     var moveGoal: Double
     var exerciseCurrent: Double

@@ -26,7 +26,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             switch result {
             case .success(let record):
                 let friendRequestRecord = FriendRequestRecord(record: record)
-                let publicDataRecordName = friendRequestRecord.fromPublicUserWithRecordName ?? ""
+                let publicDataRecordName = friendRequestRecord.creatorPublicUserRecordName ?? ""
                 print(publicDataRecordName)
                 self.cloudKitStore.fetchRecord(with: CKRecord.ID(recordName: publicDataRecordName), scope: .public) { result in
                     switch result {

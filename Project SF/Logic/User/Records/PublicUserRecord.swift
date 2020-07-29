@@ -40,6 +40,10 @@ class PublicUserRecord: DynamicRecord {
     /// - Returns: Returns the user info for name, username, profile picture as well as a CKRecord.ID for the private user record.
     func asFriend() -> Friend {
         let friend = Friend(
+            username: self.username ?? "",
+            name: self.name ?? "",
+            bio: self.bio ?? "",
+            profilePictureURL: self.profilePictureURL ?? "",
             publicUserRecordID: self.record.recordID,
             privateUserRecordID: CKRecord.ID(recordName: self.privateUserRecordName ?? "")
         )
