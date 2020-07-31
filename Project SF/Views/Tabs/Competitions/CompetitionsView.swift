@@ -24,7 +24,7 @@ struct CompetitionsView: View {
     @EnvironmentObject var alert: AlertManager
     
     @StateObject var competitionsController = CompetitionsController()
-    let friends = FriendsManager()
+    let friends = FriendRequestManager()
 
     var body: some View {
         NavigationView {
@@ -36,8 +36,8 @@ struct CompetitionsView: View {
 //                    friends.discoverFriends { result in print(result) }
 //                }
                 Button("Begin sharing") {
-                    friends.beginSharing { error in
-                        print(error ?? "success")
+                    FriendsManager().beginSharing { error in
+                        print(error)
                     }
                 }
                 Button("Allow Notifications") {

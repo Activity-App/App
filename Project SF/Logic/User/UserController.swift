@@ -15,9 +15,11 @@ class UserController: ObservableObject {
     // MARK: Properties
     
     private let cloudKitStore = CloudKitStore.shared
+    private let manager = UserManager.shared
     
     private var privateUserRecord: UserRecord?
     private var publicUserRecord: PublicUserRecord?
+    private var sharedUserRecord: SharedUserRecord?
     
     @Published var user: User?
     
@@ -43,25 +45,27 @@ class UserController: ObservableObject {
             DispatchQueue.main.async {
                 switch result {
                 case .success:
-                    /// Check it was saved correctly and update the `publicUserRecord`
-                    self.updatePublicUser { error in
+                    /// Update the private user record with the record name of the public user record.
+                    privateUserRecord.publicUserRecordName = recordName
+                    self.syncPrivateUser { error in
                         if let error = error {
+                            self.loading = true
                             completion(.cloudKitError(error))
-                            self.loading = false
                         } else {
-                            /// Update the private user record with the record name of the public user record.
-                            privateUserRecord.publicUserRecordName = recordName
-                            self.syncPrivateUser { error in
+                            /// Check it was saved correctly and update the `publicUserRecord`
+                            self.updatePublicUser { error in
                                 if let error = error {
-                                    completion(.cloudKitError(error))
-                                    self.loading = true
-                                } else {
-                                    completion(nil)
                                     self.loading = false
+                                    completion(.cloudKitError(error))
+                                } else {
+                                    self.loading = false
+                                    completion(nil)
                                 }
                             }
                         }
                     }
+                    
+                    print("here")
                 case .failure(let error):
                     self.loading = false
                     completion(.cloudKitError(error))
@@ -99,25 +103,13 @@ class UserController: ObservableObject {
             privateUserRecord.profilePictureURL = pfp
             publicUserRecord.profilePictureURL = pfp
         }
-        if let srZone = data.scoreRecordZoneName {
-            privateUserRecord.scoreRecordZoneName = srZone
-        }
-        if let srRecordName = data.scoreRecordRecordName {
-            privateUserRecord.scoreRecordRecordName = srRecordName
-        }
-        if let srShareURL = data.scoreRecordPublicShareURL {
-            privateUserRecord.scoreRecordPublicShareURL = srShareURL
-        }
-        if let friendShareURL = data.friendShareURL {
-            privateUserRecord.friendShareURL = friendShareURL
-        }
         
         syncPrivateUser { error in
             if let error = error {
                 self.loading = false
                 completion(.cloudKitError(error))
             } else {
-                self.tryToSyncPublicUserToSharedUser()
+                //self.tryToSyncPublicUserToSharedUser()
                 if publicDb {
                     self.syncPublicUser { error in
                         self.loading = false
@@ -140,19 +132,14 @@ class UserController: ObservableObject {
     func updatePrivateUser(completion: @escaping (UserControllerError?) -> Void) {
         loading = true
         
-        cloudKitStore.fetchUserRecord { result in
+        manager.fetchPrivateUserRecord { result in
             DispatchQueue.main.async {
                 self.loading = false
                 switch result {
                 case .success(let record):
                     self.privateUserRecord = record
-                    self.user = self.privateUserRecord.map {
-                        User(
-                            name: $0.name,
-                            username: $0.username,
-                            bio: $0.bio,
-                            profilePictureURL: $0.profilePictureURL
-                        )
+                    if self.user?.updateWith(privateUserRecord: record) == nil {
+                        self.user = User(privateUserRecord: record)
                     }
                     self.loading = false
                     completion(nil)
@@ -169,26 +156,16 @@ class UserController: ObservableObject {
     ///
     /// This should only be used if you want to fetch specifically from the public db. Use `updatePrivateUser` for guaranteed results.
     func updatePublicUser(completion: @escaping (UserControllerError?) -> Void) {
-        guard let privateUserRecord = privateUserRecord else {
-            completion(.doesNotExist)
-            return
-        }
         loading = true
         
-        let recordID = CKRecord.ID(recordName: privateUserRecord.publicUserRecordName ?? "")
-        cloudKitStore.fetchRecord(with: recordID, scope: .public) { result in
+        manager.fetchPublicUserRecord { result in
             DispatchQueue.main.async {
                 self.loading = false
                 switch result {
                 case .success(let record):
-                    self.publicUserRecord = PublicUserRecord(record: record)
-                    self.user = self.publicUserRecord.map {
-                        User(
-                            name: $0.name,
-                            username: $0.username,
-                            bio: $0.bio,
-                            profilePictureURL: $0.profilePictureURL
-                        )
+                    self.publicUserRecord = record
+                    if self.user?.updateWith(publicUserRecord: record) == nil {
+                        self.user = User(publicUserRecord: record)
                     }
                     completion(nil)
                 case .failure(let error):
@@ -197,6 +174,23 @@ class UserController: ObservableObject {
             }
         }
     }
+    
+//    func updateSharedUser(completion: @escaping (Result<Void, UserControllerError>) -> Void) {
+//        loading = true
+//        
+//        manager.fetchSharedUserRecord { result in
+//            DispatchQueue.main.async {
+//                self.loading = false
+//                switch result {
+//                case .success(let record):
+//                    self.sharedUserRecord = record
+//                    completion(.success(()))
+//                case .failure(let error):
+//                    completion(.failure(.cloudKitError(error)))
+//                }
+//            }
+//        }
+//    }
     
     /// Expose user info to the public db.
     /// - Parameter completion: What should happen when the operation is completed.
@@ -259,7 +253,7 @@ class UserController: ObservableObject {
         }
         loading = true
         
-        cloudKitStore.saveUserRecord(privateUserRecord, savePolicy: .changedKeys) { result in
+        manager.savePrivateUserRecord(privateUserRecord) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success:
@@ -275,34 +269,6 @@ class UserController: ObservableObject {
                     self.loading = false
                     completion(error)
                 }
-            }
-        }
-    }
-    
-    /// Tries to sync user info to the SharedUser record in the SharedToFriendsDataZone. This ensures shared and public data is kept in sync. You should favor getting data from the public db if it is available rather than the shared db. This is only a backup for when the user does not want to store their data in the public db.
-    private func tryToSyncPublicUserToSharedUser() {
-        guard let publicUserDataRecord = publicUserRecord else { return }
-        let zone = CKRecordZone.ID(zoneName: "SharedToFriendsDataZone")
-        cloudKitStore.fetchRecords(with: "PublicUserData", zone: zone, scope: .private) { result in
-            switch result {
-            case .success(let records):
-                /// There was an existing user info record in the shared to friends data zone.
-                guard let record = records.first else { return }
-                let newRecord = PublicUserRecord(record: record)
-                newRecord.name = publicUserDataRecord.name
-                newRecord.username = publicUserDataRecord.username
-                newRecord.bio = publicUserDataRecord.bio
-                newRecord.profilePictureURL = publicUserDataRecord.profilePictureURL
-                self.cloudKitStore.saveRecord(newRecord.record, scope: .private) { result in
-                    switch result {
-                    case .success:
-                        print("Done")
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
-            case .failure(let error):
-                print(error)
             }
         }
     }
@@ -335,6 +301,7 @@ class UserController: ObservableObject {
             }
         }
     }
+    
     
     // MARK: UserControllerError
     

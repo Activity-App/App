@@ -29,6 +29,7 @@ class UserRecord: DynamicRecord {
         let profilePictureURL = ModelItem<String>(key: "profilePictureURL")
         
         let publicUserRecordName = ModelItem<String>(key: "publicUserRecordName")
+        let sharedUserRecordName = ModelItem<String>(key: "sharedUserRecordName")
         
         let friendShareURLs = ModelItem<[String]>(key: "friendShareURLs")
         let friendShareURL = ModelItem<String>(key: "friendShareURL")

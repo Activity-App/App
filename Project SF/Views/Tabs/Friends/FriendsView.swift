@@ -61,6 +61,8 @@ struct FriendsView: View {
             )
         )
     ]
+    
+    @StateObject var friendController = FriendController()
 
     var body: some View {
         NavigationView {
@@ -72,11 +74,18 @@ struct FriendsView: View {
                 }
 
                 Section(header: Text("Pending Invites")) {
-                    // TODO: Pending invites
-                    Text("Pending Invites")
-//                    ForEach(pendingFriends) { friend in
-//
-//                    }
+                    ForEach(friendController.receivedRequestsFromFriends) { request in
+                        FriendRequestCell(name: request.creatorName ?? request.creatorUsername ?? "user", activityRings: nil) {
+                            FriendRequestManager().acceptFriendRequest(invitation: request.record) { error in
+                                if let error = error {
+                                    print(error)
+                                } else {
+                                    friendController.updateAll()
+                                    print("sucessfully added \(request.creatorName ?? "user")")
+                                }
+                            }
+                        }
+                    }
                 }
             }
             .listStyle(InsetGroupedListStyle())
@@ -85,6 +94,9 @@ struct FriendsView: View {
         .tabItem {
             Label("Friends", systemImage: "person.3.fill")
                 .font(.title2)
+        }
+        .onAppear {
+            friendController.updateAll()
         }
     }
 }

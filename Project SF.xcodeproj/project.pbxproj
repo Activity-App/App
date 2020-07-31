@@ -30,6 +30,8 @@
 		307E6D3924D0E999009F16DD /* ActivityResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */; };
 		307E6D3A24D0E999009F16DD /* RingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CF88924BA199E00FF79D7 /* RingType.swift */; };
 		307E6D3B24D0E99D009F16DD /* View+ForegroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B4D0524B89AC700FC4456 /* View+ForegroundModifier.swift */; };
+		307EB80B24D3A502003D70F8 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307EB80A24D3A502003D70F8 /* UserManager.swift */; };
+		307EB80F24D42F8F003D70F8 /* FriendRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307EB80E24D42F8F003D70F8 /* FriendRequestManager.swift */; };
 		308FAD8B24B97E7E00126F3F /* OnboardingInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8A24B97E7E00126F3F /* OnboardingInfoCell.swift */; };
 		308FAD8D24B97E8A00126F3F /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8C24B97E8A00126F3F /* PrivacyView.swift */; };
 		308FAD9E24B9A0DC00126F3F /* NavigationBarLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD9D24B9A0DC00126F3F /* NavigationBarLabel.swift */; };
@@ -58,6 +60,7 @@
 		30D321BE24BB65D5009CD9D0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D321B224BB65D5009CD9D0 /* ProfileView.swift */; };
 		30D321BF24BB65D5009CD9D0 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D321B424BB65D5009CD9D0 /* FriendsView.swift */; };
 		30D321C124BC1886009CD9D0 /* NavScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D321C024BC1886009CD9D0 /* NavScrollView.swift */; };
+		30D9C9E624D22ACC00684EBF /* FriendRequestStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D9C9E524D22ACC00684EBF /* FriendRequestStruct.swift */; };
 		30DBA52724CE725A005D9E04 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DBA52624CE725A005D9E04 /* AppDelegate.swift */; };
 		30E2765624C93B130040D6AB /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2765524C93B130040D6AB /* AlertManager.swift */; };
 		30EAB9F924C29B9D005326C8 /* AccentSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EAB9F824C29B9D005326C8 /* AccentSettings.swift */; };
@@ -132,6 +135,8 @@
 		3074912A24CC607800F54BF5 /* SharedUserRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedUserRecord.swift; sourceTree = "<group>"; };
 		307648C824BC7DC4005D8531 /* GrantDataAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrantDataAccessView.swift; sourceTree = "<group>"; };
 		307648CA24BC81C8005D8531 /* iCloudErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudErrorView.swift; sourceTree = "<group>"; };
+		307EB80A24D3A502003D70F8 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		307EB80E24D42F8F003D70F8 /* FriendRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestManager.swift; sourceTree = "<group>"; };
 		308FAD8A24B97E7E00126F3F /* OnboardingInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingInfoCell.swift; sourceTree = "<group>"; };
 		308FAD8C24B97E8A00126F3F /* PrivacyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
 		308FAD9D24B9A0DC00126F3F /* NavigationBarLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarLabel.swift; sourceTree = "<group>"; };
@@ -163,6 +168,7 @@
 		30D321B224BB65D5009CD9D0 /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		30D321B424BB65D5009CD9D0 /* FriendsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 		30D321C024BC1886009CD9D0 /* NavScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavScrollView.swift; sourceTree = "<group>"; };
+		30D9C9E524D22ACC00684EBF /* FriendRequestStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestStruct.swift; sourceTree = "<group>"; };
 		30DBA52624CE725A005D9E04 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30E2765524C93B130040D6AB /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		30EAB9F824C29B9D005326C8 /* AccentSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentSettings.swift; sourceTree = "<group>"; };
@@ -288,7 +294,9 @@
 			children = (
 				9C6C74B524BBE57B00C657B0 /* FriendStruct.swift */,
 				304F753024CAC9BF005D46BA /* FriendsManager.swift */,
+				307EB80E24D42F8F003D70F8 /* FriendRequestManager.swift */,
 				AA69F54724CD270A005B97AC /* FriendsController.swift */,
+				30D9C9E524D22ACC00684EBF /* FriendRequestStruct.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -331,6 +339,7 @@
 				AA6B06D324CD218400043014 /* Records */,
 				3004A97A24CC0486004D823D /* UserStruct.swift */,
 				3004A97824CC01BA004D823D /* UserController.swift */,
+				307EB80A24D3A502003D70F8 /* UserManager.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -710,6 +719,7 @@
 			files = (
 				307E6D3B24D0E99D009F16DD /* View+ForegroundModifier.swift in Sources */,
 				307E6D3924D0E999009F16DD /* ActivityResult.swift in Sources */,
+				30D9C9E624D22ACC00684EBF /* FriendRequestStruct.swift in Sources */,
 				307E6D3A24D0E999009F16DD /* RingType.swift in Sources */,
 				307E6D3824D0E993009F16DD /* UserRecord.swift in Sources */,
 				308FAD9E24B9A0DC00126F3F /* NavigationBarLabel.swift in Sources */,
@@ -718,6 +728,7 @@
 				9C7B4D0824B89AF100FC4456 /* Double+ConvertFromRangeToRange.swift in Sources */,
 				30BFC8D024B75E6C00DAC6D9 /* ContentView.swift in Sources */,
 				9C338BD924BAD0D3003E5048 /* CompetitionRecord.swift in Sources */,
+				307EB80B24D3A502003D70F8 /* UserManager.swift in Sources */,
 				30FCC84C24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift in Sources */,
 				30FCC84E24BB318000862C01 /* KeyboardManager.swift in Sources */,
 				9C7E74AA24BDC0E10032CD88 /* GrantDataAccessView.swift in Sources */,
@@ -755,6 +766,7 @@
 				9C2445DA24BC0D8E00D8F4FC /* CompetitionInvitationRecord.swift in Sources */,
 				9C338BD524BAC4F4003E5048 /* CompetitionsManager.swift in Sources */,
 				9C338BD724BAD080003E5048 /* RecordKey.swift in Sources */,
+				307EB80F24D42F8F003D70F8 /* FriendRequestManager.swift in Sources */,
 				30D321B924BB65D5009CD9D0 /* ImageSelectionView.swift in Sources */,
 				30D3217D24BB4EDE009CD9D0 /* ActivityRings.swift in Sources */,
 				9C7E74AE24BDC87A0032CD88 /* ScoreRecord.swift in Sources */,

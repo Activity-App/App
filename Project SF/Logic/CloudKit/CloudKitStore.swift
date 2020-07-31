@@ -116,33 +116,6 @@ class CloudKitStore {
         }
     }
     
-    /// Asynchronously fetches the user record from the CloudKit database
-    /// - Parameter handler: Called with the result of the operation. Not guaranteed to be on the main thread.
-    func fetchUserRecord(then handler: @escaping (Result<UserRecord, CloudKitStoreError>) -> Void) {
-        container.fetchUserRecordID { recordID, error in
-            if let error = error {
-                handler(.failure(.other(error)))
-                return
-            }
-            
-            guard let recordID = recordID else {
-                handler(.failure(CloudKitStoreError.missingID))
-                return
-            }
-            
-            // TODO: Determine whether or not this could be a memory leak
-            
-            self.fetchRecord(with: recordID, scope: .private) { result in
-                switch result {
-                case .success(let record):
-                    handler(.success(UserRecord(record: record)))
-                case .failure(let error):
-                    handler(.failure(error))
-                }
-            }
-        }
-    }
-    
     // MARK: Saving
     
     /// Asynchronously saves a single record to the CloudKit database.
@@ -160,6 +133,7 @@ class CloudKitStore {
         let operation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
         operation.savePolicy = savePolicy
         operation.qualityOfService = .userInitiated
+        
         operation.perRecordCompletionBlock = { _, error in
             if let error = error {
                 handler(.failure(.other(error)))
@@ -170,19 +144,6 @@ class CloudKitStore {
         
         database.add(operation)
      }
-    
-    func saveUserRecord(_ record: UserRecord,
-                        savePolicy: CKModifyRecordsOperation.RecordSavePolicy = .ifServerRecordUnchanged,
-                        then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void) {
-        saveRecord(record.record, scope: .private, savePolicy: savePolicy) { result in
-            switch result {
-            case .success:
-                handler(.success(()))
-            case .failure(let error):
-                handler(.failure(error))
-            }
-        }
-    }
     
     /// Utility method to create a zone with a randomised identifier.
     func createZone(named zoneName: String = UUID().uuidString, then handler: @escaping (Result<CKRecordZone, CloudKitStoreError>) -> Void) {
@@ -228,6 +189,34 @@ class CloudKitStore {
     }
     
     // MARK: Utilities
+    
+    /// Fetches share participants that can be used with a CKShare.
+    func fetchShareParticipantsFromRecordNames(
+        users: [String],
+        then completion: @escaping (Result<[CKShare.Participant], Error>) -> Void
+    ) {
+        let lookupInfo = users.map { CKUserIdentity.LookupInfo(userRecordID: CKRecord.ID(recordName: $0)) }
+        let fetchParticipantsOperation = CKFetchShareParticipantsOperation(
+            userIdentityLookupInfos: lookupInfo
+        )
+        fetchParticipantsOperation.qualityOfService = .userInitiated
+        
+        var participants = [CKShare.Participant]()
+        
+        fetchParticipantsOperation.shareParticipantFetchedBlock = { participant in
+            participants.append(participant)
+        }
+        
+        fetchParticipantsOperation.fetchShareParticipantsCompletionBlock = { error in
+            if let error = error, participants.count == 0 {
+                completion(.failure(error))
+                return
+            }
+            let returnValue: [CKShare.Participant] = participants
+            completion(.success(returnValue))
+        }
+        self.container.add(fetchParticipantsOperation)
+    }
 
     // MARK: - CloudKitStoreError
 

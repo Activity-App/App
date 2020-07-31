@@ -9,8 +9,10 @@ import SwiftUI
 import CloudKit
 
 struct FriendRequestCell: View {
-    var name: String
-    var acceptAction: () -> Void
+    let name: String
+    let activityRings: ActivityRings?
+    let acceptAction: () -> Void
+    @State var loading = false
     
     var body: some View {
         GroupBox {
@@ -24,19 +26,13 @@ struct FriendRequestCell: View {
                             .frame(width: 50)
                             .background(Color(.systemTeal))
                             .clipShape(Circle())
-                        ActivityRingsView(
-                            values: .constant(
-                                ActivityRings(
-                                    moveCurrent: 10,
-                                    moveGoal: 300,
-                                    exerciseCurrent: 40,
-                                    exerciseGoal: 30,
-                                    standCurrent: 9,
-                                    standGoal: 12)
-                            ),
-                            ringSize: RingSize(size: 45, width: 5.5, padding: 3)
-                        )
-                        .frame(width: 50)
+                        if let activityRings = activityRings {
+                            ActivityRingsView(
+                                values: .constant(activityRings),
+                                ringSize: RingSize(size: 45, width: 5.5, padding: 3)
+                            )
+                            .frame(width: 50)
+                        }
                     }
                     .frame(height: 50)
                     Text("\(name) would like to be friends.")
@@ -54,7 +50,8 @@ struct FriendRequestCell: View {
                                 .opacity(0.25)
                         )
                         Button("Accept") {
-                            
+                            acceptAction()
+                            loading = true
                         }
                         .foregroundColor(.green)
                         .padding(.vertical, 10)
@@ -65,6 +62,7 @@ struct FriendRequestCell: View {
                                 .opacity(0.25)
                         )
                         Spacer()
+                        if loading { ProgressView() }
                     }
                 }
             }
