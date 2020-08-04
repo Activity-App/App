@@ -62,7 +62,7 @@ class UserManager {
     // MARK: Public User.
     
     func setupPublicUserRecord(then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void) {
-        fetchPublicUserRecord {
+        //fetchPublicUserRecord {
     }
     
     private func createPublicUser(then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void) {
