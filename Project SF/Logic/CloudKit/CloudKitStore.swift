@@ -220,11 +220,13 @@ class CloudKitStore {
 
     // MARK: - CloudKitStoreError
 
-    enum CloudKitStoreError: Error {
-        case other(Error)
-        case unknownError
-        case missingRecord
-        case missingID
-    }
+    
 
+}
+
+public enum CloudKitStoreError: Error {
+    case other(Error)
+    case unknownError
+    case missingRecord
+    case missingID
 }

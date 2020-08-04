@@ -21,7 +21,7 @@ class UserManager {
     
     /// Asynchronously fetches the user record from the CloudKit database
     /// - Parameter handler: Called with the result of the operation. Not guaranteed to be on the main thread.
-    func fetchPrivateUserRecord(then handler: @escaping (Result<UserRecord, UserManagerError>) -> Void) {
+    func fetchPrivateUserRecord(then handler: @escaping (Result<UserRecord, CloudKitStoreError>) -> Void) {
         container.fetchUserRecordID { recordID, error in
             if let error = error {
                 handler(.failure(.other(error)))
@@ -29,7 +29,7 @@ class UserManager {
             }
             
             guard let recordID = recordID else {
-                handler(.failure(UserManagerError.missingID))
+                handler(.failure(CloudKitStoreError.missingID))
                 return
             }
             
@@ -47,7 +47,7 @@ class UserManager {
     func savePrivateUserRecord(
         _ record: UserRecord,
         savePolicy: CKModifyRecordsOperation.RecordSavePolicy = .changedKeys,
-        then handler: @escaping (Result<Void, UserManagerError>) -> Void
+        then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void
     ) {
         cloudKitStore.saveRecord(record.record, scope: .private, savePolicy: savePolicy) { result in
             switch result {
@@ -61,7 +61,44 @@ class UserManager {
     
     // MARK: Public User.
     
-    func fetchPublicUserRecord(then handler: @escaping (Result<PublicUserRecord, UserManagerError>) -> Void) {
+    func setupPublicUserRecord(then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void) {
+        fetchPublicUserRecord {
+    }
+    
+    private func createPublicUser(then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void) {
+        fetchPrivateUserRecord { result in
+            switch result {
+            case .success(let privateUserRecord):
+                /// Create a new randomized record name and save it to the private record.
+                let recordName = UUID().uuidString
+                
+                let newRecord = PublicUserRecord(recordID: CKRecord.ID(recordName: recordName))
+                newRecord.privateUserRecordName = privateUserRecord.record.recordID.recordName
+                
+                self.cloudKitStore.saveRecord(newRecord.record, scope: .public) { result in
+                    switch result {
+                    case .success:
+                        /// Update the private user record with the record name of the public user record.
+                        privateUserRecord.publicUserRecordName = recordName
+                        self.savePrivateUserRecord(privateUserRecord) { result in
+                            switch result {
+                            case .success:
+                                handler(.success(()))
+                            case .failure(let error):
+                                handler(.failure(error))
+                            }
+                        }
+                    case .failure(let error):
+                        handler(.failure(.other(error)))
+                    }
+                }
+            case .failure(let error):
+                handler(.failure(error))
+            }
+        }
+    }
+    
+    func fetchPublicUserRecord(then handler: @escaping (Result<PublicUserRecord, CloudKitStoreError>) -> Void) {
         if let publicUserRecordName = userDefaults.string(forKey: "publicUserRecordName") {
             fetchPublicUserRecordWith(recordName: publicUserRecordName) { result in
                 switch result {
@@ -96,7 +133,7 @@ class UserManager {
     
     private func fetchPublicUserRecordWith(
         recordName: String,
-        then handler: @escaping (Result<PublicUserRecord, UserManagerError>) -> Void
+        then handler: @escaping (Result<PublicUserRecord, CloudKitStoreError>) -> Void
     ) {
         let publicUserRecordID = CKRecord.ID(recordName: recordName)
         
@@ -113,7 +150,7 @@ class UserManager {
     func savePublicUserRecord(
         _ record: PublicUserRecord,
         savePolicy: CKModifyRecordsOperation.RecordSavePolicy = .changedKeys,
-        then handler: @escaping (Result<Void, UserManagerError>) -> Void
+        then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void
     ) {
         cloudKitStore.saveRecord(record.record, scope: .public, savePolicy: savePolicy) { result in
             switch result {
@@ -127,7 +164,7 @@ class UserManager {
     
     // MARK: Shared User
     
-    func fetchSharedUserRecord(then handler: @escaping (Result<SharedUserRecord, UserManagerError>) -> Void) {
+    func fetchSharedUserRecord(then handler: @escaping (Result<SharedUserRecord, CloudKitStoreError>) -> Void) {
         if let sharedUserRecordName = userDefaults.string(forKey: "sharedUserRecordName") {
             fetchSharedUserRecordWith(recordName: sharedUserRecordName) { result in
                 switch result {
@@ -162,7 +199,7 @@ class UserManager {
     
     private func fetchSharedUserRecordWith(
         recordName: String,
-        then handler: @escaping (Result<SharedUserRecord, UserManagerError>) -> Void
+        then handler: @escaping (Result<SharedUserRecord, CloudKitStoreError>) -> Void
     ) {
         let zone = CKRecordZone.ID(zoneName: "SharedToFriendsDataZone")
         let sharedUserRecordID = CKRecord.ID(recordName: recordName, zoneID: zone)
@@ -175,14 +212,5 @@ class UserManager {
                 handler(.failure(.other(error)))
             }
         }
-    }
-    
-    /// Save shared user with CloudKitStore.shared.saveRecord()
-    
-    enum UserManagerError: Error {
-        case other(Error)
-        case unknownError
-        case missingRecord
-        case missingID
     }
 }
