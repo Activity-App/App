@@ -57,15 +57,7 @@ struct SignUpView: View {
                                 .cornerRadius(8)
                         }
                     }
-                    GroupBox {
-                        Toggle("Public", isOn: $makePublic)
-                    }
-                    Text(
-                        """
-                        Your name, bio and profile picture are private and only visible to your friends by default.
-                        You can choose to make this information public if you would like it to show to everyone.
-                        """
-                    )
+                    Text("This information will be viewable to the public when searching your username. You can leave this blank or change what you want to be shown to who later in settings.")
                         .font(.caption)
                         .foregroundColor(.secondary)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -78,24 +70,19 @@ struct SignUpView: View {
                     isActive: $nextPage
                 ) {
                     signedUp = true
-                    userController.createPublicUserRecord { error in
-                        if let error = error {
-                            print(error)
+                    userController.user?.name = name
+                    userController.user?.username = username
+                    userController.user?.bio = bio
+                    userController.save { error in
+                        if error != nil {
+                            print(error!)
                             presentErrorAlert()
                         } else {
-                            let newUser = User(name: name, username: username, bio: bio)
-                            userController.set(data: newUser, publicDb: makePublic) { error in
-                                if let error = error {
-                                    print(error)
-                                    presentErrorAlert()
-                                } else {
-                                    print("success")
-                                    nextPage = true
-                                }
+                            DispatchQueue.main.async {
+                                nextPage = true
                             }
                         }
                     }
-                    
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 16)
@@ -104,12 +91,18 @@ struct SignUpView: View {
             .navigationTitle("Sign Up")
         }
         .onAppear {
-            userController.updatePrivateUser { error in
+            userController.setup { error in
                 if let error = error {
                     print(error)
-                    presentErrorAlert()
+                    self.presentErrorAlert()
                 }
             }
+            UserDefaults.standard.setValue(true, forKey: "nameToPublicDb")
+            UserDefaults.standard.setValue(true, forKey: "bioToPublicDb")
+            UserDefaults.standard.setValue(true, forKey: "profilePictureToPublicDb")
+            UserDefaults.standard.setValue(true, forKey: "nameSharedToFriends")
+            UserDefaults.standard.setValue(true, forKey: "bioSharedToFriends")
+            UserDefaults.standard.setValue(true, forKey: "profilePictureSharedToFriends")
         }
         .onDisappear {
             signedUp = false
@@ -117,14 +110,16 @@ struct SignUpView: View {
     }
     
     func presentErrorAlert() {
-        alert.present(
-            icon: "exclamationmark.icloud.fill",
-            message: "There was an error accessing iCloud. Please check your internet connection and that your device is signed into iCloud.",
-            color: .orange,
-            buttonAction: {
-                alert.dismiss()
-            }
-        )
+        DispatchQueue.main.async {
+            alert.present(
+                icon: "exclamationmark.icloud.fill",
+                message: "There was an error accessing iCloud. Please check your internet connection and that your device is signed into iCloud.",
+                color: .orange,
+                buttonAction: {
+                    alert.dismiss()
+                }
+            )
+        }
     }
 }
 

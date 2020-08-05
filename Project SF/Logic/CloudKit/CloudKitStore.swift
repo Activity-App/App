@@ -57,6 +57,10 @@ class CloudKitStore {
             Self.queue.sync {
                 // TODO: Need to properly handle paging
                 if let error = error {
+                    if let ckError = error as? CKError {
+                        handler(.failure(.ckError(ckError)))
+                        return
+                    }
                     handler(.failure(.other(error)))
                     return
                 }
@@ -104,6 +108,10 @@ class CloudKitStore {
 
         database.fetch(withRecordID: recordID) { record, error in
             if let error = error {
+                if let ckError = error as? CKError {
+                    handler(.failure(.ckError(ckError)))
+                    return
+                }
                 handler(.failure(.other(error)))
                 return
             }
@@ -136,6 +144,10 @@ class CloudKitStore {
         
         operation.perRecordCompletionBlock = { _, error in
             if let error = error {
+                if let ckError = error as? CKError {
+                    handler(.failure(.ckError(ckError)))
+                    return
+                }
                 handler(.failure(.other(error)))
                 return
             }
@@ -146,13 +158,20 @@ class CloudKitStore {
      }
     
     /// Utility method to create a zone with a randomised identifier.
-    func createZone(named zoneName: String = UUID().uuidString, then handler: @escaping (Result<CKRecordZone, CloudKitStoreError>) -> Void) {
+    func createZone(
+        named zoneName: String = UUID().uuidString,
+        then handler: @escaping (Result<CKRecordZone, CloudKitStoreError>) -> Void
+    ) {
         let zone = CKRecordZone(zoneName: zoneName)
         let zoneOperation = CKModifyRecordZonesOperation(recordZonesToSave: [zone], recordZoneIDsToDelete: nil)
         zoneOperation.qualityOfService = .userInitiated
         
         zoneOperation.modifyRecordZonesCompletionBlock = { recordZones, _, error in
             if let error = error {
+                if let ckError = error as? CKError {
+                    handler(.failure(.ckError(ckError)))
+                    return
+                }
                 handler(.failure(.other(error)))
                 return
             }
@@ -217,15 +236,13 @@ class CloudKitStore {
         }
         self.container.add(fetchParticipantsOperation)
     }
-
-    // MARK: - CloudKitStoreError
-
-    
-
 }
 
-public enum CloudKitStoreError: Error {
+// MARK: - CloudKitStoreError
+
+enum CloudKitStoreError: Error {
     case other(Error)
+    case ckError(CKError)
     case unknownError
     case missingRecord
     case missingID

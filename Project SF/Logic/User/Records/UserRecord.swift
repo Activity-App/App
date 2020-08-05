@@ -44,4 +44,22 @@ class UserRecord: DynamicRecord {
     required init(record: CKRecord) {
         self.record = record
     }
+    
+    convenience init(recordName: String, user: User) {
+        let recordID = CKRecord.ID(recordName: recordName)
+        let record = CKRecord(recordType: UserRecord.type, recordID: recordID)
+        self.init(record: record)
+        
+        self.name = user.name
+        self.username = user.username
+        self.bio = user.bio
+        self.profilePictureURL = user.profilePictureURL
+        self.publicUserRecordName = user.publicUserRecordName
+        self.sharedUserRecordName = user.sharedUserRecordName
+        self.friendShareURLs = user.friendShareURLs
+        self.friendShareURL = user.friendShareURL
+        self.scoreRecordZoneName = user.scoreRecordZoneName
+        self.scoreRecordRecordName = user.scoreRecordRecordName
+        self.scoreRecordPublicShareURL = user.scoreRecordPublicShareURL
+    }
 }
