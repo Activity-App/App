@@ -35,11 +35,6 @@ struct CompetitionsView: View {
 //                Button("search") {
 //                    friends.discoverFriends { result in print(result) }
 //                }
-                Button("Begin sharing") {
-                    FriendsManager().beginSharing { error in
-                        print(error)
-                    }
-                }
                 Button("Allow Notifications") {
                     NotificationManager.shared.requestPermission { error in
                         print(error ?? "success")

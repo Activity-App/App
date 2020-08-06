@@ -24,6 +24,7 @@ class FriendRequestRecord: DynamicRecord {
         let inviteeShareURL = ModelItem<String>(key: "inviteeShareURL")
         
         let creatorPublicUserRecordName = ModelItem<String>(key: "creatorPublicUserRecordName")
+        let creatorPrivateUserRecordName = ModelItem<String>(key: "creatorPrivateUserRecordName")
         let creatorShareURL = ModelItem<String>(key: "creatorShareURL")
         
         let accepted = ModelItem<Bool>(key: "accepted")

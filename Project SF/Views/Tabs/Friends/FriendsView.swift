@@ -63,12 +63,18 @@ struct FriendsView: View {
     ]
     
     @StateObject var friendController = FriendController()
+    @StateObject var userController = UserController()
+    @StateObject var discoveryController = UserDiscoveryController()
+    @State var showAddFriend = false
 
     var body: some View {
         NavigationView {
             List {
+                Button("remove all friends") {
+                    FriendsManager().removeAllFriends()
+                }
                 Section(header: Text("Friend Activity")) {
-                    ForEach(friends) { friend in
+                    ForEach(friendController.friends) { friend in
                         FriendsCell(friend)
                     }
                 }
@@ -76,12 +82,13 @@ struct FriendsView: View {
                 Section(header: Text("Pending Invites")) {
                     ForEach(friendController.receivedRequestsFromFriends) { request in
                         FriendRequestCell(name: request.creatorName ?? request.creatorUsername ?? "user", activityRings: nil) {
-                            FriendRequestManager().acceptFriendRequest(invitation: request.record) { error in
-                                if let error = error {
-                                    print(error)
-                                } else {
+                            FriendRequestManager().acceptFriendRequest(invitation: request.record) { result in
+                                switch result {
+                                case .success:
                                     friendController.updateAll()
                                     print("sucessfully added \(request.creatorName ?? "user")")
+                                case .failure(let error):
+                                    print(error)
                                 }
                             }
                         }
@@ -90,13 +97,40 @@ struct FriendsView: View {
             }
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("Friends")
+            .navigationBarItems(
+                trailing: NavigationButton(
+                    systemName: "plus",
+                    action: { showAddFriend = true }
+                )
+            )
         }
         .tabItem {
             Label("Friends", systemImage: "person.3.fill")
                 .font(.title2)
         }
         .onAppear {
+            print("here")
             friendController.updateAll()
+            userController.setup { result in print(result) }
+        }
+        .sheet(isPresented: $showAddFriend) {
+            ForEach(discoveryController.discovered) { user in
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text(user.username ?? "ahsekjf")
+                        Text(user.name ?? "nil")
+                        Text(user.privateUserRecordName ?? "nil")
+                        Text(user.publicUserRecordName ?? "nil")
+                    }
+                    Button("Add Friend") {
+                        guard let userRecordName = user.privateUserRecordName else { return }
+                        FriendRequestManager().invite(user: userRecordName) { result in
+                            print(result)
+                        }
+                    }
+                }
+                .padding()
+            }
         }
     }
 }

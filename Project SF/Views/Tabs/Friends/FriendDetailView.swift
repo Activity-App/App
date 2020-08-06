@@ -11,7 +11,7 @@ struct FriendDetailView: View {
 
     @Environment(\.colorScheme) var colorScheme
     @State var isAlertShown = false
-    let friend: TemporaryFriend
+    let friend: Friend
 
     var competitions: [Competition] = [
         Competition(
@@ -85,7 +85,7 @@ struct FriendDetailView: View {
             .foregroundColor(.secondary)
 
             Section(header: Text("Current Activity")) {
-                ActivityOverview(shouldAnimate: false, activity: .constant(friend.activity))
+                ActivityOverview(shouldAnimate: false, activity: .constant(friend.activityRings))
             }
 
             Section(header: Text("Current Competitions")) {
@@ -108,25 +108,25 @@ struct FriendDetailView: View {
         }
     }
 
-    init(_ friend: TemporaryFriend) {
+    init(_ friend: Friend) {
         self.friend = friend
     }
 }
 
-struct FriendDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            FriendDetailView(TemporaryFriend(
-                name: "Friend3",
-                activity: .init(
-                    moveCurrent: 380,
-                    moveGoal: 400,
-                    exerciseCurrent: 39,
-                    exerciseGoal: 30,
-                    standCurrent: 14,
-                    standGoal: 12
-                )
-            ))
-        }
-    }
-}
+//struct FriendDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationView {
+//            FriendDetailView(TemporaryFriend(
+//                name: "Friend3",
+//                activity: .init(
+//                    moveCurrent: 380,
+//                    moveGoal: 400,
+//                    exerciseCurrent: 39,
+//                    exerciseGoal: 30,
+//                    standCurrent: 14,
+//                    standGoal: 12
+//                )
+//            ))
+//        }
+//    }
+//}

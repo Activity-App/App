@@ -125,7 +125,7 @@ extension UserManager {
                 handler(.failure(.ckError(error)))
                 return
             }
-            
+            print(recordID)
             guard let recordID = recordID else {
                 handler(.failure(CloudKitStoreError.missingID))
                 return
@@ -136,6 +136,7 @@ extension UserManager {
                 case .success(let record):
                     handler(.success(UserRecord(record: record)))
                 case .failure(let error):
+                    print(error)
                     handler(.failure(error))
                 }
             }
@@ -317,26 +318,10 @@ extension UserManager {
             case .success:
                 handler(.success(()))
             case .failure(let error):
-                switch result {
-                case .success:
-                    handler(.success(()))
-                case .failure(let error):
-                    switch error {
-                    case .ckError(let ckError):
-                        if ckError.code == .unknownItem {
-                            self.createPublicUserRecord { result in
-                                switch result {
-                                case .success:
-                                    handler(.success(()))
-                                case .failure(let error):
-                                    handler(.failure(error))
-                                }
-                            }
-                        } else {
-                            handler(.failure(error))
-                        }
-                    case .missingID, .missingRecord:
-                        self.createPublicUserRecord { result in
+                switch error {
+                case .ckError(let ckError):
+                    if ckError.code == .unknownItem {
+                        self.createSharedUserRecord { result in
                             switch result {
                             case .success:
                                 handler(.success(()))
@@ -344,9 +329,20 @@ extension UserManager {
                                 handler(.failure(error))
                             }
                         }
-                    default:
+                    } else {
                         handler(.failure(error))
                     }
+                case .missingID, .missingRecord:
+                    self.createSharedUserRecord { result in
+                        switch result {
+                        case .success:
+                            handler(.success(()))
+                        case .failure(let error):
+                            handler(.failure(error))
+                        }
+                    }
+                default:
+                    handler(.failure(error))
                 }
             }
         }
@@ -370,6 +366,8 @@ extension UserManager {
                         sharedData.username = userRecord.username
                         sharedData.bio = userRecord.bio
                         sharedData.profilePictureURL = userRecord.profilePictureURL
+                        sharedData.privateUserRecordName = userRecord.record.recordID.recordName
+                        sharedData.publicUserRecordName = userRecord.publicUserRecordName
                         
                         /// Create a share from the created activity record and set the public permission to none so no one can access it unless we explicitly allow them.
                         let share = CKShare(rootRecord: sharedData.record)

@@ -93,7 +93,10 @@ class FriendController: ObservableObject {
         manager.fetchFriends { result in
             switch result {
             case .success(let friends):
-                self.friends = friends
+                print("fetched friends")
+                DispatchQueue.main.async {
+                    self.friends = friends
+                }
             case .failure(let error):
                 print("fetch friend error \(error)")
             }

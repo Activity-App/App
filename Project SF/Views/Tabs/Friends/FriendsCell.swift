@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FriendsCell: View {
 
-    let friend: TemporaryFriend
+    let friend: Friend
 
     var body: some View {
         NavigationLink(destination: FriendDetailView(friend)) {
@@ -19,47 +19,47 @@ struct FriendsCell: View {
                         .font(.title3)
                         .fontWeight(.black)
                         .padding(.bottom, 4)
-                    Text("Move: \(friend.activity.moveFraction)")
+                    Text("Move: \(friend.activityRings.moveFraction)")
                         .foregroundColor(RingType.move.color)
                         .fontWeight(.medium)
-                    Text("Exercise: \(friend.activity.exerciseFraction)")
+                    Text("Exercise: \(friend.activityRings.exerciseFraction)")
                         .foregroundColor(RingType.exercise.color)
                         .fontWeight(.medium)
-                    Text("Stand: \(friend.activity.standFraction)")
+                    Text("Stand: \(friend.activityRings.standFraction)")
                         .foregroundColor(RingType.stand.darkColor)
                         .fontWeight(.medium)
                 }
                 Spacer()
-                ActivityRingsView(values: .constant(friend.activity), ringSize: .small)
+                ActivityRingsView(values: .constant(friend.activityRings), ringSize: .small)
                     .padding(.vertical, 12)
                     .padding(.trailing, 6)
             }
         }
     }
 
-    init(_ friend: TemporaryFriend) {
+    init(_ friend: Friend) {
         self.friend = friend
     }
 }
-
-struct FriendsCell_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            RoundedNavigationLink("Show", destination:
-                                    GroupBox {
-                                        FriendsCell(TemporaryFriend(
-                                            name: "Friend3",
-                                            activity: .init(
-                                                moveCurrent: 380,
-                                                moveGoal: 400,
-                                                exerciseCurrent: 39,
-                                                exerciseGoal: 30,
-                                                standCurrent: 14,
-                                                standGoal: 12
-                                            )
-                                        ))
-                                    }
-            )
-        }
-    }
-}
+//
+//struct FriendsCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationView {
+//            RoundedNavigationLink("Show", destination:
+//                                    GroupBox {
+//                                        FriendsCell(Friend(
+//                                            name: "Friend3",
+//                                            activityRings: .init(
+//                                                moveCurrent: 380,
+//                                                moveGoal: 400,
+//                                                exerciseCurrent: 39,
+//                                                exerciseGoal: 30,
+//                                                standCurrent: 14,
+//                                                standGoal: 12
+//                                            )
+//                                        ))
+//                                    }
+//            )
+//        }
+//    }
+//}

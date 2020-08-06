@@ -22,10 +22,14 @@ class FriendsManager: ObservableObject {
     /// Requests permission from the user to discover their contacts.
     /// - Parameter handler: The result handler. Not guaranteed to be executed on the main thread.
     /// - Tag: requestDiscoveryPermission
-    func requestDiscoveryPermission(then handler: @escaping (Result<Bool, Error>) -> Void) {
+    func requestDiscoveryPermission(then handler: @escaping (Result<Bool, CloudKitStoreError>) -> Void) {
         container.requestApplicationPermission([.userDiscoverability]) { (status, error) in
             if let error = error {
-                handler(.failure(error))
+                if let ckError = error as? CKError {
+                    handler(.failure(.ckError(ckError)))
+                    return
+                }
+                handler(.failure(.other(error)))
                 return
             }
             switch status {
@@ -34,28 +38,36 @@ class FriendsManager: ObservableObject {
             case .denied:
                 handler(.success(false))
             default:
-                handler(.failure(FriendsManagerError.unknownError))
+                handler(.failure(.unknownError))
             }
         }
     }
     
     /// Asynchronously discovers the users friends. Fails if the adequate permissions have not been granted (you can request the required permission using [requestDiscoveryPermission](x-source-tag://requestDiscoveryPermission).
     /// - Parameter handler: The result handler. Not guaranteed to be executed on the main thread.
-    func discoverFriends(then handler: @escaping (Result<[Friend], Error>) -> Void) {
+    func discoverFriends(then handler: @escaping (Result<[Friend], CloudKitStoreError>) -> Void) {
         container.status(forApplicationPermission: .userDiscoverability) { [weak container] status, error in
             guard let container = container else { return }
             if let error = error {
-                handler(.failure(error))
+                if let ckError = error as? CKError {
+                    handler(.failure(.ckError(ckError)))
+                    return
+                }
+                handler(.failure(.other(error)))
                 return
             }
             if case .granted = status {
                 container.discoverAllIdentities { identities, error in
                     if let error = error {
-                        handler(.failure(error))
+                        if let ckError = error as? CKError {
+                            handler(.failure(.ckError(ckError)))
+                            return
+                        }
+                        handler(.failure(.other(error)))
                         return
                     }
                     guard let identities = identities else {
-                        handler(.failure(FriendsManagerError.unknownError))
+                        handler(.failure(.unknownError))
                         return
                     }
                     print(identities)
@@ -74,7 +86,7 @@ class FriendsManager: ObservableObject {
                             switch result {
                             case .success(let records):
                                 for user in records {
-                                    friends.append(user.asFriend())
+                                    //friends.append(user.asFriend())
                                     
                                     if identity == identities.last && user.record == records.last?.record {
                                         handler(.success(friends))
@@ -87,138 +99,96 @@ class FriendsManager: ObservableObject {
                     }
                 }
             } else {
-                handler(.failure(FriendsManagerError.insufficientPermissions))
+                handler(.failure(.unknownError))
             }
         }
     }
     
-    // ** DONT USE ANYTHING BELOW YET **
-    
-    /// Creates empty SharedWithFriendsData record for current user as well as a share and saves it to the private db.
-    /// - Parameter handler: What to do when the operation completes.
-    ///
-    /// This method is required before inviting or sharing other users. It creates a zone named SharedWithFriendsDataZone for information shared with your friends in your private db. A SharedWithFriendsData record is created inside that zone and will hold all data that should be only shared with friends. This record should hold activity, competiton and user info or any other data that should be shared with friends depending on the users settings. A share is created with public permission set to none so that only invited users/friends can access the data. The **private** user record is modified to contain the URL to the share sharing the SharedWithFriendsDataRecord.
-    func beginSharing(completion: @escaping (Error?) -> Void) {
-        /// Create new randomized zone in your private db to share your activity data.
-        cloudKitStore.createZone(named: "SharedWithFriendsDataZone") { result in
+    func fetchFriends(then handler: @escaping (Result<[Friend], CloudKitStoreError>) -> Void) {
+        userManager.fetch { result in
             switch result {
-            case .success(let zone):
-                self.userManager.fetchPrivateUserRecord { result in
-                    switch result {
-                    case .success(let userRecord):
-                        /// Create an empty `SharedWithFriendsData` record in the created zone.
-                        let sharedData = SharedUserRecord(recordID: CKRecord.ID(zoneID: zone.zoneID))
-                        sharedData.name = userRecord.name
-                        sharedData.username = userRecord.username
-                        sharedData.bio = userRecord.bio
-                        sharedData.profilePictureURL = userRecord.profilePictureURL
-                        
-                        /// Create a share from the created activity record and set the public permission to none so no one can access it unless we explicitly allow them.
-                        let share = CKShare(rootRecord: sharedData.record)
-                        share.publicPermission = .none
-                        
-                        /// Operation to save the activity record and share.
-                        let operation = CKModifyRecordsOperation(
-                            recordsToSave: [sharedData.record, share],
-                            recordIDsToDelete: nil
-                        )
-                        operation.qualityOfService = .userInitiated
-                        
-                        /// Placeholder for if saving share is successful.
-                        var savedShare: CKShare?
-                        
-                        operation.perRecordCompletionBlock = { record, error in
-                            if let error = error {
-                                completion(error)
-                            }
-                            if let record = record as? CKShare {
-                                savedShare = record
-                            }
-                        }
-                        
-                        operation.completionBlock = {
-                            guard let savedShare = savedShare, let url = savedShare.url else {
-                                completion(FriendsManagerError.unknownError)
-                                return
-                            }
-                            
-                            /// Save the saved share url to the user record so it can be accessed later.
-                            userRecord.friendShareURL = url.absoluteString
-                            self.userManager.savePrivateUserRecord(userRecord) { result in
-                                switch result {
-                                case .success:
-                                    completion(nil)
-                                case .failure(let error):
-                                    completion(error)
-                                }
-                            }
-                        }
-                        
-                        self.container.privateCloudDatabase.add(operation)
-                    case .failure(let error):
-                        completion(error)
-                    }
-                }
-            case .failure(let error):
-                completion(error)
-            }
-        }
-    }
-    
-    func fetchFriends(completion: @escaping (Result<[Friend], Error>) -> Void) {
-        userManager.fetchPrivateUserRecord { result in
-            switch result {
-            case .success(let privateUserRecord):
-                let friendShareURLs = privateUserRecord.friendShareURLs?.map { URL(string: $0)! } ?? []
+            case .success(let user):
+                let friendShareURLs = user.friendShareURLs?.map { URL(string: $0)! } ?? []
                 let metadataFetchOperation = CKFetchShareMetadataOperation(shareURLs: friendShareURLs)
+                metadataFetchOperation.shouldFetchRootRecord = true
                 metadataFetchOperation.qualityOfService = .userInitiated
                 
                 var friends: [Friend] = []
+                var fetchError: CloudKitStoreError?
                 
                 metadataFetchOperation.perShareMetadataBlock = { _, metadata, error in
                     if let error = error {
-                        completion(.failure(error))
-                        print(error)
+                        if let ckError = error as? CKError {
+                            fetchError = .ckError(ckError)
+                            return
+                        }
+                        fetchError = .other(error)
                         return
                     }
-                    guard let metadata = metadata else { return }
-                    let sharedUser = SharedUserRecord(record: metadata.rootRecord!)
-                    let publicUserRecordID = CKRecord.ID(recordName: sharedUser.publicUserRecordName ?? "")
+
+                    guard let metadata = metadata?.rootRecord else { handler(.failure(.missingRecord)); return }
+                    let sharedUser = SharedUserRecord(record: metadata)
+                    guard let privateUserRecordName = sharedUser.privateUserRecordName,
+                          let publicUserRecordName = sharedUser.publicUserRecordName else {
+                        handler(.failure(.missingID))
+                        return
+                    }
+                    let privateUserRecordID = CKRecord.ID(recordName: privateUserRecordName)
+                    let publicUserRecordID = CKRecord.ID(recordName: publicUserRecordName)
+                    
+                    let friendActivity = ActivityRings(
+                        moveCurrent: Double(sharedUser.move ?? 0),
+                        moveGoal: Double(sharedUser.moveGoal ?? 300),
+                        exerciseCurrent: Double(sharedUser.exercise ?? 0),
+                        exerciseGoal: Double(sharedUser.exerciseGoal ?? 30),
+                        standCurrent: Double(sharedUser.stand ?? 0),
+                        standGoal: Double(sharedUser.standGoal ?? 12)
+                    )
                     
                     let friend = Friend(
                         username: sharedUser.username ?? "",
                         name: sharedUser.name ?? "",
                         bio: sharedUser.bio ?? "",
                         profilePictureURL: sharedUser.profilePictureURL ?? "",
+                        activityRings: friendActivity,
                         publicUserRecordID: publicUserRecordID,
-                        privateUserRecordID: privateUserRecord.record.recordID
+                        privateUserRecordID: privateUserRecordID
                     )
-                    
                     friends.append(friend)
                 }
                 
                 metadataFetchOperation.fetchShareMetadataCompletionBlock = { error in
                     if let error = error {
-                        completion(.failure(error))
+                        if let ckError = error as? CKError {
+                            handler(.failure(.ckError(ckError)))
+                            return
+                        }
+                        handler(.failure(.other(error)))
+                        return
                     }
-                    completion(.success(friends))
+                    if let error = fetchError {
+                        handler(.failure(error))
+                        return
+                    }
+                    handler(.success(friends))
                 }
+                
+                self.container.add(metadataFetchOperation)
             case .failure(let error):
-                completion(.failure(error))
+                handler(.failure(error))
             }
         }
     }
     
-    // MARK: Friends Manager Error
-    
-    enum FriendsManagerError: Error {
-        case unknownError
-        case insufficientPermissions
-    }
-    
-    enum FriendRequestType {
-        case sent
-        case received
-        case all
+    func removeAllFriends() {
+        userManager.fetchPrivateUserRecord { result in
+            switch result {
+            case .success(let record):
+                record.friendShareURLs = []
+                self.userManager.savePrivateUserRecord(record, then: { _ in })
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
