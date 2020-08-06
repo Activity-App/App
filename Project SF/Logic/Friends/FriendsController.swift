@@ -10,7 +10,7 @@ import UIKit
 
 class FriendController: ObservableObject {
     
-    private var manager = FriendsManager()
+    private var manager = FriendManager()
     private var requestManager = FriendRequestManager()
     
     @Published var friends: [Friend] = []
@@ -20,7 +20,7 @@ class FriendController: ObservableObject {
     @Published var sharingEnabled = UserDefaults.standard.bool(forKey: "sharingEnabled")
     
     func updateAll() {
-        requestManager.fetchAndCleanAcceptedRequests { error in
+        requestManager.cleanAcceptedRequests { error in
             if let error = error { print(error); return }
             self.requestManager.fetchFriendRequests(type: .received) { result in
                 switch result {
@@ -41,19 +41,19 @@ class FriendController: ObservableObject {
                             switch result {
                             case .success(let creatorPublicUserRecordRaw):
                                 let creatorPublicUserRecord = PublicUserRecord(record: creatorPublicUserRecordRaw)
-                                let predicate = NSPredicate(format: "privateUserRecordName = %@", request.inviteePrivateUserRecordName ?? "")
+                                let predicate = NSPredicate(format: "privateUserRecordName = %@", request.recipientPrivateUserRecordName ?? "")
                                 CloudKitStore.shared.fetchRecords(with: PublicUserRecord.self, predicate: predicate, scope: .public) { result in
                                     switch result {
-                                    case .success(let inviteePublicUserRecordRaw):
-                                        guard let inviteePublicUserRecord = inviteePublicUserRecordRaw.first else { return }
+                                    case .success(let recipientPublicUserRecordRaw):
+                                        guard let recipientPublicUserRecord = recipientPublicUserRecordRaw.first else { return }
                                         
                                         let friendRequest = FriendRequest(
                                             id: request.record.recordID.recordName,
-                                            inviteeName: inviteePublicUserRecord.name,
+                                            recipientName: recipientPublicUserRecord.name,
                                             creatorName: creatorPublicUserRecord.name,
-                                            inviteeUsername: inviteePublicUserRecord.username,
+                                            recipientUsername: recipientPublicUserRecord.username,
                                             creatorUsername: creatorPublicUserRecord.username,
-                                            inviteeProfilePicture: nil,
+                                            recipientProfilePicture: nil,
                                             creatorProfilePicture: nil,
                                             record: request
                                         )

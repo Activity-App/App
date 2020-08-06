@@ -9,11 +9,11 @@ import UIKit
 
 struct FriendRequest: Identifiable {
     let id: String
-    let inviteeName: String?
+    let recipientName: String?
     let creatorName: String?
-    let inviteeUsername: String?
+    let recipientUsername: String?
     let creatorUsername: String?
-    let inviteeProfilePicture: UIImage?
+    let recipientProfilePicture: UIImage?
     let creatorProfilePicture: UIImage?
     
     let record: FriendRequestRecord

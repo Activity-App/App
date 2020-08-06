@@ -155,9 +155,8 @@ class CloudKitStore {
             }
             
             /// Get the associated share from the share metadata.
-            guard let shareURLMetadata = shareMetadata.first(
-                    where: { $0.share.url == shareURL }
-            ) else {
+            let firstMetadata = shareMetadata.first(where: { $0.share.url == shareURL })
+            guard let shareURLMetadata = firstMetadata else {
                 handler(.failure(.unknownError))
                 return
             }
@@ -271,7 +270,7 @@ class CloudKitStore {
         )
         fetchParticipantsOperation.qualityOfService = .userInitiated
         
-        var participants = [CKShare.Participant]()
+        var participants: [CKShare.Participant] = []
         
         fetchParticipantsOperation.shareParticipantFetchedBlock = { participant in
             participants.append(participant)
@@ -286,10 +285,9 @@ class CloudKitStore {
                 completion(.failure(.other(error)))
                 return
             }
-            let returnValue: [CKShare.Participant] = participants
-            completion(.success(returnValue))
+            completion(.success(participants))
         }
-        self.container.add(fetchParticipantsOperation)
+        container.add(fetchParticipantsOperation)
     }
 }
 

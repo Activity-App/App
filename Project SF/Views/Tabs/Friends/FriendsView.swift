@@ -71,7 +71,7 @@ struct FriendsView: View {
         NavigationView {
             List {
                 Button("remove all friends") {
-                    FriendsManager().removeAllFriends()
+                    FriendManager().removeAllFriends()
                 }
                 Section(header: Text("Friend Activity")) {
                     ForEach(friendController.friends) { friend in
@@ -82,7 +82,7 @@ struct FriendsView: View {
                 Section(header: Text("Pending Invites")) {
                     ForEach(friendController.receivedRequestsFromFriends) { request in
                         FriendRequestCell(name: request.creatorName ?? request.creatorUsername ?? "user", activityRings: nil) {
-                            FriendRequestManager().acceptFriendRequest(invitation: request.record) { result in
+                            FriendRequestManager().acceptFriendRequest(friendRequest: request.record) { result in
                                 switch result {
                                 case .success:
                                     friendController.updateAll()

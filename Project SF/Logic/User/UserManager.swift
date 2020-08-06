@@ -17,6 +17,12 @@ class UserManager {
     
     private init() { }
     
+    var privateUserRecord: UserRecord?
+}
+
+// MARK: Default Methods
+
+extension UserManager {
     func setup(then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void) {
         setupPublicUserRecord { result in
             switch result {
@@ -40,6 +46,7 @@ class UserManager {
             switch result {
             case .success(let privateUserRecord):
                 let user = User(privateUserRecord: privateUserRecord)
+                self.privateUserRecord = privateUserRecord
                 handler(.success(user))
             case .failure(let error):
                 handler(.failure(error))
@@ -111,7 +118,6 @@ class UserManager {
             }
         }
     }
-    
 }
 
 // MARK: Private User
@@ -125,7 +131,6 @@ extension UserManager {
                 handler(.failure(.ckError(error)))
                 return
             }
-            print(recordID)
             guard let recordID = recordID else {
                 handler(.failure(CloudKitStoreError.missingID))
                 return
@@ -134,6 +139,7 @@ extension UserManager {
             self.cloudKitStore.fetchRecord(with: recordID, scope: .private) { result in
                 switch result {
                 case .success(let record):
+                    self.privateUserRecord = record
                     handler(.success(UserRecord(record: record)))
                 case .failure(let error):
                     print(error)
@@ -156,6 +162,7 @@ extension UserManager {
         cloudKitStore.saveRecord(record.record, scope: .private, savePolicy: savePolicy) { result in
             switch result {
             case .success:
+                self.privateUserRecord = record
                 handler(.success(()))
             case .failure(let error):
                 handler(.failure(error))
