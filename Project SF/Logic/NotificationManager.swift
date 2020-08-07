@@ -73,7 +73,7 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
             CloudKitStore.shared.fetchRecord(with: friendRequestRecordID, scope: .public) { result in
                 switch result {
                 case .success(let record):
-                    FriendRequestManager().acceptFriendRequest(friendRequest: FriendRequestRecord(record: record)) { _ in
+                    FriendRequestManager().acceptFriendRequest(FriendRequestRecord(record: record)) { _ in
                         completionHandler()
                     }
                 case .failure(let error):

@@ -82,7 +82,7 @@ struct FriendsView: View {
                 Section(header: Text("Pending Invites")) {
                     ForEach(friendController.receivedRequestsFromFriends) { request in
                         FriendRequestCell(name: request.creatorName ?? request.creatorUsername ?? "user", activityRings: nil) {
-                            FriendRequestManager().acceptFriendRequest(friendRequest: request.record) { result in
+                            FriendRequestManager().acceptFriendRequest(request.record) { result in
                                 switch result {
                                 case .success:
                                     friendController.updateAll()

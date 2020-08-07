@@ -139,8 +139,9 @@ extension UserManager {
             self.cloudKitStore.fetchRecord(with: recordID, scope: .private) { result in
                 switch result {
                 case .success(let record):
-                    self.privateUserRecord = record
-                    handler(.success(UserRecord(record: record)))
+                    let userRecord = UserRecord(record: record)
+                    self.privateUserRecord = userRecord
+                    handler(.success(userRecord))
                 case .failure(let error):
                     print(error)
                     handler(.failure(error))
