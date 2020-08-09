@@ -21,7 +21,7 @@ class FriendController: ObservableObject {
     
     func updateAll() {
         requestManager.cleanAcceptedRequests { error in
-            if let error = error { print(error); return }
+            //if let error = error { print(error); return }
             self.requestManager.fetchFriendRequests(type: .received) { result in
                 switch result {
                 case .success(let receivedFriendRequests):
