@@ -203,9 +203,8 @@ extension FriendRequestManager {
         
         /// Create a predicate that will only fetch records that have been sent and accepted.
         let creatorPredicate = NSPredicate(format: "creatorPrivateUserRecordName = %@", publicUserRecordName)
-        let recipientShareURLPredicate = NSPredicate(format: "recipientShareURL != nil")
         let acceptedPredicate = NSPredicate(format: "accepted == true")
-        let allPredicates = [creatorPredicate, recipientShareURLPredicate, acceptedPredicate]
+        let allPredicates = [creatorPredicate, acceptedPredicate]
         let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: allPredicates)
         
         self.cloudKitStore.fetchRecords(with: FriendRequestRecord.self, predicate: predicate, scope: .public) { result in
@@ -214,7 +213,8 @@ extension FriendRequestManager {
                 /// If there are no results then there is nothing to do and therefore the operation is a success.
                 guard !friendRequests.isEmpty else { handler(.success(())); return }
                 
-                for friendRequest in friendRequests {
+                /// Only iterate over friend requests where the recipient has accepted and added their shareURL.
+                for friendRequest in friendRequests where friendRequest.recipientShareURL != nil {
                     /// Make friendShareURLs empty if it is nil.
                     if privateUserRecord.friendShareURLs == nil {
                         privateUserRecord.friendShareURLs = []

@@ -82,7 +82,7 @@ struct FriendsView: View {
                 Section(header: Text("Pending Invites")) {
                     ForEach(friendController.receivedRequestsFromFriends) { request in
                         FriendRequestCell(name: request.creatorName ?? request.creatorUsername ?? "user", activityRings: nil) {
-                            FriendRequestManager().acceptFriendRequest(friendRequest: request.record) { result in
+                            FriendRequestManager().acceptFriendRequest(request.record) { result in
                                 switch result {
                                 case .success:
                                     friendController.updateAll()
@@ -115,21 +115,12 @@ struct FriendsView: View {
         }
         .sheet(isPresented: $showAddFriend) {
             ForEach(discoveryController.discovered) { user in
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text(user.username ?? "ahsekjf")
-                        Text(user.name ?? "nil")
-                        Text(user.privateUserRecordName ?? "nil")
-                        Text(user.publicUserRecordName ?? "nil")
-                    }
-                    Button("Add Friend") {
-                        guard let userRecordName = user.privateUserRecordName else { return }
-                        FriendRequestManager().invite(user: userRecordName) { result in
-                            print(result)
-                        }
-                    }
-                }
-                .padding()
+                FriendDiscoveryView(name: user.name, username: user.username!, action: {
+                    FriendRequestManager().invite(user: user.privateUserRecordName!, then: { result in
+                        print(result)
+                    })
+                })
+                .padding(.horizontal)
             }
         }
     }

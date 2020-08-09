@@ -20,6 +20,7 @@
 		30278E9324BC553A00E87E80 /* CompetitionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30278E9224BC553A00E87E80 /* CompetitionDetail.swift */; };
 		3031515824DAEECB005D99E1 /* UserDiscoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3031515724DAEECB005D99E1 /* UserDiscoveryManager.swift */; };
 		3031515A24DAF119005D99E1 /* UserDiscoveryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3031515924DAF119005D99E1 /* UserDiscoveryController.swift */; };
+		303A174224DD337600A431ED /* FriendDiscoveryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303A174124DD337600A431ED /* FriendDiscoveryView.swift */; };
 		304F753124CAC9BF005D46BA /* FriendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304F753024CAC9BF005D46BA /* FriendManager.swift */; };
 		3050123624C0887D00E39019 /* Int+ConvertFromRangeToRange copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3050123524C0887D00E39019 /* Int+ConvertFromRangeToRange copy.swift */; };
 		306719E624C90438006B758D /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306719E524C90438006B758D /* AlertView.swift */; };
@@ -130,6 +131,7 @@
 		302CF88B24BA1A4000FF79D7 /* ActivityResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityResult.swift; sourceTree = "<group>"; };
 		3031515724DAEECB005D99E1 /* UserDiscoveryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDiscoveryManager.swift; sourceTree = "<group>"; };
 		3031515924DAF119005D99E1 /* UserDiscoveryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDiscoveryController.swift; sourceTree = "<group>"; };
+		303A174124DD337600A431ED /* FriendDiscoveryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FriendDiscoveryView.swift; path = ../../../../../../../FriendDiscoveryView.swift; sourceTree = "<group>"; };
 		304F753024CAC9BF005D46BA /* FriendManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendManager.swift; sourceTree = "<group>"; };
 		3050123524C0887D00E39019 /* Int+ConvertFromRangeToRange copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+ConvertFromRangeToRange copy.swift"; sourceTree = "<group>"; };
 		306719E524C90438006B758D /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
@@ -481,6 +483,7 @@
 			isa = PBXGroup;
 			children = (
 				30D321B424BB65D5009CD9D0 /* FriendsView.swift */,
+				303A174124DD337600A431ED /* FriendDiscoveryView.swift */,
 				3067712E24BDE0080085F152 /* FriendsCell.swift */,
 				3067713024BDE3950085F152 /* FriendDetailView.swift */,
 				300E688B24D13F4100425008 /* FriendRequestCell.swift */,
@@ -792,6 +795,7 @@
 				AA69F54A24CD41E4005B97AC /* NotificationManager.swift in Sources */,
 				306719E624C90438006B758D /* AlertView.swift in Sources */,
 				9CCFDD2824B9758A00162B0F /* TestApp.swift in Sources */,
+				303A174224DD337600A431ED /* FriendDiscoveryView.swift in Sources */,
 				9C39F69524C07BAA0073C9FF /* SignUpView.swift in Sources */,
 				9C6C74B324BAEC0B00C657B0 /* DynamicRecord.swift in Sources */,
 				9C7E74AC24BDC7790032CD88 /* ScoreURLHolderRecord.swift in Sources */,

@@ -12,7 +12,7 @@ struct ProjectSFApp: App {
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
-    @AppStorage("showOnboarding") var showOnboarding = true
+    @State var showOnboarding = true
     @StateObject var healthKit = HealthKitController()
     @StateObject var alert = AlertManager()
     
