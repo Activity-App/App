@@ -16,7 +16,9 @@ class UserDiscoveryController: ObservableObject {
         manager.fetchAllPublicUsers { result in
             switch result {
             case .success(let users):
-                self.discovered = users
+                DispatchQueue.main.async {
+                    self.discovered = users
+                }
             case .failure(let error):
                 print("discovery error \(error)")
             }

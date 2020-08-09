@@ -12,7 +12,6 @@ struct PointsGraph: View {
     
     @State var currentPage: Int = 0
     @State var translation: CGFloat = 0
-    @State var allowAnimation = false
     var startDate: Date
     let history: [CGFloat]
     let bars = 7
@@ -79,9 +78,6 @@ struct PointsGraph: View {
             }
             .onAppear {
                 currentPage = pages()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    allowAnimation = true
-                }
             }
             HStack {
                 ForEach(1 ..< pages() + 1) { dot in
@@ -184,7 +180,7 @@ struct PointsGraph: View {
             RoundedRectangle(cornerRadius: 10, style: .continuous)
                 .foregroundColor(.accentColor)
                 .frame(height: height)
-                .animation(allowAnimation ? .spring() : nil)
+                .animation(.spring())
         }
         .frame(maxWidth: 45)
         .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))

@@ -23,6 +23,7 @@ class UserManager {
 // MARK: Default Methods
 
 extension UserManager {
+    /// Setup the user. Checks for and creates a public and shared user record if they don't exist.
     func setup(then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void) {
         setupPublicUserRecord { result in
             switch result {
@@ -41,12 +42,12 @@ extension UserManager {
         }
     }
     
+    /// Fetch the current properties of the user as a User struct.
     func fetch(then handler: @escaping (Result<User, CloudKitStoreError>) -> Void) {
         fetchPrivateUserRecord { result in
             switch result {
             case .success(let privateUserRecord):
                 let user = User(privateUserRecord: privateUserRecord)
-                self.privateUserRecord = privateUserRecord
                 handler(.success(user))
             case .failure(let error):
                 handler(.failure(error))
@@ -54,6 +55,9 @@ extension UserManager {
         }
     }
     
+    /// Save user properties to the cloud. This method will respect the privacy settings the user has set and should be preferred whenever a save is initiated by the user and not the system.
+    /// - Parameters:
+    ///   - user: The user struct with new updated values that should be saved. Only changed values will be saved.
     func save(user: User, then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void) {
         
         guard let privateUserRecordName = user.privateUserRecordName else { handler(.failure(.missingID)); return }
@@ -65,7 +69,6 @@ extension UserManager {
         savePrivateUserRecord(privateUserRecord) { result in
             switch result {
             case .success:
-                print("success")
                 let publicUserRecordID = CKRecord.ID(recordName: publicUserRecordName)
                 let publicUser = PublicUserRecord(recordID: publicUserRecordID)
                 publicUser.username = user.username

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AlertView: View {
     
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var manager: AlertManager
     @State var colorPulse = false
     
@@ -24,7 +25,7 @@ struct AlertView: View {
                     ZStack {
                         ZStack {
                             RoundedRectangle(cornerRadius: 40, style: .continuous)
-                                .foregroundColor(.white)
+                                .foregroundColor(colorScheme == .light ? .white : .black)
                                 .shadow(radius: 20)
                             VStack {
                                 Text("Something went wrong!")

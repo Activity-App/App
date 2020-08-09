@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Network
 
 class NetworkManager {
     
@@ -22,10 +23,20 @@ class NetworkManager {
     
     let urlSession: URLSession
     
+    private let monitor = NWPathMonitor()
+    private let monitorQueue = DispatchQueue(label: "NetworkMonitorQueue")
+    var connected = false
+    
     // MARK: Init
     
     init(urlSession: URLSession) {
         self.urlSession = urlSession
+        
+        self.monitor.pathUpdateHandler = { update in
+            self.connected = update.status == .satisfied
+            print(self.connected)
+        }
+        self.monitor.start(queue: monitorQueue)
     }
 
     // MARK: Data Request

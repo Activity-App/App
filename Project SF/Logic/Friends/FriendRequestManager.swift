@@ -202,7 +202,7 @@ extension FriendRequestManager {
         }
         
         /// Create a predicate that will only fetch records that have been sent and accepted.
-        let creatorPredicate = NSPredicate(format: "creatorPrivateUserRecordName = %@", publicUserRecordName)
+        let creatorPredicate = NSPredicate(format: "creatorPublicUserRecordName = %@", publicUserRecordName)
         let acceptedPredicate = NSPredicate(format: "accepted == true")
         let allPredicates = [creatorPredicate, acceptedPredicate]
         let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: allPredicates)
@@ -220,10 +220,11 @@ extension FriendRequestManager {
                         privateUserRecord.friendShareURLs = []
                     }
                     /// Add the friend request recipient share url to the users array of friends share urls.
-                    privateUserRecord.friendShareURLs?.append(friendRequest.recipientShareURL!)
+                    privateUserRecord.friendShareURLs!.append(friendRequest.recipientShareURL!)
                     self.userManager.savePrivateUserRecord(privateUserRecord) { result in
                         switch result {
                         case .success:
+                            print("did that successfully")
                             ///** The two users are now successfully friends yay! We can now safely delete the friend request from the public db. **
                             let friendRequestRecordID = friendRequest.record.recordID
                             self.cloudKitStore.deleteRecord(with: friendRequestRecordID, scope: .public) { result in

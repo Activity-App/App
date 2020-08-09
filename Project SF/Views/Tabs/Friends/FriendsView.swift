@@ -62,8 +62,8 @@ struct FriendsView: View {
         )
     ]
     
-    @StateObject var friendController = FriendController()
-    @StateObject var userController = UserController()
+    @EnvironmentObject var friendController: FriendController
+    @EnvironmentObject var userController: UserController
     @StateObject var discoveryController = UserDiscoveryController()
     @State var showAddFriend = false
 
@@ -109,9 +109,7 @@ struct FriendsView: View {
                 .font(.title2)
         }
         .onAppear {
-            print("here")
             friendController.updateAll()
-            userController.setup { result in print(result) }
         }
         .sheet(isPresented: $showAddFriend) {
             ForEach(discoveryController.discovered) { user in
