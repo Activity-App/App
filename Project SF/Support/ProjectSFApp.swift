@@ -10,7 +10,15 @@ import Network
 
 struct ProjectSFApp: App {
  
-    let cloudKitStore = CloudKitStore.shared
+    let cloudKitStore: CloudKitStore
+    
+    init() {
+        self.cloudKitStore = .shared
+    }
+    
+    init(cloudKitStore: CloudKitStore = .shared) {
+        self.cloudKitStore = cloudKitStore
+    }
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
@@ -71,7 +79,7 @@ struct ProjectSFApp: App {
                 healthKit.updateTodaysActivityData()
             }
         }
-        friendController.updateAll()
+        friendController.updateAll { _ in }
         checkConnection()
     }
     

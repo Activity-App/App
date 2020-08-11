@@ -10,6 +10,8 @@ import UIKit
 
 class FriendController: ObservableObject {
     
+    typealias Handler = (CloudKitStoreError?) -> Void
+    
     private var manager = FriendManager()
     private var requestManager = FriendRequestManager()
     
@@ -19,7 +21,27 @@ class FriendController: ObservableObject {
     @Published var receivedRequestsFromFriends: [FriendRequest] = []
     @Published var sharingEnabled = UserDefaults.standard.bool(forKey: "sharingEnabled")
     
-    func updateAll() {
+    func updateAll(then handler: @escaping Handler) {
+        requestManager.fetchFriendRequests(type: .sent) { result in
+            switch result {
+            case .success(let sentFriendRequests):
+                DispatchQueue.main.async {
+                    self.sentRequestsToFriends = sentFriendRequests
+                }
+                self.requestManager.cleanAcceptedRequests { result in
+                    switch result {
+                    case .success(let deletedFriendRequests):
+                        for request in deletedFriendRequests {
+                            self.sentRequestsToFriends.removeAll { $0.record.recordID == request.record.recordID }
+                        }
+                    case .failure(let error):
+                        handler(error)
+                    }
+                }
+            case .failure(let error):
+                handler(error)
+            }
+        }
         requestManager.cleanAcceptedRequests { error in
             self.requestManager.fetchFriendRequests(type: .received) { result in
                 switch result {

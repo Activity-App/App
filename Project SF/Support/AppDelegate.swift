@@ -10,7 +10,7 @@ import CloudKit
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     
-    let cloudKitStore = CloudKitStore.shared
+    let cloudKitStore: CloudKitStore = .shared
     
     func application(
         _ application: UIApplication,

@@ -40,6 +40,8 @@
 		308FAD9E24B9A0DC00126F3F /* NavigationBarLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD9D24B9A0DC00126F3F /* NavigationBarLabel.swift */; };
 		3090918224B9480F000E3B11 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3090918124B9480F000E3B11 /* RoundedButton.swift */; };
 		30ABC14024C565A40060825B /* CompetitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ABC13F24C565A40060825B /* CompetitionType.swift */; };
+		30B3EF6724E194B600E5038C /* StructWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B3EF6624E194B600E5038C /* StructWrapper.swift */; };
+		30B3EF6924E2D97600E5038C /* Result+Get.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B3EF6824E2D97600E5038C /* Result+Get.swift */; };
 		30BFC8CE24B75E6C00DAC6D9 /* ProjectSFApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8CD24B75E6C00DAC6D9 /* ProjectSFApp.swift */; };
 		30BFC8D024B75E6C00DAC6D9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFC8CF24B75E6C00DAC6D9 /* ContentView.swift */; };
 		30BFC8D224B75E6F00DAC6D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30BFC8D124B75E6F00DAC6D9 /* Assets.xcassets */; };
@@ -148,6 +150,8 @@
 		308FAD9D24B9A0DC00126F3F /* NavigationBarLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarLabel.swift; sourceTree = "<group>"; };
 		3090918124B9480F000E3B11 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		30ABC13F24C565A40060825B /* CompetitionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionType.swift; sourceTree = "<group>"; };
+		30B3EF6624E194B600E5038C /* StructWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StructWrapper.swift; path = ../../../../../StructWrapper.swift; sourceTree = "<group>"; };
+		30B3EF6824E2D97600E5038C /* Result+Get.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Result+Get.swift"; path = "../../../../../../Result+Get.swift"; sourceTree = "<group>"; };
 		30BFC8CA24B75E6C00DAC6D9 /* Project SF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project SF.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30BFC8CD24B75E6C00DAC6D9 /* ProjectSFApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSFApp.swift; sourceTree = "<group>"; };
 		30BFC8CF24B75E6C00DAC6D9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -280,6 +284,7 @@
 				9CCFDD2324B9745E00162B0F /* UIApplication+IsTesting.swift */,
 				9C8FAD4924BAADA600571947 /* CKContainer+AppDefault.swift */,
 				30EAB9FE24C325F2005326C8 /* UserDefaults+UIColor.swift */,
+				30B3EF6824E2D97600E5038C /* Result+Get.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -528,6 +533,7 @@
 				30FCC84B24BB2EC800862C01 /* ResignKeyboardOnDragGesture.swift */,
 				30FCC84D24BB318000862C01 /* KeyboardManager.swift */,
 				3029AF5124B886A7003F0324 /* Extensions */,
+				30B3EF6624E194B600E5038C /* StructWrapper.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -746,6 +752,7 @@
 				9CCFDD1F24B971D600162B0F /* NetworkManager.swift in Sources */,
 				9CCFDD2624B9753F00162B0F /* Main.swift in Sources */,
 				30D321C124BC1886009CD9D0 /* NavScrollView.swift in Sources */,
+				30B3EF6924E2D97600E5038C /* Result+Get.swift in Sources */,
 				30251C1924BFC1A50058D6D2 /* CompetitorDetail.swift in Sources */,
 				30BFC8E924B804CC00DAC6D9 /* ActivityRingView.swift in Sources */,
 				3067712F24BDE0080085F152 /* FriendsCell.swift in Sources */,
@@ -798,6 +805,7 @@
 				303A174224DD337600A431ED /* FriendDiscoveryView.swift in Sources */,
 				9C39F69524C07BAA0073C9FF /* SignUpView.swift in Sources */,
 				9C6C74B324BAEC0B00C657B0 /* DynamicRecord.swift in Sources */,
+				30B3EF6724E194B600E5038C /* StructWrapper.swift in Sources */,
 				9C7E74AC24BDC7790032CD88 /* ScoreURLHolderRecord.swift in Sources */,
 				3067713124BDE3950085F152 /* FriendDetailView.swift in Sources */,
 				30D321BB24BB65D5009CD9D0 /* PermissionSettings.swift in Sources */,

@@ -70,9 +70,9 @@ struct FriendsView: View {
     var body: some View {
         NavigationView {
             List {
-                Button("remove all friends") {
-                    FriendManager().removeAllFriends()
-                }
+//                Button("remove all friends") {
+//                    FriendManager().removeAllFriends()
+//                }
                 Section(header: Text("Friend Activity")) {
                     ForEach(friendController.friends) { friend in
                         FriendsCell(friend)
@@ -85,7 +85,7 @@ struct FriendsView: View {
                             FriendRequestManager().acceptFriendRequest(request.record) { result in
                                 switch result {
                                 case .success:
-                                    friendController.updateAll()
+                                    friendController.updateAll { _ in }
                                     print("sucessfully added \(request.creatorName ?? "user")")
                                 case .failure(let error):
                                     print(error)
@@ -109,7 +109,7 @@ struct FriendsView: View {
                 .font(.title2)
         }
         .onAppear {
-            friendController.updateAll()
+            friendController.updateAll { _ in }
         }
         .sheet(isPresented: $showAddFriend) {
             ForEach(discoveryController.discovered) { user in

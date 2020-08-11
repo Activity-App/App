@@ -14,10 +14,14 @@ class UserController: ObservableObject {
     
     // MARK: Properties
 
-    private let manager = UserManager.shared
+    private let manager: UserManager
 
     @Published var user: User?
     @Published var loading = false
+    
+    init(manager: UserManager = .shared) {
+        self.manager = manager
+    }
     
     func setup(then handler: @escaping (CloudKitStoreError?) -> Void) {
         isLoading(true)

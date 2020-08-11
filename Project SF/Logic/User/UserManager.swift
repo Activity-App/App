@@ -7,17 +7,27 @@
 
 import CloudKit
 
-class UserManager {
+final class UserManager {
+    
+    // MARK: Properties
     
     static let shared = UserManager()
     
-    private let container: CKContainer = .appDefault
-    private let cloudKitStore = CloudKitStore.shared
+    private let container: CKContainer
+    private let cloudKitStore: CloudKitStore
     private let userDefaults = UserDefaults.standard
     
-    private init() { }
+    // MARK: Init
     
-    var privateUserRecord: UserRecord?
+    private init(
+        container: CKContainer = .appDefault,
+        cloudKitStore: CloudKitStore = .shared
+    ) {
+        self.container = container
+        self.cloudKitStore = cloudKitStore
+    }
+    
+    private var privateUserRecord: UserRecord?
 }
 
 // MARK: Default Methods
@@ -26,31 +36,26 @@ extension UserManager {
     /// Setup the user. Checks for and creates a public and shared user record if they don't exist.
     func setup(then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void) {
         setupPublicUserRecord { result in
-            switch result {
-            case .success:
+            result.get(handler) {
                 self.setupSharedUserRecord { result in
-                    switch result {
-                    case .success:
-                        handler(.success(()))
-                    case .failure(let error):
-                        handler(.failure(error))
-                    }
+                    result.complete(handler)
                 }
-            case .failure(let error):
-                handler(.failure(error))
             }
         }
     }
     
     /// Fetch the current properties of the user as a User struct.
     func fetch(then handler: @escaping (Result<User, CloudKitStoreError>) -> Void) {
-        fetchPrivateUserRecord { result in
-            switch result {
-            case .success(let privateUserRecord):
-                let user = User(privateUserRecord: privateUserRecord)
-                handler(.success(user))
-            case .failure(let error):
-                handler(.failure(error))
+        if let privateUserRecord = privateUserRecord {
+            let user = User(privateUserRecord: privateUserRecord)
+            handler(.success(user))
+            return
+        } else {
+            fetchPrivateUserRecord { result in
+                result.get(handler) { record in
+                    let user = User(privateUserRecord: record)
+                    handler(.success(user))
+                }
             }
         }
     }
@@ -67,8 +72,7 @@ extension UserManager {
         let privateUserRecord = UserRecord(recordName: privateUserRecordName, user: user)
         
         savePrivateUserRecord(privateUserRecord) { result in
-            switch result {
-            case .success:
+            result.get(handler) {
                 let publicUserRecordID = CKRecord.ID(recordName: publicUserRecordName)
                 let publicUser = PublicUserRecord(recordID: publicUserRecordID)
                 publicUser.username = user.username
@@ -84,8 +88,7 @@ extension UserManager {
                 }
                 
                 self.savePublicUserRecord(publicUser) { result in
-                    switch result {
-                    case .success:
+                    result.get(handler) {
                         let sharedUserZone = CKRecordZone.ID(zoneName: "SharedWithFriendsDataZone")
                         let sharedUserRecordID = CKRecord.ID(
                             recordName: sharedUserRecordName,
@@ -104,20 +107,10 @@ extension UserManager {
                         }
                         
                         self.saveSharedUserRecord(sharedUser) { result in
-                            switch result {
-                            case .success:
-                                handler(.success(()))
-                            case .failure(let error):
-                                handler(.failure(error))
-                            }
+                            result.complete(handler)
                         }
-                        
-                    case .failure(let error):
-                        handler(.failure(error))
                     }
                 }
-            case .failure(let error):
-                handler(.failure(error))
             }
         }
     }
@@ -128,7 +121,7 @@ extension UserManager {
 extension UserManager {
     /// Asynchronously fetches the user record from the CloudKit database
     /// - Parameter handler: Called with the result of the operation. Not guaranteed to be on the main thread.
-    func fetchPrivateUserRecord(then handler: @escaping (Result<UserRecord, CloudKitStoreError>) -> Void) {
+    private func fetchPrivateUserRecord(then handler: @escaping (Result<UserRecord, CloudKitStoreError>) -> Void) {
         container.fetchUserRecordID { recordID, error in
             if let error = error as? CKError {
                 handler(.failure(.ckError(error)))
@@ -140,14 +133,10 @@ extension UserManager {
             }
             
             self.cloudKitStore.fetchRecord(with: recordID, scope: .private) { result in
-                switch result {
-                case .success(let record):
+                result.get(handler) { record in
                     let userRecord = UserRecord(record: record)
                     self.privateUserRecord = userRecord
                     handler(.success(userRecord))
-                case .failure(let error):
-                    print(error)
-                    handler(.failure(error))
                 }
             }
         }
@@ -164,12 +153,9 @@ extension UserManager {
         then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void
     ) {
         cloudKitStore.saveRecord(record.record, scope: .private, savePolicy: savePolicy) { result in
-            switch result {
-            case .success:
+            result.get(handler) {
                 self.privateUserRecord = record
                 handler(.success(()))
-            case .failure(let error):
-                handler(.failure(error))
             }
         }
     }
@@ -180,7 +166,7 @@ extension UserManager {
 extension UserManager {
     /// Tries to fetch public user if it exists it will return as a success. If it is missing it will create the public user and return as a success.
     /// - Parameter handler: What to do when the operation completes. Returns void for success and error for failure.
-    func setupPublicUserRecord(then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void) {
+    private func setupPublicUserRecord(then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void) {
         fetchPublicUserRecord { result in
             switch result {
             case .success:
@@ -190,24 +176,14 @@ extension UserManager {
                 case .ckError(let ckError):
                     if ckError.code == .unknownItem {
                         self.createPublicUserRecord { result in
-                            switch result {
-                            case .success:
-                                handler(.success(()))
-                            case .failure(let error):
-                                handler(.failure(error))
-                            }
+                            result.complete(handler)
                         }
                     } else {
                         handler(.failure(error))
                     }
                 case .missingID, .missingRecord:
                     self.createPublicUserRecord { result in
-                        switch result {
-                        case .success:
-                            handler(.success(()))
-                        case .failure(let error):
-                            handler(.failure(error))
-                        }
+                        result.complete(handler)
                     }
                 default:
                     handler(.failure(error))
@@ -219,36 +195,31 @@ extension UserManager {
     /// Creates a new public user record and saves its record name to the private user.
     /// - Parameter handler: What to do when the operation completes. Returns void for success and error for failure.
     private func createPublicUserRecord(then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void) {
-        fetchPrivateUserRecord { result in
-            switch result {
-            case .success(let privateUserRecord):
+        fetch { result in
+            result.get(handler) { user in
+                var user = user
+                guard let privateUserRecordName = user.privateUserRecordName else {
+                    handler(.failure(.missingID))
+                    return
+                }
                 /// Create a new randomized record name and save it to the private record.
                 let recordName = UUID().uuidString
                 
                 let newRecord = PublicUserRecord(recordID: CKRecord.ID(recordName: recordName))
-                newRecord.username = privateUserRecord.username
-                newRecord.privateUserRecordName = privateUserRecord.record.recordID.recordName
+                newRecord.username = user.username
+                newRecord.privateUserRecordName = privateUserRecordName
                 
                 self.cloudKitStore.saveRecord(newRecord.record, scope: .public) { result in
-                    switch result {
-                    case .success:
+                    result.get(handler) {
                         /// Update the private user record with the record name of the public user record.
-                        privateUserRecord.publicUserRecordName = recordName
-                        self.userDefaults.set(recordName, forKey: "publicUserRecordName")
-                        self.savePrivateUserRecord(privateUserRecord) { result in
-                            switch result {
-                            case .success:
-                                handler(.success(()))
-                            case .failure(let error):
-                                handler(.failure(error))
-                            }
+                        user.publicUserRecordName = recordName
+                        
+                        let privateUser = UserRecord(recordName: privateUserRecordName, user: user)
+                        self.savePrivateUserRecord(privateUser) { result in
+                            result.complete(handler)
                         }
-                    case .failure(let error):
-                        handler(.failure(error))
                     }
                 }
-            case .failure(let error):
-                handler(.failure(error))
             }
         }
     }
@@ -256,50 +227,19 @@ extension UserManager {
     /// Fetch the public user record using record name in UserDefaults by default. If no value in UserDefaults, it will get it from private user record and if that doesnt exist, it'll fail with missingID error (this generally means it has not yet been created).
     /// - Parameter handler: <#handler description#>
     func fetchPublicUserRecord(then handler: @escaping (Result<PublicUserRecord, CloudKitStoreError>) -> Void) {
-        if let publicUserRecordName = userDefaults.string(forKey: "publicUserRecordName") {
-            fetchPublicUserRecordWith(recordName: publicUserRecordName) { result in
-                switch result {
-                case .success(let publicUserRecord):
-                    handler(.success(publicUserRecord))
-                case .failure(let error):
-                    handler(.failure(error))
+        fetch { result in
+            result.get(handler) { user in
+                guard let publicUserRecordName = user.publicUserRecordName else {
+                    handler(.failure(.missingID))
+                    return
                 }
-            }
-        } else {
-            fetchPrivateUserRecord { result in
-                switch result {
-                case .success(let privateUserRecord):
-                    guard let publicUserRecordName = privateUserRecord.publicUserRecordName else {
-                        handler(.failure(.missingID))
-                        return
+                let publicUserRecordID = CKRecord.ID(recordName: publicUserRecordName)
+                
+                self.cloudKitStore.fetchRecord(with: publicUserRecordID, scope: .public) { result in
+                    result.get(handler) { record in
+                        handler(.success(PublicUserRecord(record: record)))
                     }
-                    self.fetchPublicUserRecordWith(recordName: publicUserRecordName) { result in
-                        switch result {
-                        case .success(let publicUserRecord):
-                            handler(.success(publicUserRecord))
-                        case .failure(let error):
-                            handler(.failure(error))
-                        }
-                    }
-                case .failure(let error):
-                    handler(.failure(error))
                 }
-            }
-        }
-    }
-    
-    private func fetchPublicUserRecordWith(
-        recordName: String,
-        then handler: @escaping (Result<PublicUserRecord, CloudKitStoreError>) -> Void
-    ) {
-        let publicUserRecordID = CKRecord.ID(recordName: recordName)
-        
-        cloudKitStore.fetchRecord(with: publicUserRecordID, scope: .public) { result in
-            switch result {
-            case .success(let record):
-                handler(.success(PublicUserRecord(record: record)))
-            case .failure(let error):
-                handler(.failure(error))
             }
         }
     }
@@ -310,12 +250,7 @@ extension UserManager {
         then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void
     ) {
         cloudKitStore.saveRecord(record.record, scope: .public, savePolicy: savePolicy) { result in
-            switch result {
-            case .success:
-                handler(.success(()))
-            case .failure(let error):
-                handler(.failure(error))
-            }
+            result.complete(handler)
         }
     }
 }
@@ -323,7 +258,7 @@ extension UserManager {
 // MARK: Shared User
 
 extension UserManager {
-    func setupSharedUserRecord(then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void) {
+    private func setupSharedUserRecord(then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void) {
         fetchSharedUserRecord { result in
             switch result {
             case .success:
@@ -333,24 +268,14 @@ extension UserManager {
                 case .ckError(let ckError):
                     if ckError.code == .unknownItem {
                         self.createSharedUserRecord { result in
-                            switch result {
-                            case .success:
-                                handler(.success(()))
-                            case .failure(let error):
-                                handler(.failure(error))
-                            }
+                            result.complete(handler)
                         }
                     } else {
                         handler(.failure(error))
                     }
                 case .missingID, .missingRecord:
                     self.createSharedUserRecord { result in
-                        switch result {
-                        case .success:
-                            handler(.success(()))
-                        case .failure(let error):
-                            handler(.failure(error))
-                        }
+                        result.complete(handler)
                     }
                 default:
                     handler(.failure(error))
@@ -366,19 +291,23 @@ extension UserManager {
     private func createSharedUserRecord(then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void) {
         /// Create new  zone in your private db to share your activity data.
         cloudKitStore.createZone(named: "SharedWithFriendsDataZone") { result in
-            switch result {
-            case .success(let zone):
-                self.fetchPrivateUserRecord { result in
-                    switch result {
-                    case .success(let userRecord):
+            result.get(handler) { zone in
+                self.fetch { result in
+                    result.get(handler) { user in
+                        var user = user
+                        guard let privateUserRecordName = user.privateUserRecordName else {
+                            handler(.failure(.missingID))
+                            return
+                        }
+                        
                         /// Create an empty `SharedWithFriendsData` record in the created zone.
                         let sharedData = SharedUserRecord(recordID: CKRecord.ID(zoneID: zone.zoneID))
-                        sharedData.name = userRecord.name
-                        sharedData.username = userRecord.username
-                        sharedData.bio = userRecord.bio
-                        sharedData.profilePictureURL = userRecord.profilePictureURL
-                        sharedData.privateUserRecordName = userRecord.record.recordID.recordName
-                        sharedData.publicUserRecordName = userRecord.publicUserRecordName
+                        sharedData.name = user.name
+                        sharedData.username = user.username
+                        sharedData.bio = user.bio
+                        sharedData.profilePictureURL = user.profilePictureURL
+                        sharedData.privateUserRecordName = user.privateUserRecordName
+                        sharedData.publicUserRecordName = user.publicUserRecordName
                         
                         /// Create a share from the created activity record and set the public permission to none so no one can access it unless we explicitly allow them.
                         let share = CKShare(rootRecord: sharedData.record)
@@ -413,78 +342,38 @@ extension UserManager {
                             }
                             
                             /// Save the saved share url to the user record so it can be accessed later.
-                            userRecord.sharedUserRecordName = sharedData.record.recordID.recordName
-                            userRecord.friendShareURL = url.absoluteString
                             
-                            self.userDefaults.set(sharedData.record.recordID.recordName, forKey: "sharedUserRecordName")
+                            user.sharedUserRecordName = sharedData.record.recordID.recordName
+                            user.friendShareURL = url.absoluteString
                             
-                            self.savePrivateUserRecord(userRecord) { result in
-                                switch result {
-                                case .success:
-                                    handler(.success(()))
-                                case .failure(let error):
-                                    handler(.failure(error))
-                                }
+                            let privateUser = UserRecord(recordName: privateUserRecordName, user: user)
+                            self.savePrivateUserRecord(privateUser) { result in
+                                result.complete(handler)
                             }
                         }
                         
                         self.container.privateCloudDatabase.add(operation)
-                    case .failure(let error):
-                        handler(.failure(error))
                     }
                 }
-            case .failure(let error):
-                handler(.failure(error))
             }
         }
     }
     
     func fetchSharedUserRecord(then handler: @escaping (Result<SharedUserRecord, CloudKitStoreError>) -> Void) {
-        if let sharedUserRecordName = userDefaults.string(forKey: "sharedUserRecordName") {
-            fetchSharedUserRecordWith(recordName: sharedUserRecordName) { result in
-                switch result {
-                case .success(let sharedUserRecord):
-                    handler(.success(sharedUserRecord))
-                case .failure(let error):
-                    handler(.failure(error))
+        fetch { result in
+            result.get(handler) { user in
+                guard let sharedUserRecordName = user.sharedUserRecordName else {
+                    handler(.failure(.missingID))
+                    return
                 }
-            }
-        } else {
-            fetchPrivateUserRecord { result in
-                switch result {
-                case .success(let privateUserRecord):
-                    guard let sharedUserRecordName = privateUserRecord.sharedUserRecordName else {
-                        handler(.failure(.missingID))
-                        return
+                let zone = CKRecordZone.ID(zoneName: "SharedWithFriendsDataZone")
+                let sharedUserRecordID = CKRecord.ID(recordName: sharedUserRecordName, zoneID: zone)
+                
+                self.cloudKitStore.fetchRecord(with: sharedUserRecordID, scope: .private) { result in
+                    result.get(handler) { record in
+                        handler(.success(SharedUserRecord(record: record)))
                     }
-                    self.fetchSharedUserRecordWith(recordName: sharedUserRecordName) { result in
-                        switch result {
-                        case .success(let publicUserRecord):
-                            handler(.success(publicUserRecord))
-                        case .failure(let error):
-                            handler(.failure(error))
-                        }
-                    }
-                case .failure(let error):
-                    handler(.failure(error))
                 }
-            }
-        }
-    }
-    
-    private func fetchSharedUserRecordWith(
-        recordName: String,
-        then handler: @escaping (Result<SharedUserRecord, CloudKitStoreError>) -> Void
-    ) {
-        let zone = CKRecordZone.ID(zoneName: "SharedWithFriendsDataZone")
-        let sharedUserRecordID = CKRecord.ID(recordName: recordName, zoneID: zone)
-        
-        cloudKitStore.fetchRecord(with: sharedUserRecordID, scope: .private) { result in
-            switch result {
-            case .success(let record):
-                handler(.success(SharedUserRecord(record: record)))
-            case .failure(let error):
-                handler(.failure(error))
             }
         }
     }
@@ -495,12 +384,7 @@ extension UserManager {
         then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void
     ) {
         cloudKitStore.saveRecord(record.record, scope: .private, savePolicy: savePolicy) { result in
-            switch result {
-            case .success:
-                handler(.success(()))
-            case .failure(let error):
-                handler(.failure(error))
-            }
+            result.complete(handler)
         }
     }
 }

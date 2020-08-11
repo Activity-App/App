@@ -9,6 +9,7 @@ import UIKit
 
 struct FriendRequest: Identifiable {
     let id: String
+    
     let recipientName: String?
     let creatorName: String?
     let recipientUsername: String?

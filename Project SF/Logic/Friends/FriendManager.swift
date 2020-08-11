@@ -11,20 +11,20 @@ class FriendManager: ObservableObject {
     
     // MARK: Properties
     
-    private let container = CKContainer.appDefault
-    private let cloudKitStore = CloudKitStore.shared
-    private let userManager = UserManager.shared
+    private let container: CKContainer
+    private let cloudKitStore: CloudKitStore
+    private let userManager: UserManager
     
-    func removeAllFriends() {
-        userManager.fetchPrivateUserRecord { result in
-            switch result {
-            case .success(let record):
-                record.friendShareURLs = []
-                self.userManager.savePrivateUserRecord(record, then: { _ in })
-            case .failure(let error):
-                print(error)
-            }
-        }
+    // MARK: Init
+    
+    init(
+        container: CKContainer = .appDefault,
+        cloudKitStore: CloudKitStore = .shared,
+        userManager: UserManager = .shared
+    ) {
+        self.container = container
+        self.cloudKitStore = cloudKitStore
+        self.userManager = userManager
     }
 }
 
@@ -33,79 +33,81 @@ class FriendManager: ObservableObject {
 extension FriendManager {
     func fetchFriends(then handler: @escaping (Result<[Friend], CloudKitStoreError>) -> Void) {
         /// Get user record.
-        guard let user = userManager.privateUserRecord else {
-            handler(.failure(.missingRecord))
-            return
-        }
-        
-        /// From the friend share urls list we need to fetch the underlying SharedUserRecord.
-        let friendShareURLs = user.friendShareURLs?.map { URL(string: $0)! } ?? []
-        let metadataFetchOperation = CKFetchShareMetadataOperation(shareURLs: friendShareURLs)
-        metadataFetchOperation.shouldFetchRootRecord = true
-        metadataFetchOperation.qualityOfService = .userInitiated
-        
-        /// Placeholder values to hold incoming data.
-        var friends: [Friend] = []
-        var fetchError: CloudKitStoreError?
-        
-        metadataFetchOperation.perShareMetadataBlock = { _, metadata, error in
-            if let error = error {
-                if let ckError = error as? CKError {
-                    fetchError = .ckError(ckError)
-                    return
+        userManager.fetch { result in
+            switch result {
+            case .success(let user):
+                /// From the friend share urls list we need to fetch the underlying SharedUserRecord.
+                let friendShareURLs = user.friendShareURLs?.map { URL(string: $0)! } ?? []
+                let metadataFetchOperation = CKFetchShareMetadataOperation(shareURLs: friendShareURLs)
+                metadataFetchOperation.shouldFetchRootRecord = true
+                metadataFetchOperation.qualityOfService = .userInitiated
+                
+                /// Placeholder values to hold incoming data.
+                var friends: [Friend] = []
+                var fetchError: CloudKitStoreError?
+                
+                metadataFetchOperation.perShareMetadataBlock = { _, metadata, error in
+                    if let error = error {
+                        if let ckError = error as? CKError {
+                            fetchError = .ckError(ckError)
+                            return
+                        }
+                        fetchError = .other(error)
+                        return
+                    }
+                    /// Get the root record from the share metadata. This will be a `SharedUser`
+                    guard let rootRecord = metadata?.rootRecord else { handler(.failure(.missingRecord)); return }
+                    let sharedUser = SharedUserRecord(record: rootRecord)
+                    guard let privateUserRecordName = sharedUser.privateUserRecordName,
+                          let publicUserRecordName = sharedUser.publicUserRecordName else {
+                        handler(.failure(.missingID))
+                        return
+                    }
+                    let privateUserRecordID = CKRecord.ID(recordName: privateUserRecordName)
+                    let publicUserRecordID = CKRecord.ID(recordName: publicUserRecordName)
+                    
+                    let friendActivity = ActivityRings(
+                        moveCurrent: Double(sharedUser.move ?? 0),
+                        moveGoal: Double(sharedUser.moveGoal ?? 300),
+                        exerciseCurrent: Double(sharedUser.exercise ?? 0),
+                        exerciseGoal: Double(sharedUser.exerciseGoal ?? 30),
+                        standCurrent: Double(sharedUser.stand ?? 0),
+                        standGoal: Double(sharedUser.standGoal ?? 12)
+                    )
+                    
+                    let friend = Friend(
+                        username: sharedUser.username ?? "",
+                        name: sharedUser.name ?? "",
+                        bio: sharedUser.bio ?? "",
+                        profilePictureURL: sharedUser.profilePictureURL ?? "",
+                        activityRings: friendActivity,
+                        publicUserRecordID: publicUserRecordID,
+                        privateUserRecordID: privateUserRecordID
+                    )
+                    friends.append(friend)
                 }
-                fetchError = .other(error)
-                return
-            }
-            /// Get the root record from the share metadata. This will be a `SharedUser`
-            guard let rootRecord = metadata?.rootRecord else { handler(.failure(.missingRecord)); return }
-            let sharedUser = SharedUserRecord(record: rootRecord)
-            guard let privateUserRecordName = sharedUser.privateUserRecordName,
-                  let publicUserRecordName = sharedUser.publicUserRecordName else {
-                handler(.failure(.missingID))
-                return
-            }
-            let privateUserRecordID = CKRecord.ID(recordName: privateUserRecordName)
-            let publicUserRecordID = CKRecord.ID(recordName: publicUserRecordName)
-            
-            let friendActivity = ActivityRings(
-                moveCurrent: Double(sharedUser.move ?? 0),
-                moveGoal: Double(sharedUser.moveGoal ?? 300),
-                exerciseCurrent: Double(sharedUser.exercise ?? 0),
-                exerciseGoal: Double(sharedUser.exerciseGoal ?? 30),
-                standCurrent: Double(sharedUser.stand ?? 0),
-                standGoal: Double(sharedUser.standGoal ?? 12)
-            )
-            
-            let friend = Friend(
-                username: sharedUser.username ?? "",
-                name: sharedUser.name ?? "",
-                bio: sharedUser.bio ?? "",
-                profilePictureURL: sharedUser.profilePictureURL ?? "",
-                activityRings: friendActivity,
-                publicUserRecordID: publicUserRecordID,
-                privateUserRecordID: privateUserRecordID
-            )
-            friends.append(friend)
-        }
-        
-        metadataFetchOperation.fetchShareMetadataCompletionBlock = { error in
-            if let error = error {
-                if let ckError = error as? CKError {
-                    handler(.failure(.ckError(ckError)))
-                    return
+                
+                metadataFetchOperation.fetchShareMetadataCompletionBlock = { error in
+                    if let error = error {
+                        if let ckError = error as? CKError {
+                            handler(.failure(.ckError(ckError)))
+                            return
+                        }
+                        handler(.failure(.other(error)))
+                        return
+                    }
+                    if let error = fetchError {
+                        handler(.failure(error))
+                        return
+                    }
+                    handler(.success(friends))
                 }
-                handler(.failure(.other(error)))
-                return
-            }
-            if let error = fetchError {
+                
+                self.container.add(metadataFetchOperation)
+            case .failure(let error):
                 handler(.failure(error))
-                return
             }
-            handler(.success(friends))
         }
-        
-        container.add(metadataFetchOperation)
     }
 }
 
@@ -171,13 +173,12 @@ extension FriendManager {
                         let recordID = identity.userRecordID?.recordName ?? ""
                         let predicate = NSPredicate(format: "userRecordID == %@", recordID)
                         
-                        CloudKitStore.shared.fetchRecords(
+                        self.cloudKitStore.fetchRecords(
                             with: PublicUserRecord.self,
                             predicate: predicate,
                             scope: .public
                         ) { result in
-                            switch result {
-                            case .success(let records):
+                            result.get(handler) { records in
                                 for user in records {
                                     //friends.append(user.asFriend())
                                     
@@ -185,8 +186,6 @@ extension FriendManager {
                                         handler(.success(friends))
                                     }
                                 }
-                            case .failure:
-                                break
                             }
                         }
                     }
