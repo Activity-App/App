@@ -9,10 +9,10 @@ import SwiftUI
 
 struct FriendsCell: View {
 
-    let friend: Friend
+    let friend: ExternalUser
 
     var body: some View {
-        NavigationLink(destination: FriendDetailView(friend)) {
+        NavigationLink(destination: FriendDetailView(friend: friend, competitions: [])) {
             HStack {
                 VStack(alignment: .leading) {
                     Text(friend.name)
@@ -37,7 +37,7 @@ struct FriendsCell: View {
         }
     }
 
-    init(_ friend: Friend) {
+    init(_ friend: ExternalUser) {
         self.friend = friend
     }
 }

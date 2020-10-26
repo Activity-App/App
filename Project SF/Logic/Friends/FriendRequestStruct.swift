@@ -8,12 +8,12 @@
 import UIKit
 
 struct FriendRequest: Identifiable {
-    let id: String
+    let id = UUID()
     
     let recipientName: String?
     let creatorName: String?
-    let recipientUsername: String?
-    let creatorUsername: String?
+    let recipientUsername: String
+    let creatorUsername: String
     let recipientProfilePicture: UIImage?
     let creatorProfilePicture: UIImage?
     

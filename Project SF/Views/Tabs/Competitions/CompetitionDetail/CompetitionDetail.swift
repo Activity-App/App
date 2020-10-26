@@ -95,17 +95,17 @@ struct CompetitionDetail: View {
     }
 }
 
-struct CompetitionDetail_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            CompetitionDetail(
-                competition: Competition(
-                    title: "CompetitionName",
-                    startDate: Date() - 100000,
-                    endDate: Date() + 100000
-                )
-            )
-            .environmentObject(HealthKitController())
-        }
-    }
-}
+//struct CompetitionDetail_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationView {
+//            CompetitionDetail(
+//                competition: Competition(
+//                    title: "CompetitionName",
+//                    startDate: Date() - 100000,
+//                    endDate: Date() + 100000
+//                )
+//            )
+//            .environmentObject(HealthKitController())
+//        }
+//    }
+//}

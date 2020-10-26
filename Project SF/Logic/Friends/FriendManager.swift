@@ -28,10 +28,24 @@ class FriendManager: ObservableObject {
     }
 }
 
+// MARK: Setting
+
+extension FriendManager {
+    func updateActivityData(activityRings: ActivityRings, then handler: @escaping (Result<Void, CloudKitStoreError>) -> Void) {
+        userManager.fetch { result in
+            result.get(handler) { user in
+                var user = user
+                user.activity = activityRings
+                self.userManager.save(user: user, then: handler)
+            }
+        }
+    }
+}
+
 // MARK: Fetching
 
 extension FriendManager {
-    func fetchFriends(then handler: @escaping (Result<[Friend], CloudKitStoreError>) -> Void) {
+    func fetchFriends(then handler: @escaping (Result<[ExternalUser], CloudKitStoreError>) -> Void) {
         /// Get user record.
         userManager.fetch { result in
             switch result {
@@ -43,7 +57,7 @@ extension FriendManager {
                 metadataFetchOperation.qualityOfService = .userInitiated
                 
                 /// Placeholder values to hold incoming data.
-                var friends: [Friend] = []
+                var friends: [ExternalUser] = []
                 var fetchError: CloudKitStoreError?
                 
                 metadataFetchOperation.perShareMetadataBlock = { _, metadata, error in
@@ -75,7 +89,7 @@ extension FriendManager {
                         standGoal: Double(sharedUser.standGoal ?? 12)
                     )
                     
-                    let friend = Friend(
+                    let friend = ExternalUser(
                         username: sharedUser.username ?? "",
                         name: sharedUser.name ?? "",
                         bio: sharedUser.bio ?? "",
@@ -140,7 +154,7 @@ extension FriendManager {
     
     /// Asynchronously discovers the users friends. Fails if the adequate permissions have not been granted (you can request the required permission using [requestDiscoveryPermission](x-source-tag://requestDiscoveryPermission).
     /// - Parameter handler: The result handler. Not guaranteed to be executed on the main thread.
-    func discoverFriends(then handler: @escaping (Result<[Friend], CloudKitStoreError>) -> Void) {
+    func discoverFriends(then handler: @escaping (Result<[ExternalUser], CloudKitStoreError>) -> Void) {
         container.status(forApplicationPermission: .userDiscoverability) { [weak container] status, error in
             guard let container = container else { return }
             if let error = error {
@@ -167,7 +181,7 @@ extension FriendManager {
                     }
                     print(identities)
                     
-                    var friends: [Friend] = []
+                    let friends: [ExternalUser] = []
                     
                     for identity in identities {
                         let recordID = identity.userRecordID?.recordName ?? ""

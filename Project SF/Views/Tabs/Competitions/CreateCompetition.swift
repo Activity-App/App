@@ -27,6 +27,7 @@ struct CreateCompetition: View {
     @State var distanceGoalInt = 10
     
     @EnvironmentObject var competitionController: CompetitionsController
+    @EnvironmentObject var friendController: FriendController
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -61,6 +62,7 @@ struct CreateCompetition: View {
                                     removal: AnyTransition.identity
                                 )
                             )
+                            .labelsHidden()
                     }
                 }
                 .padding(16)
@@ -168,29 +170,77 @@ struct CreateCompetition: View {
             
             Group {
                 VStack {
-                    Button("Invite friends") {
-                        // TODO: Handle invite friends
-                        withAnimation(.easeInOut) {
-                            invitedFriends.append("nmsdnjosadn\(Int.random(in: 0...100))")
-                            invitedFriends.append("nmsdnjosadn\(Int.random(in: 0...100))")
-                            invitedFriends.append("nmsdnjosadn\(Int.random(in: 0...100))")
-                            invitedFriends.append("nmsdnjosadn\(Int.random(in: 0...100))")
-                            invitedFriends.append("nmsdnjosadn\(Int.random(in: 0...100))")
-                        }
-                    }
-                    .frame(maxWidth: .infinity)
-                    .buttonStyle(PlainButtonStyle())
-                    .foregroundColor(.accentColor)
-
-                    if !invitedFriends.isEmpty {
-                        List(invitedFriends.indices) { index in
-                            Section {
-                                Text(invitedFriends[index])
+                    Text("Invite friends:")
+                        .foregroundColor(Color(.tertiaryLabel))
+                        .bold()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    if !friendController.friends.isEmpty {
+                        ScrollView {
+                            ForEach(friendController.friends) { friend in
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .frame(minHeight: 50)
+                                    .foregroundColor(Color(.tertiarySystemBackground))
+                                    .overlay(
+                                        HStack {
+                                            Text(friend.name)
+                                                .padding()
+                                            Spacer()
+                                            Image(systemName: "checkmark")
+                                                .resizable()
+                                                .aspectMode(.fit)
+                                                .frame(height: 10)
+                                        }
+                                    )
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .frame(minHeight: 50)
+                                    .foregroundColor(Color(.tertiarySystemBackground))
+                                    .overlay(
+                                        Text(friend.name)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                    )
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .frame(minHeight: 50)
+                                    .foregroundColor(Color(.tertiarySystemBackground))
+                                    .overlay(
+                                        Text(friend.name)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                    )
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .frame(minHeight: 50)
+                                    .foregroundColor(Color(.tertiarySystemBackground))
+                                    .overlay(
+                                        Text(friend.name)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                    )
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .frame(minHeight: 50)
+                                    .foregroundColor(Color(.tertiarySystemBackground))
+                                    .overlay (
+                                        Text(friend.name)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                    )
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .frame(minHeight: 50)
+                                    .foregroundColor(Color(.tertiarySystemBackground))
+                                    .overlay (
+                                        Text(friend.name)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                    )
                             }
                         }
-                        .listStyle(InsetGroupedListStyle())
                         .frame(height: 200)
                     }
+
+//                    if !invitedFriends.isEmpty {
+//                        List(invitedFriends.indices) { index in
+//                            Section {
+//                                Text(invitedFriends[index])
+//                            }
+//                        }
+//                        .listStyle(InsetGroupedListStyle())
+//                        .frame(height: 200)
+//                    }
                 }
                 .padding(16)
             }
@@ -214,7 +264,8 @@ struct CreateCompetition: View {
                     stepsGoal: stepsGoalInt,
                     distanceGoal: distanceGoalInt,
                     startDate: Date(),
-                    endDate: competitionEndDate
+                    endDate: competitionEndDate,
+                    users: []
                 )
                 
                 competitionController.create(competition: newCompetition, with: [])

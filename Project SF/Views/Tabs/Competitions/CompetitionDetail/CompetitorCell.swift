@@ -10,7 +10,7 @@ import SwiftUI
 struct CompetitorCell: View {
     
     let competition: Competition
-    let person: CompetingPerson
+    let person: CompetingUser
 
     @ViewBuilder
     var body: some View {
@@ -35,7 +35,7 @@ struct CompetitorCell: View {
                 )
                 .padding(.leading, 4)
             VStack(alignment: .leading) {
-                Text(person.name)
+                Text(person.user.name)
                     .fontWeight(.bold)
                 Text("\(person.points) points")
                     .font(.caption)
@@ -45,15 +45,15 @@ struct CompetitorCell: View {
     }
 }
 
-struct CompetitorCell_Previews: PreviewProvider {
-    static var previews: some View {
-        CompetitorCell(
-            competition: Competition(
-                title: "CompetitionName",
-                startDate: Date() - 100000,
-                endDate: Date() + 100000
-            ),
-            person: CompetingPerson(name: "Me", points: 150)
-        )
-    }
-}
+//struct CompetitorCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CompetitorCell(
+//            competition: Competition(
+//                title: "CompetitionName",
+//                startDate: Date() - 100000,
+//                endDate: Date() + 100000
+//            ),
+//            person: CompetingUser(name: "Me", points: 150)
+//        )
+//    }
+//}

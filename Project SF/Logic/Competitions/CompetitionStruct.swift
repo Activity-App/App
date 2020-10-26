@@ -24,8 +24,7 @@ class Competition: Identifiable {
     var startDate: Date
     var endDate: Date
     
-    var creator: CompetingPerson
-    var people: [CompetingPerson]
+    var users: [CompetingUser]
     
     init(
         title: String,
@@ -37,7 +36,8 @@ class Competition: Identifiable {
         stepsGoal: Int = 10000,
         distanceGoal: Int = 10,
         startDate: Date,
-        endDate: Date
+        endDate: Date,
+        users: [CompetingUser]
     ) {
         self.id = UUID().uuidString
         self.title = title
@@ -51,12 +51,7 @@ class Competition: Identifiable {
         self.startDate = startDate
         self.endDate = endDate
         
-        self.creator = CompetingPerson(name: "Me", points: 300)
-        self.people = [
-            CompetingPerson(name: "Person1", points: 100),
-            CompetingPerson(name: "Person2", points: 200),
-            CompetingPerson(name: "Person3", points: 6000)
-        ]
+        self.users = users
     }
     
     init(record: CompetitionRecord) {
@@ -72,11 +67,6 @@ class Competition: Identifiable {
         self.startDate = record.startDate ?? Date()
         self.endDate = record.endDate ?? Date()
         
-        self.creator = CompetingPerson(name: "Me", points: 300)
-        self.people = [
-            CompetingPerson(name: "Person1", points: 100),
-            CompetingPerson(name: "Person2", points: 200),
-            CompetingPerson(name: "Person3", points: 6000)
-        ]
+        self.users = []
     }
 }

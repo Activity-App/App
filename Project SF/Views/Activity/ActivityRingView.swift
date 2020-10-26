@@ -17,7 +17,7 @@ struct ActivityRingView: View {
     @Binding var current: Double
     @Binding var goal: Double
     
-    @State var fill: Double = 0
+    @State var fill: Double = 0.001
     @State var showShadow = false
 
     var body: some View {

@@ -17,6 +17,8 @@ final class UserManager {
     private let cloudKitStore: CloudKitStore
     private let userDefaults = UserDefaults.standard
     
+    private var privateUserRecord: UserRecord?
+    
     // MARK: Init
     
     private init(
@@ -26,8 +28,6 @@ final class UserManager {
         self.container = container
         self.cloudKitStore = cloudKitStore
     }
-    
-    private var privateUserRecord: UserRecord?
 }
 
 // MARK: Default Methods
@@ -104,6 +104,19 @@ extension UserManager {
                         }
                         if self.userDefaults.bool(forKey: "profilePictureSharedToFriends") {
                             sharedUser.profilePictureURL = user.profilePictureURL
+                        }
+                        if self.userDefaults.bool(forKey: "profilePictureSharedToFriends") {
+                            sharedUser.profilePictureURL = user.profilePictureURL
+                        }
+                        if let activity = user.activity {
+                            sharedUser.move = Int(activity.moveCurrent)
+                            sharedUser.moveGoal = Int(activity.moveGoal)
+                            sharedUser.exercise = Int(activity.exerciseCurrent)
+                            sharedUser.exerciseGoal = Int(activity.exerciseGoal)
+                            sharedUser.stand = Int(activity.standCurrent)
+                            sharedUser.standGoal = Int(activity.standGoal)
+                            sharedUser.steps = activity.steps
+                            sharedUser.distance = activity.distance
                         }
                         
                         self.saveSharedUserRecord(sharedUser) { result in

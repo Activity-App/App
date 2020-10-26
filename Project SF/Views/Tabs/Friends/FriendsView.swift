@@ -64,15 +64,13 @@ struct FriendsView: View {
     
     @EnvironmentObject var friendController: FriendController
     @EnvironmentObject var userController: UserController
+    @EnvironmentObject var alert: AlertManager
     @StateObject var discoveryController = UserDiscoveryController()
     @State var showAddFriend = false
 
     var body: some View {
         NavigationView {
             List {
-//                Button("remove all friends") {
-//                    FriendManager().removeAllFriends()
-//                }
                 Section(header: Text("Friend Activity")) {
                     ForEach(friendController.friends) { friend in
                         FriendsCell(friend)
@@ -80,15 +78,12 @@ struct FriendsView: View {
                 }
 
                 Section(header: Text("Pending Invites")) {
-                    ForEach(friendController.receivedRequestsFromFriends) { request in
-                        FriendRequestCell(name: request.creatorName ?? request.creatorUsername ?? "user", activityRings: nil) {
-                            FriendRequestManager().acceptFriendRequest(request.record) { result in
+                    ForEach(friendController.receivedFriendRequests) { request in
+                        FriendRequestCell(name: request.creatorName ?? request.creatorUsername, activityRings: nil) {
+                            friendController.acceptRequest(request) { result in
                                 switch result {
-                                case .success:
-                                    friendController.updateAll { _ in }
-                                    print("sucessfully added \(request.creatorName ?? "user")")
-                                case .failure(let error):
-                                    print(error)
+                                case .success: ()
+                                case .failure(let error): print(error)
                                 }
                             }
                         }
@@ -109,14 +104,22 @@ struct FriendsView: View {
                 .font(.title2)
         }
         .onAppear {
-            friendController.updateAll { _ in }
+            friendController.setup { result in
+                switch result {
+                case .success: ()
+                case .failure: alert.present()
+                }
+            }
         }
         .sheet(isPresented: $showAddFriend) {
             ForEach(discoveryController.discovered) { user in
                 FriendDiscoveryView(name: user.name, username: user.username!, action: {
-                    FriendRequestManager().invite(user: user.privateUserRecordName!, then: { result in
-                        print(result)
-                    })
+                    friendController.sendRequest(to: user) { result in
+                        switch result {
+                        case .success: ()
+                        case .failure: alert.present()
+                        }
+                    }
                 })
                 .padding(.horizontal)
             }

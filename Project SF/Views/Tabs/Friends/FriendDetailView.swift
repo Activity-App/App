@@ -11,20 +11,8 @@ struct FriendDetailView: View {
 
     @Environment(\.colorScheme) var colorScheme
     @State var isAlertShown = false
-    let friend: Friend
-
-    var competitions: [Competition] = [
-        Competition(
-            title: "Competition1",
-            startDate: Date() - 100000,
-            endDate: Date() + 100000
-        ),
-        Competition(
-            title: "Competition2",
-            startDate: Date(),
-            endDate: Date() + 1000000
-        )
-    ]
+    let friend: ExternalUser
+    var competitions: [Competition]
 
     var body: some View {
         List {
@@ -106,10 +94,6 @@ struct FriendDetailView: View {
                 // TODO: Friend / Unfriend
             }, secondaryButton: .cancel(Text("Cancel")))
         }
-    }
-
-    init(_ friend: Friend) {
-        self.friend = friend
     }
 }
 

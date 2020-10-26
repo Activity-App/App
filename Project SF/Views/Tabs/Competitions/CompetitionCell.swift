@@ -59,28 +59,28 @@ struct CompetitionCell: View {
     }
 }
 
-struct CompetitionCell_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        let competitions: [Competition] = [
-            Competition(
-                title: "Competition1",
-                startDate: Date() - 100000,
-                endDate: Date() + 100000
-            ),
-            Competition(
-                title: "Competition2",
-                startDate: Date(),
-                endDate: Date() + 1000000
-            )
-        ]
-
-        return VStack(spacing: 32) {
-            CompetitionCell(competitions[0])
-                .frame(height: 100)
-
-            CompetitionCell(competitions[1])
-                .frame(width: 500, height: 40)
-        }
-    }
-}
+//struct CompetitionCell_Previews: PreviewProvider {
+//    
+//    static var previews: some View {
+//        let competitions: [Competition] = [
+//            Competition(
+//                title: "Competition1",
+//                startDate: Date() - 100000,
+//                endDate: Date() + 100000
+//            ),
+//            Competition(
+//                title: "Competition2",
+//                startDate: Date(),
+//                endDate: Date() + 1000000
+//            )
+//        ]
+//
+//        return VStack(spacing: 32) {
+//            CompetitionCell(competitions[0])
+//                .frame(height: 100)
+//
+//            CompetitionCell(competitions[1])
+//                .frame(width: 500, height: 40)
+//        }
+//    }
+//}

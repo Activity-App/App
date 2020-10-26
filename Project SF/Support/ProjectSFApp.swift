@@ -49,14 +49,19 @@ struct ProjectSFApp: App {
             .environmentObject(friendController)
             .environmentObject(healthKit)
             .environmentObject(alert)
-            .onAppear(perform: didFinishLaunching)
+            //.onAppear(perform: didFinishLaunching)
             .onReceive(didBecomeActiveNotification, perform: { _ in didBecomeActive() } )
         }
     }
     
     /// Add functions to perform when the app first launches here.
     func didFinishLaunching() {
-        didBecomeActive()
+        checkConnection()
+        healthKit.authorizeHealthKit {
+            if healthKit.authorizationState == .granted {
+                healthKit.updateTodaysActivityData()
+            }
+        }
         
         /// Set the accent colour.
         DispatchQueue.main.async {
@@ -68,7 +73,9 @@ struct ProjectSFApp: App {
         userController.setup { error in
             if error != nil {
                 alert.present(message: "A error occured and we don't know what went wrong. Check you have a working internet connection and are signed into iCloud.")
+                return
             }
+            friendController.setup { result in print(result) }
         }
     }
     
@@ -77,9 +84,10 @@ struct ProjectSFApp: App {
         healthKit.authorizeHealthKit {
             if healthKit.authorizationState == .granted {
                 healthKit.updateTodaysActivityData()
+                friendController.updateActivityData(activityRings: healthKit.latestActivityData) { print("\($0)h") }
             }
         }
-        friendController.updateAll { _ in }
+        friendController.setup { result in print(result) }
         checkConnection()
     }
     
@@ -87,6 +95,7 @@ struct ProjectSFApp: App {
         if network.connected {
             
         } else {
+            // swiftlint:disable:next line_length
             alert.present(icon: "wifi.slash", message: "We couldn't connect you to the internet. You won't be able to see the latest competition or friend data without a connection.", buttonTitle: "Continue Anyway", buttonAction: { alert.dismiss() })
         }
     }

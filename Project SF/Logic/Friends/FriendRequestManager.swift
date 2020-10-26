@@ -6,6 +6,7 @@
 //
 
 import CloudKit
+import UIKit
 
 class FriendRequestManager {
     
@@ -85,6 +86,7 @@ extension FriendRequestManager {
             result.get(handler) { user in
                 /// Fetch only friend requests that have been sent or received not accepted.
                 guard let privateUserRecordName = user.privateUserRecordName else {
+                    print("missing here")
                     handler(.failure(.missingID))
                     return
                 }
@@ -95,13 +97,66 @@ extension FriendRequestManager {
                 let acceptedPredicate = NSPredicate(format: "accepted == false")
                 let allPredicates = [recordNamePredicate, acceptedPredicate]
                 
-                let predicate = type == .all ?
-                    NSPredicate(value: true) :
-                    NSCompoundPredicate(andPredicateWithSubpredicates: allPredicates)
+                let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: allPredicates)
                 
                 self.cloudKitStore.fetchRecords(with: FriendRequestRecord.self, predicate: predicate, scope: .public) { result in
                     result.get(handler) { friendRequests in
                         handler(.success(friendRequests))
+                    }
+                }
+            }
+        }
+    }
+    
+    /// Convert FriendRequestRecord to FriendRequest to be used in UI.
+    /// - Parameters:
+    ///   - friendRequestRecord: The friend request record.
+    ///   - type: The type of friend request.
+    func recordToStruct(
+        friendRequestRecord: FriendRequestRecord,
+        type: FriendRequestType,
+        handler: @escaping (Result<FriendRequest, CloudKitStoreError>) -> Void
+    ) {
+//        guard let creatorPublicUserRecordName = friendRequestRecord.creatorPublicUserRecordName,
+//              let recipientPublicUserRecordName = friendRequestRecord.recipientPublicUserRecordName
+//        else {
+//            handler(.failure(.missingID))
+//            return
+//        }
+        
+        userManager.fetch { result in
+            result.get(handler) { user in
+                
+                /// If it is a record we have received, we should fetch the creators info otherwise we should fetch the person we sent the request to info.
+                let recordID = CKRecord.ID(
+                    recordName: type == .received ? friendRequestRecord.creatorPublicUserRecordName! : friendRequestRecord.recipientPublicUserRecordName!
+                )
+                self.cloudKitStore.fetchRecord(with: recordID, scope: .public) { result in
+                    result.get(handler) { userRecordRaw in
+                        let userRecord = PublicUserRecord(record: userRecordRaw)
+                        if type == .received {
+                            let friendRequest = FriendRequest(
+                                recipientName: user.name,
+                                creatorName: userRecord.name,
+                                recipientUsername: user.username!,
+                                creatorUsername: userRecord.username!,
+                                recipientProfilePicture: nil,
+                                creatorProfilePicture: nil,
+                                record: friendRequestRecord
+                            )
+                            handler(.success(friendRequest))
+                        } else {
+                            let friendRequest = FriendRequest(
+                                recipientName: userRecord.name,
+                                creatorName: user.name,
+                                recipientUsername: userRecord.username!,
+                                creatorUsername: user.username!,
+                                recipientProfilePicture: nil,
+                                creatorProfilePicture: nil,
+                                record: friendRequestRecord
+                            )
+                            handler(.success(friendRequest))
+                        }
                     }
                 }
             }
@@ -114,8 +169,6 @@ extension FriendRequestManager {
         case sent
         /// Requests sent to user.
         case received
-        /// All requests.
-        case all
     }
 }
 
@@ -214,6 +267,7 @@ extension FriendRequestManager {
                 self.cloudKitStore.fetchRecords(with: FriendRequestRecord.self, predicate: predicate, scope: .public) { result in
                     result.get(handler) { friendRequests in
                         /// If there are no results then there is nothing to do and therefore the operation is a success.
+                        print(friendRequests)
                         guard !friendRequests.isEmpty else { handler(.success([])); return }
                         
                         var deletedFriendRequest: [FriendRequestRecord] = []

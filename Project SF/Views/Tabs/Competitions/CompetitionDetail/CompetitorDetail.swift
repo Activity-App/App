@@ -11,7 +11,7 @@ struct CompetitorDetail: View {
     
     @EnvironmentObject var healthKit: HealthKitController
     let competition: Competition
-    let person: CompetingPerson
+    let person: CompetingUser
     
     var body: some View {
         List {
@@ -32,7 +32,7 @@ struct CompetitorDetail: View {
                 .padding(.horizontal)
             }
             
-            Section(header: Text("\(person.name)s Point History")) {
+            Section(header: Text("\(person.user.name)s Point History")) {
                 PointsGraph()
                     .frame(height: 230)
             }
@@ -43,21 +43,21 @@ struct CompetitorDetail: View {
                 }
             }
         }
-        .navigationTitle(person.name)
+        .navigationTitle(person.user.name)
         .listStyle(InsetGroupedListStyle())
     }
 }
 
-struct CompetitorDetail_Previews: PreviewProvider {
-    static var previews: some View {
-        CompetitorDetail(
-            competition: Competition(
-                title: "CompetitionName",
-                startDate: Date() - 100000,
-                endDate: Date() + 100000
-            ),
-            person: CompetingPerson(name: "Me", points: 150)
-        )
-        .environmentObject(HealthKitController())
-    }
-}
+//struct CompetitorDetail_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CompetitorDetail(
+//            competition: Competition(
+//                title: "CompetitionName",
+//                startDate: Date() - 100000,
+//                endDate: Date() + 100000
+//            ),
+//            person: CompetingUser(name: "Me", points: 150)
+//        )
+//        .environmentObject(HealthKitController())
+//    }
+//}

@@ -21,6 +21,7 @@ class FriendRequestRecord: DynamicRecord {
     
     struct Model {
         let recipientPrivateUserRecordName = ModelItem<String>(key: "recipientPrivateUserRecordName")
+        let recipientPublicUserRecordName = ModelItem<String>(key: "recipientPublicUserRecordName")
         let recipientShareURL = ModelItem<String>(key: "recipientShareURL")
         
         let creatorPublicUserRecordName = ModelItem<String>(key: "creatorPublicUserRecordName")

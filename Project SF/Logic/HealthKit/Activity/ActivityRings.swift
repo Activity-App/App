@@ -14,6 +14,8 @@ struct ActivityRings: Equatable, Hashable {
     var exerciseGoal: Double
     var standCurrent: Double
     var standGoal: Double
+    var steps: Int?
+    var distance: Int?
 
     var moveFraction: String {
         "\(Int(moveCurrent))/\(Int(moveGoal))"

@@ -18,7 +18,7 @@ class CompetitionsController: ObservableObject {
     /// - Parameters:
     ///   - competition: A competition struct to add to CloudKit
     ///   - friends: An array of friends you would like to invite to the competition.
-    func create(competition: Competition, with friends: [Friend]) {
+    func create(competition: Competition, with friends: [ExternalUser]) {
         state = .loading
         
         manager.createCompetition(

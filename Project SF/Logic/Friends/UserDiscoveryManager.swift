@@ -11,6 +11,8 @@ class UserDiscoveryManager {
     
     let cloudKitStore = CloudKitStore.shared
     
+    // TODO: Add discovery
+    
     func fetchAllPublicUsers(then handler: @escaping (Result<[User], CloudKitStoreError>) -> Void) {
         cloudKitStore.fetchRecords(with: PublicUserRecord.self, scope: .public) { result in
             switch result {

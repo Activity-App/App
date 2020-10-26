@@ -39,6 +39,7 @@
 		308FAD8D24B97E8A00126F3F /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD8C24B97E8A00126F3F /* PrivacyView.swift */; };
 		308FAD9E24B9A0DC00126F3F /* NavigationBarLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FAD9D24B9A0DC00126F3F /* NavigationBarLabel.swift */; };
 		3090918224B9480F000E3B11 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3090918124B9480F000E3B11 /* RoundedButton.swift */; };
+		30AB3DDB24EAB424002F6F97 /* CompetingUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AB3DDA24EAB424002F6F97 /* CompetingUser.swift */; };
 		30ABC14024C565A40060825B /* CompetitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ABC13F24C565A40060825B /* CompetitionType.swift */; };
 		30B3EF6724E194B600E5038C /* StructWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B3EF6624E194B600E5038C /* StructWrapper.swift */; };
 		30B3EF6924E2D97600E5038C /* Result+Get.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B3EF6824E2D97600E5038C /* Result+Get.swift */; };
@@ -149,6 +150,7 @@
 		308FAD8C24B97E8A00126F3F /* PrivacyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
 		308FAD9D24B9A0DC00126F3F /* NavigationBarLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarLabel.swift; sourceTree = "<group>"; };
 		3090918124B9480F000E3B11 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		30AB3DDA24EAB424002F6F97 /* CompetingUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CompetingUser.swift; path = ../../../../../../CompetingUser.swift; sourceTree = "<group>"; };
 		30ABC13F24C565A40060825B /* CompetitionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionType.swift; sourceTree = "<group>"; };
 		30B3EF6624E194B600E5038C /* StructWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StructWrapper.swift; path = ../../../../../StructWrapper.swift; sourceTree = "<group>"; };
 		30B3EF6824E2D97600E5038C /* Result+Get.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Result+Get.swift"; path = "../../../../../../Result+Get.swift"; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				9C338BD824BAD0D3003E5048 /* CompetitionRecord.swift */,
 				9C338BD424BAC4F4003E5048 /* CompetitionsManager.swift */,
 				30132FF124CAB48700CB6683 /* CompetitionsController.swift */,
+				30AB3DDA24EAB424002F6F97 /* CompetingUser.swift */,
 			);
 			path = Competitions;
 			sourceTree = "<group>";
@@ -757,6 +760,7 @@
 				30BFC8E924B804CC00DAC6D9 /* ActivityRingView.swift in Sources */,
 				3067712F24BDE0080085F152 /* FriendsCell.swift in Sources */,
 				30D321BD24BB65D5009CD9D0 /* ProfileSettings.swift in Sources */,
+				30AB3DDB24EAB424002F6F97 /* CompetingUser.swift in Sources */,
 				30EAB9F924C29B9D005326C8 /* AccentSettings.swift in Sources */,
 				30BFC8DF24B7637F00DAC6D9 /* VisualEffectView.swift in Sources */,
 				30DBA52724CE725A005D9E04 /* AppDelegate.swift in Sources */,

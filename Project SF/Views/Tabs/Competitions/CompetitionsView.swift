@@ -8,13 +8,6 @@
 import SwiftUI
 import CloudKit
 
-struct CompetingPerson: Identifiable, Equatable {
-    var id = UUID()
-    var name: String
-    var points: Int = 0
-    var history: [Int] = []
-}
-
 struct CompetitionsView: View {
 
     @Environment(\.colorScheme) var colorScheme
@@ -22,6 +15,7 @@ struct CompetitionsView: View {
     @State var showCreateCompetition = false
     
     @EnvironmentObject var alert: AlertManager
+    @EnvironmentObject var friendController: FriendController
     
     @StateObject var competitionsController = CompetitionsController()
     let friends = FriendRequestManager()
@@ -76,6 +70,7 @@ struct CompetitionsView: View {
         }
         .sheet(isPresented: $showCreateCompetition) {
             CreateCompetition()
+                .environmentObject(friendController)
                 .environmentObject(competitionsController)
         }
         .onAppear {

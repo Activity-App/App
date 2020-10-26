@@ -7,7 +7,7 @@
 
 import CloudKit
 
-struct Friend: Hashable, Identifiable {
+struct ExternalUser: Hashable, Identifiable {
     
     let id = UUID()
     
