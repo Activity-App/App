@@ -4,7 +4,7 @@
 
 In the interest of fostering an open and welcoming environment, we as
 contributors and maintainers pledge to making participation in our project and
-our community a harassment-free experience for everyone, regardless of age, body
+our community a harassment-free experience for **everyone**, regardless of age, body
 size, disability, ethnicity, sex characteristics, gender identity and expression,
 level of experience, education, socio-economic status, nationality, personal
 appearance, race, religion, or sexual identity and orientation.
@@ -31,12 +31,12 @@ Examples of unacceptable behavior by participants include:
 * Other conduct which could reasonably be considered inappropriate in a
  professional setting
  
- ## Additional Considerations
+## Additional Considerations
  
- Many of our contributors may still be students, including those that are still minors.
- In regards to this, please be mindful when initiating and/or engaging in a conversation
- with other contributors. Particularly, be mindful of the language you use, and the 
- appropriateness of your messaging with them.
+Many of our contributors may still be students, including those that are still minors.
+In regards to this, please be mindful when initiating and/or engaging in a conversation
+with other contributors. Particularly, be mindful of the language you use, and the 
+appropriateness of your messaging with them.
 
 ## Our Responsibilities
 
